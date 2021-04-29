@@ -1,3 +1,5 @@
+[![Build Status](https://www.travis-ci.com/vantage-sh/vantage-python.svg?branch=main)](https://www.travis-ci.com/vantage-sh/vantage-python)
+
 # vantage-client
 Vantage API
 
