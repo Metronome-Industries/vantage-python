@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **ping**
-> ping()
+> object ping()
 
 
 
@@ -30,7 +30,8 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = vantage.PingApi(vantage.ApiClient(configuration))
 
 try:
-    api_instance.ping()
+    api_response = api_instance.ping()
+    pprint(api_response)
 except ApiException as e:
     print("Exception when calling PingApi->ping: %s\n" % e)
 ```
@@ -40,7 +41,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
