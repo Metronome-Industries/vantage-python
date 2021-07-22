@@ -15,11 +15,15 @@
 from __future__ import absolute_import
 
 # import models into model package
+from vantage.models.cost import Cost
+from vantage.models.costs import Costs
 from vantage.models.price import Price
 from vantage.models.prices import Prices
 from vantage.models.product import Product
 from vantage.models.products import Products
 from vantage.models.provider import Provider
 from vantage.models.providers import Providers
+from vantage.models.report import Report
+from vantage.models.reports import Reports
 from vantage.models.service import Service
 from vantage.models.services import Services

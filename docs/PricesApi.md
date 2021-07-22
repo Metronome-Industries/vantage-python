@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_prices**
-> Prices get_prices(product_id)
+> Prices get_prices(product_id, page=page, limit=limit)
 
 
 
@@ -87,9 +87,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = vantage.PricesApi(vantage.ApiClient(configuration))
 product_id = 'product_id_example' # str | 
+page = 2 # int | The page of results to return. (optional)
+limit = 500 # int | The amount of results to return. The maximum is 1000 (optional)
 
 try:
-    api_response = api_instance.get_prices(product_id)
+    api_response = api_instance.get_prices(product_id, page=page, limit=limit)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PricesApi->get_prices: %s\n" % e)
@@ -100,6 +102,8 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **product_id** | **str**|  | 
+ **page** | **int**| The page of results to return. | [optional] 
+ **limit** | **int**| The amount of results to return. The maximum is 1000 | [optional] 
 
 ### Return type
 
@@ -168,7 +172,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_products**
-> Products get_products(provider_id=provider_id, service_id=service_id, name=name)
+> Products get_products(provider_id=provider_id, service_id=service_id, name=name, page=page, limit=limit)
 
 
 
@@ -191,9 +195,11 @@ api_instance = vantage.PricesApi(vantage.ApiClient(configuration))
 provider_id = 'provider_id_example' # str | Query by Provider to list all Products across all Services for a Provider. e.g. aws (optional)
 service_id = 'service_id_example' # str | Query by Service to list all Products for a specific provider service. e.g. aws-ec2 (optional)
 name = 'name_example' # str | Query by name of the Product to see a list of products which match that name. e.g. m5a.16xlarge (optional)
+page = 2 # int | The page of results to return. (optional)
+limit = 500 # int | The amount of results to return. The maximum is 1000 (optional)
 
 try:
-    api_response = api_instance.get_products(provider_id=provider_id, service_id=service_id, name=name)
+    api_response = api_instance.get_products(provider_id=provider_id, service_id=service_id, name=name, page=page, limit=limit)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PricesApi->get_products: %s\n" % e)
@@ -206,6 +212,8 @@ Name | Type | Description  | Notes
  **provider_id** | **str**| Query by Provider to list all Products across all Services for a Provider. e.g. aws | [optional] 
  **service_id** | **str**| Query by Service to list all Products for a specific provider service. e.g. aws-ec2 | [optional] 
  **name** | **str**| Query by name of the Product to see a list of products which match that name. e.g. m5a.16xlarge | [optional] 
+ **page** | **int**| The page of results to return. | [optional] 
+ **limit** | **int**| The amount of results to return. The maximum is 1000 | [optional] 
 
 ### Return type
 
@@ -223,7 +231,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_providers**
-> Providers get_providers()
+> Providers get_providers(page=page, limit=limit)
 
 
 
@@ -243,16 +251,22 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 
 # create an instance of the API class
 api_instance = vantage.PricesApi(vantage.ApiClient(configuration))
+page = 56 # int | The page of results to return. (optional)
+limit = 56 # int | The amount of results to return. The maximum is 1000 (optional)
 
 try:
-    api_response = api_instance.get_providers()
+    api_response = api_instance.get_providers(page=page, limit=limit)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PricesApi->get_providers: %s\n" % e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int**| The page of results to return. | [optional] 
+ **limit** | **int**| The amount of results to return. The maximum is 1000 | [optional] 
 
 ### Return type
 
@@ -270,7 +284,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_services**
-> Services get_services(provider_id=provider_id)
+> Services get_services(provider_id=provider_id, page=page, limit=limit)
 
 
 
@@ -291,9 +305,11 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 # create an instance of the API class
 api_instance = vantage.PricesApi(vantage.ApiClient(configuration))
 provider_id = 'provider_id_example' # str | Query services for a specific provider. e.g. aws (optional)
+page = 2 # int | The page of results to return. (optional)
+limit = 500 # int | The amount of results to return. The maximum is 1000 (optional)
 
 try:
-    api_response = api_instance.get_services(provider_id=provider_id)
+    api_response = api_instance.get_services(provider_id=provider_id, page=page, limit=limit)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PricesApi->get_services: %s\n" % e)
@@ -304,6 +320,8 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **provider_id** | **str**| Query services for a specific provider. e.g. aws | [optional] 
+ **page** | **int**| The page of results to return. | [optional] 
+ **limit** | **int**| The amount of results to return. The maximum is 1000 | [optional] 
 
 ### Return type
 
