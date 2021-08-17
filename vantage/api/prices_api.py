@@ -147,6 +147,8 @@ class PricesApi(object):
 
         :param async_req bool
         :param str product_id: (required)
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Prices
                  If the method is called asynchronously,
                  returns the request thread.
@@ -169,12 +171,14 @@ class PricesApi(object):
 
         :param async_req bool
         :param str product_id: (required)
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Prices
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['product_id']  # noqa: E501
+        all_params = ['product_id', 'page', 'limit']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -201,6 +205,10 @@ class PricesApi(object):
             path_params['product_id'] = params['product_id']  # noqa: E501
 
         query_params = []
+        if 'page' in params:
+            query_params.append(('page', params['page']))  # noqa: E501
+        if 'limit' in params:
+            query_params.append(('limit', params['limit']))  # noqa: E501
 
         header_params = {}
 
@@ -339,6 +347,8 @@ class PricesApi(object):
         :param str provider_id: Query by Provider to list all Products across all Services for a Provider. e.g. aws
         :param str service_id: Query by Service to list all Products for a specific provider service. e.g. aws-ec2
         :param str name: Query by name of the Product to see a list of products which match that name. e.g. m5a.16xlarge
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Products
                  If the method is called asynchronously,
                  returns the request thread.
@@ -363,12 +373,14 @@ class PricesApi(object):
         :param str provider_id: Query by Provider to list all Products across all Services for a Provider. e.g. aws
         :param str service_id: Query by Service to list all Products for a specific provider service. e.g. aws-ec2
         :param str name: Query by name of the Product to see a list of products which match that name. e.g. m5a.16xlarge
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Products
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['provider_id', 'service_id', 'name']  # noqa: E501
+        all_params = ['provider_id', 'service_id', 'name', 'page', 'limit']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -395,6 +407,10 @@ class PricesApi(object):
             query_params.append(('service_id', params['service_id']))  # noqa: E501
         if 'name' in params:
             query_params.append(('name', params['name']))  # noqa: E501
+        if 'page' in params:
+            query_params.append(('page', params['page']))  # noqa: E501
+        if 'limit' in params:
+            query_params.append(('limit', params['limit']))  # noqa: E501
 
         header_params = {}
 
@@ -435,6 +451,8 @@ class PricesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Providers
                  If the method is called asynchronously,
                  returns the request thread.
@@ -456,12 +474,14 @@ class PricesApi(object):
         >>> result = thread.get()
 
         :param async_req bool
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Providers
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = []  # noqa: E501
+        all_params = ['page', 'limit']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -482,6 +502,10 @@ class PricesApi(object):
         path_params = {}
 
         query_params = []
+        if 'page' in params:
+            query_params.append(('page', params['page']))  # noqa: E501
+        if 'limit' in params:
+            query_params.append(('limit', params['limit']))  # noqa: E501
 
         header_params = {}
 
@@ -523,6 +547,8 @@ class PricesApi(object):
 
         :param async_req bool
         :param str provider_id: Query services for a specific provider. e.g. aws
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Services
                  If the method is called asynchronously,
                  returns the request thread.
@@ -545,12 +571,14 @@ class PricesApi(object):
 
         :param async_req bool
         :param str provider_id: Query services for a specific provider. e.g. aws
+        :param int page: The page of results to return.
+        :param int limit: The amount of results to return. The maximum is 1000
         :return: Services
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['provider_id']  # noqa: E501
+        all_params = ['provider_id', 'page', 'limit']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -573,6 +601,10 @@ class PricesApi(object):
         query_params = []
         if 'provider_id' in params:
             query_params.append(('provider_id', params['provider_id']))  # noqa: E501
+        if 'page' in params:
+            query_params.append(('page', params['page']))  # noqa: E501
+        if 'limit' in params:
+            query_params.append(('limit', params['limit']))  # noqa: E501
 
         header_params = {}
 

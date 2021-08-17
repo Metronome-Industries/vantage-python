@@ -36,7 +36,7 @@ class PingApi(object):
     def ping(self, **kwargs):  # noqa: E501
         """ping  # noqa: E501
 
-        This is a health check endpoint that can be used to determine Vantage API healthiness. It will return a 200 success with the raw text of \"pong\" if everything is running smoothly.  # noqa: E501
+        This is a health check endpoint that can be used to determine Vantage API healthiness. It will return 200 if everything is running smoothly.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.ping(async_req=True)
@@ -57,7 +57,7 @@ class PingApi(object):
     def ping_with_http_info(self, **kwargs):  # noqa: E501
         """ping  # noqa: E501
 
-        This is a health check endpoint that can be used to determine Vantage API healthiness. It will return a 200 success with the raw text of \"pong\" if everything is running smoothly.  # noqa: E501
+        This is a health check endpoint that can be used to determine Vantage API healthiness. It will return 200 if everything is running smoothly.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.ping_with_http_info(async_req=True)
