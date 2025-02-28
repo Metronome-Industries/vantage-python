@@ -1,14 +1,14 @@
 # vantage.PingApi
 
-All URIs are relative to *https://api.vantage.sh*
+All URIs are relative to *https://api.vantage.sh/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ping**](PingApi.md#ping) | **GET** /v1/ping | 
+[**ping**](PingApi.md#ping) | **GET** /ping | 
 
 
 # **ping**
-> object ping()
+> ping()
 
 
 
@@ -30,8 +30,7 @@ configuration.access_token = 'YOUR_ACCESS_TOKEN'
 api_instance = vantage.PingApi(vantage.ApiClient(configuration))
 
 try:
-    api_response = api_instance.ping()
-    pprint(api_response)
+    api_instance.ping()
 except ApiException as e:
     print("Exception when calling PingApi->ping: %s\n" % e)
 ```
@@ -41,7 +40,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
