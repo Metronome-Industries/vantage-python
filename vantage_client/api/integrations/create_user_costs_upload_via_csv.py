@@ -5,8 +5,12 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.create_user_costs_upload_via_csv_data_body import CreateUserCostsUploadViaCsvDataBody
-from ...models.create_user_costs_upload_via_csv_files_body import CreateUserCostsUploadViaCsvFilesBody
+from ...models.create_user_costs_upload_via_csv_data_body import (
+    CreateUserCostsUploadViaCsvDataBody,
+)
+from ...models.create_user_costs_upload_via_csv_files_body import (
+    CreateUserCostsUploadViaCsvFilesBody,
+)
 from ...models.errors import Errors
 from ...models.user_costs_upload import UserCostsUpload
 from ...types import Response
@@ -36,7 +40,6 @@ def _get_kwargs(
         _files_body = body.to_multipart()
 
         _kwargs["files"] = _files_body
-        headers["Content-Type"] = "multipart/form-data"
 
     _kwargs["headers"] = headers
     return _kwargs
