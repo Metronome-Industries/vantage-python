@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -40,10 +41,10 @@ class TagValues:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.tag_value import TagValue
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         tag_values = []
         _tag_values = d.pop("tag_values", UNSET)
         for tag_values_item_data in _tag_values or []:

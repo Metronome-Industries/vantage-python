@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -40,10 +41,10 @@ class VirtualTagConfigs:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.virtual_tag_config import VirtualTagConfig
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         virtual_tag_configs = []
         _virtual_tag_configs = d.pop("virtual_tag_configs", UNSET)
         for virtual_tag_configs_item_data in _virtual_tag_configs or []:

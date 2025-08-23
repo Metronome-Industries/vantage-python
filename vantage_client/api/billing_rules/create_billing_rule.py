@@ -22,9 +22,8 @@ def _get_kwargs(
         "url": "/billing_rules",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
@@ -64,10 +63,10 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: CreateBillingRule,
 ) -> Response[Union[BillingRule, Errors]]:
-    """Create a Billing Rule.
+    """Create a BillingRule.
 
     Args:
-        body (CreateBillingRule): Create a Billing Rule.
+        body (CreateBillingRule): Create a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -93,10 +92,10 @@ def sync(
     client: AuthenticatedClient,
     body: CreateBillingRule,
 ) -> Optional[Union[BillingRule, Errors]]:
-    """Create a Billing Rule.
+    """Create a BillingRule.
 
     Args:
-        body (CreateBillingRule): Create a Billing Rule.
+        body (CreateBillingRule): Create a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -117,10 +116,10 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: CreateBillingRule,
 ) -> Response[Union[BillingRule, Errors]]:
-    """Create a Billing Rule.
+    """Create a BillingRule.
 
     Args:
-        body (CreateBillingRule): Create a Billing Rule.
+        body (CreateBillingRule): Create a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -144,10 +143,10 @@ async def asyncio(
     client: AuthenticatedClient,
     body: CreateBillingRule,
 ) -> Optional[Union[BillingRule, Errors]]:
-    """Create a Billing Rule.
+    """Create a BillingRule.
 
     Args:
-        body (CreateBillingRule): Create a Billing Rule.
+        body (CreateBillingRule): Create a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

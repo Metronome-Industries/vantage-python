@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -40,10 +41,10 @@ class BusinessMetricValues:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.business_metric_value import BusinessMetricValue
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         values = []
         _values = d.pop("values", UNSET)
         for values_item_data in _values or []:

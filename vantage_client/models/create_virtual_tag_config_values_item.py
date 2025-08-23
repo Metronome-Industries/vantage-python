@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -57,12 +58,12 @@ class CreateVirtualTagConfigValuesItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_virtual_tag_config_values_item_cost_metric import (
             CreateVirtualTagConfigValuesItemCostMetric,
         )
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         filter_ = d.pop("filter")
 
         name = d.pop("name", UNSET)

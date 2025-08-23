@@ -6,7 +6,7 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.cost_reports import CostReports
+from ...models.forecasted_costs import ForecastedCosts
 from ...models.get_forecasted_costs_provider import GetForecastedCostsProvider
 from ...types import UNSET, Response, Unset
 
@@ -14,10 +14,11 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     cost_report_token: str,
     *,
-    start_date: Union[Unset, datetime.datetime] = UNSET,
-    end_date: Union[Unset, datetime.datetime] = UNSET,
+    start_date: Union[Unset, datetime.date] = UNSET,
+    end_date: Union[Unset, datetime.date] = UNSET,
     provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
     service: Union[Unset, str] = UNSET,
+    page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
@@ -40,6 +41,8 @@ def _get_kwargs(
 
     params["service"] = service
 
+    params["page"] = page
+
     params["limit"] = limit
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -53,9 +56,11 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[CostReports]:
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[ForecastedCosts]:
     if response.status_code == 200:
-        response_200 = CostReports.from_dict(response.json())
+        response_200 = ForecastedCosts.from_dict(response.json())
 
         return response_200
     if client.raise_on_unexpected_status:
@@ -64,7 +69,9 @@ def _parse_response(*, client: Union[AuthenticatedClient, Client], response: htt
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[CostReports]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[ForecastedCosts]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -77,20 +84,22 @@ def sync_detailed(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.datetime] = UNSET,
-    end_date: Union[Unset, datetime.datetime] = UNSET,
+    start_date: Union[Unset, datetime.date] = UNSET,
+    end_date: Union[Unset, datetime.date] = UNSET,
     provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
     service: Union[Unset, str] = UNSET,
+    page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
-) -> Response[CostReports]:
+) -> Response[ForecastedCosts]:
     """Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.datetime]):
-        end_date (Union[Unset, datetime.datetime]):
+        start_date (Union[Unset, datetime.date]):
+        end_date (Union[Unset, datetime.date]):
         provider (Union[Unset, GetForecastedCostsProvider]):
         service (Union[Unset, str]):
+        page (Union[Unset, int]):
         limit (Union[Unset, int]):
 
     Raises:
@@ -98,7 +107,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CostReports]
+        Response[ForecastedCosts]
     """
 
     kwargs = _get_kwargs(
@@ -107,6 +116,7 @@ def sync_detailed(
         end_date=end_date,
         provider=provider,
         service=service,
+        page=page,
         limit=limit,
     )
 
@@ -121,20 +131,22 @@ def sync(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.datetime] = UNSET,
-    end_date: Union[Unset, datetime.datetime] = UNSET,
+    start_date: Union[Unset, datetime.date] = UNSET,
+    end_date: Union[Unset, datetime.date] = UNSET,
     provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
     service: Union[Unset, str] = UNSET,
+    page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
-) -> Optional[CostReports]:
+) -> Optional[ForecastedCosts]:
     """Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.datetime]):
-        end_date (Union[Unset, datetime.datetime]):
+        start_date (Union[Unset, datetime.date]):
+        end_date (Union[Unset, datetime.date]):
         provider (Union[Unset, GetForecastedCostsProvider]):
         service (Union[Unset, str]):
+        page (Union[Unset, int]):
         limit (Union[Unset, int]):
 
     Raises:
@@ -142,7 +154,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        CostReports
+        ForecastedCosts
     """
 
     return sync_detailed(
@@ -152,6 +164,7 @@ def sync(
         end_date=end_date,
         provider=provider,
         service=service,
+        page=page,
         limit=limit,
     ).parsed
 
@@ -160,20 +173,22 @@ async def asyncio_detailed(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.datetime] = UNSET,
-    end_date: Union[Unset, datetime.datetime] = UNSET,
+    start_date: Union[Unset, datetime.date] = UNSET,
+    end_date: Union[Unset, datetime.date] = UNSET,
     provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
     service: Union[Unset, str] = UNSET,
+    page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
-) -> Response[CostReports]:
+) -> Response[ForecastedCosts]:
     """Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.datetime]):
-        end_date (Union[Unset, datetime.datetime]):
+        start_date (Union[Unset, datetime.date]):
+        end_date (Union[Unset, datetime.date]):
         provider (Union[Unset, GetForecastedCostsProvider]):
         service (Union[Unset, str]):
+        page (Union[Unset, int]):
         limit (Union[Unset, int]):
 
     Raises:
@@ -181,7 +196,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[CostReports]
+        Response[ForecastedCosts]
     """
 
     kwargs = _get_kwargs(
@@ -190,6 +205,7 @@ async def asyncio_detailed(
         end_date=end_date,
         provider=provider,
         service=service,
+        page=page,
         limit=limit,
     )
 
@@ -202,20 +218,22 @@ async def asyncio(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.datetime] = UNSET,
-    end_date: Union[Unset, datetime.datetime] = UNSET,
+    start_date: Union[Unset, datetime.date] = UNSET,
+    end_date: Union[Unset, datetime.date] = UNSET,
     provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
     service: Union[Unset, str] = UNSET,
+    page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
-) -> Optional[CostReports]:
+) -> Optional[ForecastedCosts]:
     """Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.datetime]):
-        end_date (Union[Unset, datetime.datetime]):
+        start_date (Union[Unset, datetime.date]):
+        end_date (Union[Unset, datetime.date]):
         provider (Union[Unset, GetForecastedCostsProvider]):
         service (Union[Unset, str]):
+        page (Union[Unset, int]):
         limit (Union[Unset, int]):
 
     Raises:
@@ -223,7 +241,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        CostReports
+        ForecastedCosts
     """
 
     return (
@@ -234,6 +252,7 @@ async def asyncio(
             end_date=end_date,
             provider=provider,
             service=service,
+            page=page,
             limit=limit,
         )
     ).parsed

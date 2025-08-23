@@ -1,4 +1,5 @@
-from typing import Any, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,9 +16,9 @@ class AnomalyAlert:
     Attributes:
         token (Union[Unset, str]):
         created_at (Union[Unset, str]): The date and time, in UTC, the AnomalyAlert was created. ISO 8601 Formatted.
-            Example: 2021-07-09 00:00:00+00:00.
+            Example: 2021-07-09T00:00:00Z.
         alerted_at (Union[Unset, str]): The date and time, in UTC, the AnomalyAlert is sent. ISO 8601 Formatted.
-            Example: 2021-07-09 00:00:00+00:00.
+            Example: 2021-07-09T00:00:00Z.
         category (Union[Unset, str]): The category of the AnomalyAlert.
         service (Union[Unset, str]): The provider service causing the AnomalyAlert.
         provider (Union[Unset, str]): The provider of the service causing the AnomalyAlert.
@@ -26,6 +27,7 @@ class AnomalyAlert:
         seven_day_average (Union[Unset, str]): The seven day average of the amount observed.
         status (Union[Unset, str]): The status of the AnomalyAlert.
         feedback (Union[Unset, str]): The user-provided feedback of why alert was ignored/archived.
+        resources (Union[Unset, list[str]]): The names of the resources the AnomalyAlert was attributed to.
         cost_report_token (Union[Unset, str]): The token of the Report associated with the AnomalyAlert.
     """
 
@@ -40,6 +42,7 @@ class AnomalyAlert:
     seven_day_average: Union[Unset, str] = UNSET
     status: Union[Unset, str] = UNSET
     feedback: Union[Unset, str] = UNSET
+    resources: Union[Unset, list[str]] = UNSET
     cost_report_token: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -65,6 +68,10 @@ class AnomalyAlert:
         status = self.status
 
         feedback = self.feedback
+
+        resources: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.resources, Unset):
+            resources = self.resources
 
         cost_report_token = self.cost_report_token
 
@@ -93,14 +100,16 @@ class AnomalyAlert:
             field_dict["status"] = status
         if feedback is not UNSET:
             field_dict["feedback"] = feedback
+        if resources is not UNSET:
+            field_dict["resources"] = resources
         if cost_report_token is not UNSET:
             field_dict["cost_report_token"] = cost_report_token
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         created_at = d.pop("created_at", UNSET)
@@ -123,6 +132,8 @@ class AnomalyAlert:
 
         feedback = d.pop("feedback", UNSET)
 
+        resources = cast(list[str], d.pop("resources", UNSET))
+
         cost_report_token = d.pop("cost_report_token", UNSET)
 
         anomaly_alert = cls(
@@ -137,6 +148,7 @@ class AnomalyAlert:
             seven_day_average=seven_day_average,
             status=status,
             feedback=feedback,
+            resources=resources,
             cost_report_token=cost_report_token,
         )
 

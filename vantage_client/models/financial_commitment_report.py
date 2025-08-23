@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -18,7 +19,7 @@ class FinancialCommitmentReport:
             Report.
         default (Union[Unset, bool]): Indicates whether the FinancialCommitmentReport is the default report.
         created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
-            2024-03-19 00:00:00+00:00.
+            2024-03-19T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the FinancialCommitmentReport is a part of.
         user_token (Union[Unset, str]): The token for the User who created this FinancialCommitmentReport.
         start_date (Union[Unset, str]): The start date for the FinancialCommitmentReport. Only set for custom date
@@ -112,8 +113,8 @@ class FinancialCommitmentReport:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)

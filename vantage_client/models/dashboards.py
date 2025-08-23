@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.dashboard import Dashboard
-    from ..models.links import Links
+    from ..models.dashboards_links import DashboardsLinks
 
 
 T = TypeVar("T", bound="Dashboards")
@@ -18,11 +19,11 @@ class Dashboards:
     """Dashboards model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, DashboardsLinks]):
         dashboards (Union[Unset, list['Dashboard']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "DashboardsLinks"] = UNSET
     dashboards: Union[Unset, list["Dashboard"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class Dashboards:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.dashboard import Dashboard
-        from ..models.links import Links
+        from ..models.dashboards_links import DashboardsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, DashboardsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = DashboardsLinks.from_dict(_links)
 
         dashboards = []
         _dashboards = d.pop("dashboards", UNSET)

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.team import Team
+    from ..models.teams_links import TeamsLinks
 
 
 T = TypeVar("T", bound="Teams")
@@ -18,11 +19,11 @@ class Teams:
     """Teams model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, TeamsLinks]):
         teams (Union[Unset, list['Team']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "TeamsLinks"] = UNSET
     teams: Union[Unset, list["Team"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class Teams:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.team import Team
+        from ..models.teams_links import TeamsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, TeamsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = TeamsLinks.from_dict(_links)
 
         teams = []
         _teams = d.pop("teams", UNSET)

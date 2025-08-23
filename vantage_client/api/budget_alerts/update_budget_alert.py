@@ -7,18 +7,14 @@ from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.budget_alert import BudgetAlert
 from ...models.errors import Errors
-from ...models.update_budget_alert_files_body import UpdateBudgetAlertFilesBody
-from ...models.update_budget_alert_json_body import UpdateBudgetAlertJsonBody
+from ...models.update_budget_alert_body import UpdateBudgetAlertBody
 from ...types import Response
 
 
 def _get_kwargs(
     budget_alert_token: str,
     *,
-    body: Union[
-        UpdateBudgetAlertJsonBody,
-        UpdateBudgetAlertFilesBody,
-    ],
+    body: UpdateBudgetAlertBody,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -27,16 +23,9 @@ def _get_kwargs(
         "url": f"/budget_alerts/{budget_alert_token}",
     }
 
-    if isinstance(body, UpdateBudgetAlertJsonBody):
-        _json_body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-        _kwargs["json"] = _json_body
-        headers["Content-Type"] = "application/json"
-    if isinstance(body, UpdateBudgetAlertFilesBody):
-        _files_body = body.to_multipart()
-
-        _kwargs["files"] = _files_body
-        headers["Content-Type"] = "multipart/form-data"
+    headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
     return _kwargs
@@ -74,17 +63,13 @@ def sync_detailed(
     budget_alert_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBudgetAlertJsonBody,
-        UpdateBudgetAlertFilesBody,
-    ],
+    body: UpdateBudgetAlertBody,
 ) -> Response[Union[BudgetAlert, Errors]]:
     """Updates an existing BudgetAlert.
 
     Args:
         budget_alert_token (str):
-        body (UpdateBudgetAlertJsonBody):
-        body (UpdateBudgetAlertFilesBody):
+        body (UpdateBudgetAlertBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -110,17 +95,13 @@ def sync(
     budget_alert_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBudgetAlertJsonBody,
-        UpdateBudgetAlertFilesBody,
-    ],
+    body: UpdateBudgetAlertBody,
 ) -> Optional[Union[BudgetAlert, Errors]]:
     """Updates an existing BudgetAlert.
 
     Args:
         budget_alert_token (str):
-        body (UpdateBudgetAlertJsonBody):
-        body (UpdateBudgetAlertFilesBody):
+        body (UpdateBudgetAlertBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -141,17 +122,13 @@ async def asyncio_detailed(
     budget_alert_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBudgetAlertJsonBody,
-        UpdateBudgetAlertFilesBody,
-    ],
+    body: UpdateBudgetAlertBody,
 ) -> Response[Union[BudgetAlert, Errors]]:
     """Updates an existing BudgetAlert.
 
     Args:
         budget_alert_token (str):
-        body (UpdateBudgetAlertJsonBody):
-        body (UpdateBudgetAlertFilesBody):
+        body (UpdateBudgetAlertBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -175,17 +152,13 @@ async def asyncio(
     budget_alert_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBudgetAlertJsonBody,
-        UpdateBudgetAlertFilesBody,
-    ],
+    body: UpdateBudgetAlertBody,
 ) -> Optional[Union[BudgetAlert, Errors]]:
     """Updates an existing BudgetAlert.
 
     Args:
         budget_alert_token (str):
-        body (UpdateBudgetAlertJsonBody):
-        body (UpdateBudgetAlertFilesBody):
+        body (UpdateBudgetAlertBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

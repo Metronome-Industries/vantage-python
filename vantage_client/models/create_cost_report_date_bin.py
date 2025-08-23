@@ -5,6 +5,7 @@ class CreateCostReportDateBin(str, Enum):
     CUMULATIVE = "cumulative"
     DAY = "day"
     MONTH = "month"
+    QUARTER = "quarter"
     WEEK = "week"
 
     def __str__(self) -> str:

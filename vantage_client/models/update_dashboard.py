@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -19,8 +20,6 @@ class UpdateDashboard:
     """Update a Dashboard.
 
     Attributes:
-        end_date (str): The end date for the date range for costs in the Dashboard. ISO 8601 Formatted. Incompatible
-            with 'date_interval' parameter.
         title (Union[Unset, str]): The title of the Dashboard.
         widgets (Union[Unset, list['UpdateDashboardWidgetsItem']]): The widgets to add to the Dashboard. Currently
             supports CostReport, ResourceReport, KubernetesEfficiencyReport, and FinancialCommitmentReport.
@@ -30,23 +29,23 @@ class UpdateDashboard:
             Incompatible with 'start_date' and 'end_date' parameters.
         start_date (Union[Unset, str]): The start date for the date range for costs in the Dashboard. ISO 8601
             Formatted. Incompatible with 'date_interval' parameter.
+        end_date (Union[Unset, str]): The end date for the date range for costs in the Dashboard. ISO 8601 Formatted.
+            Incompatible with 'date_interval' parameter.
         workspace_token (Union[Unset, str]): The token of the Workspace the Dashboard belongs to. Required if the API
             token is associated with multiple Workspaces.
     """
 
-    end_date: str
     title: Union[Unset, str] = UNSET
     widgets: Union[Unset, list["UpdateDashboardWidgetsItem"]] = UNSET
     saved_filter_tokens: Union[Unset, list[str]] = UNSET
     date_bin: Union[Unset, UpdateDashboardDateBin] = UNSET
     date_interval: Union[Unset, UpdateDashboardDateInterval] = UNSET
     start_date: Union[Unset, str] = UNSET
+    end_date: Union[Unset, str] = UNSET
     workspace_token: Union[Unset, str] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        end_date = self.end_date
-
         title = self.title
 
         widgets: Union[Unset, list[dict[str, Any]]] = UNSET
@@ -70,15 +69,13 @@ class UpdateDashboard:
 
         start_date = self.start_date
 
+        end_date = self.end_date
+
         workspace_token = self.workspace_token
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "end_date": end_date,
-            }
-        )
+        field_dict.update({})
         if title is not UNSET:
             field_dict["title"] = title
         if widgets is not UNSET:
@@ -91,18 +88,18 @@ class UpdateDashboard:
             field_dict["date_interval"] = date_interval
         if start_date is not UNSET:
             field_dict["start_date"] = start_date
+        if end_date is not UNSET:
+            field_dict["end_date"] = end_date
         if workspace_token is not UNSET:
             field_dict["workspace_token"] = workspace_token
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_dashboard_widgets_item import UpdateDashboardWidgetsItem
 
-        d = src_dict.copy()
-        end_date = d.pop("end_date")
-
+        d = dict(src_dict)
         title = d.pop("title", UNSET)
 
         widgets = []
@@ -130,16 +127,18 @@ class UpdateDashboard:
 
         start_date = d.pop("start_date", UNSET)
 
+        end_date = d.pop("end_date", UNSET)
+
         workspace_token = d.pop("workspace_token", UNSET)
 
         update_dashboard = cls(
-            end_date=end_date,
             title=title,
             widgets=widgets,
             saved_filter_tokens=saved_filter_tokens,
             date_bin=date_bin,
             date_interval=date_interval,
             start_date=start_date,
+            end_date=end_date,
             workspace_token=workspace_token,
         )
 

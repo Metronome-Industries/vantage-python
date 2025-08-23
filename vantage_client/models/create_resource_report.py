@@ -1,4 +1,5 @@
-from typing import Any, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,11 +18,15 @@ class CreateResourceReport:
         title (Union[Unset, str]): The title of the ResourceReport.
         filter_ (Union[Unset, str]): The filter query language to apply to the ResourceReport. Additional documentation
             available at https://docs.vantage.sh/vql.
+        columns (Union[Unset, list[str]]): Array of column names to display in the table. Column names should match
+            those returned by the /resource_reports/columns endpoint. The order determines the display order. Only available
+            for reports with a single resource type filter.
     """
 
     workspace_token: str
     title: Union[Unset, str] = UNSET
     filter_: Union[Unset, str] = UNSET
+    columns: Union[Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -30,6 +35,10 @@ class CreateResourceReport:
         title = self.title
 
         filter_ = self.filter_
+
+        columns: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.columns, Unset):
+            columns = self.columns
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -42,22 +51,27 @@ class CreateResourceReport:
             field_dict["title"] = title
         if filter_ is not UNSET:
             field_dict["filter"] = filter_
+        if columns is not UNSET:
+            field_dict["columns"] = columns
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         workspace_token = d.pop("workspace_token")
 
         title = d.pop("title", UNSET)
 
         filter_ = d.pop("filter", UNSET)
 
+        columns = cast(list[str], d.pop("columns", UNSET))
+
         create_resource_report = cls(
             workspace_token=workspace_token,
             title=title,
             filter_=filter_,
+            columns=columns,
         )
 
         create_resource_report.additional_properties = d

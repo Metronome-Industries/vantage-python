@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -31,9 +32,9 @@ class Dashboard:
         end_date (Union[Unset, str]): The end date for the date range for Reports in the Dashboard. ISO 8601 Formatted.
             Overwrites 'date_interval' if set. Example: 2023-09-04.
         created_at (Union[Unset, str]): The date and time, in UTC, the Dashboard was created. ISO 8601 Formatted.
-            Example: 2023-08-04 00:00:00+00:00.
+            Example: 2023-08-04T00:00:00Z.
         updated_at (Union[Unset, str]): The date and time, in UTC, the Dashboard was created. ISO 8601 Formatted.
-            Example: 2023-08-04 00:00:00+00:00.
+            Example: 2023-08-04T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the Dashboard is a part of. Example:
             wrkspc_abcd1234567890.
     """
@@ -114,10 +115,10 @@ class Dashboard:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.dashboard_widget import DashboardWidget
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)

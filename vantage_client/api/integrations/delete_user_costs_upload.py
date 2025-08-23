@@ -5,7 +5,6 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.cost import Cost
 from ...models.errors import Errors
 from ...types import Response
 
@@ -22,13 +21,7 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Cost, Errors]]:
-    if response.status_code == 204:
-        response_204 = Cost.from_dict(response.json())
-
-        return response_204
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Errors]:
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
@@ -39,9 +32,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Cost, Errors]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -55,7 +46,7 @@ def sync_detailed(
     user_costs_upload_token: int,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Cost, Errors]]:
+) -> Response[Errors]:
     """Delete a UserCostsUpload.
 
     Args:
@@ -67,7 +58,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Cost, Errors]]
+        Response[Errors]
     """
 
     kwargs = _get_kwargs(
@@ -87,7 +78,7 @@ def sync(
     user_costs_upload_token: int,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Cost, Errors]]:
+) -> Optional[Errors]:
     """Delete a UserCostsUpload.
 
     Args:
@@ -99,7 +90,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Cost, Errors]
+        Errors
     """
 
     return sync_detailed(
@@ -114,7 +105,7 @@ async def asyncio_detailed(
     user_costs_upload_token: int,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Cost, Errors]]:
+) -> Response[Errors]:
     """Delete a UserCostsUpload.
 
     Args:
@@ -126,7 +117,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Cost, Errors]]
+        Response[Errors]
     """
 
     kwargs = _get_kwargs(
@@ -144,7 +135,7 @@ async def asyncio(
     user_costs_upload_token: int,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Cost, Errors]]:
+) -> Optional[Errors]:
     """Delete a UserCostsUpload.
 
     Args:
@@ -156,7 +147,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Cost, Errors]
+        Errors
     """
 
     return (

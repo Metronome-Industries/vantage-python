@@ -54,7 +54,7 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[BillingRule, Errors]]:
-    """Return a Billing Rule.
+    """Return a BillingRule.
 
     Args:
         billing_rule_token (str):
@@ -83,7 +83,7 @@ def sync(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[BillingRule, Errors]]:
-    """Return a Billing Rule.
+    """Return a BillingRule.
 
     Args:
         billing_rule_token (str):
@@ -107,7 +107,7 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Union[BillingRule, Errors]]:
-    """Return a Billing Rule.
+    """Return a BillingRule.
 
     Args:
         billing_rule_token (str):
@@ -134,7 +134,7 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
 ) -> Optional[Union[BillingRule, Errors]]:
-    """Return a Billing Rule.
+    """Return a BillingRule.
 
     Args:
         billing_rule_token (str):

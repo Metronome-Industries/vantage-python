@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.kubernetes_efficiency_report import KubernetesEfficiencyReport
-    from ..models.links import Links
+    from ..models.kubernetes_efficiency_reports_links import KubernetesEfficiencyReportsLinks
 
 
 T = TypeVar("T", bound="KubernetesEfficiencyReports")
@@ -18,11 +19,11 @@ class KubernetesEfficiencyReports:
     """KubernetesEfficiencyReports model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, KubernetesEfficiencyReportsLinks]):
         kubernetes_efficiency_reports (Union[Unset, list['KubernetesEfficiencyReport']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "KubernetesEfficiencyReportsLinks"] = UNSET
     kubernetes_efficiency_reports: Union[Unset, list["KubernetesEfficiencyReport"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class KubernetesEfficiencyReports:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.kubernetes_efficiency_report import KubernetesEfficiencyReport
-        from ..models.links import Links
+        from ..models.kubernetes_efficiency_reports_links import KubernetesEfficiencyReportsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, KubernetesEfficiencyReportsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = KubernetesEfficiencyReportsLinks.from_dict(_links)
 
         kubernetes_efficiency_reports = []
         _kubernetes_efficiency_reports = d.pop("kubernetes_efficiency_reports", UNSET)

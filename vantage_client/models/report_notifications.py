@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.report_notification import ReportNotification
+    from ..models.report_notifications_links import ReportNotificationsLinks
 
 
 T = TypeVar("T", bound="ReportNotifications")
@@ -18,11 +19,11 @@ class ReportNotifications:
     """ReportNotifications model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, ReportNotificationsLinks]):
         report_notifications (Union[Unset, list['ReportNotification']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "ReportNotificationsLinks"] = UNSET
     report_notifications: Union[Unset, list["ReportNotification"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class ReportNotifications:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.report_notification import ReportNotification
+        from ..models.report_notifications_links import ReportNotificationsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, ReportNotificationsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = ReportNotificationsLinks.from_dict(_links)
 
         report_notifications = []
         _report_notifications = d.pop("report_notifications", UNSET)

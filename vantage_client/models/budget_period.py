@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -13,9 +14,9 @@ class BudgetPeriod:
     """
     Attributes:
         start_at (Union[Unset, str]): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
-            2024-03-19 00:00:00+00:00.
+            2024-03-19T00:00:00Z.
         end_at (Union[Unset, str]): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
-            2024-03-19 00:00:00+00:00.
+            2024-03-19T00:00:00Z.
         amount (Union[Unset, str]): The amount of the Budget Period as a string to ensure precision. Example: 100.00.
     """
 
@@ -44,8 +45,8 @@ class BudgetPeriod:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         start_at = d.pop("start_at", UNSET)
 
         end_at = d.pop("end_at", UNSET)

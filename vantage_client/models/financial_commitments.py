@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.financial_commitment import FinancialCommitment
-    from ..models.links import Links
+    from ..models.financial_commitments_links import FinancialCommitmentsLinks
 
 
 T = TypeVar("T", bound="FinancialCommitments")
@@ -18,11 +19,11 @@ class FinancialCommitments:
     """FinancialCommitments model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, FinancialCommitmentsLinks]):
         financial_commitments (Union[Unset, list['FinancialCommitment']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "FinancialCommitmentsLinks"] = UNSET
     financial_commitments: Union[Unset, list["FinancialCommitment"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class FinancialCommitments:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.financial_commitment import FinancialCommitment
-        from ..models.links import Links
+        from ..models.financial_commitments_links import FinancialCommitmentsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, FinancialCommitmentsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = FinancialCommitmentsLinks.from_dict(_links)
 
         financial_commitments = []
         _financial_commitments = d.pop("financial_commitments", UNSET)

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.saved_filter import SavedFilter
+    from ..models.saved_filters_links import SavedFiltersLinks
 
 
 T = TypeVar("T", bound="SavedFilters")
@@ -18,11 +19,11 @@ class SavedFilters:
     """SavedFilters model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, SavedFiltersLinks]):
         saved_filters (Union[Unset, list['SavedFilter']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "SavedFiltersLinks"] = UNSET
     saved_filters: Union[Unset, list["SavedFilter"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class SavedFilters:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.saved_filter import SavedFilter
+        from ..models.saved_filters_links import SavedFiltersLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, SavedFiltersLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = SavedFiltersLinks.from_dict(_links)
 
         saved_filters = []
         _saved_filters = d.pop("saved_filters", UNSET)

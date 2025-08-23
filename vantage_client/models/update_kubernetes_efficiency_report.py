@@ -1,4 +1,5 @@
 import datetime
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -33,7 +34,7 @@ class UpdateKubernetesEfficiencyReport:
         date_bucket (Union[Unset, UpdateKubernetesEfficiencyReportDateBucket]): The date bucket of the
             KubernetesEfficiencyReport.
         groupings (Union[Unset, list[str]]): Grouping values for aggregating costs on the KubernetesEfficiencyReport.
-            Valid groupings: cluster_id, namespace, labeled, category, label, label:<label_name>.
+            Valid groupings: cluster_id, namespace, labeled, category, pod, label, label:<label_name>.
     """
 
     title: Union[Unset, str] = UNSET
@@ -98,8 +99,8 @@ class UpdateKubernetesEfficiencyReport:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         title = d.pop("title", UNSET)
 
         filter_ = d.pop("filter", UNSET)

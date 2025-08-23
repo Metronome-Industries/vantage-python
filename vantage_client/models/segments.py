@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.segment import Segment
+    from ..models.segments_links import SegmentsLinks
 
 
 T = TypeVar("T", bound="Segments")
@@ -18,11 +19,11 @@ class Segments:
     """Segments model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, SegmentsLinks]):
         segments (Union[Unset, list['Segment']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "SegmentsLinks"] = UNSET
     segments: Union[Unset, list["Segment"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class Segments:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.segment import Segment
+        from ..models.segments_links import SegmentsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, SegmentsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = SegmentsLinks.from_dict(_links)
 
         segments = []
         _segments = d.pop("segments", UNSET)

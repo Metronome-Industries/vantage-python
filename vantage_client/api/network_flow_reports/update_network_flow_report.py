@@ -23,9 +23,8 @@ def _get_kwargs(
         "url": f"/network_flow_reports/{network_flow_report_token}",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers

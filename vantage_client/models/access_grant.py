@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -19,7 +20,7 @@ class AccessGrant:
         access (Union[Unset, str]): The access status of the AccessGrant.
         team_token (Union[Unset, str]): The Team token for which an AccessGrant is applied to.
         created_at (Union[Unset, str]): The date and time, in UTC, the AccessGrant was created. ISO 8601 Formatted.
-            Example: 2023-08-04 00:00:00+00:00.
+            Example: 2023-08-04T00:00:00Z.
         created_by (Union[Unset, str]): The token for the User who created the AccessGrant.
     """
 
@@ -63,8 +64,8 @@ class AccessGrant:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         resource_token = d.pop("resource_token", UNSET)

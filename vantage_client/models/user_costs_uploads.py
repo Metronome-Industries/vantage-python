@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.user_costs_upload import UserCostsUpload
+    from ..models.user_costs_uploads_links import UserCostsUploadsLinks
 
 
 T = TypeVar("T", bound="UserCostsUploads")
@@ -18,11 +19,11 @@ class UserCostsUploads:
     """UserCostsUploads model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, UserCostsUploadsLinks]):
         user_costs_uploads (Union[Unset, list['UserCostsUpload']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "UserCostsUploadsLinks"] = UNSET
     user_costs_uploads: Union[Unset, list["UserCostsUpload"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class UserCostsUploads:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.user_costs_upload import UserCostsUpload
+        from ..models.user_costs_uploads_links import UserCostsUploadsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, UserCostsUploadsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = UserCostsUploadsLinks.from_dict(_links)
 
         user_costs_uploads = []
         _user_costs_uploads = d.pop("user_costs_uploads", UNSET)

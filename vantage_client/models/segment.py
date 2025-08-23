@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -29,7 +30,7 @@ class Segment:
         filter_ (Union[Unset, str]): The filter applied to the Segment. Additional documentation available at
             https://docs.vantage.sh/vql.
         created_at (Union[Unset, str]): The date and time, in UTC, the Segment was created. ISO 8601 Formatted. Example:
-            2021-07-09 00:00:00+00:00.
+            2021-07-09T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the Segment is a part of.
         report_token (Union[Unset, str]): The token for the Report the Segment has generated.
     """
@@ -101,10 +102,10 @@ class Segment:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.segment_report_settings import SegmentReportSettings
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)

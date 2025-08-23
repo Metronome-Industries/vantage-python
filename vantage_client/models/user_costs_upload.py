@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -21,7 +22,7 @@ class UserCostsUpload:
         end_date (Union[Unset, str]): The end date of the costs in the UserCostsUpload. Example: 2021-01-31.
         import_status (Union[Unset, str]): Import status of the UserCostsUpload. Example: processing.
         created_by_token (Union[Unset, str]): The token of the Creator of the UserCostsUpload. Example: usr_1234.
-        created_at (Union[Unset, str]): When the UserCostsUpload was uploaded. Example: 2021-01-01 00:00:00+00:00.
+        created_at (Union[Unset, str]): When the UserCostsUpload was uploaded. Example: 2021-01-01T00:00:00Z.
     """
 
     token: Union[Unset, str] = UNSET
@@ -74,8 +75,8 @@ class UserCostsUpload:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         filename = d.pop("filename", UNSET)

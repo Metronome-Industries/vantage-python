@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -16,9 +17,9 @@ class AnomalyNotification:
         token (Union[Unset, str]):
         cost_report_token (Union[Unset, str]): The token for the CostReport the AnomalyNotification is associated with.
         created_at (Union[Unset, str]): The date and time, in UTC, the AnomalyNotification was created. ISO 8601
-            Formatted. Example: 2023-08-04 00:00:00+00:00.
+            Formatted. Example: 2023-08-04T00:00:00Z.
         updated_at (Union[Unset, str]): The date and time, in UTC, the AnomalyNotification was last updated at. ISO 8601
-            Formatted. Example: 2023-08-04 00:00:00+00:00.
+            Formatted. Example: 2023-08-04T00:00:00Z.
         threshold (Union[Unset, int]): The threshold amount that must be met for the notification to fire.
         user_tokens (Union[Unset, list[str]]): The tokens of the users that receive the notification.
         recipient_channels (Union[Unset, list[str]]): The channels that the notification is sent to.
@@ -73,8 +74,8 @@ class AnomalyNotification:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         cost_report_token = d.pop("cost_report_token", UNSET)

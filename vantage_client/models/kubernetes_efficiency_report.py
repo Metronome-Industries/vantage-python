@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -18,7 +19,7 @@ class KubernetesEfficiencyReport:
             Metrics.
         default (Union[Unset, bool]): Indicates whether the KubernetesEfficiencyReport is the default report.
         created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
-            2024-03-19 00:00:00+00:00.
+            2024-03-19T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the KubernetesEfficiencyReport is a part of.
         user_token (Union[Unset, str]): The token for the User who created this KubernetesEfficiencyReport.
         start_date (Union[Unset, str]): The start date for the KubernetesEfficiencyReport. Only set for custom date
@@ -32,7 +33,8 @@ class KubernetesEfficiencyReport:
         aggregated_by (Union[Unset, str]): How costs are aggregated by. Possible values: idle_cost, amount,
             cost_efficiency.
         groupings (Union[Unset, str]): Grouping values for aggregating costs on the KubernetesEfficiencyReport. Valid
-            groupings: cluster_id, namespace, labeled, category, label, label:<label_name>. Example: cluster_id, namespace.
+            groupings: cluster_id, namespace, labeled, category, pod, label, label:<label_name>. Example: cluster_id,
+            namespace.
         filter_ (Union[Unset, str]): The filter applied to the KubernetesEfficiencyReport. Additional documentation
             available at https://docs.vantage.sh/vql.
     """
@@ -112,8 +114,8 @@ class KubernetesEfficiencyReport:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)

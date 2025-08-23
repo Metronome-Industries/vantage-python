@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
@@ -41,8 +42,8 @@ class CreateGCPIntegration:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         billing_account_id = d.pop("billing_account_id")
 
         project_id = d.pop("project_id")
