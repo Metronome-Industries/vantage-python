@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.billing_rule import BillingRule
-    from ..models.links import Links
+    from ..models.billing_rules_links import BillingRulesLinks
 
 
 T = TypeVar("T", bound="BillingRules")
@@ -18,11 +19,11 @@ class BillingRules:
     """BillingRules model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, BillingRulesLinks]):
         billing_rules (Union[Unset, list['BillingRule']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "BillingRulesLinks"] = UNSET
     billing_rules: Union[Unset, list["BillingRule"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class BillingRules:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.billing_rule import BillingRule
-        from ..models.links import Links
+        from ..models.billing_rules_links import BillingRulesLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, BillingRulesLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = BillingRulesLinks.from_dict(_links)
 
         billing_rules = []
         _billing_rules = d.pop("billing_rules", UNSET)

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.price import Price
+    from ..models.prices_links import PricesLinks
 
 
 T = TypeVar("T", bound="Prices")
@@ -18,11 +19,11 @@ class Prices:
     """Prices model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, PricesLinks]):
         prices (Union[Unset, list['Price']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "PricesLinks"] = UNSET
     prices: Union[Unset, list["Price"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class Prices:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.price import Price
+        from ..models.prices_links import PricesLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, PricesLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = PricesLinks.from_dict(_links)
 
         prices = []
         _prices = d.pop("prices", UNSET)

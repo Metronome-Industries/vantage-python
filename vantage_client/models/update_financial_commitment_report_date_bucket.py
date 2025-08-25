@@ -3,6 +3,7 @@ from enum import Enum
 
 class UpdateFinancialCommitmentReportDateBucket(str, Enum):
     DAY = "day"
+    HOUR = "hour"
     MONTH = "month"
     WEEK = "week"
 

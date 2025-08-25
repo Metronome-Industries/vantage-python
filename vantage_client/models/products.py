@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.product import Product
+    from ..models.products_links import ProductsLinks
 
 
 T = TypeVar("T", bound="Products")
@@ -18,11 +19,11 @@ class Products:
     """Products model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, ProductsLinks]):
         products (Union[Unset, list['Product']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "ProductsLinks"] = UNSET
     products: Union[Unset, list["Product"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class Products:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.product import Product
+        from ..models.products_links import ProductsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, ProductsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = ProductsLinks.from_dict(_links)
 
         products = []
         _products = d.pop("products", UNSET)

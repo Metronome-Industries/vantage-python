@@ -6,8 +6,7 @@ import httpx
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.errors import Errors
-from ...models.update_workspace_files_body import UpdateWorkspaceFilesBody
-from ...models.update_workspace_json_body import UpdateWorkspaceJsonBody
+from ...models.update_workspace_body import UpdateWorkspaceBody
 from ...models.workspace import Workspace
 from ...types import Response
 
@@ -15,10 +14,7 @@ from ...types import Response
 def _get_kwargs(
     workspace_token: str,
     *,
-    body: Union[
-        UpdateWorkspaceJsonBody,
-        UpdateWorkspaceFilesBody,
-    ],
+    body: UpdateWorkspaceBody,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -27,16 +23,9 @@ def _get_kwargs(
         "url": f"/workspaces/{workspace_token}",
     }
 
-    if isinstance(body, UpdateWorkspaceJsonBody):
-        _json_body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-        _kwargs["json"] = _json_body
-        headers["Content-Type"] = "application/json"
-    if isinstance(body, UpdateWorkspaceFilesBody):
-        _files_body = body.to_multipart()
-
-        _kwargs["files"] = _files_body
-        headers["Content-Type"] = "multipart/form-data"
+    headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
     return _kwargs
@@ -74,17 +63,13 @@ def sync_detailed(
     workspace_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateWorkspaceJsonBody,
-        UpdateWorkspaceFilesBody,
-    ],
+    body: UpdateWorkspaceBody,
 ) -> Response[Union[Errors, Workspace]]:
     """Update a workspace
 
     Args:
         workspace_token (str):
-        body (UpdateWorkspaceJsonBody):
-        body (UpdateWorkspaceFilesBody):
+        body (UpdateWorkspaceBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -110,17 +95,13 @@ def sync(
     workspace_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateWorkspaceJsonBody,
-        UpdateWorkspaceFilesBody,
-    ],
+    body: UpdateWorkspaceBody,
 ) -> Optional[Union[Errors, Workspace]]:
     """Update a workspace
 
     Args:
         workspace_token (str):
-        body (UpdateWorkspaceJsonBody):
-        body (UpdateWorkspaceFilesBody):
+        body (UpdateWorkspaceBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -141,17 +122,13 @@ async def asyncio_detailed(
     workspace_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateWorkspaceJsonBody,
-        UpdateWorkspaceFilesBody,
-    ],
+    body: UpdateWorkspaceBody,
 ) -> Response[Union[Errors, Workspace]]:
     """Update a workspace
 
     Args:
         workspace_token (str):
-        body (UpdateWorkspaceJsonBody):
-        body (UpdateWorkspaceFilesBody):
+        body (UpdateWorkspaceBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -175,17 +152,13 @@ async def asyncio(
     workspace_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateWorkspaceJsonBody,
-        UpdateWorkspaceFilesBody,
-    ],
+    body: UpdateWorkspaceBody,
 ) -> Optional[Union[Errors, Workspace]]:
     """Update a workspace
 
     Args:
         workspace_token (str):
-        body (UpdateWorkspaceJsonBody):
-        body (UpdateWorkspaceFilesBody):
+        body (UpdateWorkspaceBody):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

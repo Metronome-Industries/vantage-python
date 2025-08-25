@@ -23,9 +23,8 @@ def _get_kwargs(
         "url": f"/access_grants/{access_grant_token}",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers

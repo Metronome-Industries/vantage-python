@@ -28,14 +28,12 @@ def _get_kwargs(
     }
 
     if isinstance(body, UpdateBusinessMetricValuesCSVDataBody):
-        _data_body = body.to_dict()
+        _kwargs["data"] = body.to_dict()
 
-        _kwargs["data"] = _data_body
         headers["Content-Type"] = "application/x-www-form-urlencoded"
     if isinstance(body, UpdateBusinessMetricValuesCSVFilesBody):
-        _files_body = body.to_multipart()
+        _kwargs["files"] = body.to_multipart()
 
-        _kwargs["files"] = _files_body
         headers["Content-Type"] = "multipart/form-data"
 
     _kwargs["headers"] = headers
@@ -49,22 +47,22 @@ def _parse_response(
         response_201 = BusinessMetric.from_dict(response.json())
 
         return response_201
-    if response.status_code == 400:
-        response_400 = Errors.from_dict(response.json())
-
-        return response_400
-    if response.status_code == 403:
-        response_403 = Errors.from_dict(response.json())
-
-        return response_403
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+    if response.status_code == 400:
+        response_400 = Errors.from_dict(response.json())
+
+        return response_400
     if response.status_code == 422:
         response_422 = Errors.from_dict(response.json())
 
         return response_422
+    if response.status_code == 403:
+        response_403 = Errors.from_dict(response.json())
+
+        return response_403
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

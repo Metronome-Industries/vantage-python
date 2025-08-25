@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -151,13 +152,13 @@ class UpdateCostReport:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.update_cost_report_business_metric_tokens_with_metadata_item import (
             UpdateCostReportBusinessMetricTokensWithMetadataItem,
         )
         from ..models.update_cost_report_settings import UpdateCostReportSettings
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title", UNSET)
 
         groupings = d.pop("groupings", UNSET)

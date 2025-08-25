@@ -28,14 +28,14 @@ def _parse_response(
         response_204 = VirtualTagConfig.from_dict(response.json())
 
         return response_204
-    if response.status_code == 403:
-        response_403 = Errors.from_dict(response.json())
-
-        return response_403
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+    if response.status_code == 403:
+        response_403 = Errors.from_dict(response.json())
+
+        return response_403
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

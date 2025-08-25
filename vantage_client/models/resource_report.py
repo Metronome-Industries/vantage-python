@@ -1,4 +1,5 @@
-from typing import Any, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,10 +19,11 @@ class ResourceReport:
         filter_ (Union[Unset, str]): The filter applied to the ResourceReport. Additional documentation available at
             https://docs.vantage.sh/vql.
         created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
-            2024-03-19 00:00:00+00:00.
+            2024-03-19T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the ResourceReport is a part of.
         user_token (Union[Unset, str]): The token for the User who created this ResourceReport.
         created_by_token (Union[Unset, str]): The token for the User or Team who created this ResourceReport.
+        columns (Union[Unset, list[str]]): Array of column names configured for the ResourceReport table display.
     """
 
     token: Union[Unset, str] = UNSET
@@ -31,6 +33,7 @@ class ResourceReport:
     workspace_token: Union[Unset, str] = UNSET
     user_token: Union[Unset, str] = UNSET
     created_by_token: Union[Unset, str] = UNSET
+    columns: Union[Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -47,6 +50,10 @@ class ResourceReport:
         user_token = self.user_token
 
         created_by_token = self.created_by_token
+
+        columns: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.columns, Unset):
+            columns = self.columns
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -65,12 +72,14 @@ class ResourceReport:
             field_dict["user_token"] = user_token
         if created_by_token is not UNSET:
             field_dict["created_by_token"] = created_by_token
+        if columns is not UNSET:
+            field_dict["columns"] = columns
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)
@@ -85,6 +94,8 @@ class ResourceReport:
 
         created_by_token = d.pop("created_by_token", UNSET)
 
+        columns = cast(list[str], d.pop("columns", UNSET))
+
         resource_report = cls(
             token=token,
             title=title,
@@ -93,6 +104,7 @@ class ResourceReport:
             workspace_token=workspace_token,
             user_token=user_token,
             created_by_token=created_by_token,
+            columns=columns,
         )
 
         resource_report.additional_properties = d

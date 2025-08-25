@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -20,6 +21,7 @@ class UpdateCostReportSettings:
         amortize (Union[Unset, bool]): Report will amortize.
         unallocated (Union[Unset, bool]): Report will show unallocated costs.
         aggregate_by (Union[Unset, str]): Report will aggregate by cost or usage.
+        show_previous_period (Union[Unset, bool]): Report will show previous period costs or usage comparison.
     """
 
     include_credits: Union[Unset, bool] = UNSET
@@ -29,6 +31,7 @@ class UpdateCostReportSettings:
     amortize: Union[Unset, bool] = UNSET
     unallocated: Union[Unset, bool] = UNSET
     aggregate_by: Union[Unset, str] = UNSET
+    show_previous_period: Union[Unset, bool] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -45,6 +48,8 @@ class UpdateCostReportSettings:
         unallocated = self.unallocated
 
         aggregate_by = self.aggregate_by
+
+        show_previous_period = self.show_previous_period
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -63,12 +68,14 @@ class UpdateCostReportSettings:
             field_dict["unallocated"] = unallocated
         if aggregate_by is not UNSET:
             field_dict["aggregate_by"] = aggregate_by
+        if show_previous_period is not UNSET:
+            field_dict["show_previous_period"] = show_previous_period
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         include_credits = d.pop("include_credits", UNSET)
 
         include_refunds = d.pop("include_refunds", UNSET)
@@ -83,6 +90,8 @@ class UpdateCostReportSettings:
 
         aggregate_by = d.pop("aggregate_by", UNSET)
 
+        show_previous_period = d.pop("show_previous_period", UNSET)
+
         update_cost_report_settings = cls(
             include_credits=include_credits,
             include_refunds=include_refunds,
@@ -91,6 +100,7 @@ class UpdateCostReportSettings:
             amortize=amortize,
             unallocated=unallocated,
             aggregate_by=aggregate_by,
+            show_previous_period=show_previous_period,
         )
 
         update_cost_report_settings.additional_properties = d

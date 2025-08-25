@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,8 +7,8 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.links import Links
     from ..models.network_flow_report import NetworkFlowReport
+    from ..models.network_flow_reports_links import NetworkFlowReportsLinks
 
 
 T = TypeVar("T", bound="NetworkFlowReports")
@@ -18,11 +19,11 @@ class NetworkFlowReports:
     """NetworkFlowReports model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, NetworkFlowReportsLinks]):
         network_flow_reports (Union[Unset, list['NetworkFlowReport']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "NetworkFlowReportsLinks"] = UNSET
     network_flow_reports: Union[Unset, list["NetworkFlowReport"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class NetworkFlowReports:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        from ..models.links import Links
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.network_flow_report import NetworkFlowReport
+        from ..models.network_flow_reports_links import NetworkFlowReportsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, NetworkFlowReportsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = NetworkFlowReportsLinks.from_dict(_links)
 
         network_flow_reports = []
         _network_flow_reports = d.pop("network_flow_reports", UNSET)

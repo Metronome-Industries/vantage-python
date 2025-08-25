@@ -5,6 +5,7 @@ class GetForecastedCostsProvider(str, Enum):
     ALL = "all"
     AWS = "aws"
     AZURE = "azure"
+    AZURE_CSP = "azure_csp"
     CLICKHOUSE = "clickhouse"
     CONFLUENT = "confluent"
     CORALOGIX = "coralogix"
@@ -16,6 +17,7 @@ class GetForecastedCostsProvider(str, Enum):
     GITHUB = "github"
     GRAFANA = "grafana"
     KUBERNETES = "kubernetes"
+    KUBERNETES_AGENT = "kubernetes_agent"
     LINODE = "linode"
     MONGO = "mongo"
     NEW_RELIC = "new_relic"
@@ -25,6 +27,7 @@ class GetForecastedCostsProvider(str, Enum):
     PLANETSCALE = "planetscale"
     SNOWFLAKE = "snowflake"
     TEMPORAL = "temporal"
+    TWILIO = "twilio"
 
     def __str__(self) -> str:
         return str(self.value)

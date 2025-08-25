@@ -23,9 +23,8 @@ def _get_kwargs(
         "url": f"/billing_rules/{billing_rule_token}",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
@@ -70,11 +69,11 @@ def sync_detailed(
     client: AuthenticatedClient,
     body: UpdateBillingRule,
 ) -> Response[Union[BillingRule, Errors]]:
-    """Update a Billing Rule.
+    """Update a BillingRule.
 
     Args:
         billing_rule_token (str):
-        body (UpdateBillingRule): Update a Billing Rule.
+        body (UpdateBillingRule): Update a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -102,11 +101,11 @@ def sync(
     client: AuthenticatedClient,
     body: UpdateBillingRule,
 ) -> Optional[Union[BillingRule, Errors]]:
-    """Update a Billing Rule.
+    """Update a BillingRule.
 
     Args:
         billing_rule_token (str):
-        body (UpdateBillingRule): Update a Billing Rule.
+        body (UpdateBillingRule): Update a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -129,11 +128,11 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     body: UpdateBillingRule,
 ) -> Response[Union[BillingRule, Errors]]:
-    """Update a Billing Rule.
+    """Update a BillingRule.
 
     Args:
         billing_rule_token (str):
-        body (UpdateBillingRule): Update a Billing Rule.
+        body (UpdateBillingRule): Update a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -159,11 +158,11 @@ async def asyncio(
     client: AuthenticatedClient,
     body: UpdateBillingRule,
 ) -> Optional[Union[BillingRule, Errors]]:
-    """Update a Billing Rule.
+    """Update a BillingRule.
 
     Args:
         billing_rule_token (str):
-        body (UpdateBillingRule): Update a Billing Rule.
+        body (UpdateBillingRule): Update a BillingRule.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

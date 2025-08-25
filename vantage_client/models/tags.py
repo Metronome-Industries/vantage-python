@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,6 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.tag import Tag
+    from ..models.tags_links import TagsLinks
 
 
 T = TypeVar("T", bound="Tags")
@@ -17,13 +19,19 @@ class Tags:
     """Tags model
 
     Attributes:
+        links (Union[Unset, TagsLinks]):
         tags (Union[Unset, list['Tag']]):
     """
 
+    links: Union[Unset, "TagsLinks"] = UNSET
     tags: Union[Unset, list["Tag"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        links: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.links, Unset):
+            links = self.links.to_dict()
+
         tags: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.tags, Unset):
             tags = []
@@ -34,16 +42,26 @@ class Tags:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if links is not UNSET:
+            field_dict["links"] = links
         if tags is not UNSET:
             field_dict["tags"] = tags
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.tag import Tag
+        from ..models.tags_links import TagsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
+        _links = d.pop("links", UNSET)
+        links: Union[Unset, TagsLinks]
+        if isinstance(_links, Unset):
+            links = UNSET
+        else:
+            links = TagsLinks.from_dict(_links)
+
         tags = []
         _tags = d.pop("tags", UNSET)
         for tags_item_data in _tags or []:
@@ -52,6 +70,7 @@ class Tags:
             tags.append(tags_item)
 
         tags = cls(
+            links=links,
             tags=tags,
         )
 

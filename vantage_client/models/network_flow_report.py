@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -17,7 +18,7 @@ class NetworkFlowReport:
         title (Union[Unset, str]): The title of the NetworkFlowReport. Example: Public Traffic Destinations.
         default (Union[Unset, bool]): Indicates whether the NetworkFlowReport is the default report.
         created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
-            2024-03-19 00:00:00+00:00.
+            2024-03-19T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the NetworkFlowReport is a part of.
         created_by_token (Union[Unset, str]): The token for the User or Team that created this NetworkFlowReport.
         start_date (Union[Unset, str]): The start date for the NetworkFlowReport. Only set for custom date ranges. ISO
@@ -111,8 +112,8 @@ class NetworkFlowReport:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)

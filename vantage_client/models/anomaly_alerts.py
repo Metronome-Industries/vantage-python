@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.anomaly_alert import AnomalyAlert
-    from ..models.links import Links
+    from ..models.anomaly_alerts_links import AnomalyAlertsLinks
 
 
 T = TypeVar("T", bound="AnomalyAlerts")
@@ -18,11 +19,11 @@ class AnomalyAlerts:
     """AnomalyAlerts model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, AnomalyAlertsLinks]):
         anomaly_alerts (Union[Unset, list['AnomalyAlert']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "AnomalyAlertsLinks"] = UNSET
     anomaly_alerts: Union[Unset, list["AnomalyAlert"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class AnomalyAlerts:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.anomaly_alert import AnomalyAlert
-        from ..models.links import Links
+        from ..models.anomaly_alerts_links import AnomalyAlertsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, AnomalyAlertsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = AnomalyAlertsLinks.from_dict(_links)
 
         anomaly_alerts = []
         _anomaly_alerts = d.pop("anomaly_alerts", UNSET)

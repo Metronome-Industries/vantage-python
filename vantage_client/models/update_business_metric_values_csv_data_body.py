@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from io import BytesIO
 from typing import Any, TypeVar
 
@@ -33,8 +34,8 @@ class UpdateBusinessMetricValuesCSVDataBody:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         csv = File(payload=BytesIO(d.pop("csv")))
 
         update_business_metric_values_csv_data_body = cls(

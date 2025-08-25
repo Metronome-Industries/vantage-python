@@ -1,12 +1,16 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.business_metric_import_type import BusinessMetricImportType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.attached_cost_report_for_business_metric import AttachedCostReportForBusinessMetric
+    from ..models.cloudwatch_fields import CloudwatchFields
+    from ..models.datadog_metric_fields import DatadogMetricFields
 
 
 T = TypeVar("T", bound="BusinessMetric")
@@ -22,12 +26,21 @@ class BusinessMetric:
         created_by_token (Union[Unset, str]): The token of the Creator of the BusinessMetric. Example: usr_1234.
         cost_report_tokens_with_metadata (Union[Unset, list['AttachedCostReportForBusinessMetric']]): The tokens for any
             CostReports that use the BusinessMetric, the unit scale, and label filter.
+        import_type (Union[Unset, BusinessMetricImportType]): The type of import for the BusinessMetric. Example:
+            datadog_metrics.
+        integration_token (Union[Unset, str]): The Integration token used to import the BusinessMetric.
+        cloudwatch_fields (Union[Unset, CloudwatchFields]):
+        datadog_metric_fields (Union[Unset, DatadogMetricFields]):
     """
 
     token: Union[Unset, str] = UNSET
     title: Union[Unset, str] = UNSET
     created_by_token: Union[Unset, str] = UNSET
     cost_report_tokens_with_metadata: Union[Unset, list["AttachedCostReportForBusinessMetric"]] = UNSET
+    import_type: Union[Unset, BusinessMetricImportType] = UNSET
+    integration_token: Union[Unset, str] = UNSET
+    cloudwatch_fields: Union[Unset, "CloudwatchFields"] = UNSET
+    datadog_metric_fields: Union[Unset, "DatadogMetricFields"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -44,6 +57,20 @@ class BusinessMetric:
                 cost_report_tokens_with_metadata_item = cost_report_tokens_with_metadata_item_data.to_dict()
                 cost_report_tokens_with_metadata.append(cost_report_tokens_with_metadata_item)
 
+        import_type: Union[Unset, str] = UNSET
+        if not isinstance(self.import_type, Unset):
+            import_type = self.import_type.value
+
+        integration_token = self.integration_token
+
+        cloudwatch_fields: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.cloudwatch_fields, Unset):
+            cloudwatch_fields = self.cloudwatch_fields.to_dict()
+
+        datadog_metric_fields: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.datadog_metric_fields, Unset):
+            datadog_metric_fields = self.datadog_metric_fields.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -55,14 +82,24 @@ class BusinessMetric:
             field_dict["created_by_token"] = created_by_token
         if cost_report_tokens_with_metadata is not UNSET:
             field_dict["cost_report_tokens_with_metadata"] = cost_report_tokens_with_metadata
+        if import_type is not UNSET:
+            field_dict["import_type"] = import_type
+        if integration_token is not UNSET:
+            field_dict["integration_token"] = integration_token
+        if cloudwatch_fields is not UNSET:
+            field_dict["cloudwatch_fields"] = cloudwatch_fields
+        if datadog_metric_fields is not UNSET:
+            field_dict["datadog_metric_fields"] = datadog_metric_fields
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.attached_cost_report_for_business_metric import AttachedCostReportForBusinessMetric
+        from ..models.cloudwatch_fields import CloudwatchFields
+        from ..models.datadog_metric_fields import DatadogMetricFields
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)
@@ -78,11 +115,38 @@ class BusinessMetric:
 
             cost_report_tokens_with_metadata.append(cost_report_tokens_with_metadata_item)
 
+        _import_type = d.pop("import_type", UNSET)
+        import_type: Union[Unset, BusinessMetricImportType]
+        if isinstance(_import_type, Unset):
+            import_type = UNSET
+        else:
+            import_type = BusinessMetricImportType(_import_type)
+
+        integration_token = d.pop("integration_token", UNSET)
+
+        _cloudwatch_fields = d.pop("cloudwatch_fields", UNSET)
+        cloudwatch_fields: Union[Unset, CloudwatchFields]
+        if isinstance(_cloudwatch_fields, Unset):
+            cloudwatch_fields = UNSET
+        else:
+            cloudwatch_fields = CloudwatchFields.from_dict(_cloudwatch_fields)
+
+        _datadog_metric_fields = d.pop("datadog_metric_fields", UNSET)
+        datadog_metric_fields: Union[Unset, DatadogMetricFields]
+        if isinstance(_datadog_metric_fields, Unset):
+            datadog_metric_fields = UNSET
+        else:
+            datadog_metric_fields = DatadogMetricFields.from_dict(_datadog_metric_fields)
+
         business_metric = cls(
             token=token,
             title=title,
             created_by_token=created_by_token,
             cost_report_tokens_with_metadata=cost_report_tokens_with_metadata,
+            import_type=import_type,
+            integration_token=integration_token,
+            cloudwatch_fields=cloudwatch_fields,
+            datadog_metric_fields=datadog_metric_fields,
         )
 
         business_metric.additional_properties = d

@@ -1,10 +1,12 @@
+from collections.abc import Mapping
 from io import BytesIO
-from typing import Any, TypeVar
+from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..types import File
+from .. import types
+from ..types import UNSET, File, Unset
 
 T = TypeVar("T", bound="CreateUserCostsUploadViaCsvFilesBody")
 
@@ -14,13 +16,18 @@ class CreateUserCostsUploadViaCsvFilesBody:
     """
     Attributes:
         csv (File): CSV file containing custom costs
+        auto_transform (Union[Unset, bool]): Attempt to automatically transform the CSV file to match the FOCUS format.
+            Default: False.
     """
 
     csv: File
+    auto_transform: Union[Unset, bool] = False
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         csv = self.csv.to_tuple()
+
+        auto_transform = self.auto_transform
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -29,31 +36,34 @@ class CreateUserCostsUploadViaCsvFilesBody:
                 "csv": csv,
             }
         )
+        if auto_transform is not UNSET:
+            field_dict["auto_transform"] = auto_transform
 
         return field_dict
 
-    def to_multipart(self) -> dict[str, Any]:
-        csv = self.csv.to_tuple()
+    def to_multipart(self) -> types.RequestFiles:
+        files: types.RequestFiles = []
 
-        field_dict: dict[str, Any] = {}
+        files.append(("csv", self.csv.to_tuple()))
+
+        if not isinstance(self.auto_transform, Unset):
+            files.append(("auto_transform", (None, str(self.auto_transform).encode(), "text/plain")))
+
         for prop_name, prop in self.additional_properties.items():
-            field_dict[prop_name] = (None, str(prop).encode(), "text/plain")
+            files.append((prop_name, (None, str(prop).encode(), "text/plain")))
 
-        field_dict.update(
-            {
-                "csv": csv,
-            }
-        )
-
-        return field_dict
+        return files
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         csv = File(payload=BytesIO(d.pop("csv")))
+
+        auto_transform = d.pop("auto_transform", UNSET)
 
         create_user_costs_upload_via_csv_files_body = cls(
             csv=csv,
+            auto_transform=auto_transform,
         )
 
         create_user_costs_upload_via_csv_files_body.additional_properties = d

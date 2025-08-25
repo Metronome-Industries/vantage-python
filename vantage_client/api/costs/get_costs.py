@@ -5,7 +5,6 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.costs import Costs
 from ...models.errors import Errors
 from ...models.get_costs_date_bin import GetCostsDateBin
 from ...models.get_costs_order import GetCostsOrder
@@ -14,12 +13,15 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    cost_report_token: str,
+    cost_report_token: Union[Unset, str] = UNSET,
+    filter_: Union[Unset, str] = UNSET,
+    workspace_token: Union[Unset, str] = UNSET,
     start_date: Union[Unset, str] = UNSET,
     end_date: Union[Unset, str] = UNSET,
     groupings: Union[Unset, list[str]] = UNSET,
     order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
     limit: Union[Unset, int] = UNSET,
+    page: Union[Unset, int] = UNSET,
     date_bin: Union[Unset, GetCostsDateBin] = UNSET,
     settingsinclude_credits: Union[Unset, bool] = False,
     settingsinclude_refunds: Union[Unset, bool] = False,
@@ -28,10 +30,15 @@ def _get_kwargs(
     settingsamortize: Union[Unset, bool] = True,
     settingsunallocated: Union[Unset, bool] = False,
     settingsaggregate_by: Union[Unset, str] = "cost",
+    settingsshow_previous_period: Union[Unset, bool] = True,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
     params["cost_report_token"] = cost_report_token
+
+    params["filter"] = filter_
+
+    params["workspace_token"] = workspace_token
 
     params["start_date"] = start_date
 
@@ -50,6 +57,8 @@ def _get_kwargs(
     params["order"] = json_order
 
     params["limit"] = limit
+
+    params["page"] = page
 
     json_date_bin: Union[Unset, str] = UNSET
     if not isinstance(date_bin, Unset):
@@ -71,6 +80,8 @@ def _get_kwargs(
 
     params["settings[aggregate_by]"] = settingsaggregate_by
 
+    params["settings[show_previous_period]"] = settingsshow_previous_period
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
     _kwargs: dict[str, Any] = {
@@ -82,13 +93,7 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Costs, Errors]]:
-    if response.status_code == 200:
-        response_200 = Costs.from_dict(response.json())
-
-        return response_200
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Errors]:
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
@@ -107,9 +112,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Costs, Errors]]:
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -121,12 +124,15 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    cost_report_token: str,
+    cost_report_token: Union[Unset, str] = UNSET,
+    filter_: Union[Unset, str] = UNSET,
+    workspace_token: Union[Unset, str] = UNSET,
     start_date: Union[Unset, str] = UNSET,
     end_date: Union[Unset, str] = UNSET,
     groupings: Union[Unset, list[str]] = UNSET,
     order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
     limit: Union[Unset, int] = UNSET,
+    page: Union[Unset, int] = UNSET,
     date_bin: Union[Unset, GetCostsDateBin] = UNSET,
     settingsinclude_credits: Union[Unset, bool] = False,
     settingsinclude_refunds: Union[Unset, bool] = False,
@@ -135,16 +141,20 @@ def sync_detailed(
     settingsamortize: Union[Unset, bool] = True,
     settingsunallocated: Union[Unset, bool] = False,
     settingsaggregate_by: Union[Unset, str] = "cost",
-) -> Response[Union[Costs, Errors]]:
-    """Return all Costs for a CostReport.
+    settingsshow_previous_period: Union[Unset, bool] = True,
+) -> Response[Errors]:
+    """Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (str):
+        cost_report_token (Union[Unset, str]):
+        filter_ (Union[Unset, str]):
+        workspace_token (Union[Unset, str]):
         start_date (Union[Unset, str]):
         end_date (Union[Unset, str]):
         groupings (Union[Unset, list[str]]):
         order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
         limit (Union[Unset, int]):
+        page (Union[Unset, int]):
         date_bin (Union[Unset, GetCostsDateBin]):
         settingsinclude_credits (Union[Unset, bool]):  Default: False.
         settingsinclude_refunds (Union[Unset, bool]):  Default: False.
@@ -153,22 +163,26 @@ def sync_detailed(
         settingsamortize (Union[Unset, bool]):  Default: True.
         settingsunallocated (Union[Unset, bool]):  Default: False.
         settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
+        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Costs, Errors]]
+        Response[Errors]
     """
 
     kwargs = _get_kwargs(
         cost_report_token=cost_report_token,
+        filter_=filter_,
+        workspace_token=workspace_token,
         start_date=start_date,
         end_date=end_date,
         groupings=groupings,
         order=order,
         limit=limit,
+        page=page,
         date_bin=date_bin,
         settingsinclude_credits=settingsinclude_credits,
         settingsinclude_refunds=settingsinclude_refunds,
@@ -177,6 +191,7 @@ def sync_detailed(
         settingsamortize=settingsamortize,
         settingsunallocated=settingsunallocated,
         settingsaggregate_by=settingsaggregate_by,
+        settingsshow_previous_period=settingsshow_previous_period,
     )
 
     response = client.get_httpx_client().request(
@@ -189,12 +204,15 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    cost_report_token: str,
+    cost_report_token: Union[Unset, str] = UNSET,
+    filter_: Union[Unset, str] = UNSET,
+    workspace_token: Union[Unset, str] = UNSET,
     start_date: Union[Unset, str] = UNSET,
     end_date: Union[Unset, str] = UNSET,
     groupings: Union[Unset, list[str]] = UNSET,
     order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
     limit: Union[Unset, int] = UNSET,
+    page: Union[Unset, int] = UNSET,
     date_bin: Union[Unset, GetCostsDateBin] = UNSET,
     settingsinclude_credits: Union[Unset, bool] = False,
     settingsinclude_refunds: Union[Unset, bool] = False,
@@ -203,16 +221,20 @@ def sync(
     settingsamortize: Union[Unset, bool] = True,
     settingsunallocated: Union[Unset, bool] = False,
     settingsaggregate_by: Union[Unset, str] = "cost",
-) -> Optional[Union[Costs, Errors]]:
-    """Return all Costs for a CostReport.
+    settingsshow_previous_period: Union[Unset, bool] = True,
+) -> Optional[Errors]:
+    """Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (str):
+        cost_report_token (Union[Unset, str]):
+        filter_ (Union[Unset, str]):
+        workspace_token (Union[Unset, str]):
         start_date (Union[Unset, str]):
         end_date (Union[Unset, str]):
         groupings (Union[Unset, list[str]]):
         order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
         limit (Union[Unset, int]):
+        page (Union[Unset, int]):
         date_bin (Union[Unset, GetCostsDateBin]):
         settingsinclude_credits (Union[Unset, bool]):  Default: False.
         settingsinclude_refunds (Union[Unset, bool]):  Default: False.
@@ -221,23 +243,27 @@ def sync(
         settingsamortize (Union[Unset, bool]):  Default: True.
         settingsunallocated (Union[Unset, bool]):  Default: False.
         settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
+        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Costs, Errors]
+        Errors
     """
 
     return sync_detailed(
         client=client,
         cost_report_token=cost_report_token,
+        filter_=filter_,
+        workspace_token=workspace_token,
         start_date=start_date,
         end_date=end_date,
         groupings=groupings,
         order=order,
         limit=limit,
+        page=page,
         date_bin=date_bin,
         settingsinclude_credits=settingsinclude_credits,
         settingsinclude_refunds=settingsinclude_refunds,
@@ -246,18 +272,22 @@ def sync(
         settingsamortize=settingsamortize,
         settingsunallocated=settingsunallocated,
         settingsaggregate_by=settingsaggregate_by,
+        settingsshow_previous_period=settingsshow_previous_period,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    cost_report_token: str,
+    cost_report_token: Union[Unset, str] = UNSET,
+    filter_: Union[Unset, str] = UNSET,
+    workspace_token: Union[Unset, str] = UNSET,
     start_date: Union[Unset, str] = UNSET,
     end_date: Union[Unset, str] = UNSET,
     groupings: Union[Unset, list[str]] = UNSET,
     order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
     limit: Union[Unset, int] = UNSET,
+    page: Union[Unset, int] = UNSET,
     date_bin: Union[Unset, GetCostsDateBin] = UNSET,
     settingsinclude_credits: Union[Unset, bool] = False,
     settingsinclude_refunds: Union[Unset, bool] = False,
@@ -266,16 +296,20 @@ async def asyncio_detailed(
     settingsamortize: Union[Unset, bool] = True,
     settingsunallocated: Union[Unset, bool] = False,
     settingsaggregate_by: Union[Unset, str] = "cost",
-) -> Response[Union[Costs, Errors]]:
-    """Return all Costs for a CostReport.
+    settingsshow_previous_period: Union[Unset, bool] = True,
+) -> Response[Errors]:
+    """Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (str):
+        cost_report_token (Union[Unset, str]):
+        filter_ (Union[Unset, str]):
+        workspace_token (Union[Unset, str]):
         start_date (Union[Unset, str]):
         end_date (Union[Unset, str]):
         groupings (Union[Unset, list[str]]):
         order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
         limit (Union[Unset, int]):
+        page (Union[Unset, int]):
         date_bin (Union[Unset, GetCostsDateBin]):
         settingsinclude_credits (Union[Unset, bool]):  Default: False.
         settingsinclude_refunds (Union[Unset, bool]):  Default: False.
@@ -284,22 +318,26 @@ async def asyncio_detailed(
         settingsamortize (Union[Unset, bool]):  Default: True.
         settingsunallocated (Union[Unset, bool]):  Default: False.
         settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
+        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Costs, Errors]]
+        Response[Errors]
     """
 
     kwargs = _get_kwargs(
         cost_report_token=cost_report_token,
+        filter_=filter_,
+        workspace_token=workspace_token,
         start_date=start_date,
         end_date=end_date,
         groupings=groupings,
         order=order,
         limit=limit,
+        page=page,
         date_bin=date_bin,
         settingsinclude_credits=settingsinclude_credits,
         settingsinclude_refunds=settingsinclude_refunds,
@@ -308,6 +346,7 @@ async def asyncio_detailed(
         settingsamortize=settingsamortize,
         settingsunallocated=settingsunallocated,
         settingsaggregate_by=settingsaggregate_by,
+        settingsshow_previous_period=settingsshow_previous_period,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -318,12 +357,15 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    cost_report_token: str,
+    cost_report_token: Union[Unset, str] = UNSET,
+    filter_: Union[Unset, str] = UNSET,
+    workspace_token: Union[Unset, str] = UNSET,
     start_date: Union[Unset, str] = UNSET,
     end_date: Union[Unset, str] = UNSET,
     groupings: Union[Unset, list[str]] = UNSET,
     order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
     limit: Union[Unset, int] = UNSET,
+    page: Union[Unset, int] = UNSET,
     date_bin: Union[Unset, GetCostsDateBin] = UNSET,
     settingsinclude_credits: Union[Unset, bool] = False,
     settingsinclude_refunds: Union[Unset, bool] = False,
@@ -332,16 +374,20 @@ async def asyncio(
     settingsamortize: Union[Unset, bool] = True,
     settingsunallocated: Union[Unset, bool] = False,
     settingsaggregate_by: Union[Unset, str] = "cost",
-) -> Optional[Union[Costs, Errors]]:
-    """Return all Costs for a CostReport.
+    settingsshow_previous_period: Union[Unset, bool] = True,
+) -> Optional[Errors]:
+    """Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (str):
+        cost_report_token (Union[Unset, str]):
+        filter_ (Union[Unset, str]):
+        workspace_token (Union[Unset, str]):
         start_date (Union[Unset, str]):
         end_date (Union[Unset, str]):
         groupings (Union[Unset, list[str]]):
         order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
         limit (Union[Unset, int]):
+        page (Union[Unset, int]):
         date_bin (Union[Unset, GetCostsDateBin]):
         settingsinclude_credits (Union[Unset, bool]):  Default: False.
         settingsinclude_refunds (Union[Unset, bool]):  Default: False.
@@ -350,24 +396,28 @@ async def asyncio(
         settingsamortize (Union[Unset, bool]):  Default: True.
         settingsunallocated (Union[Unset, bool]):  Default: False.
         settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
+        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Costs, Errors]
+        Errors
     """
 
     return (
         await asyncio_detailed(
             client=client,
             cost_report_token=cost_report_token,
+            filter_=filter_,
+            workspace_token=workspace_token,
             start_date=start_date,
             end_date=end_date,
             groupings=groupings,
             order=order,
             limit=limit,
+            page=page,
             date_bin=date_bin,
             settingsinclude_credits=settingsinclude_credits,
             settingsinclude_refunds=settingsinclude_refunds,
@@ -376,5 +426,6 @@ async def asyncio(
             settingsamortize=settingsamortize,
             settingsunallocated=settingsunallocated,
             settingsaggregate_by=settingsaggregate_by,
+            settingsshow_previous_period=settingsshow_previous_period,
         )
     ).parsed

@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -25,7 +26,7 @@ class Budget:
         created_by_token (Union[Unset, str]): The token of the Creator of the Budget.
         cost_report_token (Union[Unset, str]): The token of the Report associated with the Budget.
         created_at (Union[Unset, str]): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
-            2024-03-19 00:00:00+00:00.
+            2024-03-19T00:00:00Z.
         budget_alert_tokens (Union[Unset, list[str]]): The tokens of the BudgetAlerts associated with the Budget.
         child_budget_tokens (Union[Unset, list[str]]): The tokens of the child Budgets associated with the hierarchical
             Budget.
@@ -112,11 +113,11 @@ class Budget:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.budget_performance import BudgetPerformance
         from ..models.budget_period import BudgetPeriod
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         name = d.pop("name", UNSET)

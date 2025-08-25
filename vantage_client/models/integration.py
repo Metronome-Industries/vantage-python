@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -22,7 +23,7 @@ class Integration:
             Example: connected.
         workspace_tokens (Union[Unset, list[str]]): The tokens for any Workspaces that the account belongs to.
         created_at (Union[Unset, str]): The date and time, in UTC, the Integration was created. ISO 8601 Formatted.
-            Example: 2023-08-04 00:00:00+00:00.
+            Example: 2023-08-04T00:00:00Z.
     """
 
     token: Union[Unset, str] = UNSET
@@ -69,8 +70,8 @@ class Integration:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         provider = d.pop("provider", UNSET)

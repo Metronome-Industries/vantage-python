@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -28,7 +29,7 @@ class FinancialCommitment:
         commitment (Union[Unset, str]): The amount of the financial commitment. Example: $2.18.
         status (Union[Unset, str]): The status of the financial commitment (e.g. active vs expired). Example: active.
         created_at (Union[Unset, str]): The date and time, in UTC, the Financial Commitment was created. ISO 8601
-            Formatted. Example: 2024-03-19 00:00:00+00:00.
+            Formatted. Example: 2024-03-19T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the FinancialCommitment is a part of.
     """
 
@@ -112,8 +113,8 @@ class FinancialCommitment:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         commitment_type = d.pop("commitment_type", UNSET)
 
         service = d.pop("service", UNSET)

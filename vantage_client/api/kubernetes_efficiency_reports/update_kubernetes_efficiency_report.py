@@ -23,9 +23,8 @@ def _get_kwargs(
         "url": f"/kubernetes_efficiency_reports/{kubernetes_efficiency_report_token}",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers

@@ -23,9 +23,8 @@ def _get_kwargs(
         "url": f"/resource_reports/{resource_report_token}",
     }
 
-    _body = body.to_dict()
+    _kwargs["json"] = body.to_dict()
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers
@@ -39,14 +38,14 @@ def _parse_response(
         response_200 = ResourceReport.from_dict(response.json())
 
         return response_200
-    if response.status_code == 400:
-        response_400 = Errors.from_dict(response.json())
-
-        return response_400
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+    if response.status_code == 400:
+        response_400 = Errors.from_dict(response.json())
+
+        return response_400
     if response.status_code == 422:
         response_422 = Errors.from_dict(response.json())
 

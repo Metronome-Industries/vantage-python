@@ -1,9 +1,11 @@
+from collections.abc import Mapping
 from io import BytesIO
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from .. import types
 from ..types import File
 
 T = TypeVar("T", bound="UpdateBusinessMetricValuesCSVFilesBody")
@@ -32,24 +34,19 @@ class UpdateBusinessMetricValuesCSVFilesBody:
 
         return field_dict
 
-    def to_multipart(self) -> dict[str, Any]:
-        csv = self.csv.to_tuple()
+    def to_multipart(self) -> types.RequestFiles:
+        files: types.RequestFiles = []
 
-        field_dict: dict[str, Any] = {}
+        files.append(("csv", self.csv.to_tuple()))
+
         for prop_name, prop in self.additional_properties.items():
-            field_dict[prop_name] = (None, str(prop).encode(), "text/plain")
+            files.append((prop_name, (None, str(prop).encode(), "text/plain")))
 
-        field_dict.update(
-            {
-                "csv": csv,
-            }
-        )
-
-        return field_dict
+        return files
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         csv = File(payload=BytesIO(d.pop("csv")))
 
         update_business_metric_values_csv_files_body = cls(

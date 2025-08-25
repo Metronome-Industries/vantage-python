@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -16,7 +17,7 @@ class Workspace:
         token (Union[Unset, str]):
         name (Union[Unset, str]): The name of the Workspace. Example: Acme Corp..
         created_at (Union[Unset, str]): The date and time, in UTC, the Workspace was created. ISO 8601 Formatted.
-            Example: 2023-08-04 00:00:00+00:00.
+            Example: 2023-08-04T00:00:00Z.
         enable_currency_conversion (Union[Unset, bool]): Whether or not currency conversion is enabled for the
             Workspace.
         currency (Union[Unset, str]): The currency code for the Workspace that will be used for currency conversion.
@@ -65,8 +66,8 @@ class Workspace:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         name = d.pop("name", UNSET)

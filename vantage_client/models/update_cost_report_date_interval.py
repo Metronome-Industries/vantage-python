@@ -4,6 +4,7 @@ from enum import Enum
 class UpdateCostReportDateInterval(str, Enum):
     CUSTOM = "custom"
     LAST_12_MONTHS = "last_12_months"
+    LAST_14_DAYS = "last_14_days"
     LAST_24_MONTHS = "last_24_months"
     LAST_30_DAYS = "last_30_days"
     LAST_36_MONTHS = "last_36_months"

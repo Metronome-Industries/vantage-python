@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.financial_commitment_report import FinancialCommitmentReport
-    from ..models.links import Links
+    from ..models.financial_commitment_reports_links import FinancialCommitmentReportsLinks
 
 
 T = TypeVar("T", bound="FinancialCommitmentReports")
@@ -18,11 +19,11 @@ class FinancialCommitmentReports:
     """FinancialCommitmentReports model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, FinancialCommitmentReportsLinks]):
         financial_commitment_reports (Union[Unset, list['FinancialCommitmentReport']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "FinancialCommitmentReportsLinks"] = UNSET
     financial_commitment_reports: Union[Unset, list["FinancialCommitmentReport"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class FinancialCommitmentReports:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.financial_commitment_report import FinancialCommitmentReport
-        from ..models.links import Links
+        from ..models.financial_commitment_reports_links import FinancialCommitmentReportsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, FinancialCommitmentReportsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = FinancialCommitmentReportsLinks.from_dict(_links)
 
         financial_commitment_reports = []
         _financial_commitment_reports = d.pop("financial_commitment_reports", UNSET)

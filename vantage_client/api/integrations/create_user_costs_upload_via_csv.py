@@ -5,12 +5,8 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.create_user_costs_upload_via_csv_data_body import (
-    CreateUserCostsUploadViaCsvDataBody,
-)
-from ...models.create_user_costs_upload_via_csv_files_body import (
-    CreateUserCostsUploadViaCsvFilesBody,
-)
+from ...models.create_user_costs_upload_via_csv_data_body import CreateUserCostsUploadViaCsvDataBody
+from ...models.create_user_costs_upload_via_csv_files_body import CreateUserCostsUploadViaCsvFilesBody
 from ...models.errors import Errors
 from ...models.user_costs_upload import UserCostsUpload
 from ...types import Response
@@ -32,14 +28,13 @@ def _get_kwargs(
     }
 
     if isinstance(body, CreateUserCostsUploadViaCsvDataBody):
-        _data_body = body.to_dict()
+        _kwargs["data"] = body.to_dict()
 
-        _kwargs["data"] = _data_body
         headers["Content-Type"] = "application/x-www-form-urlencoded"
     if isinstance(body, CreateUserCostsUploadViaCsvFilesBody):
-        _files_body = body.to_multipart()
+        _kwargs["files"] = body.to_multipart()
 
-        _kwargs["files"] = _files_body
+        headers["Content-Type"] = "multipart/form-data"
 
     _kwargs["headers"] = headers
     return _kwargs
@@ -52,22 +47,22 @@ def _parse_response(
         response_201 = UserCostsUpload.from_dict(response.json())
 
         return response_201
-    if response.status_code == 400:
-        response_400 = Errors.from_dict(response.json())
-
-        return response_400
-    if response.status_code == 403:
-        response_403 = Errors.from_dict(response.json())
-
-        return response_403
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+    if response.status_code == 400:
+        response_400 = Errors.from_dict(response.json())
+
+        return response_400
     if response.status_code == 422:
         response_422 = Errors.from_dict(response.json())
 
         return response_422
+    if response.status_code == 403:
+        response_403 = Errors.from_dict(response.json())
+
+        return response_403
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:

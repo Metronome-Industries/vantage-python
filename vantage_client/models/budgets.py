@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.budget import Budget
-    from ..models.links import Links
+    from ..models.budgets_links import BudgetsLinks
 
 
 T = TypeVar("T", bound="Budgets")
@@ -18,11 +19,11 @@ class Budgets:
     """Budgets model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, BudgetsLinks]):
         budgets (Union[Unset, list['Budget']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "BudgetsLinks"] = UNSET
     budgets: Union[Unset, list["Budget"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class Budgets:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.budget import Budget
-        from ..models.links import Links
+        from ..models.budgets_links import BudgetsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, BudgetsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = BudgetsLinks.from_dict(_links)
 
         budgets = []
         _budgets = d.pop("budgets", UNSET)

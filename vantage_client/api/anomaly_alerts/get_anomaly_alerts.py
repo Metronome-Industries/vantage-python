@@ -1,3 +1,4 @@
+import datetime
 from http import HTTPStatus
 from typing import Any, Optional, Union
 
@@ -13,12 +14,36 @@ def _get_kwargs(
     *,
     page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
+    start_date: Union[Unset, datetime.datetime] = UNSET,
+    end_date: Union[Unset, datetime.datetime] = UNSET,
+    provider: Union[Unset, str] = UNSET,
+    service: Union[Unset, str] = UNSET,
+    cost_category: Union[Unset, str] = UNSET,
+    cost_report_token: Union[Unset, str] = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
     params["page"] = page
 
     params["limit"] = limit
+
+    json_start_date: Union[Unset, str] = UNSET
+    if not isinstance(start_date, Unset):
+        json_start_date = start_date.isoformat()
+    params["start_date"] = json_start_date
+
+    json_end_date: Union[Unset, str] = UNSET
+    if not isinstance(end_date, Unset):
+        json_end_date = end_date.isoformat()
+    params["end_date"] = json_end_date
+
+    params["provider"] = provider
+
+    params["service"] = service
+
+    params["cost_category"] = cost_category
+
+    params["cost_report_token"] = cost_report_token
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -56,12 +81,24 @@ def sync_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
+    start_date: Union[Unset, datetime.datetime] = UNSET,
+    end_date: Union[Unset, datetime.datetime] = UNSET,
+    provider: Union[Unset, str] = UNSET,
+    service: Union[Unset, str] = UNSET,
+    cost_category: Union[Unset, str] = UNSET,
+    cost_report_token: Union[Unset, str] = UNSET,
 ) -> Response[AnomalyAlerts]:
     """Return all Anomaly Alerts that the current API token has access to.
 
     Args:
         page (Union[Unset, int]):
         limit (Union[Unset, int]):
+        start_date (Union[Unset, datetime.datetime]):
+        end_date (Union[Unset, datetime.datetime]):
+        provider (Union[Unset, str]):
+        service (Union[Unset, str]):
+        cost_category (Union[Unset, str]):
+        cost_report_token (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -74,6 +111,12 @@ def sync_detailed(
     kwargs = _get_kwargs(
         page=page,
         limit=limit,
+        start_date=start_date,
+        end_date=end_date,
+        provider=provider,
+        service=service,
+        cost_category=cost_category,
+        cost_report_token=cost_report_token,
     )
 
     response = client.get_httpx_client().request(
@@ -88,12 +131,24 @@ def sync(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
+    start_date: Union[Unset, datetime.datetime] = UNSET,
+    end_date: Union[Unset, datetime.datetime] = UNSET,
+    provider: Union[Unset, str] = UNSET,
+    service: Union[Unset, str] = UNSET,
+    cost_category: Union[Unset, str] = UNSET,
+    cost_report_token: Union[Unset, str] = UNSET,
 ) -> Optional[AnomalyAlerts]:
     """Return all Anomaly Alerts that the current API token has access to.
 
     Args:
         page (Union[Unset, int]):
         limit (Union[Unset, int]):
+        start_date (Union[Unset, datetime.datetime]):
+        end_date (Union[Unset, datetime.datetime]):
+        provider (Union[Unset, str]):
+        service (Union[Unset, str]):
+        cost_category (Union[Unset, str]):
+        cost_report_token (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -107,6 +162,12 @@ def sync(
         client=client,
         page=page,
         limit=limit,
+        start_date=start_date,
+        end_date=end_date,
+        provider=provider,
+        service=service,
+        cost_category=cost_category,
+        cost_report_token=cost_report_token,
     ).parsed
 
 
@@ -115,12 +176,24 @@ async def asyncio_detailed(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
+    start_date: Union[Unset, datetime.datetime] = UNSET,
+    end_date: Union[Unset, datetime.datetime] = UNSET,
+    provider: Union[Unset, str] = UNSET,
+    service: Union[Unset, str] = UNSET,
+    cost_category: Union[Unset, str] = UNSET,
+    cost_report_token: Union[Unset, str] = UNSET,
 ) -> Response[AnomalyAlerts]:
     """Return all Anomaly Alerts that the current API token has access to.
 
     Args:
         page (Union[Unset, int]):
         limit (Union[Unset, int]):
+        start_date (Union[Unset, datetime.datetime]):
+        end_date (Union[Unset, datetime.datetime]):
+        provider (Union[Unset, str]):
+        service (Union[Unset, str]):
+        cost_category (Union[Unset, str]):
+        cost_report_token (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -133,6 +206,12 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         page=page,
         limit=limit,
+        start_date=start_date,
+        end_date=end_date,
+        provider=provider,
+        service=service,
+        cost_category=cost_category,
+        cost_report_token=cost_report_token,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -145,12 +224,24 @@ async def asyncio(
     client: AuthenticatedClient,
     page: Union[Unset, int] = UNSET,
     limit: Union[Unset, int] = UNSET,
+    start_date: Union[Unset, datetime.datetime] = UNSET,
+    end_date: Union[Unset, datetime.datetime] = UNSET,
+    provider: Union[Unset, str] = UNSET,
+    service: Union[Unset, str] = UNSET,
+    cost_category: Union[Unset, str] = UNSET,
+    cost_report_token: Union[Unset, str] = UNSET,
 ) -> Optional[AnomalyAlerts]:
     """Return all Anomaly Alerts that the current API token has access to.
 
     Args:
         page (Union[Unset, int]):
         limit (Union[Unset, int]):
+        start_date (Union[Unset, datetime.datetime]):
+        end_date (Union[Unset, datetime.datetime]):
+        provider (Union[Unset, str]):
+        service (Union[Unset, str]):
+        cost_category (Union[Unset, str]):
+        cost_report_token (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -165,5 +256,11 @@ async def asyncio(
             client=client,
             page=page,
             limit=limit,
+            start_date=start_date,
+            end_date=end_date,
+            provider=provider,
+            service=service,
+            cost_category=cost_category,
+            cost_report_token=cost_report_token,
         )
     ).parsed

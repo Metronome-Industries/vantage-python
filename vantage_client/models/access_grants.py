@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -7,7 +8,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.access_grant import AccessGrant
-    from ..models.links import Links
+    from ..models.access_grants_links import AccessGrantsLinks
 
 
 T = TypeVar("T", bound="AccessGrants")
@@ -18,11 +19,11 @@ class AccessGrants:
     """AccessGrants model
 
     Attributes:
-        links (Union[Unset, Links]):
+        links (Union[Unset, AccessGrantsLinks]):
         access_grants (Union[Unset, list['AccessGrant']]):
     """
 
-    links: Union[Unset, "Links"] = UNSET
+    links: Union[Unset, "AccessGrantsLinks"] = UNSET
     access_grants: Union[Unset, list["AccessGrant"]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -49,17 +50,17 @@ class AccessGrants:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.access_grant import AccessGrant
-        from ..models.links import Links
+        from ..models.access_grants_links import AccessGrantsLinks
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, Links]
+        links: Union[Unset, AccessGrantsLinks]
         if isinstance(_links, Unset):
             links = UNSET
         else:
-            links = Links.from_dict(_links)
+            links = AccessGrantsLinks.from_dict(_links)
 
         access_grants = []
         _access_grants = d.pop("access_grants", UNSET)

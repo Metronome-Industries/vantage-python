@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -6,9 +7,11 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.create_business_metric_cloudwatch_fields import CreateBusinessMetricCloudwatchFields
     from ..models.create_business_metric_cost_report_tokens_with_metadata_item import (
         CreateBusinessMetricCostReportTokensWithMetadataItem,
     )
+    from ..models.create_business_metric_datadog_metric_fields import CreateBusinessMetricDatadogMetricFields
     from ..models.create_business_metric_values_item import CreateBusinessMetricValuesItem
 
 
@@ -25,11 +28,16 @@ class CreateBusinessMetric:
             The tokens for any CostReports that use the BusinessMetric, the unit scale, and label filter.
         values (Union[Unset, list['CreateBusinessMetricValuesItem']]): The dates, amounts, and (optional) labels for the
             BusinessMetric.
+        datadog_metric_fields (Union[Unset, CreateBusinessMetricDatadogMetricFields]): Datadog metric configuration
+            fields
+        cloudwatch_fields (Union[Unset, CreateBusinessMetricCloudwatchFields]): Cloudwatch configuration fields.
     """
 
     title: str
     cost_report_tokens_with_metadata: Union[Unset, list["CreateBusinessMetricCostReportTokensWithMetadataItem"]] = UNSET
     values: Union[Unset, list["CreateBusinessMetricValuesItem"]] = UNSET
+    datadog_metric_fields: Union[Unset, "CreateBusinessMetricDatadogMetricFields"] = UNSET
+    cloudwatch_fields: Union[Unset, "CreateBusinessMetricCloudwatchFields"] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -49,6 +57,14 @@ class CreateBusinessMetric:
                 values_item = values_item_data.to_dict()
                 values.append(values_item)
 
+        datadog_metric_fields: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.datadog_metric_fields, Unset):
+            datadog_metric_fields = self.datadog_metric_fields.to_dict()
+
+        cloudwatch_fields: Union[Unset, dict[str, Any]] = UNSET
+        if not isinstance(self.cloudwatch_fields, Unset):
+            cloudwatch_fields = self.cloudwatch_fields.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -60,17 +76,23 @@ class CreateBusinessMetric:
             field_dict["cost_report_tokens_with_metadata"] = cost_report_tokens_with_metadata
         if values is not UNSET:
             field_dict["values"] = values
+        if datadog_metric_fields is not UNSET:
+            field_dict["datadog_metric_fields"] = datadog_metric_fields
+        if cloudwatch_fields is not UNSET:
+            field_dict["cloudwatch_fields"] = cloudwatch_fields
 
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.create_business_metric_cloudwatch_fields import CreateBusinessMetricCloudwatchFields
         from ..models.create_business_metric_cost_report_tokens_with_metadata_item import (
             CreateBusinessMetricCostReportTokensWithMetadataItem,
         )
+        from ..models.create_business_metric_datadog_metric_fields import CreateBusinessMetricDatadogMetricFields
         from ..models.create_business_metric_values_item import CreateBusinessMetricValuesItem
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         title = d.pop("title")
 
         cost_report_tokens_with_metadata = []
@@ -89,10 +111,26 @@ class CreateBusinessMetric:
 
             values.append(values_item)
 
+        _datadog_metric_fields = d.pop("datadog_metric_fields", UNSET)
+        datadog_metric_fields: Union[Unset, CreateBusinessMetricDatadogMetricFields]
+        if isinstance(_datadog_metric_fields, Unset):
+            datadog_metric_fields = UNSET
+        else:
+            datadog_metric_fields = CreateBusinessMetricDatadogMetricFields.from_dict(_datadog_metric_fields)
+
+        _cloudwatch_fields = d.pop("cloudwatch_fields", UNSET)
+        cloudwatch_fields: Union[Unset, CreateBusinessMetricCloudwatchFields]
+        if isinstance(_cloudwatch_fields, Unset):
+            cloudwatch_fields = UNSET
+        else:
+            cloudwatch_fields = CreateBusinessMetricCloudwatchFields.from_dict(_cloudwatch_fields)
+
         create_business_metric = cls(
             title=title,
             cost_report_tokens_with_metadata=cost_report_tokens_with_metadata,
             values=values,
+            datadog_metric_fields=datadog_metric_fields,
+            cloudwatch_fields=cloudwatch_fields,
         )
 
         create_business_metric.additional_properties = d

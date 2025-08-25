@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
@@ -23,7 +24,7 @@ class VirtualTagConfig:
         overridable (Union[Unset, bool]): Whether the VirtualTagConfig can override a provider-supplied tag on a
             matching Cost.
         backfill_until (Union[Unset, str]): The earliest month VirtualTagConfig should be backfilled to. Example:
-            2024-09-01.
+            2025-02-01.
         values (Union[Unset, list['VirtualTagConfigValue']]): Values for the VirtualTagConfig, with match precedence
             determined by their relative order in the list.
     """
@@ -73,10 +74,10 @@ class VirtualTagConfig:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.virtual_tag_config_value import VirtualTagConfigValue
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         created_by_token = d.pop("created_by_token", UNSET)

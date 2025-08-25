@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -30,7 +31,7 @@ class CostReport:
             service.
         settings (Union[Unset, CostReportSettings]): Report settings.
         created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
-            2021-07-09 00:00:00+00:00.
+            2021-07-09T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the CostReport is a part of.
         previous_period_start_date (Union[Unset, str]): The previous period start date of the CostReport. ISO 8601
             Formatted. Example: 2024-06-01.
@@ -149,11 +150,11 @@ class CostReport:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.attached_business_metric_for_cost_report import AttachedBusinessMetricForCostReport
         from ..models.cost_report_settings import CostReportSettings
 
-        d = src_dict.copy()
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         title = d.pop("title", UNSET)

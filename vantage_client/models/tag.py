@@ -1,4 +1,5 @@
-from typing import Any, TypeVar, Union
+from collections.abc import Mapping
+from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,12 +16,12 @@ class Tag:
     Attributes:
         tag_key (Union[Unset, str]): The Tag key. Example: aws:createdBy.
         hidden (Union[Unset, bool]): Whether the Tag has been hidden from the Vantage UI.
-        providers (Union[Unset, str]): The unique providers that are covered by the Tag key.
+        providers (Union[Unset, list[str]]): The unique providers that are covered by the Tag key.
     """
 
     tag_key: Union[Unset, str] = UNSET
     hidden: Union[Unset, bool] = UNSET
-    providers: Union[Unset, str] = UNSET
+    providers: Union[Unset, list[str]] = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -28,7 +29,9 @@ class Tag:
 
         hidden = self.hidden
 
-        providers = self.providers
+        providers: Union[Unset, list[str]] = UNSET
+        if not isinstance(self.providers, Unset):
+            providers = self.providers
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -43,13 +46,13 @@ class Tag:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         tag_key = d.pop("tag_key", UNSET)
 
         hidden = d.pop("hidden", UNSET)
 
-        providers = d.pop("providers", UNSET)
+        providers = cast(list[str], d.pop("providers", UNSET))
 
         tag = cls(
             tag_key=tag_key,

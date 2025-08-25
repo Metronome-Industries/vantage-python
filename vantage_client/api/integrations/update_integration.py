@@ -22,9 +22,8 @@ def _get_kwargs(
         "url": f"/integrations/{integration_token}",
     }
 
-    _body = body
+    _kwargs["json"] = body
 
-    _kwargs["json"] = _body
     headers["Content-Type"] = "application/json"
 
     _kwargs["headers"] = headers

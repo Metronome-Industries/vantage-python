@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
@@ -17,7 +18,7 @@ class BudgetAlert:
         budget_tokens (Union[Unset, list[str]]): The tokens for the Budgets that the Budget Alert is monitoring to
             trigger alerts on.
         created_at (Union[Unset, str]): The date and time, in UTC, the Budget Alert was created. ISO 8601 Formatted.
-            Example: 2024-03-19 00:00:00+00:00.
+            Example: 2024-03-19T00:00:00Z.
         workspace_token (Union[Unset, str]): The token for the Workspace the ResourceReport is a part of.
         user_token (Union[Unset, str]): The token for the User who created this BudgetAlert.
         user_tokens (Union[Unset, list[str]]): The Users that receive the alert.
@@ -103,8 +104,8 @@ class BudgetAlert:
         return field_dict
 
     @classmethod
-    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
-        d = src_dict.copy()
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         budget_tokens = cast(list[str], d.pop("budget_tokens", UNSET))
