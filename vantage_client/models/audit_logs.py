@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class AuditLogs:
     """AuditLogs model
 
     Attributes:
-        links (Union[Unset, AuditLogsLinks]):
-        audit_logs (Union[Unset, list['AuditLog']]):
+        links (AuditLogsLinks | Unset):
+        audit_logs (list[AuditLog] | Unset):
     """
 
-    links: Union[Unset, "AuditLogsLinks"] = UNSET
-    audit_logs: Union[Unset, list["AuditLog"]] = UNSET
+    links: AuditLogsLinks | Unset = UNSET
+    audit_logs: list[AuditLog] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        audit_logs: Union[Unset, list[dict[str, Any]]] = UNSET
+        audit_logs: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.audit_logs, Unset):
             audit_logs = []
             for audit_logs_item_data in self.audit_logs:
@@ -56,18 +58,20 @@ class AuditLogs:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, AuditLogsLinks]
+        links: AuditLogsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = AuditLogsLinks.from_dict(_links)
 
-        audit_logs = []
         _audit_logs = d.pop("audit_logs", UNSET)
-        for audit_logs_item_data in _audit_logs or []:
-            audit_logs_item = AuditLog.from_dict(audit_logs_item_data)
+        audit_logs: list[AuditLog] | Unset = UNSET
+        if _audit_logs is not UNSET:
+            audit_logs = []
+            for audit_logs_item_data in _audit_logs:
+                audit_logs_item = AuditLog.from_dict(audit_logs_item_data)
 
-            audit_logs.append(audit_logs_item)
+                audit_logs.append(audit_logs_item)
 
         audit_logs = cls(
             links=links,

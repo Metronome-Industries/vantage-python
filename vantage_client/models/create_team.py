@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,20 +18,20 @@ class CreateTeam:
 
     Attributes:
         name (str): The name of the Team.
-        description (Union[Unset, str]): The description of the Team.
-        workspace_tokens (Union[Unset, list[str]]): The Workspace tokens to associate to the Team.
-        user_tokens (Union[Unset, list[str]]): The User tokens to associate to the Team.
-        user_emails (Union[Unset, list[str]]): The User emails to associate to the Team.
-        role (Union[Unset, CreateTeamRole]): The role to assign to the provided Users. Defaults to 'editor' which has
-            editor permissions.
+        description (str | Unset): The description of the Team.
+        workspace_tokens (list[str] | Unset): The Workspace tokens to associate to the Team.
+        user_tokens (list[str] | Unset): The User tokens to associate to the Team.
+        user_emails (list[str] | Unset): The User emails to associate to the Team.
+        role (CreateTeamRole | Unset): The role to assign to the provided Users. Defaults to 'editor' which has editor
+            permissions.
     """
 
     name: str
-    description: Union[Unset, str] = UNSET
-    workspace_tokens: Union[Unset, list[str]] = UNSET
-    user_tokens: Union[Unset, list[str]] = UNSET
-    user_emails: Union[Unset, list[str]] = UNSET
-    role: Union[Unset, CreateTeamRole] = UNSET
+    description: str | Unset = UNSET
+    workspace_tokens: list[str] | Unset = UNSET
+    user_tokens: list[str] | Unset = UNSET
+    user_emails: list[str] | Unset = UNSET
+    role: CreateTeamRole | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,19 +39,19 @@ class CreateTeam:
 
         description = self.description
 
-        workspace_tokens: Union[Unset, list[str]] = UNSET
+        workspace_tokens: list[str] | Unset = UNSET
         if not isinstance(self.workspace_tokens, Unset):
             workspace_tokens = self.workspace_tokens
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 
-        user_emails: Union[Unset, list[str]] = UNSET
+        user_emails: list[str] | Unset = UNSET
         if not isinstance(self.user_emails, Unset):
             user_emails = self.user_emails
 
-        role: Union[Unset, str] = UNSET
+        role: str | Unset = UNSET
         if not isinstance(self.role, Unset):
             role = self.role.value
 
@@ -87,7 +89,7 @@ class CreateTeam:
         user_emails = cast(list[str], d.pop("user_emails", UNSET))
 
         _role = d.pop("role", UNSET)
-        role: Union[Unset, CreateTeamRole]
+        role: CreateTeamRole | Unset
         if isinstance(_role, Unset):
             role = UNSET
         else:

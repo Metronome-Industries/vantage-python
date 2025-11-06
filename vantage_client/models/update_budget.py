@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,18 +20,17 @@ class UpdateBudget:
     """Update a Budget.
 
     Attributes:
-        name (Union[Unset, str]): The name of the Budget.
-        cost_report_token (Union[Unset, str]): The CostReport token. Ignored for hierarchical Budgets.
-        child_budget_tokens (Union[Unset, list[str]]): The tokens of any child Budgets when creating a hierarchical
-            Budget.
-        periods (Union[Unset, list['UpdateBudgetPeriodsItem']]): The periods for the Budget. The start_at and end_at
-            must be iso8601 formatted e.g. YYYY-MM-DD. Ignored for hierarchical Budgets.
+        name (str | Unset): The name of the Budget.
+        cost_report_token (str | Unset): The CostReport token. Ignored for hierarchical Budgets.
+        child_budget_tokens (list[str] | Unset): The tokens of any child Budgets when creating a hierarchical Budget.
+        periods (list[UpdateBudgetPeriodsItem] | Unset): The periods for the Budget. The start_at and end_at must be
+            iso8601 formatted e.g. YYYY-MM-DD. Ignored for hierarchical Budgets.
     """
 
-    name: Union[Unset, str] = UNSET
-    cost_report_token: Union[Unset, str] = UNSET
-    child_budget_tokens: Union[Unset, list[str]] = UNSET
-    periods: Union[Unset, list["UpdateBudgetPeriodsItem"]] = UNSET
+    name: str | Unset = UNSET
+    cost_report_token: str | Unset = UNSET
+    child_budget_tokens: list[str] | Unset = UNSET
+    periods: list[UpdateBudgetPeriodsItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,11 +38,11 @@ class UpdateBudget:
 
         cost_report_token = self.cost_report_token
 
-        child_budget_tokens: Union[Unset, list[str]] = UNSET
+        child_budget_tokens: list[str] | Unset = UNSET
         if not isinstance(self.child_budget_tokens, Unset):
             child_budget_tokens = self.child_budget_tokens
 
-        periods: Union[Unset, list[dict[str, Any]]] = UNSET
+        periods: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.periods, Unset):
             periods = []
             for periods_item_data in self.periods:
@@ -73,12 +74,14 @@ class UpdateBudget:
 
         child_budget_tokens = cast(list[str], d.pop("child_budget_tokens", UNSET))
 
-        periods = []
         _periods = d.pop("periods", UNSET)
-        for periods_item_data in _periods or []:
-            periods_item = UpdateBudgetPeriodsItem.from_dict(periods_item_data)
+        periods: list[UpdateBudgetPeriodsItem] | Unset = UNSET
+        if _periods is not UNSET:
+            periods = []
+            for periods_item_data in _periods:
+                periods_item = UpdateBudgetPeriodsItem.from_dict(periods_item_data)
 
-            periods.append(periods_item)
+                periods.append(periods_item)
 
         update_budget = cls(
             name=name,

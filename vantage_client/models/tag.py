@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,14 +16,14 @@ class Tag:
     """Tag model
 
     Attributes:
-        tag_key (Union[Unset, str]): The Tag key. Example: aws:createdBy.
-        hidden (Union[Unset, bool]): Whether the Tag has been hidden from the Vantage UI.
-        providers (Union[Unset, list[str]]): The unique providers that are covered by the Tag key.
+        tag_key (str | Unset): The Tag key. Example: aws:createdBy.
+        hidden (bool | Unset): Whether the Tag has been hidden from the Vantage UI.
+        providers (list[str] | Unset): The unique providers that are covered by the Tag key.
     """
 
-    tag_key: Union[Unset, str] = UNSET
-    hidden: Union[Unset, bool] = UNSET
-    providers: Union[Unset, list[str]] = UNSET
+    tag_key: str | Unset = UNSET
+    hidden: bool | Unset = UNSET
+    providers: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -29,7 +31,7 @@ class Tag:
 
         hidden = self.hidden
 
-        providers: Union[Unset, list[str]] = UNSET
+        providers: list[str] | Unset = UNSET
         if not isinstance(self.providers, Unset):
             providers = self.providers
 

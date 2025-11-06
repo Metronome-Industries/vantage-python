@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -22,20 +22,23 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[BusinessMetric, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> BusinessMetric | Errors | None:
     if response.status_code == 204:
         response_204 = BusinessMetric.from_dict(response.json())
 
         return response_204
-    if response.status_code == 404:
-        response_404 = Errors.from_dict(response.json())
 
-        return response_404
     if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
+
+    if response.status_code == 404:
+        response_404 = Errors.from_dict(response.json())
+
+        return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -43,8 +46,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[BusinessMetric, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[BusinessMetric | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,8 +60,10 @@ def sync_detailed(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[BusinessMetric, Errors]]:
-    """Deletes an existing BusinessMetric.
+) -> Response[BusinessMetric | Errors]:
+    """Delete business metric
+
+     Deletes an existing BusinessMetric.
 
     Args:
         business_metric_token (str):
@@ -68,7 +73,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BusinessMetric, Errors]]
+        Response[BusinessMetric | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -86,8 +91,10 @@ def sync(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[BusinessMetric, Errors]]:
-    """Deletes an existing BusinessMetric.
+) -> BusinessMetric | Errors | None:
+    """Delete business metric
+
+     Deletes an existing BusinessMetric.
 
     Args:
         business_metric_token (str):
@@ -97,7 +104,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BusinessMetric, Errors]
+        BusinessMetric | Errors
     """
 
     return sync_detailed(
@@ -110,8 +117,10 @@ async def asyncio_detailed(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[BusinessMetric, Errors]]:
-    """Deletes an existing BusinessMetric.
+) -> Response[BusinessMetric | Errors]:
+    """Delete business metric
+
+     Deletes an existing BusinessMetric.
 
     Args:
         business_metric_token (str):
@@ -121,7 +130,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BusinessMetric, Errors]]
+        Response[BusinessMetric | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -137,8 +146,10 @@ async def asyncio(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[BusinessMetric, Errors]]:
-    """Deletes an existing BusinessMetric.
+) -> BusinessMetric | Errors | None:
+    """Delete business metric
+
+     Deletes an existing BusinessMetric.
 
     Args:
         business_metric_token (str):
@@ -148,7 +159,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BusinessMetric, Errors]
+        BusinessMetric | Errors
     """
 
     return (

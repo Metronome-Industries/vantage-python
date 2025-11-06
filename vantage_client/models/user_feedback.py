@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,16 +16,16 @@ class UserFeedback:
     """UserFeedback model
 
     Attributes:
-        token (Union[Unset, str]): Token of the feedback
-        message (Union[Unset, str]): User feedback message
-        created_by_token (Union[Unset, str]): Token of the creator of the feedback
-        created_at (Union[Unset, str]): Feedback creation timestamp Example: 2023-01-01T00:00:00Z.
+        token (str | Unset): Token of the feedback
+        message (str | Unset): User feedback message
+        created_by_token (str | Unset): Token of the creator of the feedback
+        created_at (str | Unset): Feedback creation timestamp Example: 2023-01-01T00:00:00Z.
     """
 
-    token: Union[Unset, str] = UNSET
-    message: Union[Unset, str] = UNSET
-    created_by_token: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    message: str | Unset = UNSET
+    created_by_token: str | Unset = UNSET
+    created_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

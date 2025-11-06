@@ -1,22 +1,25 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.download_invoice_body_file_type import DownloadInvoiceBodyFileType
+from ..models.download_invoice_file_type import DownloadInvoiceFileType
 
-T = TypeVar("T", bound="DownloadInvoiceBody")
+T = TypeVar("T", bound="DownloadInvoice")
 
 
 @_attrs_define
-class DownloadInvoiceBody:
-    """
+class DownloadInvoice:
+    """Download invoice file (PDF or CSV).
+
     Attributes:
-        file_type (DownloadInvoiceBodyFileType): Type of file to download (pdf or csv)
+        file_type (DownloadInvoiceFileType): Type of file to download (pdf or csv)
     """
 
-    file_type: DownloadInvoiceBodyFileType
+    file_type: DownloadInvoiceFileType
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -35,14 +38,14 @@ class DownloadInvoiceBody:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        file_type = DownloadInvoiceBodyFileType(d.pop("file_type"))
+        file_type = DownloadInvoiceFileType(d.pop("file_type"))
 
-        download_invoice_body = cls(
+        download_invoice = cls(
             file_type=file_type,
         )
 
-        download_invoice_body.additional_properties = d
-        return download_invoice_body
+        download_invoice.additional_properties = d
+        return download_invoice
 
     @property
     def additional_keys(self) -> list[str]:

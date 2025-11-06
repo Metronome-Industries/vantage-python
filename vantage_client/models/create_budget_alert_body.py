@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,22 +17,22 @@ class CreateBudgetAlertBody:
     Attributes:
         budget_tokens (list[str]): The tokens of the Budget that has the alert.
         threshold (int): The threshold amount that must be met for the alert to fire.
-        duration_in_days (int): The number of days from the start or end of the month to trigger the alert if the
+        duration_in_days (str): The number of days from the start or end of the month to trigger the alert if the
             threshold is reached.  For the full month, pass an empty value.
-        user_tokens (Union[Unset, list[str]]): The tokens of the users that receive the alert.
-        period_to_track (Union[Unset, str]): The period tracked on the alert. Used with duration_in_days to determine
-            the time window of the alert. Defaults to start_of_the_month if not passed. Possible values: start_of_the_month,
+        user_tokens (list[str] | Unset): The tokens of the users that receive the alert.
+        period_to_track (str | Unset): The period tracked on the alert. Used with duration_in_days to determine the time
+            window of the alert. Defaults to start_of_the_month if not passed. Possible values: start_of_the_month,
             end_of_the_month.
-        recipient_channels (Union[Unset, list[str]]): The channels receiving the alerts. Requires an integration
-            provider to be connected.
+        recipient_channels (list[str] | Unset): The channels receiving the alerts. Requires an integration provider to
+            be connected.
     """
 
     budget_tokens: list[str]
     threshold: int
-    duration_in_days: int
-    user_tokens: Union[Unset, list[str]] = UNSET
-    period_to_track: Union[Unset, str] = UNSET
-    recipient_channels: Union[Unset, list[str]] = UNSET
+    duration_in_days: str
+    user_tokens: list[str] | Unset = UNSET
+    period_to_track: str | Unset = UNSET
+    recipient_channels: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -40,13 +42,13 @@ class CreateBudgetAlertBody:
 
         duration_in_days = self.duration_in_days
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 
         period_to_track = self.period_to_track
 
-        recipient_channels: Union[Unset, list[str]] = UNSET
+        recipient_channels: list[str] | Unset = UNSET
         if not isinstance(self.recipient_channels, Unset):
             recipient_channels = self.recipient_channels
 

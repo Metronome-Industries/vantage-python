@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,20 +16,20 @@ class Team:
     """Team model
 
     Attributes:
-        token (Union[Unset, str]):
-        name (Union[Unset, str]): The name of the Team. Example: Cost Savers.
-        description (Union[Unset, str]): The description of the Team. Example: The Team that saves costs.
-        workspace_tokens (Union[Unset, list[str]]): The tokens for any Workspaces that the Team belongs to
-        user_emails (Union[Unset, list[str]]): The email addresses for Users that belong to the Team
-        user_tokens (Union[Unset, list[str]]): The tokens for Users that belong to the Team
+        token (str | Unset):
+        name (str | Unset): The name of the Team. Example: Cost Savers.
+        description (str | Unset): The description of the Team. Example: The Team that saves costs.
+        workspace_tokens (list[str] | Unset): The tokens for any Workspaces that the Team belongs to
+        user_emails (list[str] | Unset): The email addresses for Users that belong to the Team
+        user_tokens (list[str] | Unset): The tokens for Users that belong to the Team
     """
 
-    token: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    description: Union[Unset, str] = UNSET
-    workspace_tokens: Union[Unset, list[str]] = UNSET
-    user_emails: Union[Unset, list[str]] = UNSET
-    user_tokens: Union[Unset, list[str]] = UNSET
+    token: str | Unset = UNSET
+    name: str | Unset = UNSET
+    description: str | Unset = UNSET
+    workspace_tokens: list[str] | Unset = UNSET
+    user_emails: list[str] | Unset = UNSET
+    user_tokens: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,15 +39,15 @@ class Team:
 
         description = self.description
 
-        workspace_tokens: Union[Unset, list[str]] = UNSET
+        workspace_tokens: list[str] | Unset = UNSET
         if not isinstance(self.workspace_tokens, Unset):
             workspace_tokens = self.workspace_tokens
 
-        user_emails: Union[Unset, list[str]] = UNSET
+        user_emails: list[str] | Unset = UNSET
         if not isinstance(self.user_emails, Unset):
             user_emails = self.user_emails
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 

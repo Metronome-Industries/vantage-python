@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Dashboards:
     """Dashboards model
 
     Attributes:
-        links (Union[Unset, DashboardsLinks]):
-        dashboards (Union[Unset, list['Dashboard']]):
+        links (DashboardsLinks | Unset):
+        dashboards (list[Dashboard] | Unset):
     """
 
-    links: Union[Unset, "DashboardsLinks"] = UNSET
-    dashboards: Union[Unset, list["Dashboard"]] = UNSET
+    links: DashboardsLinks | Unset = UNSET
+    dashboards: list[Dashboard] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        dashboards: Union[Unset, list[dict[str, Any]]] = UNSET
+        dashboards: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.dashboards, Unset):
             dashboards = []
             for dashboards_item_data in self.dashboards:
@@ -56,18 +58,20 @@ class Dashboards:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, DashboardsLinks]
+        links: DashboardsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = DashboardsLinks.from_dict(_links)
 
-        dashboards = []
         _dashboards = d.pop("dashboards", UNSET)
-        for dashboards_item_data in _dashboards or []:
-            dashboards_item = Dashboard.from_dict(dashboards_item_data)
+        dashboards: list[Dashboard] | Unset = UNSET
+        if _dashboards is not UNSET:
+            dashboards = []
+            for dashboards_item_data in _dashboards:
+                dashboards_item = Dashboard.from_dict(dashboards_item_data)
 
-            dashboards.append(dashboards_item)
+                dashboards.append(dashboards_item)
 
         dashboards = cls(
             links=links,

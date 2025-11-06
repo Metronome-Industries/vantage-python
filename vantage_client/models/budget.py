@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,32 +21,32 @@ class Budget:
     """Budget model
 
     Attributes:
-        token (Union[Unset, str]):
-        name (Union[Unset, str]): The name of the Budget. Example: Acme123 Budget.
-        workspace_token (Union[Unset, str]): The token for the Workspace the Budget is a part of.
-        user_token (Union[Unset, str]): The token for the User who created this Budget.
-        created_by_token (Union[Unset, str]): The token of the Creator of the Budget.
-        cost_report_token (Union[Unset, str]): The token of the Report associated with the Budget.
-        created_at (Union[Unset, str]): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
+        token (str | Unset):
+        name (str | Unset): The name of the Budget. Example: Acme123 Budget.
+        workspace_token (str | Unset): The token for the Workspace the Budget is a part of.
+        user_token (str | Unset): The token for the User who created this Budget.
+        created_by_token (str | Unset): The token of the Creator of the Budget.
+        cost_report_token (str | Unset): The token of the Report associated with the Budget.
+        created_at (str | Unset): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
             2024-03-19T00:00:00Z.
-        budget_alert_tokens (Union[Unset, list[str]]): The tokens of the BudgetAlerts associated with the Budget.
-        child_budget_tokens (Union[Unset, list[str]]): The tokens of the child Budgets associated with the hierarchical
+        budget_alert_tokens (list[str] | Unset): The tokens of the BudgetAlerts associated with the Budget.
+        child_budget_tokens (list[str] | Unset): The tokens of the child Budgets associated with the hierarchical
             Budget.
-        periods (Union[Unset, list['BudgetPeriod']]): The budget periods associated with the Budget.
-        performance (Union[Unset, list['BudgetPerformance']]): The historical performance of the Budget.
+        periods (list[BudgetPeriod] | Unset): The budget periods associated with the Budget.
+        performance (list[BudgetPerformance] | Unset): The historical performance of the Budget.
     """
 
-    token: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    user_token: Union[Unset, str] = UNSET
-    created_by_token: Union[Unset, str] = UNSET
-    cost_report_token: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    budget_alert_tokens: Union[Unset, list[str]] = UNSET
-    child_budget_tokens: Union[Unset, list[str]] = UNSET
-    periods: Union[Unset, list["BudgetPeriod"]] = UNSET
-    performance: Union[Unset, list["BudgetPerformance"]] = UNSET
+    token: str | Unset = UNSET
+    name: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    user_token: str | Unset = UNSET
+    created_by_token: str | Unset = UNSET
+    cost_report_token: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    budget_alert_tokens: list[str] | Unset = UNSET
+    child_budget_tokens: list[str] | Unset = UNSET
+    periods: list[BudgetPeriod] | Unset = UNSET
+    performance: list[BudgetPerformance] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -62,22 +64,22 @@ class Budget:
 
         created_at = self.created_at
 
-        budget_alert_tokens: Union[Unset, list[str]] = UNSET
+        budget_alert_tokens: list[str] | Unset = UNSET
         if not isinstance(self.budget_alert_tokens, Unset):
             budget_alert_tokens = self.budget_alert_tokens
 
-        child_budget_tokens: Union[Unset, list[str]] = UNSET
+        child_budget_tokens: list[str] | Unset = UNSET
         if not isinstance(self.child_budget_tokens, Unset):
             child_budget_tokens = self.child_budget_tokens
 
-        periods: Union[Unset, list[dict[str, Any]]] = UNSET
+        periods: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.periods, Unset):
             periods = []
             for periods_item_data in self.periods:
                 periods_item = periods_item_data.to_dict()
                 periods.append(periods_item)
 
-        performance: Union[Unset, list[dict[str, Any]]] = UNSET
+        performance: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.performance, Unset):
             performance = []
             for performance_item_data in self.performance:
@@ -136,19 +138,23 @@ class Budget:
 
         child_budget_tokens = cast(list[str], d.pop("child_budget_tokens", UNSET))
 
-        periods = []
         _periods = d.pop("periods", UNSET)
-        for periods_item_data in _periods or []:
-            periods_item = BudgetPeriod.from_dict(periods_item_data)
+        periods: list[BudgetPeriod] | Unset = UNSET
+        if _periods is not UNSET:
+            periods = []
+            for periods_item_data in _periods:
+                periods_item = BudgetPeriod.from_dict(periods_item_data)
 
-            periods.append(periods_item)
+                periods.append(periods_item)
 
-        performance = []
         _performance = d.pop("performance", UNSET)
-        for performance_item_data in _performance or []:
-            performance_item = BudgetPerformance.from_dict(performance_item_data)
+        performance: list[BudgetPerformance] | Unset = UNSET
+        if _performance is not UNSET:
+            performance = []
+            for performance_item_data in _performance:
+                performance_item = BudgetPerformance.from_dict(performance_item_data)
 
-            performance.append(performance_item)
+                performance.append(performance_item)
 
         budget = cls(
             token=token,

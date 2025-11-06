@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,13 +20,13 @@ class UpdateDashboardWidgetsItem:
     """
     Attributes:
         widgetable_token (str): The token of the represented Resource.
-        title (Union[Unset, str]): The title of the Widget (defaults to the title of the Resource).
-        settings (Union[Unset, UpdateDashboardWidgetsItemSettings]): The settings for the DashboardWidget.
+        title (str | Unset): The title of the Widget (defaults to the title of the Resource).
+        settings (UpdateDashboardWidgetsItemSettings | Unset): The settings for the DashboardWidget.
     """
 
     widgetable_token: str
-    title: Union[Unset, str] = UNSET
-    settings: Union[Unset, "UpdateDashboardWidgetsItemSettings"] = UNSET
+    title: str | Unset = UNSET
+    settings: UpdateDashboardWidgetsItemSettings | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -32,7 +34,7 @@ class UpdateDashboardWidgetsItem:
 
         title = self.title
 
-        settings: Union[Unset, dict[str, Any]] = UNSET
+        settings: dict[str, Any] | Unset = UNSET
         if not isinstance(self.settings, Unset):
             settings = self.settings.to_dict()
 
@@ -60,7 +62,7 @@ class UpdateDashboardWidgetsItem:
         title = d.pop("title", UNSET)
 
         _settings = d.pop("settings", UNSET)
-        settings: Union[Unset, UpdateDashboardWidgetsItemSettings]
+        settings: UpdateDashboardWidgetsItemSettings | Unset
         if isinstance(_settings, Unset):
             settings = UNSET
         else:

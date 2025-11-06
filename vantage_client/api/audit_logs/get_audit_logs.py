@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -11,18 +11,18 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    user: Union[Unset, int] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    action: Union[Unset, str] = UNSET,
-    object_name: Union[Unset, str] = UNSET,
-    source: Union[Unset, str] = UNSET,
-    object_type: Union[Unset, str] = UNSET,
-    token: Union[Unset, str] = UNSET,
-    object_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    user: int | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    action: str | Unset = UNSET,
+    object_name: str | Unset = UNSET,
+    source: str | Unset = UNSET,
+    object_type: str | Unset = UNSET,
+    token: str | Unset = UNSET,
+    object_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -61,18 +61,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[AuditLogs]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AuditLogs | None:
     if response.status_code == 200:
         response_200 = AuditLogs.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[AuditLogs]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[AuditLogs]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,34 +85,36 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    user: Union[Unset, int] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    action: Union[Unset, str] = UNSET,
-    object_name: Union[Unset, str] = UNSET,
-    source: Union[Unset, str] = UNSET,
-    object_type: Union[Unset, str] = UNSET,
-    token: Union[Unset, str] = UNSET,
-    object_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    user: int | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    action: str | Unset = UNSET,
+    object_name: str | Unset = UNSET,
+    source: str | Unset = UNSET,
+    object_type: str | Unset = UNSET,
+    token: str | Unset = UNSET,
+    object_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
 ) -> Response[AuditLogs]:
-    """Return all AuditLogs.
+    """Get all audit logs
+
+     Return all AuditLogs.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        user (Union[Unset, int]):
-        workspace_token (Union[Unset, str]):
-        action (Union[Unset, str]):
-        object_name (Union[Unset, str]):
-        source (Union[Unset, str]):
-        object_type (Union[Unset, str]):
-        token (Union[Unset, str]):
-        object_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        user (int | Unset):
+        workspace_token (str | Unset):
+        action (str | Unset):
+        object_name (str | Unset):
+        source (str | Unset):
+        object_type (str | Unset):
+        token (str | Unset):
+        object_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -146,34 +149,36 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    user: Union[Unset, int] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    action: Union[Unset, str] = UNSET,
-    object_name: Union[Unset, str] = UNSET,
-    source: Union[Unset, str] = UNSET,
-    object_type: Union[Unset, str] = UNSET,
-    token: Union[Unset, str] = UNSET,
-    object_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-) -> Optional[AuditLogs]:
-    """Return all AuditLogs.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    user: int | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    action: str | Unset = UNSET,
+    object_name: str | Unset = UNSET,
+    source: str | Unset = UNSET,
+    object_type: str | Unset = UNSET,
+    token: str | Unset = UNSET,
+    object_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+) -> AuditLogs | None:
+    """Get all audit logs
+
+     Return all AuditLogs.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        user (Union[Unset, int]):
-        workspace_token (Union[Unset, str]):
-        action (Union[Unset, str]):
-        object_name (Union[Unset, str]):
-        source (Union[Unset, str]):
-        object_type (Union[Unset, str]):
-        token (Union[Unset, str]):
-        object_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        user (int | Unset):
+        workspace_token (str | Unset):
+        action (str | Unset):
+        object_name (str | Unset):
+        source (str | Unset):
+        object_type (str | Unset):
+        token (str | Unset):
+        object_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -203,34 +208,36 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    user: Union[Unset, int] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    action: Union[Unset, str] = UNSET,
-    object_name: Union[Unset, str] = UNSET,
-    source: Union[Unset, str] = UNSET,
-    object_type: Union[Unset, str] = UNSET,
-    token: Union[Unset, str] = UNSET,
-    object_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    user: int | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    action: str | Unset = UNSET,
+    object_name: str | Unset = UNSET,
+    source: str | Unset = UNSET,
+    object_type: str | Unset = UNSET,
+    token: str | Unset = UNSET,
+    object_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
 ) -> Response[AuditLogs]:
-    """Return all AuditLogs.
+    """Get all audit logs
+
+     Return all AuditLogs.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        user (Union[Unset, int]):
-        workspace_token (Union[Unset, str]):
-        action (Union[Unset, str]):
-        object_name (Union[Unset, str]):
-        source (Union[Unset, str]):
-        object_type (Union[Unset, str]):
-        token (Union[Unset, str]):
-        object_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        user (int | Unset):
+        workspace_token (str | Unset):
+        action (str | Unset):
+        object_name (str | Unset):
+        source (str | Unset):
+        object_type (str | Unset):
+        token (str | Unset):
+        object_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -263,34 +270,36 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    user: Union[Unset, int] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    action: Union[Unset, str] = UNSET,
-    object_name: Union[Unset, str] = UNSET,
-    source: Union[Unset, str] = UNSET,
-    object_type: Union[Unset, str] = UNSET,
-    token: Union[Unset, str] = UNSET,
-    object_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-) -> Optional[AuditLogs]:
-    """Return all AuditLogs.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    user: int | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    action: str | Unset = UNSET,
+    object_name: str | Unset = UNSET,
+    source: str | Unset = UNSET,
+    object_type: str | Unset = UNSET,
+    token: str | Unset = UNSET,
+    object_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+) -> AuditLogs | None:
+    """Get all audit logs
+
+     Return all AuditLogs.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        user (Union[Unset, int]):
-        workspace_token (Union[Unset, str]):
-        action (Union[Unset, str]):
-        object_name (Union[Unset, str]):
-        source (Union[Unset, str]):
-        object_type (Union[Unset, str]):
-        token (Union[Unset, str]):
-        object_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        user (int | Unset):
+        workspace_token (str | Unset):
+        action (str | Unset):
+        object_name (str | Unset):
+        source (str | Unset):
+        object_type (str | Unset):
+        token (str | Unset):
+        object_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

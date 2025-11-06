@@ -1,6 +1,6 @@
 import datetime
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -14,26 +14,26 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     cost_report_token: str,
     *,
-    start_date: Union[Unset, datetime.date] = UNSET,
-    end_date: Union[Unset, datetime.date] = UNSET,
-    provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
-    service: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    start_date: datetime.date | Unset = UNSET,
+    end_date: datetime.date | Unset = UNSET,
+    provider: GetForecastedCostsProvider | Unset = UNSET,
+    service: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
-    json_start_date: Union[Unset, str] = UNSET
+    json_start_date: str | Unset = UNSET
     if not isinstance(start_date, Unset):
         json_start_date = start_date.isoformat()
     params["start_date"] = json_start_date
 
-    json_end_date: Union[Unset, str] = UNSET
+    json_end_date: str | Unset = UNSET
     if not isinstance(end_date, Unset):
         json_end_date = end_date.isoformat()
     params["end_date"] = json_end_date
 
-    json_provider: Union[Unset, str] = UNSET
+    json_provider: str | Unset = UNSET
     if not isinstance(provider, Unset):
         json_provider = provider.value
 
@@ -56,22 +56,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[ForecastedCosts]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ForecastedCosts | None:
     if response.status_code == 200:
         response_200 = ForecastedCosts.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[ForecastedCosts]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ForecastedCosts]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,23 +81,25 @@ def sync_detailed(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.date] = UNSET,
-    end_date: Union[Unset, datetime.date] = UNSET,
-    provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
-    service: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    start_date: datetime.date | Unset = UNSET,
+    end_date: datetime.date | Unset = UNSET,
+    provider: GetForecastedCostsProvider | Unset = UNSET,
+    service: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[ForecastedCosts]:
-    """Return all ForecastedCosts.
+    """Get forecasted costs for a cost report
+
+     Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.date]):
-        end_date (Union[Unset, datetime.date]):
-        provider (Union[Unset, GetForecastedCostsProvider]):
-        service (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        start_date (datetime.date | Unset):
+        end_date (datetime.date | Unset):
+        provider (GetForecastedCostsProvider | Unset):
+        service (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -131,23 +130,25 @@ def sync(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.date] = UNSET,
-    end_date: Union[Unset, datetime.date] = UNSET,
-    provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
-    service: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[ForecastedCosts]:
-    """Return all ForecastedCosts.
+    start_date: datetime.date | Unset = UNSET,
+    end_date: datetime.date | Unset = UNSET,
+    provider: GetForecastedCostsProvider | Unset = UNSET,
+    service: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> ForecastedCosts | None:
+    """Get forecasted costs for a cost report
+
+     Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.date]):
-        end_date (Union[Unset, datetime.date]):
-        provider (Union[Unset, GetForecastedCostsProvider]):
-        service (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        start_date (datetime.date | Unset):
+        end_date (datetime.date | Unset):
+        provider (GetForecastedCostsProvider | Unset):
+        service (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -173,23 +174,25 @@ async def asyncio_detailed(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.date] = UNSET,
-    end_date: Union[Unset, datetime.date] = UNSET,
-    provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
-    service: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    start_date: datetime.date | Unset = UNSET,
+    end_date: datetime.date | Unset = UNSET,
+    provider: GetForecastedCostsProvider | Unset = UNSET,
+    service: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[ForecastedCosts]:
-    """Return all ForecastedCosts.
+    """Get forecasted costs for a cost report
+
+     Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.date]):
-        end_date (Union[Unset, datetime.date]):
-        provider (Union[Unset, GetForecastedCostsProvider]):
-        service (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        start_date (datetime.date | Unset):
+        end_date (datetime.date | Unset):
+        provider (GetForecastedCostsProvider | Unset):
+        service (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -218,23 +221,25 @@ async def asyncio(
     cost_report_token: str,
     *,
     client: AuthenticatedClient,
-    start_date: Union[Unset, datetime.date] = UNSET,
-    end_date: Union[Unset, datetime.date] = UNSET,
-    provider: Union[Unset, GetForecastedCostsProvider] = UNSET,
-    service: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[ForecastedCosts]:
-    """Return all ForecastedCosts.
+    start_date: datetime.date | Unset = UNSET,
+    end_date: datetime.date | Unset = UNSET,
+    provider: GetForecastedCostsProvider | Unset = UNSET,
+    service: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> ForecastedCosts | None:
+    """Get forecasted costs for a cost report
+
+     Return all ForecastedCosts.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, datetime.date]):
-        end_date (Union[Unset, datetime.date]):
-        provider (Union[Unset, GetForecastedCostsProvider]):
-        service (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        start_date (datetime.date | Unset):
+        end_date (datetime.date | Unset):
+        provider (GetForecastedCostsProvider | Unset):
+        service (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

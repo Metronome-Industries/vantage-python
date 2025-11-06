@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Invoices:
     """Invoices model
 
     Attributes:
-        links (Union[Unset, InvoicesLinks]):
-        invoices (Union[Unset, list['Invoice']]):
+        links (InvoicesLinks | Unset):
+        invoices (list[Invoice] | Unset):
     """
 
-    links: Union[Unset, "InvoicesLinks"] = UNSET
-    invoices: Union[Unset, list["Invoice"]] = UNSET
+    links: InvoicesLinks | Unset = UNSET
+    invoices: list[Invoice] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        invoices: Union[Unset, list[dict[str, Any]]] = UNSET
+        invoices: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.invoices, Unset):
             invoices = []
             for invoices_item_data in self.invoices:
@@ -56,18 +58,20 @@ class Invoices:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, InvoicesLinks]
+        links: InvoicesLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = InvoicesLinks.from_dict(_links)
 
-        invoices = []
         _invoices = d.pop("invoices", UNSET)
-        for invoices_item_data in _invoices or []:
-            invoices_item = Invoice.from_dict(invoices_item_data)
+        invoices: list[Invoice] | Unset = UNSET
+        if _invoices is not UNSET:
+            invoices = []
+            for invoices_item_data in _invoices:
+                invoices_item = Invoice.from_dict(invoices_item_data)
 
-            invoices.append(invoices_item)
+                invoices.append(invoices_item)
 
         invoices = cls(
             links=links,

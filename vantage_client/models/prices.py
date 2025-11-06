@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Prices:
     """Prices model
 
     Attributes:
-        links (Union[Unset, PricesLinks]):
-        prices (Union[Unset, list['Price']]):
+        links (PricesLinks | Unset):
+        prices (list[Price] | Unset):
     """
 
-    links: Union[Unset, "PricesLinks"] = UNSET
-    prices: Union[Unset, list["Price"]] = UNSET
+    links: PricesLinks | Unset = UNSET
+    prices: list[Price] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        prices: Union[Unset, list[dict[str, Any]]] = UNSET
+        prices: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.prices, Unset):
             prices = []
             for prices_item_data in self.prices:
@@ -56,18 +58,20 @@ class Prices:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, PricesLinks]
+        links: PricesLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = PricesLinks.from_dict(_links)
 
-        prices = []
         _prices = d.pop("prices", UNSET)
-        for prices_item_data in _prices or []:
-            prices_item = Price.from_dict(prices_item_data)
+        prices: list[Price] | Unset = UNSET
+        if _prices is not UNSET:
+            prices = []
+            for prices_item_data in _prices:
+                prices_item = Price.from_dict(prices_item_data)
 
-            prices.append(prices_item)
+                prices.append(prices_item)
 
         prices = cls(
             links=links,

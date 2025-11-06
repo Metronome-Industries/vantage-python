@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -15,10 +15,7 @@ from ...types import Response
 def _get_kwargs(
     integration_token: str,
     *,
-    body: Union[
-        CreateUserCostsUploadViaCsvDataBody,
-        CreateUserCostsUploadViaCsvFilesBody,
-    ],
+    body: CreateUserCostsUploadViaCsvDataBody | CreateUserCostsUploadViaCsvFilesBody,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -41,28 +38,33 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, UserCostsUpload]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | UserCostsUpload | None:
     if response.status_code == 201:
         response_201 = UserCostsUpload.from_dict(response.json())
 
         return response_201
-    if response.status_code == 404:
-        response_404 = Errors.from_dict(response.json())
 
-        return response_404
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
-    if response.status_code == 422:
-        response_422 = Errors.from_dict(response.json())
 
-        return response_422
     if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
+
+    if response.status_code == 404:
+        response_404 = Errors.from_dict(response.json())
+
+        return response_404
+
+    if response.status_code == 422:
+        response_422 = Errors.from_dict(response.json())
+
+        return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -70,8 +72,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, UserCostsUpload]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | UserCostsUpload]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,12 +86,11 @@ def sync_detailed(
     integration_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        CreateUserCostsUploadViaCsvDataBody,
-        CreateUserCostsUploadViaCsvFilesBody,
-    ],
-) -> Response[Union[Errors, UserCostsUpload]]:
-    """Create UserCostsUpload via CSV for a Custom Provider Integration.
+    body: CreateUserCostsUploadViaCsvDataBody | CreateUserCostsUploadViaCsvFilesBody,
+) -> Response[Errors | UserCostsUpload]:
+    """Upload custom provider costs
+
+     Create UserCostsUpload via CSV for a Custom Provider Integration.
 
     Args:
         integration_token (str):
@@ -101,7 +102,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, UserCostsUpload]]
+        Response[Errors | UserCostsUpload]
     """
 
     kwargs = _get_kwargs(
@@ -120,12 +121,11 @@ def sync(
     integration_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        CreateUserCostsUploadViaCsvDataBody,
-        CreateUserCostsUploadViaCsvFilesBody,
-    ],
-) -> Optional[Union[Errors, UserCostsUpload]]:
-    """Create UserCostsUpload via CSV for a Custom Provider Integration.
+    body: CreateUserCostsUploadViaCsvDataBody | CreateUserCostsUploadViaCsvFilesBody,
+) -> Errors | UserCostsUpload | None:
+    """Upload custom provider costs
+
+     Create UserCostsUpload via CSV for a Custom Provider Integration.
 
     Args:
         integration_token (str):
@@ -137,7 +137,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, UserCostsUpload]
+        Errors | UserCostsUpload
     """
 
     return sync_detailed(
@@ -151,12 +151,11 @@ async def asyncio_detailed(
     integration_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        CreateUserCostsUploadViaCsvDataBody,
-        CreateUserCostsUploadViaCsvFilesBody,
-    ],
-) -> Response[Union[Errors, UserCostsUpload]]:
-    """Create UserCostsUpload via CSV for a Custom Provider Integration.
+    body: CreateUserCostsUploadViaCsvDataBody | CreateUserCostsUploadViaCsvFilesBody,
+) -> Response[Errors | UserCostsUpload]:
+    """Upload custom provider costs
+
+     Create UserCostsUpload via CSV for a Custom Provider Integration.
 
     Args:
         integration_token (str):
@@ -168,7 +167,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, UserCostsUpload]]
+        Response[Errors | UserCostsUpload]
     """
 
     kwargs = _get_kwargs(
@@ -185,12 +184,11 @@ async def asyncio(
     integration_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        CreateUserCostsUploadViaCsvDataBody,
-        CreateUserCostsUploadViaCsvFilesBody,
-    ],
-) -> Optional[Union[Errors, UserCostsUpload]]:
-    """Create UserCostsUpload via CSV for a Custom Provider Integration.
+    body: CreateUserCostsUploadViaCsvDataBody | CreateUserCostsUploadViaCsvFilesBody,
+) -> Errors | UserCostsUpload | None:
+    """Upload custom provider costs
+
+     Create UserCostsUpload via CSV for a Custom Provider Integration.
 
     Args:
         integration_token (str):
@@ -202,7 +200,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, UserCostsUpload]
+        Errors | UserCostsUpload
     """
 
     return (

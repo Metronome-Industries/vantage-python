@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,27 +16,27 @@ T = TypeVar("T", bound="AttachedCostReportForBusinessMetric")
 class AttachedCostReportForBusinessMetric:
     """
     Attributes:
-        cost_report_token (Union[Unset, str]): The token of the CostReport the BusinessMetric is attached to. Example:
+        cost_report_token (str | Unset): The token of the CostReport the BusinessMetric is attached to. Example:
             rprt_1234.
-        unit_scale (Union[Unset, AttachedCostReportForBusinessMetricUnitScale]): Determines the scale of the
-            BusinessMetric's values within a particular CostReport. Example: per_hundred.
-        label_filter (Union[Unset, list[str]]): The labels that the BusinessMetric is filtered by within a particular
+        unit_scale (AttachedCostReportForBusinessMetricUnitScale | Unset): Determines the scale of the BusinessMetric's
+            values within a particular CostReport. Example: per_hundred.
+        label_filter (list[str] | Unset): The labels that the BusinessMetric is filtered by within a particular
             CostReport.
     """
 
-    cost_report_token: Union[Unset, str] = UNSET
-    unit_scale: Union[Unset, AttachedCostReportForBusinessMetricUnitScale] = UNSET
-    label_filter: Union[Unset, list[str]] = UNSET
+    cost_report_token: str | Unset = UNSET
+    unit_scale: AttachedCostReportForBusinessMetricUnitScale | Unset = UNSET
+    label_filter: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         cost_report_token = self.cost_report_token
 
-        unit_scale: Union[Unset, str] = UNSET
+        unit_scale: str | Unset = UNSET
         if not isinstance(self.unit_scale, Unset):
             unit_scale = self.unit_scale.value
 
-        label_filter: Union[Unset, list[str]] = UNSET
+        label_filter: list[str] | Unset = UNSET
         if not isinstance(self.label_filter, Unset):
             label_filter = self.label_filter
 
@@ -56,7 +58,7 @@ class AttachedCostReportForBusinessMetric:
         cost_report_token = d.pop("cost_report_token", UNSET)
 
         _unit_scale = d.pop("unit_scale", UNSET)
-        unit_scale: Union[Unset, AttachedCostReportForBusinessMetricUnitScale]
+        unit_scale: AttachedCostReportForBusinessMetricUnitScale | Unset
         if isinstance(_unit_scale, Unset):
             unit_scale = UNSET
         else:

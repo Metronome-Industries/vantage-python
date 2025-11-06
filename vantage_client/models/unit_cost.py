@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,30 +19,29 @@ T = TypeVar("T", bound="UnitCost")
 class UnitCost:
     """
     Attributes:
-        links (Union[Unset, UnitCostLinks]):
-        business_metric_token (Union[Unset, str]): The token of the BusinessMetric for which the unit cost was
-            calculated. Example: bsnss_mtrc_1234.
-        business_metric_title (Union[Unset, str]): The title of the BusinessMetric for which the unit cost was
-            calculated. Example: Total Revenue.
-        unit_cost_amount (Union[Unset, str]): The amount of the unit cost. Example: 4.25.
-        business_metric_amount (Union[Unset, str]): The amount of the business metric. Example: 0.371.
-        scale (Union[Unset, float]): The scale of the BusinessMetric's values within a particular CostReport. Example:
-            1.0.
-        date (Union[Unset, str]): The date for which the unit cost was calculated. ISO 8601 Formatted. Example:
+        links (UnitCostLinks | Unset):
+        business_metric_token (str | Unset): The token of the BusinessMetric for which the unit cost was calculated.
+            Example: bsnss_mtrc_1234.
+        business_metric_title (str | Unset): The title of the BusinessMetric for which the unit cost was calculated.
+            Example: Total Revenue.
+        unit_cost_amount (str | Unset): The amount of the unit cost. Example: 4.25.
+        business_metric_amount (str | Unset): The amount of the business metric. Example: 0.371.
+        scale (float | Unset): The scale of the BusinessMetric's values within a particular CostReport. Example: 1.0.
+        date (str | Unset): The date for which the unit cost was calculated. ISO 8601 Formatted. Example:
             2023-09-05+00:00.
     """
 
-    links: Union[Unset, "UnitCostLinks"] = UNSET
-    business_metric_token: Union[Unset, str] = UNSET
-    business_metric_title: Union[Unset, str] = UNSET
-    unit_cost_amount: Union[Unset, str] = UNSET
-    business_metric_amount: Union[Unset, str] = UNSET
-    scale: Union[Unset, float] = UNSET
-    date: Union[Unset, str] = UNSET
+    links: UnitCostLinks | Unset = UNSET
+    business_metric_token: str | Unset = UNSET
+    business_metric_title: str | Unset = UNSET
+    unit_cost_amount: str | Unset = UNSET
+    business_metric_amount: str | Unset = UNSET
+    scale: float | Unset = UNSET
+    date: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
@@ -82,7 +83,7 @@ class UnitCost:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, UnitCostLinks]
+        links: UnitCostLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:

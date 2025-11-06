@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,21 +15,21 @@ T = TypeVar("T", bound="RecommendationAction")
 class RecommendationAction:
     """
     Attributes:
-        action (Union[Unset, str]):
-        description (Union[Unset, str]):
-        potential_savings (Union[Unset, str]): Potential savings in dollars Example: 100.00.
-        instance_type (Union[Unset, str]):
-        containers (Union[Unset, str]):
-        remediation_cli_command (Union[Unset, str]): CLI command to remediate this recommendation Example: aws ec2 stop-
+        action (str | Unset):
+        description (str | Unset):
+        potential_savings (str | Unset): Potential savings in dollars Example: 100.00.
+        instance_type (str | Unset):
+        containers (str | Unset):
+        remediation_cli_command (str | Unset): CLI command to remediate this recommendation Example: aws ec2 stop-
             instances --instance-ids i-1234567890abcdef0.
     """
 
-    action: Union[Unset, str] = UNSET
-    description: Union[Unset, str] = UNSET
-    potential_savings: Union[Unset, str] = UNSET
-    instance_type: Union[Unset, str] = UNSET
-    containers: Union[Unset, str] = UNSET
-    remediation_cli_command: Union[Unset, str] = UNSET
+    action: str | Unset = UNSET
+    description: str | Unset = UNSET
+    potential_savings: str | Unset = UNSET
+    instance_type: str | Unset = UNSET
+    containers: str | Unset = UNSET
+    remediation_cli_command: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

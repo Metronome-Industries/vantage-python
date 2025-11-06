@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,10 +21,10 @@ class CreateCostAlert:
         threshold (float): The threshold value for the Cost Alert.
         unit_type (str): The unit type used to compare costs. Options are 'currency' or 'percentage'.
         workspace_token (str): The token of the Workspace to add the Cost Alert to.
-        email_recipients (Union[Unset, list[str]]): The email recipients for the Cost Alert.
-        slack_channels (Union[Unset, list[str]]): The Slack channels that will receive the alert.
-        teams_channels (Union[Unset, list[str]]): The Microsoft Teams channels that will receive the alert.
-        report_tokens (Union[Unset, list[str]]): The tokens of the reports to alert on.
+        email_recipients (list[str] | Unset): The email recipients for the Cost Alert.
+        slack_channels (list[str] | Unset): The Slack channels that will receive the alert.
+        teams_channels (list[str] | Unset): The Microsoft Teams channels that will receive the alert.
+        report_tokens (list[str] | Unset): The tokens of the reports to alert on.
     """
 
     title: str
@@ -30,10 +32,10 @@ class CreateCostAlert:
     threshold: float
     unit_type: str
     workspace_token: str
-    email_recipients: Union[Unset, list[str]] = UNSET
-    slack_channels: Union[Unset, list[str]] = UNSET
-    teams_channels: Union[Unset, list[str]] = UNSET
-    report_tokens: Union[Unset, list[str]] = UNSET
+    email_recipients: list[str] | Unset = UNSET
+    slack_channels: list[str] | Unset = UNSET
+    teams_channels: list[str] | Unset = UNSET
+    report_tokens: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -47,19 +49,19 @@ class CreateCostAlert:
 
         workspace_token = self.workspace_token
 
-        email_recipients: Union[Unset, list[str]] = UNSET
+        email_recipients: list[str] | Unset = UNSET
         if not isinstance(self.email_recipients, Unset):
             email_recipients = self.email_recipients
 
-        slack_channels: Union[Unset, list[str]] = UNSET
+        slack_channels: list[str] | Unset = UNSET
         if not isinstance(self.slack_channels, Unset):
             slack_channels = self.slack_channels
 
-        teams_channels: Union[Unset, list[str]] = UNSET
+        teams_channels: list[str] | Unset = UNSET
         if not isinstance(self.teams_channels, Unset):
             teams_channels = self.teams_channels
 
-        report_tokens: Union[Unset, list[str]] = UNSET
+        report_tokens: list[str] | Unset = UNSET
         if not isinstance(self.report_tokens, Unset):
             report_tokens = self.report_tokens
 

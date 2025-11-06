@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,26 +20,26 @@ T = TypeVar("T", bound="CloudwatchFields")
 class CloudwatchFields:
     """
     Attributes:
-        stat (Union[Unset, CloudwatchFieldsStat]): The time aggregation function used to import Cloudwatch metrics.
-            Example: Average.
-        region (Union[Unset, str]): The region used to import Cloudwatch metrics. Example: us-east-1.
-        namespace (Union[Unset, str]): The namespace used to import Cloudwatch metrics. Example: AWS/EC2.
-        metric_name (Union[Unset, str]): The metric name used to import Cloudwatch metrics. Example: CPUUtilization.
-        dimensions (Union[Unset, list['CloudwatchDimension']]): The dimensions used to pull specific statistical data
-            for Cloudwatch metrics.
-        label_dimension (Union[Unset, str]): The dimension used to aggregate the Cloudwatch metrics.
+        stat (CloudwatchFieldsStat | Unset): The time aggregation function used to import Cloudwatch metrics. Example:
+            Average.
+        region (str | Unset): The region used to import Cloudwatch metrics. Example: us-east-1.
+        namespace (str | Unset): The namespace used to import Cloudwatch metrics. Example: AWS/EC2.
+        metric_name (str | Unset): The metric name used to import Cloudwatch metrics. Example: CPUUtilization.
+        dimensions (list[CloudwatchDimension] | Unset): The dimensions used to pull specific statistical data for
+            Cloudwatch metrics.
+        label_dimension (str | Unset): The dimension used to aggregate the Cloudwatch metrics.
     """
 
-    stat: Union[Unset, CloudwatchFieldsStat] = UNSET
-    region: Union[Unset, str] = UNSET
-    namespace: Union[Unset, str] = UNSET
-    metric_name: Union[Unset, str] = UNSET
-    dimensions: Union[Unset, list["CloudwatchDimension"]] = UNSET
-    label_dimension: Union[Unset, str] = UNSET
+    stat: CloudwatchFieldsStat | Unset = UNSET
+    region: str | Unset = UNSET
+    namespace: str | Unset = UNSET
+    metric_name: str | Unset = UNSET
+    dimensions: list[CloudwatchDimension] | Unset = UNSET
+    label_dimension: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        stat: Union[Unset, str] = UNSET
+        stat: str | Unset = UNSET
         if not isinstance(self.stat, Unset):
             stat = self.stat.value
 
@@ -47,7 +49,7 @@ class CloudwatchFields:
 
         metric_name = self.metric_name
 
-        dimensions: Union[Unset, list[dict[str, Any]]] = UNSET
+        dimensions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.dimensions, Unset):
             dimensions = []
             for dimensions_item_data in self.dimensions:
@@ -80,7 +82,7 @@ class CloudwatchFields:
 
         d = dict(src_dict)
         _stat = d.pop("stat", UNSET)
-        stat: Union[Unset, CloudwatchFieldsStat]
+        stat: CloudwatchFieldsStat | Unset
         if isinstance(_stat, Unset):
             stat = UNSET
         else:
@@ -92,12 +94,14 @@ class CloudwatchFields:
 
         metric_name = d.pop("metric_name", UNSET)
 
-        dimensions = []
         _dimensions = d.pop("dimensions", UNSET)
-        for dimensions_item_data in _dimensions or []:
-            dimensions_item = CloudwatchDimension.from_dict(dimensions_item_data)
+        dimensions: list[CloudwatchDimension] | Unset = UNSET
+        if _dimensions is not UNSET:
+            dimensions = []
+            for dimensions_item_data in _dimensions:
+                dimensions_item = CloudwatchDimension.from_dict(dimensions_item_data)
 
-            dimensions.append(dimensions_item)
+                dimensions.append(dimensions_item)
 
         label_dimension = d.pop("label_dimension", UNSET)
 

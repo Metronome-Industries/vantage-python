@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,25 +16,24 @@ class UserCostsUpload:
     """UserCostsUpload model
 
     Attributes:
-        token (Union[Unset, str]): The token of the UserCostsUpload. Example: usr_csts_upld_1234.
-        filename (Union[Unset, str]): The filename of the uploaded costs UserCostsUpload. Example:
-            usr_csts_upld_1234.parquet.
-        amount (Union[Unset, str]): The total amount of the costs in the UserCostsUpload. Example: 1234.56.
-        start_date (Union[Unset, str]): The start date of the costs in the UserCostsUpload. Example: 2021-01-01.
-        end_date (Union[Unset, str]): The end date of the costs in the UserCostsUpload. Example: 2021-01-31.
-        import_status (Union[Unset, str]): Import status of the UserCostsUpload. Example: processing.
-        created_by_token (Union[Unset, str]): The token of the Creator of the UserCostsUpload. Example: usr_1234.
-        created_at (Union[Unset, str]): When the UserCostsUpload was uploaded. Example: 2021-01-01T00:00:00Z.
+        token (str | Unset): The token of the UserCostsUpload. Example: usr_csts_upld_1234.
+        filename (str | Unset): The filename of the uploaded costs UserCostsUpload. Example: usr_csts_upld_1234.parquet.
+        amount (str | Unset): The total amount of the costs in the UserCostsUpload. Example: 1234.56.
+        start_date (str | Unset): The start date of the costs in the UserCostsUpload. Example: 2021-01-01.
+        end_date (str | Unset): The end date of the costs in the UserCostsUpload. Example: 2021-01-31.
+        import_status (str | Unset): Import status of the UserCostsUpload. Example: processing.
+        created_by_token (str | Unset): The token of the Creator of the UserCostsUpload. Example: usr_1234.
+        created_at (str | Unset): When the UserCostsUpload was uploaded. Example: 2021-01-01T00:00:00Z.
     """
 
-    token: Union[Unset, str] = UNSET
-    filename: Union[Unset, str] = UNSET
-    amount: Union[Unset, str] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    import_status: Union[Unset, str] = UNSET
-    created_by_token: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    filename: str | Unset = UNSET
+    amount: str | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    import_status: str | Unset = UNSET
+    created_by_token: str | Unset = UNSET
+    created_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

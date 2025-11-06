@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,13 +16,13 @@ class UpdateSavedFilter:
     """Update a SavedFilter for CostReports.
 
     Attributes:
-        title (Union[Unset, str]): The title of the SavedFilter.
-        filter_ (Union[Unset, str]): The filter query language to apply to the SavedFilter, which subsequently gets
-            applied to a CostReport. Additional documentation available at https://docs.vantage.sh/vql.
+        title (str | Unset): The title of the SavedFilter.
+        filter_ (str | Unset): The filter query language to apply to the SavedFilter, which subsequently gets applied to
+            a CostReport. Additional documentation available at https://docs.vantage.sh/vql.
     """
 
-    title: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
+    title: str | Unset = UNSET
+    filter_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

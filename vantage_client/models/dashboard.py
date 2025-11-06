@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,36 +22,36 @@ class Dashboard:
     """Dashboard model
 
     Attributes:
-        token (Union[Unset, str]):  Example: dshbrd_abcd1234567890.
-        title (Union[Unset, str]): The title of the Dashboard. Example: AWS Dashboard.
-        widgets (Union[Unset, list['DashboardWidget']]):
-        saved_filter_tokens (Union[Unset, list[str]]): The tokens of the Saved Filters used in the Dashboard.
-        date_bin (Union[Unset, DashboardDateBin]): Determines how to group costs in the Dashboard.
-        date_interval (Union[Unset, DashboardDateInterval]): Determines the date range for Reports in the Dashboard.
+        token (str | Unset):  Example: dshbrd_abcd1234567890.
+        title (str | Unset): The title of the Dashboard. Example: AWS Dashboard.
+        widgets (list[DashboardWidget] | Unset):
+        saved_filter_tokens (list[str] | Unset): The tokens of the Saved Filters used in the Dashboard.
+        date_bin (DashboardDateBin | Unset): Determines how to group costs in the Dashboard.
+        date_interval (DashboardDateInterval | Unset): Determines the date range for Reports in the Dashboard.
             Guaranteed to be set to 'custom' if 'start_date' and 'end_date' are set.
-        start_date (Union[Unset, str]): The start date for the date range for Reports in the Dashboard. ISO 8601
-            Formatted. Overwrites 'date_interval' if set. Example: 2023-08-04.
-        end_date (Union[Unset, str]): The end date for the date range for Reports in the Dashboard. ISO 8601 Formatted.
+        start_date (str | Unset): The start date for the date range for Reports in the Dashboard. ISO 8601 Formatted.
+            Overwrites 'date_interval' if set. Example: 2023-08-04.
+        end_date (str | Unset): The end date for the date range for Reports in the Dashboard. ISO 8601 Formatted.
             Overwrites 'date_interval' if set. Example: 2023-09-04.
-        created_at (Union[Unset, str]): The date and time, in UTC, the Dashboard was created. ISO 8601 Formatted.
-            Example: 2023-08-04T00:00:00Z.
-        updated_at (Union[Unset, str]): The date and time, in UTC, the Dashboard was created. ISO 8601 Formatted.
-            Example: 2023-08-04T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the Dashboard is a part of. Example:
+        created_at (str | Unset): The date and time, in UTC, the Dashboard was created. ISO 8601 Formatted. Example:
+            2023-08-04T00:00:00Z.
+        updated_at (str | Unset): The date and time, in UTC, the Dashboard was created. ISO 8601 Formatted. Example:
+            2023-08-04T00:00:00Z.
+        workspace_token (str | Unset): The token for the Workspace the Dashboard is a part of. Example:
             wrkspc_abcd1234567890.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    widgets: Union[Unset, list["DashboardWidget"]] = UNSET
-    saved_filter_tokens: Union[Unset, list[str]] = UNSET
-    date_bin: Union[Unset, DashboardDateBin] = UNSET
-    date_interval: Union[Unset, DashboardDateInterval] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    updated_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    widgets: list[DashboardWidget] | Unset = UNSET
+    saved_filter_tokens: list[str] | Unset = UNSET
+    date_bin: DashboardDateBin | Unset = UNSET
+    date_interval: DashboardDateInterval | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    updated_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -57,22 +59,22 @@ class Dashboard:
 
         title = self.title
 
-        widgets: Union[Unset, list[dict[str, Any]]] = UNSET
+        widgets: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.widgets, Unset):
             widgets = []
             for widgets_item_data in self.widgets:
                 widgets_item = widgets_item_data.to_dict()
                 widgets.append(widgets_item)
 
-        saved_filter_tokens: Union[Unset, list[str]] = UNSET
+        saved_filter_tokens: list[str] | Unset = UNSET
         if not isinstance(self.saved_filter_tokens, Unset):
             saved_filter_tokens = self.saved_filter_tokens
 
-        date_bin: Union[Unset, str] = UNSET
+        date_bin: str | Unset = UNSET
         if not isinstance(self.date_bin, Unset):
             date_bin = self.date_bin.value
 
-        date_interval: Union[Unset, str] = UNSET
+        date_interval: str | Unset = UNSET
         if not isinstance(self.date_interval, Unset):
             date_interval = self.date_interval.value
 
@@ -123,24 +125,26 @@ class Dashboard:
 
         title = d.pop("title", UNSET)
 
-        widgets = []
         _widgets = d.pop("widgets", UNSET)
-        for widgets_item_data in _widgets or []:
-            widgets_item = DashboardWidget.from_dict(widgets_item_data)
+        widgets: list[DashboardWidget] | Unset = UNSET
+        if _widgets is not UNSET:
+            widgets = []
+            for widgets_item_data in _widgets:
+                widgets_item = DashboardWidget.from_dict(widgets_item_data)
 
-            widgets.append(widgets_item)
+                widgets.append(widgets_item)
 
         saved_filter_tokens = cast(list[str], d.pop("saved_filter_tokens", UNSET))
 
         _date_bin = d.pop("date_bin", UNSET)
-        date_bin: Union[Unset, DashboardDateBin]
+        date_bin: DashboardDateBin | Unset
         if isinstance(_date_bin, Unset):
             date_bin = UNSET
         else:
             date_bin = DashboardDateBin(_date_bin)
 
         _date_interval = d.pop("date_interval", UNSET)
-        date_interval: Union[Unset, DashboardDateInterval]
+        date_interval: DashboardDateInterval | Unset
         if isinstance(_date_interval, Unset):
             date_interval = UNSET
         else:

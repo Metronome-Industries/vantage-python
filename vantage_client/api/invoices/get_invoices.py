@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -11,9 +11,9 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    managed_account_token: Union[Unset, str] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    managed_account_token: str | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -34,18 +34,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Invoices]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Invoices | None:
     if response.status_code == 200:
         response_200 = Invoices.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Invoices]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Invoices]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,19 +58,18 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    managed_account_token: Union[Unset, str] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    managed_account_token: str | Unset = UNSET,
 ) -> Response[Invoices]:
-    """Return all Invoices for the current account.
+    """Get all invoices
 
-     MSP accounts see all invoices for their managed accounts. Child accounts see only their own
-    invoices.
+     Returns a list of invoices (MSP invoicing required).
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        managed_account_token (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        managed_account_token (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -95,19 +95,18 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    managed_account_token: Union[Unset, str] = UNSET,
-) -> Optional[Invoices]:
-    """Return all Invoices for the current account.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    managed_account_token: str | Unset = UNSET,
+) -> Invoices | None:
+    """Get all invoices
 
-     MSP accounts see all invoices for their managed accounts. Child accounts see only their own
-    invoices.
+     Returns a list of invoices (MSP invoicing required).
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        managed_account_token (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        managed_account_token (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -128,19 +127,18 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    managed_account_token: Union[Unset, str] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    managed_account_token: str | Unset = UNSET,
 ) -> Response[Invoices]:
-    """Return all Invoices for the current account.
+    """Get all invoices
 
-     MSP accounts see all invoices for their managed accounts. Child accounts see only their own
-    invoices.
+     Returns a list of invoices (MSP invoicing required).
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        managed_account_token (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        managed_account_token (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -164,19 +162,18 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    managed_account_token: Union[Unset, str] = UNSET,
-) -> Optional[Invoices]:
-    """Return all Invoices for the current account.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    managed_account_token: str | Unset = UNSET,
+) -> Invoices | None:
+    """Get all invoices
 
-     MSP accounts see all invoices for their managed accounts. Child accounts see only their own
-    invoices.
+     Returns a list of invoices (MSP invoicing required).
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        managed_account_token (Union[Unset, str]):
+        page (int | Unset):
+        limit (int | Unset):
+        managed_account_token (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

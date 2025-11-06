@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -30,26 +30,24 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[CostAlert, Errors]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CostAlert | Errors | None:
     if response.status_code == 201:
         response_201 = CostAlert.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[CostAlert, Errors]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CostAlert | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -62,8 +60,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateCostAlert,
-) -> Response[Union[CostAlert, Errors]]:
-    """Create a new Cost Alert
+) -> Response[CostAlert | Errors]:
+    """Create cost alert
+
+     Create a new Cost Alert
 
     Args:
         body (CreateCostAlert): Create a new Cost Alert
@@ -73,7 +73,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CostAlert, Errors]]
+        Response[CostAlert | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -91,8 +91,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: CreateCostAlert,
-) -> Optional[Union[CostAlert, Errors]]:
-    """Create a new Cost Alert
+) -> CostAlert | Errors | None:
+    """Create cost alert
+
+     Create a new Cost Alert
 
     Args:
         body (CreateCostAlert): Create a new Cost Alert
@@ -102,7 +104,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[CostAlert, Errors]
+        CostAlert | Errors
     """
 
     return sync_detailed(
@@ -115,8 +117,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateCostAlert,
-) -> Response[Union[CostAlert, Errors]]:
-    """Create a new Cost Alert
+) -> Response[CostAlert | Errors]:
+    """Create cost alert
+
+     Create a new Cost Alert
 
     Args:
         body (CreateCostAlert): Create a new Cost Alert
@@ -126,7 +130,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[CostAlert, Errors]]
+        Response[CostAlert | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -142,8 +146,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateCostAlert,
-) -> Optional[Union[CostAlert, Errors]]:
-    """Create a new Cost Alert
+) -> CostAlert | Errors | None:
+    """Create cost alert
+
+     Create a new Cost Alert
 
     Args:
         body (CreateCostAlert): Create a new Cost Alert
@@ -153,7 +159,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[CostAlert, Errors]
+        CostAlert | Errors
     """
 
     return (

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,34 +15,34 @@ T = TypeVar("T", bound="UpdateBudgetAlertBody")
 class UpdateBudgetAlertBody:
     """
     Attributes:
-        budget_tokens (Union[Unset, list[str]]): The tokens of the Budget that has the alert.
-        threshold (Union[Unset, int]): The threshold amount that must be met for the alert to fire.
-        user_tokens (Union[Unset, list[str]]): The tokens of the users that receive the alert.
-        duration_in_days (Union[Unset, int]): The number of days from the start or end of the month to trigger the alert
-            if the threshold is reached. For the full month, pass an empty value.
-        period_to_track (Union[Unset, str]): The period tracked on the alert. Used with duration_in_days to determine
-            the time window of the alert. Defaults to start_of_the_month if not passed. Possible values: start_of_the_month,
+        budget_tokens (list[str] | Unset): The tokens of the Budget that has the alert.
+        threshold (int | Unset): The threshold amount that must be met for the alert to fire.
+        user_tokens (list[str] | Unset): The tokens of the users that receive the alert.
+        duration_in_days (str | Unset): The number of days from the start or end of the month to trigger the alert if
+            the threshold is reached. For the full month, pass an empty value.
+        period_to_track (str | Unset): The period tracked on the alert. Used with duration_in_days to determine the time
+            window of the alert. Defaults to start_of_the_month if not passed. Possible values: start_of_the_month,
             end_of_the_month.
-        recipient_channels (Union[Unset, list[str]]): The channels receiving the alerts. Requires an integration
-            provider to be connected.
+        recipient_channels (list[str] | Unset): The channels receiving the alerts. Requires an integration provider to
+            be connected.
     """
 
-    budget_tokens: Union[Unset, list[str]] = UNSET
-    threshold: Union[Unset, int] = UNSET
-    user_tokens: Union[Unset, list[str]] = UNSET
-    duration_in_days: Union[Unset, int] = UNSET
-    period_to_track: Union[Unset, str] = UNSET
-    recipient_channels: Union[Unset, list[str]] = UNSET
+    budget_tokens: list[str] | Unset = UNSET
+    threshold: int | Unset = UNSET
+    user_tokens: list[str] | Unset = UNSET
+    duration_in_days: str | Unset = UNSET
+    period_to_track: str | Unset = UNSET
+    recipient_channels: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        budget_tokens: Union[Unset, list[str]] = UNSET
+        budget_tokens: list[str] | Unset = UNSET
         if not isinstance(self.budget_tokens, Unset):
             budget_tokens = self.budget_tokens
 
         threshold = self.threshold
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 
@@ -48,7 +50,7 @@ class UpdateBudgetAlertBody:
 
         period_to_track = self.period_to_track
 
-        recipient_channels: Union[Unset, list[str]] = UNSET
+        recipient_channels: list[str] | Unset = UNSET
         if not isinstance(self.recipient_channels, Unset):
             recipient_channels = self.recipient_channels
 

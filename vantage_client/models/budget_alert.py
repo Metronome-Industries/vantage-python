@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,44 +16,43 @@ class BudgetAlert:
     """BudgetAlert model
 
     Attributes:
-        token (Union[Unset, str]):
-        budget_tokens (Union[Unset, list[str]]): The tokens for the Budgets that the Budget Alert is monitoring to
-            trigger alerts on.
-        created_at (Union[Unset, str]): The date and time, in UTC, the Budget Alert was created. ISO 8601 Formatted.
-            Example: 2024-03-19T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the ResourceReport is a part of.
-        user_token (Union[Unset, str]): The token for the User who created this BudgetAlert.
-        user_tokens (Union[Unset, list[str]]): The Users that receive the alert.
-        duration_in_days (Union[Unset, str]): The number of days from the start or end of the month to trigger the alert
-            if the threshold is reached.
-        threshold (Union[Unset, str]): Alerts only send if they reach this number (as a percentage). When threshold is
-            100, that means alerts are triggered once costs reach 100% of the budget. Example: 75.
-        period_to_track (Union[Unset, str]): The period tracked on the alert. Used with duration_in_days to determine
-            the time window of the alert. Possible values: start_of_the_month, end_of_the_month. Example:
-            start_of_the_month.
-        integration_provider (Union[Unset, str]): The provider used for sending alerts. This must be configured in the
+        token (str | Unset):
+        budget_tokens (list[str] | Unset): The tokens for the Budgets that the Budget Alert is monitoring to trigger
+            alerts on.
+        created_at (str | Unset): The date and time, in UTC, the Budget Alert was created. ISO 8601 Formatted. Example:
+            2024-03-19T00:00:00Z.
+        workspace_token (str | Unset): The token for the Workspace the ResourceReport is a part of.
+        user_token (str | Unset): The token for the User who created this BudgetAlert.
+        user_tokens (list[str] | Unset): The Users that receive the alert.
+        duration_in_days (str | Unset): The number of days from the start or end of the month to trigger the alert if
+            the threshold is reached.
+        threshold (str | Unset): Alerts only send if they reach this number (as a percentage). When threshold is 100,
+            that means alerts are triggered once costs reach 100% of the budget. Example: 75.
+        period_to_track (str | Unset): The period tracked on the alert. Used with duration_in_days to determine the time
+            window of the alert. Possible values: start_of_the_month, end_of_the_month. Example: start_of_the_month.
+        integration_provider (str | Unset): The provider used for sending alerts. This must be configured in the
             console. Possible values are: slack, microsoft_graph. Example: slack.
-        recipient_channels (Union[Unset, str]): The channels receiving the alerts. Requires an integration provider to
-            be connected.
+        recipient_channels (str | Unset): The channels receiving the alerts. Requires an integration provider to be
+            connected.
     """
 
-    token: Union[Unset, str] = UNSET
-    budget_tokens: Union[Unset, list[str]] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    user_token: Union[Unset, str] = UNSET
-    user_tokens: Union[Unset, list[str]] = UNSET
-    duration_in_days: Union[Unset, str] = UNSET
-    threshold: Union[Unset, str] = UNSET
-    period_to_track: Union[Unset, str] = UNSET
-    integration_provider: Union[Unset, str] = UNSET
-    recipient_channels: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    budget_tokens: list[str] | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    user_token: str | Unset = UNSET
+    user_tokens: list[str] | Unset = UNSET
+    duration_in_days: str | Unset = UNSET
+    threshold: str | Unset = UNSET
+    period_to_track: str | Unset = UNSET
+    integration_provider: str | Unset = UNSET
+    recipient_channels: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         token = self.token
 
-        budget_tokens: Union[Unset, list[str]] = UNSET
+        budget_tokens: list[str] | Unset = UNSET
         if not isinstance(self.budget_tokens, Unset):
             budget_tokens = self.budget_tokens
 
@@ -61,7 +62,7 @@ class BudgetAlert:
 
         user_token = self.user_token
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 

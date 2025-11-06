@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,43 +16,42 @@ class FinancialCommitmentReport:
     """FinancialCommitmentReport model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the FinancialCommitmentReport. Example: Acme123 Financial Commitment
-            Report.
-        default (Union[Unset, bool]): Indicates whether the FinancialCommitmentReport is the default report.
-        created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
+        token (str | Unset):
+        title (str | Unset): The title of the FinancialCommitmentReport. Example: Acme123 Financial Commitment Report.
+        default (bool | Unset): Indicates whether the FinancialCommitmentReport is the default report.
+        created_at (str | Unset): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
             2024-03-19T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the FinancialCommitmentReport is a part of.
-        user_token (Union[Unset, str]): The token for the User who created this FinancialCommitmentReport.
-        start_date (Union[Unset, str]): The start date for the FinancialCommitmentReport. Only set for custom date
-            ranges. ISO 8601 Formatted. Example: 2024-03-01.
-        end_date (Union[Unset, str]): The end date for the FinancialCommitmentReport. Only set for custom date ranges.
-            ISO 8601 Formatted. Example: 2024-03-20.
-        date_interval (Union[Unset, str]): The date range for the FinancialCommitmentReport. Only present if a custom
-            date range is not specified. Example: last_month.
-        date_bucket (Union[Unset, str]): How costs are grouped and displayed in the FinancialCommitmentReport. Possible
+        workspace_token (str | Unset): The token for the Workspace the FinancialCommitmentReport is a part of.
+        user_token (str | Unset): The token for the User who created this FinancialCommitmentReport.
+        start_date (str | Unset): The start date for the FinancialCommitmentReport. Only set for custom date ranges. ISO
+            8601 Formatted. Example: 2024-03-01.
+        end_date (str | Unset): The end date for the FinancialCommitmentReport. Only set for custom date ranges. ISO
+            8601 Formatted. Example: 2024-03-20.
+        date_interval (str | Unset): The date range for the FinancialCommitmentReport. Only present if a custom date
+            range is not specified. Example: last_month.
+        date_bucket (str | Unset): How costs are grouped and displayed in the FinancialCommitmentReport. Possible
             values: day, week, month. Example: month.
-        groupings (Union[Unset, str]): The grouping aggregations applied to the filtered data. Example: cost_type,
+        groupings (str | Unset): The grouping aggregations applied to the filtered data. Example: cost_type,
             tag:account.
-        on_demand_costs_scope (Union[Unset, str]): The scope for the costs. Possible values: discountable, all. Example:
+        on_demand_costs_scope (str | Unset): The scope for the costs. Possible values: discountable, all. Example:
             discountable.
-        filter_ (Union[Unset, str]): The filter applied to the FinancialCommitmentReport. Additional documentation
-            available at https://docs.vantage.sh/vql.
+        filter_ (str | Unset): The filter applied to the FinancialCommitmentReport. Additional documentation available
+            at https://docs.vantage.sh/vql.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    default: Union[Unset, bool] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    user_token: Union[Unset, str] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    date_interval: Union[Unset, str] = UNSET
-    date_bucket: Union[Unset, str] = UNSET
-    groupings: Union[Unset, str] = UNSET
-    on_demand_costs_scope: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    default: bool | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    user_token: str | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    date_interval: str | Unset = UNSET
+    date_bucket: str | Unset = UNSET
+    groupings: str | Unset = UNSET
+    on_demand_costs_scope: str | Unset = UNSET
+    filter_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

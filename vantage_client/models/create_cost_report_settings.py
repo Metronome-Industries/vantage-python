@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,25 +16,24 @@ class CreateCostReportSettings:
     """Report settings.
 
     Attributes:
-        include_credits (Union[Unset, bool]): Report will include credits. Default: False.
-        include_refunds (Union[Unset, bool]): Report will include refunds. Default: False.
-        include_discounts (Union[Unset, bool]): Report will include discounts. Default: True.
-        include_tax (Union[Unset, bool]): Report will include tax. Default: True.
-        amortize (Union[Unset, bool]): Report will amortize. Default: True.
-        unallocated (Union[Unset, bool]): Report will show unallocated costs. Default: False.
-        aggregate_by (Union[Unset, str]): Report will aggregate by cost or usage. Default: 'cost'.
-        show_previous_period (Union[Unset, bool]): Report will show previous period costs or usage comparison. Default:
-            True.
+        include_credits (bool | Unset): Report will include credits. Default: False.
+        include_refunds (bool | Unset): Report will include refunds. Default: False.
+        include_discounts (bool | Unset): Report will include discounts. Default: True.
+        include_tax (bool | Unset): Report will include tax. Default: True.
+        amortize (bool | Unset): Report will amortize. Default: True.
+        unallocated (bool | Unset): Report will show unallocated costs. Default: False.
+        aggregate_by (str | Unset): Report will aggregate by cost or usage. Default: 'cost'.
+        show_previous_period (bool | Unset): Report will show previous period costs or usage comparison. Default: True.
     """
 
-    include_credits: Union[Unset, bool] = False
-    include_refunds: Union[Unset, bool] = False
-    include_discounts: Union[Unset, bool] = True
-    include_tax: Union[Unset, bool] = True
-    amortize: Union[Unset, bool] = True
-    unallocated: Union[Unset, bool] = False
-    aggregate_by: Union[Unset, str] = "cost"
-    show_previous_period: Union[Unset, bool] = True
+    include_credits: bool | Unset = False
+    include_refunds: bool | Unset = False
+    include_discounts: bool | Unset = True
+    include_tax: bool | Unset = True
+    amortize: bool | Unset = True
+    unallocated: bool | Unset = False
+    aggregate_by: str | Unset = "cost"
+    show_previous_period: bool | Unset = True
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

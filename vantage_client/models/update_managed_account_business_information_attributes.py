@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,15 +22,15 @@ class UpdateManagedAccountBusinessInformationAttributes:
     """Business information and custom fields (MSP invoicing accounts only)
 
     Attributes:
-        id (Union[Unset, int]):
-        token (Union[Unset, str]):
-        metadata (Union[Unset, UpdateManagedAccountBusinessInformationAttributesMetadata]): Business metadata including
-            custom fields
+        id (int | Unset):
+        token (str | Unset):
+        metadata (UpdateManagedAccountBusinessInformationAttributesMetadata | Unset): Business metadata including custom
+            fields
     """
 
-    id: Union[Unset, int] = UNSET
-    token: Union[Unset, str] = UNSET
-    metadata: Union[Unset, "UpdateManagedAccountBusinessInformationAttributesMetadata"] = UNSET
+    id: int | Unset = UNSET
+    token: str | Unset = UNSET
+    metadata: UpdateManagedAccountBusinessInformationAttributesMetadata | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -36,7 +38,7 @@ class UpdateManagedAccountBusinessInformationAttributes:
 
         token = self.token
 
-        metadata: Union[Unset, dict[str, Any]] = UNSET
+        metadata: dict[str, Any] | Unset = UNSET
         if not isinstance(self.metadata, Unset):
             metadata = self.metadata.to_dict()
 
@@ -64,7 +66,7 @@ class UpdateManagedAccountBusinessInformationAttributes:
         token = d.pop("token", UNSET)
 
         _metadata = d.pop("metadata", UNSET)
-        metadata: Union[Unset, UpdateManagedAccountBusinessInformationAttributesMetadata]
+        metadata: UpdateManagedAccountBusinessInformationAttributesMetadata | Unset
         if isinstance(_metadata, Unset):
             metadata = UNSET
         else:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,24 +20,24 @@ class Price:
     """Price model
 
     Attributes:
-        id (Union[Unset, str]):
-        unit (Union[Unset, str]): The unit in which the amount is billed. Example: hour.
-        region (Union[Unset, str]): The region the price is specific to. Example: us-east-1.
-        rate_type (Union[Unset, str]): The part of the product the price applies to. (compute, transfer, etc..) Example:
+        id (str | Unset):
+        unit (str | Unset): The unit in which the amount is billed. Example: hour.
+        region (str | Unset): The region the price is specific to. Example: us-east-1.
+        rate_type (str | Unset): The part of the product the price applies to. (compute, transfer, etc..) Example:
             compute.
-        currency (Union[Unset, str]): The currency of the amount. Example: USD.
-        amount (Union[Unset, float]): The amount of money this specific product price costs. Example: 1.324.
-        details (Union[Unset, PriceDetails]): Service specific metadata. Example: {'platform': 'linux-enterprise',
+        currency (str | Unset): The currency of the amount. Example: USD.
+        amount (float | Unset): The amount of money this specific product price costs. Example: 1.324.
+        details (PriceDetails | Unset): Service specific metadata. Example: {'platform': 'linux-enterprise',
             'lifecycle': 'on-demand'}.
     """
 
-    id: Union[Unset, str] = UNSET
-    unit: Union[Unset, str] = UNSET
-    region: Union[Unset, str] = UNSET
-    rate_type: Union[Unset, str] = UNSET
-    currency: Union[Unset, str] = UNSET
-    amount: Union[Unset, float] = UNSET
-    details: Union[Unset, "PriceDetails"] = UNSET
+    id: str | Unset = UNSET
+    unit: str | Unset = UNSET
+    region: str | Unset = UNSET
+    rate_type: str | Unset = UNSET
+    currency: str | Unset = UNSET
+    amount: float | Unset = UNSET
+    details: PriceDetails | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -51,7 +53,7 @@ class Price:
 
         amount = self.amount
 
-        details: Union[Unset, dict[str, Any]] = UNSET
+        details: dict[str, Any] | Unset = UNSET
         if not isinstance(self.details, Unset):
             details = self.details.to_dict()
 
@@ -93,7 +95,7 @@ class Price:
         amount = d.pop("amount", UNSET)
 
         _details = d.pop("details", UNSET)
-        details: Union[Unset, PriceDetails]
+        details: PriceDetails | Unset
         if isinstance(_details, Unset):
             details = UNSET
         else:

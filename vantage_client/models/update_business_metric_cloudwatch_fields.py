@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,23 +22,22 @@ class UpdateBusinessMetricCloudwatchFields:
     """Cloudwatch configuration fields.
 
     Attributes:
-        integration_token (Union[Unset, str]): Integration token for the account from which you would like to fetch
-            metrics.
-        stat (Union[Unset, str]):
-        region (Union[Unset, str]):
-        namespace (Union[Unset, str]):
-        metric_name (Union[Unset, str]):
-        label_dimension (Union[Unset, str]):
-        dimensions (Union[Unset, list['UpdateBusinessMetricCloudwatchFieldsDimensionsItem']]):
+        integration_token (str | Unset): Integration token for the account from which you would like to fetch metrics.
+        stat (str | Unset):
+        region (str | Unset):
+        namespace (str | Unset):
+        metric_name (str | Unset):
+        label_dimension (str | Unset):
+        dimensions (list[UpdateBusinessMetricCloudwatchFieldsDimensionsItem] | Unset):
     """
 
-    integration_token: Union[Unset, str] = UNSET
-    stat: Union[Unset, str] = UNSET
-    region: Union[Unset, str] = UNSET
-    namespace: Union[Unset, str] = UNSET
-    metric_name: Union[Unset, str] = UNSET
-    label_dimension: Union[Unset, str] = UNSET
-    dimensions: Union[Unset, list["UpdateBusinessMetricCloudwatchFieldsDimensionsItem"]] = UNSET
+    integration_token: str | Unset = UNSET
+    stat: str | Unset = UNSET
+    region: str | Unset = UNSET
+    namespace: str | Unset = UNSET
+    metric_name: str | Unset = UNSET
+    label_dimension: str | Unset = UNSET
+    dimensions: list[UpdateBusinessMetricCloudwatchFieldsDimensionsItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,7 +53,7 @@ class UpdateBusinessMetricCloudwatchFields:
 
         label_dimension = self.label_dimension
 
-        dimensions: Union[Unset, list[dict[str, Any]]] = UNSET
+        dimensions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.dimensions, Unset):
             dimensions = []
             for dimensions_item_data in self.dimensions:
@@ -98,12 +99,14 @@ class UpdateBusinessMetricCloudwatchFields:
 
         label_dimension = d.pop("label_dimension", UNSET)
 
-        dimensions = []
         _dimensions = d.pop("dimensions", UNSET)
-        for dimensions_item_data in _dimensions or []:
-            dimensions_item = UpdateBusinessMetricCloudwatchFieldsDimensionsItem.from_dict(dimensions_item_data)
+        dimensions: list[UpdateBusinessMetricCloudwatchFieldsDimensionsItem] | Unset = UNSET
+        if _dimensions is not UNSET:
+            dimensions = []
+            for dimensions_item_data in _dimensions:
+                dimensions_item = UpdateBusinessMetricCloudwatchFieldsDimensionsItem.from_dict(dimensions_item_data)
 
-            dimensions.append(dimensions_item)
+                dimensions.append(dimensions_item)
 
         update_business_metric_cloudwatch_fields = cls(
             integration_token=integration_token,

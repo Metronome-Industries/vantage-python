@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,15 +18,15 @@ class CreateManagedAccount:
     Attributes:
         name (str): The name of the Managed Account.
         contact_email (str): The contact email address for the Managed Account.
-        access_credential_tokens (Union[Unset, list[str]]): Access Credential (aka Integrations) tokens to assign to the
+        access_credential_tokens (list[str] | Unset): Access Credential (aka Integrations) tokens to assign to the
             Managed Account.
-        billing_rule_tokens (Union[Unset, list[str]]): Billing Rule tokens to assign to the Managed Account.
+        billing_rule_tokens (list[str] | Unset): Billing Rule tokens to assign to the Managed Account.
     """
 
     name: str
     contact_email: str
-    access_credential_tokens: Union[Unset, list[str]] = UNSET
-    billing_rule_tokens: Union[Unset, list[str]] = UNSET
+    access_credential_tokens: list[str] | Unset = UNSET
+    billing_rule_tokens: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -32,11 +34,11 @@ class CreateManagedAccount:
 
         contact_email = self.contact_email
 
-        access_credential_tokens: Union[Unset, list[str]] = UNSET
+        access_credential_tokens: list[str] | Unset = UNSET
         if not isinstance(self.access_credential_tokens, Unset):
             access_credential_tokens = self.access_credential_tokens
 
-        billing_rule_tokens: Union[Unset, list[str]] = UNSET
+        billing_rule_tokens: list[str] | Unset = UNSET
         if not isinstance(self.billing_rule_tokens, Unset):
             billing_rule_tokens = self.billing_rule_tokens
 

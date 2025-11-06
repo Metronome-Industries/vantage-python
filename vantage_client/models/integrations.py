@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Integrations:
     """Integrations model
 
     Attributes:
-        links (Union[Unset, IntegrationsLinks]):
-        integrations (Union[Unset, list['Integration']]):
+        links (IntegrationsLinks | Unset):
+        integrations (list[Integration] | Unset):
     """
 
-    links: Union[Unset, "IntegrationsLinks"] = UNSET
-    integrations: Union[Unset, list["Integration"]] = UNSET
+    links: IntegrationsLinks | Unset = UNSET
+    integrations: list[Integration] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        integrations: Union[Unset, list[dict[str, Any]]] = UNSET
+        integrations: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.integrations, Unset):
             integrations = []
             for integrations_item_data in self.integrations:
@@ -56,18 +58,20 @@ class Integrations:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, IntegrationsLinks]
+        links: IntegrationsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = IntegrationsLinks.from_dict(_links)
 
-        integrations = []
         _integrations = d.pop("integrations", UNSET)
-        for integrations_item_data in _integrations or []:
-            integrations_item = Integration.from_dict(integrations_item_data)
+        integrations: list[Integration] | Unset = UNSET
+        if _integrations is not UNSET:
+            integrations = []
+            for integrations_item_data in _integrations:
+                integrations_item = Integration.from_dict(integrations_item_data)
 
-            integrations.append(integrations_item)
+                integrations.append(integrations_item)
 
         integrations = cls(
             links=links,

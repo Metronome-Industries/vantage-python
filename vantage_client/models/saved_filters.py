@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class SavedFilters:
     """SavedFilters model
 
     Attributes:
-        links (Union[Unset, SavedFiltersLinks]):
-        saved_filters (Union[Unset, list['SavedFilter']]):
+        links (SavedFiltersLinks | Unset):
+        saved_filters (list[SavedFilter] | Unset):
     """
 
-    links: Union[Unset, "SavedFiltersLinks"] = UNSET
-    saved_filters: Union[Unset, list["SavedFilter"]] = UNSET
+    links: SavedFiltersLinks | Unset = UNSET
+    saved_filters: list[SavedFilter] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        saved_filters: Union[Unset, list[dict[str, Any]]] = UNSET
+        saved_filters: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.saved_filters, Unset):
             saved_filters = []
             for saved_filters_item_data in self.saved_filters:
@@ -56,18 +58,20 @@ class SavedFilters:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, SavedFiltersLinks]
+        links: SavedFiltersLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = SavedFiltersLinks.from_dict(_links)
 
-        saved_filters = []
         _saved_filters = d.pop("saved_filters", UNSET)
-        for saved_filters_item_data in _saved_filters or []:
-            saved_filters_item = SavedFilter.from_dict(saved_filters_item_data)
+        saved_filters: list[SavedFilter] | Unset = UNSET
+        if _saved_filters is not UNSET:
+            saved_filters = []
+            for saved_filters_item_data in _saved_filters:
+                saved_filters_item = SavedFilter.from_dict(saved_filters_item_data)
 
-            saved_filters.append(saved_filters_item)
+                saved_filters.append(saved_filters_item)
 
         saved_filters = cls(
             links=links,

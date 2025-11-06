@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,25 +20,25 @@ T = TypeVar("T", bound="ForecastedCost")
 class ForecastedCost:
     """
     Attributes:
-        links (Union[Unset, ForecastedCostLinks]):
-        date (Union[Unset, str]): The date the forecasted cost is projected to accrue. ISO 8601 Formatted. Example:
+        links (ForecastedCostLinks | Unset):
+        date (str | Unset): The date the forecasted cost is projected to accrue. ISO 8601 Formatted. Example:
             2035-09-05+00:00.
-        amount (Union[Unset, str]): The amount of the forecasted cost. Example: 4.25.
-        provider (Union[Unset, ForecastedCostProvider]): The cost provider which incurred the cost. Will be 'all' for
-            all combined providers. Example: aws.
-        service (Union[Unset, str]): The service for the forecasted cost. Will be 'all' for all combined services
-            Example: Amazon Elastic Compute Cloud - Compute.
+        amount (str | Unset): The amount of the forecasted cost. Example: 4.25.
+        provider (ForecastedCostProvider | Unset): The cost provider which incurred the cost. Will be 'all' for all
+            combined providers. Example: aws.
+        service (str | Unset): The service for the forecasted cost. Will be 'all' for all combined services Example:
+            Amazon Elastic Compute Cloud - Compute.
     """
 
-    links: Union[Unset, "ForecastedCostLinks"] = UNSET
-    date: Union[Unset, str] = UNSET
-    amount: Union[Unset, str] = UNSET
-    provider: Union[Unset, ForecastedCostProvider] = UNSET
-    service: Union[Unset, str] = UNSET
+    links: ForecastedCostLinks | Unset = UNSET
+    date: str | Unset = UNSET
+    amount: str | Unset = UNSET
+    provider: ForecastedCostProvider | Unset = UNSET
+    service: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
@@ -44,7 +46,7 @@ class ForecastedCost:
 
         amount = self.amount
 
-        provider: Union[Unset, str] = UNSET
+        provider: str | Unset = UNSET
         if not isinstance(self.provider, Unset):
             provider = self.provider.value
 
@@ -72,7 +74,7 @@ class ForecastedCost:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ForecastedCostLinks]
+        links: ForecastedCostLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
@@ -83,7 +85,7 @@ class ForecastedCost:
         amount = d.pop("amount", UNSET)
 
         _provider = d.pop("provider", UNSET)
-        provider: Union[Unset, ForecastedCostProvider]
+        provider: ForecastedCostProvider | Unset
         if isinstance(_provider, Unset):
             provider = UNSET
         else:

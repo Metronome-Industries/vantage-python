@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -30,33 +30,37 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[AccessGrant, Errors]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> AccessGrant | Errors | None:
     if response.status_code == 201:
         response_201 = AccessGrant.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
-    if response.status_code == 422:
-        response_422 = Errors.from_dict(response.json())
 
-        return response_422
     if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if response.status_code == 406:
         response_406 = Errors.from_dict(response.json())
 
         return response_406
+
+    if response.status_code == 422:
+        response_422 = Errors.from_dict(response.json())
+
+        return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -64,8 +68,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[AccessGrant, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[AccessGrant | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -78,8 +82,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateAccessGrant,
-) -> Response[Union[AccessGrant, Errors]]:
-    """Create an Access Grant.
+) -> Response[AccessGrant | Errors]:
+    """Create access grant
+
+     Create an Access Grant.
 
     Args:
         body (CreateAccessGrant): Create an Access Grant.
@@ -89,7 +95,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AccessGrant, Errors]]
+        Response[AccessGrant | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -107,8 +113,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: CreateAccessGrant,
-) -> Optional[Union[AccessGrant, Errors]]:
-    """Create an Access Grant.
+) -> AccessGrant | Errors | None:
+    """Create access grant
+
+     Create an Access Grant.
 
     Args:
         body (CreateAccessGrant): Create an Access Grant.
@@ -118,7 +126,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AccessGrant, Errors]
+        AccessGrant | Errors
     """
 
     return sync_detailed(
@@ -131,8 +139,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateAccessGrant,
-) -> Response[Union[AccessGrant, Errors]]:
-    """Create an Access Grant.
+) -> Response[AccessGrant | Errors]:
+    """Create access grant
+
+     Create an Access Grant.
 
     Args:
         body (CreateAccessGrant): Create an Access Grant.
@@ -142,7 +152,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AccessGrant, Errors]]
+        Response[AccessGrant | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -158,8 +168,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateAccessGrant,
-) -> Optional[Union[AccessGrant, Errors]]:
-    """Create an Access Grant.
+) -> AccessGrant | Errors | None:
+    """Create access grant
+
+     Create an Access Grant.
 
     Args:
         body (CreateAccessGrant): Create an Access Grant.
@@ -169,7 +181,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AccessGrant, Errors]
+        AccessGrant | Errors
     """
 
     return (

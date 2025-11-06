@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,14 +20,14 @@ class VirtualTagConfigs:
     """VirtualTagConfigs model
 
     Attributes:
-        virtual_tag_configs (Union[Unset, list['VirtualTagConfig']]):
+        virtual_tag_configs (list[VirtualTagConfig] | Unset):
     """
 
-    virtual_tag_configs: Union[Unset, list["VirtualTagConfig"]] = UNSET
+    virtual_tag_configs: list[VirtualTagConfig] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        virtual_tag_configs: Union[Unset, list[dict[str, Any]]] = UNSET
+        virtual_tag_configs: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.virtual_tag_configs, Unset):
             virtual_tag_configs = []
             for virtual_tag_configs_item_data in self.virtual_tag_configs:
@@ -45,12 +47,14 @@ class VirtualTagConfigs:
         from ..models.virtual_tag_config import VirtualTagConfig
 
         d = dict(src_dict)
-        virtual_tag_configs = []
         _virtual_tag_configs = d.pop("virtual_tag_configs", UNSET)
-        for virtual_tag_configs_item_data in _virtual_tag_configs or []:
-            virtual_tag_configs_item = VirtualTagConfig.from_dict(virtual_tag_configs_item_data)
+        virtual_tag_configs: list[VirtualTagConfig] | Unset = UNSET
+        if _virtual_tag_configs is not UNSET:
+            virtual_tag_configs = []
+            for virtual_tag_configs_item_data in _virtual_tag_configs:
+                virtual_tag_configs_item = VirtualTagConfig.from_dict(virtual_tag_configs_item_data)
 
-            virtual_tag_configs.append(virtual_tag_configs_item)
+                virtual_tag_configs.append(virtual_tag_configs_item)
 
         virtual_tag_configs = cls(
             virtual_tag_configs=virtual_tag_configs,

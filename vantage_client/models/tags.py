@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Tags:
     """Tags model
 
     Attributes:
-        links (Union[Unset, TagsLinks]):
-        tags (Union[Unset, list['Tag']]):
+        links (TagsLinks | Unset):
+        tags (list[Tag] | Unset):
     """
 
-    links: Union[Unset, "TagsLinks"] = UNSET
-    tags: Union[Unset, list["Tag"]] = UNSET
+    links: TagsLinks | Unset = UNSET
+    tags: list[Tag] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        tags: Union[Unset, list[dict[str, Any]]] = UNSET
+        tags: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.tags, Unset):
             tags = []
             for tags_item_data in self.tags:
@@ -56,18 +58,20 @@ class Tags:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, TagsLinks]
+        links: TagsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = TagsLinks.from_dict(_links)
 
-        tags = []
         _tags = d.pop("tags", UNSET)
-        for tags_item_data in _tags or []:
-            tags_item = Tag.from_dict(tags_item_data)
+        tags: list[Tag] | Unset = UNSET
+        if _tags is not UNSET:
+            tags = []
+            for tags_item_data in _tags:
+                tags_item = Tag.from_dict(tags_item_data)
 
-            tags.append(tags_item)
+                tags.append(tags_item)
 
         tags = cls(
             links=links,

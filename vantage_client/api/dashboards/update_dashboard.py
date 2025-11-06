@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -31,30 +31,29 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Dashboard, Errors]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Dashboard | Errors | None:
     if response.status_code == 200:
         response_200 = Dashboard.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Dashboard, Errors]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Dashboard | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -68,8 +67,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateDashboard,
-) -> Response[Union[Dashboard, Errors]]:
-    """Update a Dashboard.
+) -> Response[Dashboard | Errors]:
+    """Update dashboard
+
+     Update a Dashboard.
 
     Args:
         dashboard_token (str):
@@ -80,7 +81,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Dashboard, Errors]]
+        Response[Dashboard | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -100,8 +101,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: UpdateDashboard,
-) -> Optional[Union[Dashboard, Errors]]:
-    """Update a Dashboard.
+) -> Dashboard | Errors | None:
+    """Update dashboard
+
+     Update a Dashboard.
 
     Args:
         dashboard_token (str):
@@ -112,7 +115,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Dashboard, Errors]
+        Dashboard | Errors
     """
 
     return sync_detailed(
@@ -127,8 +130,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateDashboard,
-) -> Response[Union[Dashboard, Errors]]:
-    """Update a Dashboard.
+) -> Response[Dashboard | Errors]:
+    """Update dashboard
+
+     Update a Dashboard.
 
     Args:
         dashboard_token (str):
@@ -139,7 +144,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Dashboard, Errors]]
+        Response[Dashboard | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -157,8 +162,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: UpdateDashboard,
-) -> Optional[Union[Dashboard, Errors]]:
-    """Update a Dashboard.
+) -> Dashboard | Errors | None:
+    """Update dashboard
+
+     Update a Dashboard.
 
     Args:
         dashboard_token (str):
@@ -169,7 +176,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Dashboard, Errors]
+        Dashboard | Errors
     """
 
     return (

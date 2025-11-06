@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,24 +16,24 @@ class UpdateCostReportSettings:
     """Report settings.
 
     Attributes:
-        include_credits (Union[Unset, bool]): Report will include credits.
-        include_refunds (Union[Unset, bool]): Report will include refunds.
-        include_discounts (Union[Unset, bool]): Report will include discounts.
-        include_tax (Union[Unset, bool]): Report will include tax.
-        amortize (Union[Unset, bool]): Report will amortize.
-        unallocated (Union[Unset, bool]): Report will show unallocated costs.
-        aggregate_by (Union[Unset, str]): Report will aggregate by cost or usage.
-        show_previous_period (Union[Unset, bool]): Report will show previous period costs or usage comparison.
+        include_credits (bool | Unset): Report will include credits.
+        include_refunds (bool | Unset): Report will include refunds.
+        include_discounts (bool | Unset): Report will include discounts.
+        include_tax (bool | Unset): Report will include tax.
+        amortize (bool | Unset): Report will amortize.
+        unallocated (bool | Unset): Report will show unallocated costs.
+        aggregate_by (str | Unset): Report will aggregate by cost or usage.
+        show_previous_period (bool | Unset): Report will show previous period costs or usage comparison.
     """
 
-    include_credits: Union[Unset, bool] = UNSET
-    include_refunds: Union[Unset, bool] = UNSET
-    include_discounts: Union[Unset, bool] = UNSET
-    include_tax: Union[Unset, bool] = UNSET
-    amortize: Union[Unset, bool] = UNSET
-    unallocated: Union[Unset, bool] = UNSET
-    aggregate_by: Union[Unset, str] = UNSET
-    show_previous_period: Union[Unset, bool] = UNSET
+    include_credits: bool | Unset = UNSET
+    include_refunds: bool | Unset = UNSET
+    include_discounts: bool | Unset = UNSET
+    include_tax: bool | Unset = UNSET
+    amortize: bool | Unset = UNSET
+    unallocated: bool | Unset = UNSET
+    aggregate_by: str | Unset = UNSET
+    show_previous_period: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

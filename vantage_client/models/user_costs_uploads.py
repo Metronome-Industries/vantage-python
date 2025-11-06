@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class UserCostsUploads:
     """UserCostsUploads model
 
     Attributes:
-        links (Union[Unset, UserCostsUploadsLinks]):
-        user_costs_uploads (Union[Unset, list['UserCostsUpload']]):
+        links (UserCostsUploadsLinks | Unset):
+        user_costs_uploads (list[UserCostsUpload] | Unset):
     """
 
-    links: Union[Unset, "UserCostsUploadsLinks"] = UNSET
-    user_costs_uploads: Union[Unset, list["UserCostsUpload"]] = UNSET
+    links: UserCostsUploadsLinks | Unset = UNSET
+    user_costs_uploads: list[UserCostsUpload] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        user_costs_uploads: Union[Unset, list[dict[str, Any]]] = UNSET
+        user_costs_uploads: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.user_costs_uploads, Unset):
             user_costs_uploads = []
             for user_costs_uploads_item_data in self.user_costs_uploads:
@@ -56,18 +58,20 @@ class UserCostsUploads:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, UserCostsUploadsLinks]
+        links: UserCostsUploadsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = UserCostsUploadsLinks.from_dict(_links)
 
-        user_costs_uploads = []
         _user_costs_uploads = d.pop("user_costs_uploads", UNSET)
-        for user_costs_uploads_item_data in _user_costs_uploads or []:
-            user_costs_uploads_item = UserCostsUpload.from_dict(user_costs_uploads_item_data)
+        user_costs_uploads: list[UserCostsUpload] | Unset = UNSET
+        if _user_costs_uploads is not UNSET:
+            user_costs_uploads = []
+            for user_costs_uploads_item_data in _user_costs_uploads:
+                user_costs_uploads_item = UserCostsUpload.from_dict(user_costs_uploads_item_data)
 
-            user_costs_uploads.append(user_costs_uploads_item)
+                user_costs_uploads.append(user_costs_uploads_item)
 
         user_costs_uploads = cls(
             links=links,

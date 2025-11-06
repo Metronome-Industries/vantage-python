@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class ResourceReports:
     """ResourceReports model
 
     Attributes:
-        links (Union[Unset, ResourceReportsLinks]):
-        resource_reports (Union[Unset, list['ResourceReport']]):
+        links (ResourceReportsLinks | Unset):
+        resource_reports (list[ResourceReport] | Unset):
     """
 
-    links: Union[Unset, "ResourceReportsLinks"] = UNSET
-    resource_reports: Union[Unset, list["ResourceReport"]] = UNSET
+    links: ResourceReportsLinks | Unset = UNSET
+    resource_reports: list[ResourceReport] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        resource_reports: Union[Unset, list[dict[str, Any]]] = UNSET
+        resource_reports: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.resource_reports, Unset):
             resource_reports = []
             for resource_reports_item_data in self.resource_reports:
@@ -56,18 +58,20 @@ class ResourceReports:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ResourceReportsLinks]
+        links: ResourceReportsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = ResourceReportsLinks.from_dict(_links)
 
-        resource_reports = []
         _resource_reports = d.pop("resource_reports", UNSET)
-        for resource_reports_item_data in _resource_reports or []:
-            resource_reports_item = ResourceReport.from_dict(resource_reports_item_data)
+        resource_reports: list[ResourceReport] | Unset = UNSET
+        if _resource_reports is not UNSET:
+            resource_reports = []
+            for resource_reports_item_data in _resource_reports:
+                resource_reports_item = ResourceReport.from_dict(resource_reports_item_data)
 
-            resource_reports.append(resource_reports_item)
+                resource_reports.append(resource_reports_item)
 
         resource_reports = cls(
             links=links,

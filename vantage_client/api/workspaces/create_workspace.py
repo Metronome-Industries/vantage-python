@@ -1,11 +1,11 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.create_workspace_body import CreateWorkspaceBody
+from ...models.create_workspace import CreateWorkspace
 from ...models.errors import Errors
 from ...models.workspace import Workspace
 from ...types import Response
@@ -13,7 +13,7 @@ from ...types import Response
 
 def _get_kwargs(
     *,
-    body: CreateWorkspaceBody,
+    body: CreateWorkspace,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -30,26 +30,24 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, Workspace]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | Workspace | None:
     if response.status_code == 201:
         response_201 = Workspace.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, Workspace]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors | Workspace]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -61,19 +59,21 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: CreateWorkspaceBody,
-) -> Response[Union[Errors, Workspace]]:
-    """Create a workspace
+    body: CreateWorkspace,
+) -> Response[Errors | Workspace]:
+    """Create workspace
+
+     Create a workspace
 
     Args:
-        body (CreateWorkspaceBody):
+        body (CreateWorkspace): Create a workspace
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Workspace]]
+        Response[Errors | Workspace]
     """
 
     kwargs = _get_kwargs(
@@ -90,19 +90,21 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: CreateWorkspaceBody,
-) -> Optional[Union[Errors, Workspace]]:
-    """Create a workspace
+    body: CreateWorkspace,
+) -> Errors | Workspace | None:
+    """Create workspace
+
+     Create a workspace
 
     Args:
-        body (CreateWorkspaceBody):
+        body (CreateWorkspace): Create a workspace
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Workspace]
+        Errors | Workspace
     """
 
     return sync_detailed(
@@ -114,19 +116,21 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: CreateWorkspaceBody,
-) -> Response[Union[Errors, Workspace]]:
-    """Create a workspace
+    body: CreateWorkspace,
+) -> Response[Errors | Workspace]:
+    """Create workspace
+
+     Create a workspace
 
     Args:
-        body (CreateWorkspaceBody):
+        body (CreateWorkspace): Create a workspace
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Workspace]]
+        Response[Errors | Workspace]
     """
 
     kwargs = _get_kwargs(
@@ -141,19 +145,21 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: CreateWorkspaceBody,
-) -> Optional[Union[Errors, Workspace]]:
-    """Create a workspace
+    body: CreateWorkspace,
+) -> Errors | Workspace | None:
+    """Create workspace
+
+     Create a workspace
 
     Args:
-        body (CreateWorkspaceBody):
+        body (CreateWorkspace): Create a workspace
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Workspace]
+        Errors | Workspace
     """
 
     return (

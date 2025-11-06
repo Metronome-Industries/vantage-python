@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,14 +16,14 @@ class ResourceReportColumns:
     """ResourceReportColumns model
 
     Attributes:
-        columns (Union[Unset, list[str]]): Array of available column names for the specified resource type.
+        columns (list[str] | Unset): Array of available column names for the specified resource type.
     """
 
-    columns: Union[Unset, list[str]] = UNSET
+    columns: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        columns: Union[Unset, list[str]] = UNSET
+        columns: list[str] | Unset = UNSET
         if not isinstance(self.columns, Unset):
             columns = self.columns
 

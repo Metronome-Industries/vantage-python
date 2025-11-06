@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,24 +16,23 @@ class Workspace:
     """Workspace model
 
     Attributes:
-        token (Union[Unset, str]):
-        name (Union[Unset, str]): The name of the Workspace. Example: Acme Corp..
-        created_at (Union[Unset, str]): The date and time, in UTC, the Workspace was created. ISO 8601 Formatted.
-            Example: 2023-08-04T00:00:00Z.
-        enable_currency_conversion (Union[Unset, bool]): Whether or not currency conversion is enabled for the
-            Workspace.
-        currency (Union[Unset, str]): The currency code for the Workspace that will be used for currency conversion.
-            Example: USD.
-        exchange_rate_date (Union[Unset, str]): The exchange rate date that will be used to convert currency for your
-            cost data.
+        token (str | Unset):
+        name (str | Unset): The name of the Workspace. Example: Acme Corp..
+        created_at (str | Unset): The date and time, in UTC, the Workspace was created. ISO 8601 Formatted. Example:
+            2023-08-04T00:00:00Z.
+        enable_currency_conversion (bool | Unset): Whether or not currency conversion is enabled for the Workspace.
+        currency (str | Unset): The currency code for the Workspace that will be used for currency conversion. Example:
+            USD.
+        exchange_rate_date (str | Unset): The exchange rate date that will be used to convert currency for your cost
+            data.
     """
 
-    token: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    enable_currency_conversion: Union[Unset, bool] = UNSET
-    currency: Union[Unset, str] = UNSET
-    exchange_rate_date: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    name: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    enable_currency_conversion: bool | Unset = UNSET
+    currency: str | Unset = UNSET
+    exchange_rate_date: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

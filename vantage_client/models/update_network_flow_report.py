@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,35 +22,33 @@ class UpdateNetworkFlowReport:
     """Update a NetworkFlowReport.
 
     Attributes:
-        title (Union[Unset, str]): The title of the NetworkFlowReport.
-        filter_ (Union[Unset, str]): The filter query language to apply to the NetworkFlowReport. Additional
-            documentation available at https://docs.vantage.sh/vql.
-        start_date (Union[Unset, datetime.date]): The start date of the NetworkFlowReport. YYYY-MM-DD formatted.
-            Incompatible with 'date_interval' parameter.
-        end_date (Union[Unset, datetime.date]): The end date of the NetworkFlowReport. YYYY-MM-DD formatted.
-            Incompatible with 'date_interval' parameter.
-        date_interval (Union[Unset, UpdateNetworkFlowReportDateInterval]): The date interval of the NetworkFlowReport.
-            Unless 'custom' is used, this is incompatible with 'start_date' and 'end_date' parameters. Defaults to
-            'last_7_days'.
-        groupings (Union[Unset, list[UpdateNetworkFlowReportGroupingsItem]]): Grouping values for aggregating data on
-            the NetworkFlowReport. Valid groupings: account_id, az_id, dstaddr, dsthostname, flow_direction, interface_id,
+        title (str | Unset): The title of the NetworkFlowReport.
+        filter_ (str | Unset): The filter query language to apply to the NetworkFlowReport. Additional documentation
+            available at https://docs.vantage.sh/vql.
+        start_date (datetime.date | Unset): The start date of the NetworkFlowReport. YYYY-MM-DD formatted. Incompatible
+            with 'date_interval' parameter.
+        end_date (datetime.date | Unset): The end date of the NetworkFlowReport. YYYY-MM-DD formatted. Incompatible with
+            'date_interval' parameter.
+        date_interval (UpdateNetworkFlowReportDateInterval | Unset): The date interval of the NetworkFlowReport. Unless
+            'custom' is used, this is incompatible with 'start_date' and 'end_date' parameters. Defaults to 'last_7_days'.
+        groupings (list[UpdateNetworkFlowReportGroupingsItem] | Unset): Grouping values for aggregating data on the
+            NetworkFlowReport. Valid groupings: account_id, az_id, dstaddr, dsthostname, flow_direction, interface_id,
             instance_id, peer_resource_uuid, peer_account_id, peer_vpc_id, peer_region, peer_az_id, peer_subnet_id,
             peer_interface_id, peer_instance_id, region, resource_uuid, srcaddr, srchostname, subnet_id, traffic_category,
             traffic_path, vpc_id.
-        flow_direction (Union[Unset, UpdateNetworkFlowReportFlowDirection]): The flow direction of the
-            NetworkFlowReport.
-        flow_weight (Union[Unset, UpdateNetworkFlowReportFlowWeight]): The dimension by which the logs in the report are
+        flow_direction (UpdateNetworkFlowReportFlowDirection | Unset): The flow direction of the NetworkFlowReport.
+        flow_weight (UpdateNetworkFlowReportFlowWeight | Unset): The dimension by which the logs in the report are
             sorted. Defaults to costs.
     """
 
-    title: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    start_date: Union[Unset, datetime.date] = UNSET
-    end_date: Union[Unset, datetime.date] = UNSET
-    date_interval: Union[Unset, UpdateNetworkFlowReportDateInterval] = UNSET
-    groupings: Union[Unset, list[UpdateNetworkFlowReportGroupingsItem]] = UNSET
-    flow_direction: Union[Unset, UpdateNetworkFlowReportFlowDirection] = UNSET
-    flow_weight: Union[Unset, UpdateNetworkFlowReportFlowWeight] = UNSET
+    title: str | Unset = UNSET
+    filter_: str | Unset = UNSET
+    start_date: datetime.date | Unset = UNSET
+    end_date: datetime.date | Unset = UNSET
+    date_interval: UpdateNetworkFlowReportDateInterval | Unset = UNSET
+    groupings: list[UpdateNetworkFlowReportGroupingsItem] | Unset = UNSET
+    flow_direction: UpdateNetworkFlowReportFlowDirection | Unset = UNSET
+    flow_weight: UpdateNetworkFlowReportFlowWeight | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -56,30 +56,30 @@ class UpdateNetworkFlowReport:
 
         filter_ = self.filter_
 
-        start_date: Union[Unset, str] = UNSET
+        start_date: str | Unset = UNSET
         if not isinstance(self.start_date, Unset):
             start_date = self.start_date.isoformat()
 
-        end_date: Union[Unset, str] = UNSET
+        end_date: str | Unset = UNSET
         if not isinstance(self.end_date, Unset):
             end_date = self.end_date.isoformat()
 
-        date_interval: Union[Unset, str] = UNSET
+        date_interval: str | Unset = UNSET
         if not isinstance(self.date_interval, Unset):
             date_interval = self.date_interval.value
 
-        groupings: Union[Unset, list[str]] = UNSET
+        groupings: list[str] | Unset = UNSET
         if not isinstance(self.groupings, Unset):
             groupings = []
             for groupings_item_data in self.groupings:
                 groupings_item = groupings_item_data.value
                 groupings.append(groupings_item)
 
-        flow_direction: Union[Unset, str] = UNSET
+        flow_direction: str | Unset = UNSET
         if not isinstance(self.flow_direction, Unset):
             flow_direction = self.flow_direction.value
 
-        flow_weight: Union[Unset, str] = UNSET
+        flow_weight: str | Unset = UNSET
         if not isinstance(self.flow_weight, Unset):
             flow_weight = self.flow_weight.value
 
@@ -113,42 +113,44 @@ class UpdateNetworkFlowReport:
         filter_ = d.pop("filter", UNSET)
 
         _start_date = d.pop("start_date", UNSET)
-        start_date: Union[Unset, datetime.date]
+        start_date: datetime.date | Unset
         if isinstance(_start_date, Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
         _end_date = d.pop("end_date", UNSET)
-        end_date: Union[Unset, datetime.date]
+        end_date: datetime.date | Unset
         if isinstance(_end_date, Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
         _date_interval = d.pop("date_interval", UNSET)
-        date_interval: Union[Unset, UpdateNetworkFlowReportDateInterval]
+        date_interval: UpdateNetworkFlowReportDateInterval | Unset
         if isinstance(_date_interval, Unset):
             date_interval = UNSET
         else:
             date_interval = UpdateNetworkFlowReportDateInterval(_date_interval)
 
-        groupings = []
         _groupings = d.pop("groupings", UNSET)
-        for groupings_item_data in _groupings or []:
-            groupings_item = UpdateNetworkFlowReportGroupingsItem(groupings_item_data)
+        groupings: list[UpdateNetworkFlowReportGroupingsItem] | Unset = UNSET
+        if _groupings is not UNSET:
+            groupings = []
+            for groupings_item_data in _groupings:
+                groupings_item = UpdateNetworkFlowReportGroupingsItem(groupings_item_data)
 
-            groupings.append(groupings_item)
+                groupings.append(groupings_item)
 
         _flow_direction = d.pop("flow_direction", UNSET)
-        flow_direction: Union[Unset, UpdateNetworkFlowReportFlowDirection]
+        flow_direction: UpdateNetworkFlowReportFlowDirection | Unset
         if isinstance(_flow_direction, Unset):
             flow_direction = UNSET
         else:
             flow_direction = UpdateNetworkFlowReportFlowDirection(_flow_direction)
 
         _flow_weight = d.pop("flow_weight", UNSET)
-        flow_weight: Union[Unset, UpdateNetworkFlowReportFlowWeight]
+        flow_weight: UpdateNetworkFlowReportFlowWeight | Unset
         if isinstance(_flow_weight, Unset):
             flow_weight = UNSET
         else:

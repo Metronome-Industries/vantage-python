@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class ReportNotifications:
     """ReportNotifications model
 
     Attributes:
-        links (Union[Unset, ReportNotificationsLinks]):
-        report_notifications (Union[Unset, list['ReportNotification']]):
+        links (ReportNotificationsLinks | Unset):
+        report_notifications (list[ReportNotification] | Unset):
     """
 
-    links: Union[Unset, "ReportNotificationsLinks"] = UNSET
-    report_notifications: Union[Unset, list["ReportNotification"]] = UNSET
+    links: ReportNotificationsLinks | Unset = UNSET
+    report_notifications: list[ReportNotification] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        report_notifications: Union[Unset, list[dict[str, Any]]] = UNSET
+        report_notifications: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.report_notifications, Unset):
             report_notifications = []
             for report_notifications_item_data in self.report_notifications:
@@ -56,18 +58,20 @@ class ReportNotifications:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ReportNotificationsLinks]
+        links: ReportNotificationsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = ReportNotificationsLinks.from_dict(_links)
 
-        report_notifications = []
         _report_notifications = d.pop("report_notifications", UNSET)
-        for report_notifications_item_data in _report_notifications or []:
-            report_notifications_item = ReportNotification.from_dict(report_notifications_item_data)
+        report_notifications: list[ReportNotification] | Unset = UNSET
+        if _report_notifications is not UNSET:
+            report_notifications = []
+            for report_notifications_item_data in _report_notifications:
+                report_notifications_item = ReportNotification.from_dict(report_notifications_item_data)
 
-            report_notifications.append(report_notifications_item)
+                report_notifications.append(report_notifications_item)
 
         report_notifications = cls(
             links=links,

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Recommendations:
     """Recommendations model
 
     Attributes:
-        links (Union[Unset, RecommendationsLinks]):
-        recommendations (Union[Unset, list['Recommendation']]):
+        links (RecommendationsLinks | Unset):
+        recommendations (list[Recommendation] | Unset):
     """
 
-    links: Union[Unset, "RecommendationsLinks"] = UNSET
-    recommendations: Union[Unset, list["Recommendation"]] = UNSET
+    links: RecommendationsLinks | Unset = UNSET
+    recommendations: list[Recommendation] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        recommendations: Union[Unset, list[dict[str, Any]]] = UNSET
+        recommendations: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.recommendations, Unset):
             recommendations = []
             for recommendations_item_data in self.recommendations:
@@ -56,18 +58,20 @@ class Recommendations:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, RecommendationsLinks]
+        links: RecommendationsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = RecommendationsLinks.from_dict(_links)
 
-        recommendations = []
         _recommendations = d.pop("recommendations", UNSET)
-        for recommendations_item_data in _recommendations or []:
-            recommendations_item = Recommendation.from_dict(recommendations_item_data)
+        recommendations: list[Recommendation] | Unset = UNSET
+        if _recommendations is not UNSET:
+            recommendations = []
+            for recommendations_item_data in _recommendations:
+                recommendations_item = Recommendation.from_dict(recommendations_item_data)
 
-            recommendations.append(recommendations_item)
+                recommendations.append(recommendations_item)
 
         recommendations = cls(
             links=links,

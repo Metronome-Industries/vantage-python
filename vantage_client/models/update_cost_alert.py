@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,33 +16,32 @@ class UpdateCostAlert:
     """Update a Cost Alert
 
     Attributes:
-        title (Union[Unset, str]): The title of the Cost Alert.
-        email_recipients (Union[Unset, list[str]]): The email recipients for the Cost Alert.
-        interval (Union[Unset, str]): The period of time used to compare costs. Options are 'day', 'week', 'month',
-            'quarter'.
-        threshold (Union[Unset, float]): The threshold value for the Cost Alert.
-        slack_channels (Union[Unset, list[str]]): The Slack channels that will receive the alert. Make sure your slack
+        title (str | Unset): The title of the Cost Alert.
+        email_recipients (list[str] | Unset): The email recipients for the Cost Alert.
+        interval (str | Unset): The period of time used to compare costs. Options are 'day', 'week', 'month', 'quarter'.
+        threshold (float | Unset): The threshold value for the Cost Alert.
+        slack_channels (list[str] | Unset): The Slack channels that will receive the alert. Make sure your slack
             integration is connected at https://console.vantage.sh/settings/slack.
-        teams_channels (Union[Unset, list[str]]): The Microsoft Teams channels that will receive the alert. Make sure
-            your teams integration is connected at https://console.vantage.sh/settings/microsoft_teams.
-        unit_type (Union[Unset, str]): The unit type used to compare costs. Options are 'currency' or 'percentage'.
-        report_tokens (Union[Unset, list[str]]): The tokens of the reports to alert on.
+        teams_channels (list[str] | Unset): The Microsoft Teams channels that will receive the alert. Make sure your
+            teams integration is connected at https://console.vantage.sh/settings/microsoft_teams.
+        unit_type (str | Unset): The unit type used to compare costs. Options are 'currency' or 'percentage'.
+        report_tokens (list[str] | Unset): The tokens of the reports to alert on.
     """
 
-    title: Union[Unset, str] = UNSET
-    email_recipients: Union[Unset, list[str]] = UNSET
-    interval: Union[Unset, str] = UNSET
-    threshold: Union[Unset, float] = UNSET
-    slack_channels: Union[Unset, list[str]] = UNSET
-    teams_channels: Union[Unset, list[str]] = UNSET
-    unit_type: Union[Unset, str] = UNSET
-    report_tokens: Union[Unset, list[str]] = UNSET
+    title: str | Unset = UNSET
+    email_recipients: list[str] | Unset = UNSET
+    interval: str | Unset = UNSET
+    threshold: float | Unset = UNSET
+    slack_channels: list[str] | Unset = UNSET
+    teams_channels: list[str] | Unset = UNSET
+    unit_type: str | Unset = UNSET
+    report_tokens: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         title = self.title
 
-        email_recipients: Union[Unset, list[str]] = UNSET
+        email_recipients: list[str] | Unset = UNSET
         if not isinstance(self.email_recipients, Unset):
             email_recipients = self.email_recipients
 
@@ -48,17 +49,17 @@ class UpdateCostAlert:
 
         threshold = self.threshold
 
-        slack_channels: Union[Unset, list[str]] = UNSET
+        slack_channels: list[str] | Unset = UNSET
         if not isinstance(self.slack_channels, Unset):
             slack_channels = self.slack_channels
 
-        teams_channels: Union[Unset, list[str]] = UNSET
+        teams_channels: list[str] | Unset = UNSET
         if not isinstance(self.teams_channels, Unset):
             teams_channels = self.teams_channels
 
         unit_type = self.unit_type
 
-        report_tokens: Union[Unset, list[str]] = UNSET
+        report_tokens: list[str] | Unset = UNSET
         if not isinstance(self.report_tokens, Unset):
             report_tokens = self.report_tokens
 

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,44 +16,43 @@ class KubernetesEfficiencyReport:
     """KubernetesEfficiencyReport model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the KubernetesEfficiencyReport. Example: Acme123 Kubernetes Efficiency
+        token (str | Unset):
+        title (str | Unset): The title of the KubernetesEfficiencyReport. Example: Acme123 Kubernetes Efficiency
             Metrics.
-        default (Union[Unset, bool]): Indicates whether the KubernetesEfficiencyReport is the default report.
-        created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
+        default (bool | Unset): Indicates whether the KubernetesEfficiencyReport is the default report.
+        created_at (str | Unset): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
             2024-03-19T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the KubernetesEfficiencyReport is a part of.
-        user_token (Union[Unset, str]): The token for the User who created this KubernetesEfficiencyReport.
-        start_date (Union[Unset, str]): The start date for the KubernetesEfficiencyReport. Only set for custom date
-            ranges. ISO 8601 Formatted. Example: 2024-03-01.
-        end_date (Union[Unset, str]): The end date for the KubernetesEfficiencyReport. Only set for custom date ranges.
-            ISO 8601 Formatted. Example: 2024-03-20.
-        date_interval (Union[Unset, str]): The date range for the KubernetesEfficiencyReport. Only present if a custom
-            date range is not specified. Example: last_month.
-        date_bucket (Union[Unset, str]): How costs are grouped and displayed in the KubernetesEfficiencyReport. Possible
+        workspace_token (str | Unset): The token for the Workspace the KubernetesEfficiencyReport is a part of.
+        user_token (str | Unset): The token for the User who created this KubernetesEfficiencyReport.
+        start_date (str | Unset): The start date for the KubernetesEfficiencyReport. Only set for custom date ranges.
+            ISO 8601 Formatted. Example: 2024-03-01.
+        end_date (str | Unset): The end date for the KubernetesEfficiencyReport. Only set for custom date ranges. ISO
+            8601 Formatted. Example: 2024-03-20.
+        date_interval (str | Unset): The date range for the KubernetesEfficiencyReport. Only present if a custom date
+            range is not specified. Example: last_month.
+        date_bucket (str | Unset): How costs are grouped and displayed in the KubernetesEfficiencyReport. Possible
             values: day, week, month. Example: month.
-        aggregated_by (Union[Unset, str]): How costs are aggregated by. Possible values: idle_cost, amount,
-            cost_efficiency.
-        groupings (Union[Unset, str]): Grouping values for aggregating costs on the KubernetesEfficiencyReport. Valid
+        aggregated_by (str | Unset): How costs are aggregated by. Possible values: idle_cost, amount, cost_efficiency.
+        groupings (str | Unset): Grouping values for aggregating costs on the KubernetesEfficiencyReport. Valid
             groupings: cluster_id, namespace, labeled, category, pod, label, label:<label_name>. Example: cluster_id,
             namespace.
-        filter_ (Union[Unset, str]): The filter applied to the KubernetesEfficiencyReport. Additional documentation
-            available at https://docs.vantage.sh/vql.
+        filter_ (str | Unset): The filter applied to the KubernetesEfficiencyReport. Additional documentation available
+            at https://docs.vantage.sh/vql.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    default: Union[Unset, bool] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    user_token: Union[Unset, str] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    date_interval: Union[Unset, str] = UNSET
-    date_bucket: Union[Unset, str] = UNSET
-    aggregated_by: Union[Unset, str] = UNSET
-    groupings: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    default: bool | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    user_token: str | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    date_interval: str | Unset = UNSET
+    date_bucket: str | Unset = UNSET
+    aggregated_by: str | Unset = UNSET
+    groupings: str | Unset = UNSET
+    filter_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

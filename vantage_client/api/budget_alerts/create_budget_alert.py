@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -30,17 +30,17 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[BudgetAlert, Errors]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> BudgetAlert | Errors | None:
     if response.status_code == 201:
         response_201 = BudgetAlert.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -48,8 +48,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[BudgetAlert, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[BudgetAlert | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -62,8 +62,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateBudgetAlertBody,
-) -> Response[Union[BudgetAlert, Errors]]:
-    """Create a Budget Alert.
+) -> Response[BudgetAlert | Errors]:
+    """Create budget alert
+
+     Create a Budget Alert.
 
     Args:
         body (CreateBudgetAlertBody):
@@ -73,7 +75,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BudgetAlert, Errors]]
+        Response[BudgetAlert | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -91,8 +93,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: CreateBudgetAlertBody,
-) -> Optional[Union[BudgetAlert, Errors]]:
-    """Create a Budget Alert.
+) -> BudgetAlert | Errors | None:
+    """Create budget alert
+
+     Create a Budget Alert.
 
     Args:
         body (CreateBudgetAlertBody):
@@ -102,7 +106,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BudgetAlert, Errors]
+        BudgetAlert | Errors
     """
 
     return sync_detailed(
@@ -115,8 +119,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateBudgetAlertBody,
-) -> Response[Union[BudgetAlert, Errors]]:
-    """Create a Budget Alert.
+) -> Response[BudgetAlert | Errors]:
+    """Create budget alert
+
+     Create a Budget Alert.
 
     Args:
         body (CreateBudgetAlertBody):
@@ -126,7 +132,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BudgetAlert, Errors]]
+        Response[BudgetAlert | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -142,8 +148,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateBudgetAlertBody,
-) -> Optional[Union[BudgetAlert, Errors]]:
-    """Create a Budget Alert.
+) -> BudgetAlert | Errors | None:
+    """Create budget alert
+
+     Create a Budget Alert.
 
     Args:
         body (CreateBudgetAlertBody):
@@ -153,7 +161,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BudgetAlert, Errors]
+        BudgetAlert | Errors
     """
 
     return (

@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -13,15 +13,15 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    providers: Union[Unset, list[GetTagsProvidersItem]] = UNSET,
-    search_query: Union[Unset, str] = UNSET,
-    sort_direction: Union[Unset, GetTagsSortDirection] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
+    providers: list[GetTagsProvidersItem] | Unset = UNSET,
+    search_query: str | Unset = UNSET,
+    sort_direction: GetTagsSortDirection | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
-    json_providers: Union[Unset, list[str]] = UNSET
+    json_providers: list[str] | Unset = UNSET
     if not isinstance(providers, Unset):
         json_providers = []
         for providers_item_data in providers:
@@ -32,7 +32,7 @@ def _get_kwargs(
 
     params["search_query"] = search_query
 
-    json_sort_direction: Union[Unset, str] = UNSET
+    json_sort_direction: str | Unset = UNSET
     if not isinstance(sort_direction, Unset):
         json_sort_direction = sort_direction.value
 
@@ -53,18 +53,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Tags]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Tags | None:
     if response.status_code == 200:
         response_200 = Tags.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Tags]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Tags]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -76,20 +77,22 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagsProvidersItem]] = UNSET,
-    search_query: Union[Unset, str] = UNSET,
-    sort_direction: Union[Unset, GetTagsSortDirection] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
+    providers: list[GetTagsProvidersItem] | Unset = UNSET,
+    search_query: str | Unset = UNSET,
+    sort_direction: GetTagsSortDirection | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
 ) -> Response[Tags]:
-    """Return all Tags that the current API token has access to.
+    """Get all tags
+
+     Return all Tags that the current API token has access to.
 
     Args:
-        providers (Union[Unset, list[GetTagsProvidersItem]]):
-        search_query (Union[Unset, str]):
-        sort_direction (Union[Unset, GetTagsSortDirection]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        providers (list[GetTagsProvidersItem] | Unset):
+        search_query (str | Unset):
+        sort_direction (GetTagsSortDirection | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -117,20 +120,22 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagsProvidersItem]] = UNSET,
-    search_query: Union[Unset, str] = UNSET,
-    sort_direction: Union[Unset, GetTagsSortDirection] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
-) -> Optional[Tags]:
-    """Return all Tags that the current API token has access to.
+    providers: list[GetTagsProvidersItem] | Unset = UNSET,
+    search_query: str | Unset = UNSET,
+    sort_direction: GetTagsSortDirection | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
+) -> Tags | None:
+    """Get all tags
+
+     Return all Tags that the current API token has access to.
 
     Args:
-        providers (Union[Unset, list[GetTagsProvidersItem]]):
-        search_query (Union[Unset, str]):
-        sort_direction (Union[Unset, GetTagsSortDirection]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        providers (list[GetTagsProvidersItem] | Unset):
+        search_query (str | Unset):
+        sort_direction (GetTagsSortDirection | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -153,20 +158,22 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagsProvidersItem]] = UNSET,
-    search_query: Union[Unset, str] = UNSET,
-    sort_direction: Union[Unset, GetTagsSortDirection] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
+    providers: list[GetTagsProvidersItem] | Unset = UNSET,
+    search_query: str | Unset = UNSET,
+    sort_direction: GetTagsSortDirection | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
 ) -> Response[Tags]:
-    """Return all Tags that the current API token has access to.
+    """Get all tags
+
+     Return all Tags that the current API token has access to.
 
     Args:
-        providers (Union[Unset, list[GetTagsProvidersItem]]):
-        search_query (Union[Unset, str]):
-        sort_direction (Union[Unset, GetTagsSortDirection]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        providers (list[GetTagsProvidersItem] | Unset):
+        search_query (str | Unset):
+        sort_direction (GetTagsSortDirection | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -192,20 +199,22 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagsProvidersItem]] = UNSET,
-    search_query: Union[Unset, str] = UNSET,
-    sort_direction: Union[Unset, GetTagsSortDirection] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
-) -> Optional[Tags]:
-    """Return all Tags that the current API token has access to.
+    providers: list[GetTagsProvidersItem] | Unset = UNSET,
+    search_query: str | Unset = UNSET,
+    sort_direction: GetTagsSortDirection | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
+) -> Tags | None:
+    """Get all tags
+
+     Return all Tags that the current API token has access to.
 
     Args:
-        providers (Union[Unset, list[GetTagsProvidersItem]]):
-        search_query (Union[Unset, str]):
-        sort_direction (Union[Unset, GetTagsSortDirection]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        providers (list[GetTagsProvidersItem] | Unset):
+        search_query (str | Unset):
+        sort_direction (GetTagsSortDirection | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

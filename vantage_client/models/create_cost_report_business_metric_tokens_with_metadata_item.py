@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,27 +19,27 @@ class CreateCostReportBusinessMetricTokensWithMetadataItem:
     """
     Attributes:
         business_metric_token (str): The token of the BusinessMetric to attach to the CostReport.
-        unit_scale (Union[Unset, CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale]): Determines the scale
-            of the BusinessMetric's values within the CostReport. Default:
+        unit_scale (CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale | Unset): Determines the scale of the
+            BusinessMetric's values within the CostReport. Default:
             CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale.PER_UNIT.
-        label_filter (Union[Unset, list[str]]): Include only values with these labels in the CostReport.
+        label_filter (list[str] | Unset): Include only values with these labels in the CostReport.
     """
 
     business_metric_token: str
-    unit_scale: Union[Unset, CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale] = (
+    unit_scale: CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale | Unset = (
         CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale.PER_UNIT
     )
-    label_filter: Union[Unset, list[str]] = UNSET
+    label_filter: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         business_metric_token = self.business_metric_token
 
-        unit_scale: Union[Unset, str] = UNSET
+        unit_scale: str | Unset = UNSET
         if not isinstance(self.unit_scale, Unset):
             unit_scale = self.unit_scale.value
 
-        label_filter: Union[Unset, list[str]] = UNSET
+        label_filter: list[str] | Unset = UNSET
         if not isinstance(self.label_filter, Unset):
             label_filter = self.label_filter
 
@@ -61,7 +63,7 @@ class CreateCostReportBusinessMetricTokensWithMetadataItem:
         business_metric_token = d.pop("business_metric_token")
 
         _unit_scale = d.pop("unit_scale", UNSET)
-        unit_scale: Union[Unset, CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale]
+        unit_scale: CreateCostReportBusinessMetricTokensWithMetadataItemUnitScale | Unset
         if isinstance(_unit_scale, Unset):
             unit_scale = UNSET
         else:

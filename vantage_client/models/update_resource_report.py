@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,17 +16,17 @@ class UpdateResourceReport:
     """Update a ResourceReport.
 
     Attributes:
-        title (Union[Unset, str]): The title of the ResourceReport.
-        filter_ (Union[Unset, str]): The filter query language to apply to the ResourceReport. Additional documentation
+        title (str | Unset): The title of the ResourceReport.
+        filter_ (str | Unset): The filter query language to apply to the ResourceReport. Additional documentation
             available at https://docs.vantage.sh/vql.
-        columns (Union[Unset, list[str]]): Array of column names to display in the table. Column names should match
-            those returned by the /resource_reports/columns endpoint. The order determines the display order. Only available
-            for reports with a single resource type filter.
+        columns (list[str] | Unset): Array of column names to display in the table. Column names should match those
+            returned by the /resource_reports/columns endpoint. The order determines the display order. Only available for
+            reports with a single resource type filter.
     """
 
-    title: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    columns: Union[Unset, list[str]] = UNSET
+    title: str | Unset = UNSET
+    filter_: str | Unset = UNSET
+    columns: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -32,7 +34,7 @@ class UpdateResourceReport:
 
         filter_ = self.filter_
 
-        columns: Union[Unset, list[str]] = UNSET
+        columns: list[str] | Unset = UNSET
         if not isinstance(self.columns, Unset):
             columns = self.columns
 

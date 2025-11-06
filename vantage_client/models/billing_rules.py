@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class BillingRules:
     """BillingRules model
 
     Attributes:
-        links (Union[Unset, BillingRulesLinks]):
-        billing_rules (Union[Unset, list['BillingRule']]):
+        links (BillingRulesLinks | Unset):
+        billing_rules (list[BillingRule] | Unset):
     """
 
-    links: Union[Unset, "BillingRulesLinks"] = UNSET
-    billing_rules: Union[Unset, list["BillingRule"]] = UNSET
+    links: BillingRulesLinks | Unset = UNSET
+    billing_rules: list[BillingRule] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        billing_rules: Union[Unset, list[dict[str, Any]]] = UNSET
+        billing_rules: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.billing_rules, Unset):
             billing_rules = []
             for billing_rules_item_data in self.billing_rules:
@@ -56,18 +58,20 @@ class BillingRules:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, BillingRulesLinks]
+        links: BillingRulesLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = BillingRulesLinks.from_dict(_links)
 
-        billing_rules = []
         _billing_rules = d.pop("billing_rules", UNSET)
-        for billing_rules_item_data in _billing_rules or []:
-            billing_rules_item = BillingRule.from_dict(billing_rules_item_data)
+        billing_rules: list[BillingRule] | Unset = UNSET
+        if _billing_rules is not UNSET:
+            billing_rules = []
+            for billing_rules_item_data in _billing_rules:
+                billing_rules_item = BillingRule.from_dict(billing_rules_item_data)
 
-            billing_rules.append(billing_rules_item)
+                billing_rules.append(billing_rules_item)
 
         billing_rules = cls(
             links=links,

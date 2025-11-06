@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Products:
     """Products model
 
     Attributes:
-        links (Union[Unset, ProductsLinks]):
-        products (Union[Unset, list['Product']]):
+        links (ProductsLinks | Unset):
+        products (list[Product] | Unset):
     """
 
-    links: Union[Unset, "ProductsLinks"] = UNSET
-    products: Union[Unset, list["Product"]] = UNSET
+    links: ProductsLinks | Unset = UNSET
+    products: list[Product] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        products: Union[Unset, list[dict[str, Any]]] = UNSET
+        products: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.products, Unset):
             products = []
             for products_item_data in self.products:
@@ -56,18 +58,20 @@ class Products:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ProductsLinks]
+        links: ProductsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = ProductsLinks.from_dict(_links)
 
-        products = []
         _products = d.pop("products", UNSET)
-        for products_item_data in _products or []:
-            products_item = Product.from_dict(products_item_data)
+        products: list[Product] | Unset = UNSET
+        if _products is not UNSET:
+            products = []
+            for products_item_data in _products:
+                products_item = Product.from_dict(products_item_data)
 
-            products.append(products_item)
+                products.append(products_item)
 
         products = cls(
             links=links,

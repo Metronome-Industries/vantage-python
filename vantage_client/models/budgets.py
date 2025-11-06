@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Budgets:
     """Budgets model
 
     Attributes:
-        links (Union[Unset, BudgetsLinks]):
-        budgets (Union[Unset, list['Budget']]):
+        links (BudgetsLinks | Unset):
+        budgets (list[Budget] | Unset):
     """
 
-    links: Union[Unset, "BudgetsLinks"] = UNSET
-    budgets: Union[Unset, list["Budget"]] = UNSET
+    links: BudgetsLinks | Unset = UNSET
+    budgets: list[Budget] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        budgets: Union[Unset, list[dict[str, Any]]] = UNSET
+        budgets: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.budgets, Unset):
             budgets = []
             for budgets_item_data in self.budgets:
@@ -56,18 +58,20 @@ class Budgets:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, BudgetsLinks]
+        links: BudgetsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = BudgetsLinks.from_dict(_links)
 
-        budgets = []
         _budgets = d.pop("budgets", UNSET)
-        for budgets_item_data in _budgets or []:
-            budgets_item = Budget.from_dict(budgets_item_data)
+        budgets: list[Budget] | Unset = UNSET
+        if _budgets is not UNSET:
+            budgets = []
+            for budgets_item_data in _budgets:
+                budgets_item = Budget.from_dict(budgets_item_data)
 
-            budgets.append(budgets_item)
+                budgets.append(budgets_item)
 
         budgets = cls(
             links=links,

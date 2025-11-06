@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,37 +16,36 @@ class CostAlert:
     """CostAlert model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]):
-        email_recipients (Union[Unset, list[str]]): The email addresses that will receive the alert.
-        slack_channels (Union[Unset, list[str]]): The Slack channels that will receive the alert. Make sure your slack
+        token (str | Unset):
+        title (str | Unset):
+        email_recipients (list[str] | Unset): The email addresses that will receive the alert.
+        slack_channels (list[str] | Unset): The Slack channels that will receive the alert. Make sure your slack
             integration is connected at https://console.vantage.sh/settings/slack.
-        teams_channels (Union[Unset, list[str]]): The Microsoft Teams channels that will receive the alert. Make sure
-            your teams integration is connected at https://console.vantage.sh/settings/microsoft_teams.
-        created_at (Union[Unset, str]): The date and time, in UTC, for when the alert was created. ISO 8601 Formatted.
+        teams_channels (list[str] | Unset): The Microsoft Teams channels that will receive the alert. Make sure your
+            teams integration is connected at https://console.vantage.sh/settings/microsoft_teams.
+        created_at (str | Unset): The date and time, in UTC, for when the alert was created. ISO 8601 Formatted.
             Example: 2023-10-01T12:00:00Z.
-        updated_at (Union[Unset, str]): The date and time, in UTC, for when the alert was last updated. ISO 8601
-            Formatted. Example: 2023-10-01T12:00:00Z.
-        workspace_token (Union[Unset, str]): The ID of the organization that owns the CostAlert.
-        interval (Union[Unset, str]): The period of time used to compare costs. Options are 'day', 'week', 'month',
-            'quarter'.
-        threshold (Union[Unset, float]): The cost change threshold to alert on.
-        unit_type (Union[Unset, str]): The unit type used to compare costs. Options are 'currency' or 'percentage'.
-        report_tokens (Union[Unset, list[str]]): The tokens of the reports to alert on.
+        updated_at (str | Unset): The date and time, in UTC, for when the alert was last updated. ISO 8601 Formatted.
+            Example: 2023-10-01T12:00:00Z.
+        workspace_token (str | Unset): The ID of the organization that owns the CostAlert.
+        interval (str | Unset): The period of time used to compare costs. Options are 'day', 'week', 'month', 'quarter'.
+        threshold (float | Unset): The cost change threshold to alert on.
+        unit_type (str | Unset): The unit type used to compare costs. Options are 'currency' or 'percentage'.
+        report_tokens (list[str] | Unset): The tokens of the reports to alert on.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    email_recipients: Union[Unset, list[str]] = UNSET
-    slack_channels: Union[Unset, list[str]] = UNSET
-    teams_channels: Union[Unset, list[str]] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    updated_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    interval: Union[Unset, str] = UNSET
-    threshold: Union[Unset, float] = UNSET
-    unit_type: Union[Unset, str] = UNSET
-    report_tokens: Union[Unset, list[str]] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    email_recipients: list[str] | Unset = UNSET
+    slack_channels: list[str] | Unset = UNSET
+    teams_channels: list[str] | Unset = UNSET
+    created_at: str | Unset = UNSET
+    updated_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    interval: str | Unset = UNSET
+    threshold: float | Unset = UNSET
+    unit_type: str | Unset = UNSET
+    report_tokens: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,15 +53,15 @@ class CostAlert:
 
         title = self.title
 
-        email_recipients: Union[Unset, list[str]] = UNSET
+        email_recipients: list[str] | Unset = UNSET
         if not isinstance(self.email_recipients, Unset):
             email_recipients = self.email_recipients
 
-        slack_channels: Union[Unset, list[str]] = UNSET
+        slack_channels: list[str] | Unset = UNSET
         if not isinstance(self.slack_channels, Unset):
             slack_channels = self.slack_channels
 
-        teams_channels: Union[Unset, list[str]] = UNSET
+        teams_channels: list[str] | Unset = UNSET
         if not isinstance(self.teams_channels, Unset):
             teams_channels = self.teams_channels
 
@@ -76,7 +77,7 @@ class CostAlert:
 
         unit_type = self.unit_type
 
-        report_tokens: Union[Unset, list[str]] = UNSET
+        report_tokens: list[str] | Unset = UNSET
         if not isinstance(self.report_tokens, Unset):
             report_tokens = self.report_tokens
 

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Teams:
     """Teams model
 
     Attributes:
-        links (Union[Unset, TeamsLinks]):
-        teams (Union[Unset, list['Team']]):
+        links (TeamsLinks | Unset):
+        teams (list[Team] | Unset):
     """
 
-    links: Union[Unset, "TeamsLinks"] = UNSET
-    teams: Union[Unset, list["Team"]] = UNSET
+    links: TeamsLinks | Unset = UNSET
+    teams: list[Team] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        teams: Union[Unset, list[dict[str, Any]]] = UNSET
+        teams: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.teams, Unset):
             teams = []
             for teams_item_data in self.teams:
@@ -56,18 +58,20 @@ class Teams:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, TeamsLinks]
+        links: TeamsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = TeamsLinks.from_dict(_links)
 
-        teams = []
         _teams = d.pop("teams", UNSET)
-        for teams_item_data in _teams or []:
-            teams_item = Team.from_dict(teams_item_data)
+        teams: list[Team] | Unset = UNSET
+        if _teams is not UNSET:
+            teams = []
+            for teams_item_data in _teams:
+                teams_item = Team.from_dict(teams_item_data)
 
-            teams.append(teams_item)
+                teams.append(teams_item)
 
         teams = cls(
             links=links,

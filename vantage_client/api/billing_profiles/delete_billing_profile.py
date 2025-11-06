@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -22,16 +22,18 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[BillingProfile, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> BillingProfile | Errors | None:
     if response.status_code == 204:
         response_204 = BillingProfile.from_dict(response.json())
 
         return response_204
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -39,8 +41,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[BillingProfile, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[BillingProfile | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -53,8 +55,8 @@ def sync_detailed(
     billing_profile_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[BillingProfile, Errors]]:
-    """Delete a Billing Profile.
+) -> Response[BillingProfile | Errors]:
+    """Delete billing profile
 
      Requires MSP invoicing to be enabled on the account.
 
@@ -66,7 +68,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BillingProfile, Errors]]
+        Response[BillingProfile | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -84,8 +86,8 @@ def sync(
     billing_profile_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[BillingProfile, Errors]]:
-    """Delete a Billing Profile.
+) -> BillingProfile | Errors | None:
+    """Delete billing profile
 
      Requires MSP invoicing to be enabled on the account.
 
@@ -97,7 +99,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BillingProfile, Errors]
+        BillingProfile | Errors
     """
 
     return sync_detailed(
@@ -110,8 +112,8 @@ async def asyncio_detailed(
     billing_profile_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[BillingProfile, Errors]]:
-    """Delete a Billing Profile.
+) -> Response[BillingProfile | Errors]:
+    """Delete billing profile
 
      Requires MSP invoicing to be enabled on the account.
 
@@ -123,7 +125,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BillingProfile, Errors]]
+        Response[BillingProfile | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -139,8 +141,8 @@ async def asyncio(
     billing_profile_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[BillingProfile, Errors]]:
-    """Delete a Billing Profile.
+) -> BillingProfile | Errors | None:
+    """Delete billing profile
 
      Requires MSP invoicing to be enabled on the account.
 
@@ -152,7 +154,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BillingProfile, Errors]
+        BillingProfile | Errors
     """
 
     return (

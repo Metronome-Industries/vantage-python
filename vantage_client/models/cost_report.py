@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -8,6 +10,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.attached_business_metric_for_cost_report import AttachedBusinessMetricForCostReport
+    from ..models.chart_settings import ChartSettings
     from ..models.cost_report_settings import CostReportSettings
 
 
@@ -19,50 +22,51 @@ class CostReport:
     """CostReport model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the CostReport. Example: Production Environment.
-        folder_token (Union[Unset, str]): The token for the Folder the CostReport is a part of.
-        saved_filter_tokens (Union[Unset, list[str]]): The tokens for the SavedFilters assigned to the CostReport.
-        business_metric_tokens_with_metadata (Union[Unset, list['AttachedBusinessMetricForCostReport']]): The tokens for
-            the BusinessMetrics assigned to the CostReport, the unit scale, and label filter.
-        filter_ (Union[Unset, str]): The filter applied to the CostReport. Additional documentation available at
+        token (str | Unset):
+        title (str | Unset): The title of the CostReport. Example: Production Environment.
+        folder_token (str | Unset): The token for the Folder the CostReport is a part of.
+        saved_filter_tokens (list[str] | Unset): The tokens for the SavedFilters assigned to the CostReport.
+        business_metric_tokens_with_metadata (list[AttachedBusinessMetricForCostReport] | Unset): The tokens for the
+            BusinessMetrics assigned to the CostReport, the unit scale, and label filter.
+        filter_ (str | Unset): The filter applied to the CostReport. Additional documentation available at
             https://docs.vantage.sh/vql.
-        groupings (Union[Unset, str]): The grouping aggregations applied to the filtered data. Example: provider,
-            service.
-        settings (Union[Unset, CostReportSettings]): Report settings.
-        created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
+        groupings (str | Unset): The grouping aggregations applied to the filtered data. Example: provider, service.
+        settings (CostReportSettings | Unset): Report settings.
+        created_at (str | Unset): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
             2021-07-09T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the CostReport is a part of.
-        previous_period_start_date (Union[Unset, str]): The previous period start date of the CostReport. ISO 8601
-            Formatted. Example: 2024-06-01.
-        previous_period_end_date (Union[Unset, str]): The previous period end date of the CostReport. ISO 8601
-            Formatted. Example: 2024-06-15.
-        start_date (Union[Unset, str]): The start date of the CostReports. ISO 8601 Formatted. Overwrites
-            'date_interval' if set. Example: 2024-07-01.
-        end_date (Union[Unset, str]): The end date of the CostReports. ISO 8601 Formatted. Overwrites 'date_interval' if
-            set. Example: 2024-07-15.
-        date_interval (Union[Unset, str]): The date interval of the CostReport.
-        chart_type (Union[Unset, str]): The chart type of the CostReport.
-        date_bin (Union[Unset, str]): The date bin of the CostReport.
+        workspace_token (str | Unset): The token for the Workspace the CostReport is a part of.
+        previous_period_start_date (str | Unset): The previous period start date of the CostReport. ISO 8601 Formatted.
+            Example: 2024-06-01.
+        previous_period_end_date (str | Unset): The previous period end date of the CostReport. ISO 8601 Formatted.
+            Example: 2024-06-15.
+        start_date (str | Unset): The start date of the CostReports. ISO 8601 Formatted. Overwrites 'date_interval' if
+            set. Example: 2024-07-01.
+        end_date (str | Unset): The end date of the CostReports. ISO 8601 Formatted. Overwrites 'date_interval' if set.
+            Example: 2024-07-15.
+        date_interval (str | Unset): The date interval of the CostReport.
+        chart_type (str | Unset): The chart type of the CostReport.
+        date_bin (str | Unset): The date bin of the CostReport.
+        chart_settings (ChartSettings | Unset):
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    folder_token: Union[Unset, str] = UNSET
-    saved_filter_tokens: Union[Unset, list[str]] = UNSET
-    business_metric_tokens_with_metadata: Union[Unset, list["AttachedBusinessMetricForCostReport"]] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    groupings: Union[Unset, str] = UNSET
-    settings: Union[Unset, "CostReportSettings"] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    previous_period_start_date: Union[Unset, str] = UNSET
-    previous_period_end_date: Union[Unset, str] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    date_interval: Union[Unset, str] = UNSET
-    chart_type: Union[Unset, str] = UNSET
-    date_bin: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    folder_token: str | Unset = UNSET
+    saved_filter_tokens: list[str] | Unset = UNSET
+    business_metric_tokens_with_metadata: list[AttachedBusinessMetricForCostReport] | Unset = UNSET
+    filter_: str | Unset = UNSET
+    groupings: str | Unset = UNSET
+    settings: CostReportSettings | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    previous_period_start_date: str | Unset = UNSET
+    previous_period_end_date: str | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    date_interval: str | Unset = UNSET
+    chart_type: str | Unset = UNSET
+    date_bin: str | Unset = UNSET
+    chart_settings: ChartSettings | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -72,11 +76,11 @@ class CostReport:
 
         folder_token = self.folder_token
 
-        saved_filter_tokens: Union[Unset, list[str]] = UNSET
+        saved_filter_tokens: list[str] | Unset = UNSET
         if not isinstance(self.saved_filter_tokens, Unset):
             saved_filter_tokens = self.saved_filter_tokens
 
-        business_metric_tokens_with_metadata: Union[Unset, list[dict[str, Any]]] = UNSET
+        business_metric_tokens_with_metadata: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.business_metric_tokens_with_metadata, Unset):
             business_metric_tokens_with_metadata = []
             for business_metric_tokens_with_metadata_item_data in self.business_metric_tokens_with_metadata:
@@ -87,7 +91,7 @@ class CostReport:
 
         groupings = self.groupings
 
-        settings: Union[Unset, dict[str, Any]] = UNSET
+        settings: dict[str, Any] | Unset = UNSET
         if not isinstance(self.settings, Unset):
             settings = self.settings.to_dict()
 
@@ -108,6 +112,10 @@ class CostReport:
         chart_type = self.chart_type
 
         date_bin = self.date_bin
+
+        chart_settings: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.chart_settings, Unset):
+            chart_settings = self.chart_settings.to_dict()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -146,12 +154,15 @@ class CostReport:
             field_dict["chart_type"] = chart_type
         if date_bin is not UNSET:
             field_dict["date_bin"] = date_bin
+        if chart_settings is not UNSET:
+            field_dict["chart_settings"] = chart_settings
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.attached_business_metric_for_cost_report import AttachedBusinessMetricForCostReport
+        from ..models.chart_settings import ChartSettings
         from ..models.cost_report_settings import CostReportSettings
 
         d = dict(src_dict)
@@ -163,21 +174,23 @@ class CostReport:
 
         saved_filter_tokens = cast(list[str], d.pop("saved_filter_tokens", UNSET))
 
-        business_metric_tokens_with_metadata = []
         _business_metric_tokens_with_metadata = d.pop("business_metric_tokens_with_metadata", UNSET)
-        for business_metric_tokens_with_metadata_item_data in _business_metric_tokens_with_metadata or []:
-            business_metric_tokens_with_metadata_item = AttachedBusinessMetricForCostReport.from_dict(
-                business_metric_tokens_with_metadata_item_data
-            )
+        business_metric_tokens_with_metadata: list[AttachedBusinessMetricForCostReport] | Unset = UNSET
+        if _business_metric_tokens_with_metadata is not UNSET:
+            business_metric_tokens_with_metadata = []
+            for business_metric_tokens_with_metadata_item_data in _business_metric_tokens_with_metadata:
+                business_metric_tokens_with_metadata_item = AttachedBusinessMetricForCostReport.from_dict(
+                    business_metric_tokens_with_metadata_item_data
+                )
 
-            business_metric_tokens_with_metadata.append(business_metric_tokens_with_metadata_item)
+                business_metric_tokens_with_metadata.append(business_metric_tokens_with_metadata_item)
 
         filter_ = d.pop("filter", UNSET)
 
         groupings = d.pop("groupings", UNSET)
 
         _settings = d.pop("settings", UNSET)
-        settings: Union[Unset, CostReportSettings]
+        settings: CostReportSettings | Unset
         if isinstance(_settings, Unset):
             settings = UNSET
         else:
@@ -201,6 +214,13 @@ class CostReport:
 
         date_bin = d.pop("date_bin", UNSET)
 
+        _chart_settings = d.pop("chart_settings", UNSET)
+        chart_settings: ChartSettings | Unset
+        if isinstance(_chart_settings, Unset):
+            chart_settings = UNSET
+        else:
+            chart_settings = ChartSettings.from_dict(_chart_settings)
+
         cost_report = cls(
             token=token,
             title=title,
@@ -219,6 +239,7 @@ class CostReport:
             date_interval=date_interval,
             chart_type=chart_type,
             date_bin=date_bin,
+            chart_settings=chart_settings,
         )
 
         cost_report.additional_properties = d

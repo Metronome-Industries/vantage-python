@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -31,16 +31,18 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[AnomalyNotification, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> AnomalyNotification | Errors | None:
     if response.status_code == 201:
         response_201 = AnomalyNotification.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -48,8 +50,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[AnomalyNotification, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[AnomalyNotification | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -62,8 +64,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateAnomalyNotification,
-) -> Response[Union[AnomalyNotification, Errors]]:
-    """Create an Anomaly Notification for a Cost Report.
+) -> Response[AnomalyNotification | Errors]:
+    """Create anomaly notification
+
+     Create an Anomaly Notification for a Cost Report.
 
     Args:
         body (CreateAnomalyNotification): Create an Anomaly Notification for a Cost Report.
@@ -73,7 +77,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AnomalyNotification, Errors]]
+        Response[AnomalyNotification | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -91,8 +95,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: CreateAnomalyNotification,
-) -> Optional[Union[AnomalyNotification, Errors]]:
-    """Create an Anomaly Notification for a Cost Report.
+) -> AnomalyNotification | Errors | None:
+    """Create anomaly notification
+
+     Create an Anomaly Notification for a Cost Report.
 
     Args:
         body (CreateAnomalyNotification): Create an Anomaly Notification for a Cost Report.
@@ -102,7 +108,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AnomalyNotification, Errors]
+        AnomalyNotification | Errors
     """
 
     return sync_detailed(
@@ -115,8 +121,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateAnomalyNotification,
-) -> Response[Union[AnomalyNotification, Errors]]:
-    """Create an Anomaly Notification for a Cost Report.
+) -> Response[AnomalyNotification | Errors]:
+    """Create anomaly notification
+
+     Create an Anomaly Notification for a Cost Report.
 
     Args:
         body (CreateAnomalyNotification): Create an Anomaly Notification for a Cost Report.
@@ -126,7 +134,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[AnomalyNotification, Errors]]
+        Response[AnomalyNotification | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -142,8 +150,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateAnomalyNotification,
-) -> Optional[Union[AnomalyNotification, Errors]]:
-    """Create an Anomaly Notification for a Cost Report.
+) -> AnomalyNotification | Errors | None:
+    """Create anomaly notification
+
+     Create an Anomaly Notification for a Cost Report.
 
     Args:
         body (CreateAnomalyNotification): Create an Anomaly Notification for a Cost Report.
@@ -153,7 +163,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[AnomalyNotification, Errors]
+        AnomalyNotification | Errors
     """
 
     return (

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class CostServices:
     """CostServices model
 
     Attributes:
-        links (Union[Unset, CostServicesLinks]):
-        cost_services (Union[Unset, list['CostService']]):
+        links (CostServicesLinks | Unset):
+        cost_services (list[CostService] | Unset):
     """
 
-    links: Union[Unset, "CostServicesLinks"] = UNSET
-    cost_services: Union[Unset, list["CostService"]] = UNSET
+    links: CostServicesLinks | Unset = UNSET
+    cost_services: list[CostService] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        cost_services: Union[Unset, list[dict[str, Any]]] = UNSET
+        cost_services: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.cost_services, Unset):
             cost_services = []
             for cost_services_item_data in self.cost_services:
@@ -56,18 +58,20 @@ class CostServices:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, CostServicesLinks]
+        links: CostServicesLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = CostServicesLinks.from_dict(_links)
 
-        cost_services = []
         _cost_services = d.pop("cost_services", UNSET)
-        for cost_services_item_data in _cost_services or []:
-            cost_services_item = CostService.from_dict(cost_services_item_data)
+        cost_services: list[CostService] | Unset = UNSET
+        if _cost_services is not UNSET:
+            cost_services = []
+            for cost_services_item_data in _cost_services:
+                cost_services_item = CostService.from_dict(cost_services_item_data)
 
-            cost_services.append(cost_services_item)
+                cost_services.append(cost_services_item)
 
         cost_services = cls(
             links=links,

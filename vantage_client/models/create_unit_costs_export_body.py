@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,21 +17,21 @@ class CreateUnitCostsExportBody:
     """
     Attributes:
         cost_report_token (str): The CostReport token.
-        workspace_token (Union[Unset, str]): The token of the Workspace to query costs from. Required if the API token
-            is associated with multiple Workspaces.
-        start_date (Union[Unset, str]): First date you would like to filter unit costs from. Defaults to the report's
-            default. ISO 8601 formatted.
-        end_date (Union[Unset, str]): Last date you would like to filter unit costs to. Defaults to the report's
-            default. ISO 8601 formatted.
-        date_bin (Union[Unset, CreateUnitCostsExportBodyDateBin]): The date bin of the unit costs. Defaults to the
-            report's default or day.
+        workspace_token (str | Unset): The token of the Workspace to query costs from. Required if the API token is
+            associated with multiple Workspaces.
+        start_date (str | Unset): First date you would like to filter unit costs from. Defaults to the report's default.
+            ISO 8601 formatted.
+        end_date (str | Unset): Last date you would like to filter unit costs to. Defaults to the report's default. ISO
+            8601 formatted.
+        date_bin (CreateUnitCostsExportBodyDateBin | Unset): The date bin of the unit costs. Defaults to the report's
+            default or day.
     """
 
     cost_report_token: str
-    workspace_token: Union[Unset, str] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    date_bin: Union[Unset, CreateUnitCostsExportBodyDateBin] = UNSET
+    workspace_token: str | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    date_bin: CreateUnitCostsExportBodyDateBin | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -41,7 +43,7 @@ class CreateUnitCostsExportBody:
 
         end_date = self.end_date
 
-        date_bin: Union[Unset, str] = UNSET
+        date_bin: str | Unset = UNSET
         if not isinstance(self.date_bin, Unset):
             date_bin = self.date_bin.value
 
@@ -75,7 +77,7 @@ class CreateUnitCostsExportBody:
         end_date = d.pop("end_date", UNSET)
 
         _date_bin = d.pop("date_bin", UNSET)
-        date_bin: Union[Unset, CreateUnitCostsExportBodyDateBin]
+        date_bin: CreateUnitCostsExportBodyDateBin | Unset
         if isinstance(_date_bin, Unset):
             date_bin = UNSET
         else:

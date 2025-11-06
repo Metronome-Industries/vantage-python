@@ -1,19 +1,19 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
 from ...models.billing_profile import BillingProfile
-from ...models.create_billing_profile_body import CreateBillingProfileBody
+from ...models.create_billing_profile import CreateBillingProfile
 from ...models.errors import Errors
 from ...types import Response
 
 
 def _get_kwargs(
     *,
-    body: CreateBillingProfileBody,
+    body: CreateBillingProfile,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -31,16 +31,18 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[BillingProfile, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> BillingProfile | Errors | None:
     if response.status_code == 201:
         response_201 = BillingProfile.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -48,8 +50,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[BillingProfile, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[BillingProfile | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -61,21 +63,21 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: CreateBillingProfileBody,
-) -> Response[Union[BillingProfile, Errors]]:
-    """Create a new Billing Profile.
+    body: CreateBillingProfile,
+) -> Response[BillingProfile | Errors]:
+    """Create billing profile
 
-     Requires MSP invoicing to be enabled on the account.
+     Create a billing profile (MSP invoicing required).
 
     Args:
-        body (CreateBillingProfileBody):
+        body (CreateBillingProfile): Create a billing profile (MSP invoicing required).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BillingProfile, Errors]]
+        Response[BillingProfile | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -92,21 +94,21 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: CreateBillingProfileBody,
-) -> Optional[Union[BillingProfile, Errors]]:
-    """Create a new Billing Profile.
+    body: CreateBillingProfile,
+) -> BillingProfile | Errors | None:
+    """Create billing profile
 
-     Requires MSP invoicing to be enabled on the account.
+     Create a billing profile (MSP invoicing required).
 
     Args:
-        body (CreateBillingProfileBody):
+        body (CreateBillingProfile): Create a billing profile (MSP invoicing required).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BillingProfile, Errors]
+        BillingProfile | Errors
     """
 
     return sync_detailed(
@@ -118,21 +120,21 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: CreateBillingProfileBody,
-) -> Response[Union[BillingProfile, Errors]]:
-    """Create a new Billing Profile.
+    body: CreateBillingProfile,
+) -> Response[BillingProfile | Errors]:
+    """Create billing profile
 
-     Requires MSP invoicing to be enabled on the account.
+     Create a billing profile (MSP invoicing required).
 
     Args:
-        body (CreateBillingProfileBody):
+        body (CreateBillingProfile): Create a billing profile (MSP invoicing required).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BillingProfile, Errors]]
+        Response[BillingProfile | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -147,21 +149,21 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: CreateBillingProfileBody,
-) -> Optional[Union[BillingProfile, Errors]]:
-    """Create a new Billing Profile.
+    body: CreateBillingProfile,
+) -> BillingProfile | Errors | None:
+    """Create billing profile
 
-     Requires MSP invoicing to be enabled on the account.
+     Create a billing profile (MSP invoicing required).
 
     Args:
-        body (CreateBillingProfileBody):
+        body (CreateBillingProfile): Create a billing profile (MSP invoicing required).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BillingProfile, Errors]
+        BillingProfile | Errors
     """
 
     return (

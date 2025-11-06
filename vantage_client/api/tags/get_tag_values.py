@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -15,15 +15,15 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     key: str,
     *,
-    providers: Union[Unset, list[GetTagValuesProvidersItem]] = UNSET,
-    sort_direction: Union[Unset, GetTagValuesSortDirection] = GetTagValuesSortDirection.ASC,
-    search_query: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
+    providers: list[GetTagValuesProvidersItem] | Unset = UNSET,
+    sort_direction: GetTagValuesSortDirection | Unset = GetTagValuesSortDirection.ASC,
+    search_query: str | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
-    json_providers: Union[Unset, list[str]] = UNSET
+    json_providers: list[str] | Unset = UNSET
     if not isinstance(providers, Unset):
         json_providers = []
         for providers_item_data in providers:
@@ -32,7 +32,7 @@ def _get_kwargs(
 
     params["providers"] = json_providers
 
-    json_sort_direction: Union[Unset, str] = UNSET
+    json_sort_direction: str | Unset = UNSET
     if not isinstance(sort_direction, Unset):
         json_sort_direction = sort_direction.value
 
@@ -55,26 +55,24 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, TagValues]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | TagValues | None:
     if response.status_code == 200:
         response_200 = TagValues.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, TagValues]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors | TagValues]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -87,29 +85,31 @@ def sync_detailed(
     key: str,
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagValuesProvidersItem]] = UNSET,
-    sort_direction: Union[Unset, GetTagValuesSortDirection] = GetTagValuesSortDirection.ASC,
-    search_query: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
-) -> Response[Union[Errors, TagValues]]:
-    """Returns corresponding TagValues for a given Tag.
+    providers: list[GetTagValuesProvidersItem] | Unset = UNSET,
+    sort_direction: GetTagValuesSortDirection | Unset = GetTagValuesSortDirection.ASC,
+    search_query: str | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
+) -> Response[Errors | TagValues]:
+    """Get tag values
+
+     Returns corresponding TagValues for a given Tag.
 
     Args:
         key (str):
-        providers (Union[Unset, list[GetTagValuesProvidersItem]]):
-        sort_direction (Union[Unset, GetTagValuesSortDirection]):  Default:
+        providers (list[GetTagValuesProvidersItem] | Unset):
+        sort_direction (GetTagValuesSortDirection | Unset):  Default:
             GetTagValuesSortDirection.ASC.
-        search_query (Union[Unset, str]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        search_query (str | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, TagValues]]
+        Response[Errors | TagValues]
     """
 
     kwargs = _get_kwargs(
@@ -132,29 +132,31 @@ def sync(
     key: str,
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagValuesProvidersItem]] = UNSET,
-    sort_direction: Union[Unset, GetTagValuesSortDirection] = GetTagValuesSortDirection.ASC,
-    search_query: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
-) -> Optional[Union[Errors, TagValues]]:
-    """Returns corresponding TagValues for a given Tag.
+    providers: list[GetTagValuesProvidersItem] | Unset = UNSET,
+    sort_direction: GetTagValuesSortDirection | Unset = GetTagValuesSortDirection.ASC,
+    search_query: str | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
+) -> Errors | TagValues | None:
+    """Get tag values
+
+     Returns corresponding TagValues for a given Tag.
 
     Args:
         key (str):
-        providers (Union[Unset, list[GetTagValuesProvidersItem]]):
-        sort_direction (Union[Unset, GetTagValuesSortDirection]):  Default:
+        providers (list[GetTagValuesProvidersItem] | Unset):
+        sort_direction (GetTagValuesSortDirection | Unset):  Default:
             GetTagValuesSortDirection.ASC.
-        search_query (Union[Unset, str]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        search_query (str | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, TagValues]
+        Errors | TagValues
     """
 
     return sync_detailed(
@@ -172,29 +174,31 @@ async def asyncio_detailed(
     key: str,
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagValuesProvidersItem]] = UNSET,
-    sort_direction: Union[Unset, GetTagValuesSortDirection] = GetTagValuesSortDirection.ASC,
-    search_query: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
-) -> Response[Union[Errors, TagValues]]:
-    """Returns corresponding TagValues for a given Tag.
+    providers: list[GetTagValuesProvidersItem] | Unset = UNSET,
+    sort_direction: GetTagValuesSortDirection | Unset = GetTagValuesSortDirection.ASC,
+    search_query: str | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
+) -> Response[Errors | TagValues]:
+    """Get tag values
+
+     Returns corresponding TagValues for a given Tag.
 
     Args:
         key (str):
-        providers (Union[Unset, list[GetTagValuesProvidersItem]]):
-        sort_direction (Union[Unset, GetTagValuesSortDirection]):  Default:
+        providers (list[GetTagValuesProvidersItem] | Unset):
+        sort_direction (GetTagValuesSortDirection | Unset):  Default:
             GetTagValuesSortDirection.ASC.
-        search_query (Union[Unset, str]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        search_query (str | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, TagValues]]
+        Response[Errors | TagValues]
     """
 
     kwargs = _get_kwargs(
@@ -215,29 +219,31 @@ async def asyncio(
     key: str,
     *,
     client: AuthenticatedClient,
-    providers: Union[Unset, list[GetTagValuesProvidersItem]] = UNSET,
-    sort_direction: Union[Unset, GetTagValuesSortDirection] = GetTagValuesSortDirection.ASC,
-    search_query: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = 1,
-    limit: Union[Unset, int] = 100,
-) -> Optional[Union[Errors, TagValues]]:
-    """Returns corresponding TagValues for a given Tag.
+    providers: list[GetTagValuesProvidersItem] | Unset = UNSET,
+    sort_direction: GetTagValuesSortDirection | Unset = GetTagValuesSortDirection.ASC,
+    search_query: str | Unset = UNSET,
+    page: int | Unset = 1,
+    limit: int | Unset = 100,
+) -> Errors | TagValues | None:
+    """Get tag values
+
+     Returns corresponding TagValues for a given Tag.
 
     Args:
         key (str):
-        providers (Union[Unset, list[GetTagValuesProvidersItem]]):
-        sort_direction (Union[Unset, GetTagValuesSortDirection]):  Default:
+        providers (list[GetTagValuesProvidersItem] | Unset):
+        sort_direction (GetTagValuesSortDirection | Unset):  Default:
             GetTagValuesSortDirection.ASC.
-        search_query (Union[Unset, str]):
-        page (Union[Unset, int]):  Default: 1.
-        limit (Union[Unset, int]):  Default: 100.
+        search_query (str | Unset):
+        page (int | Unset):  Default: 1.
+        limit (int | Unset):  Default: 100.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, TagValues]
+        Errors | TagValues
     """
 
     return (

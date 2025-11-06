@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -15,12 +15,12 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     cost_report_token: str,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    date_bin: Union[Unset, GetUnitCostsDateBin] = UNSET,
-    order: Union[Unset, GetUnitCostsOrder] = GetUnitCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    date_bin: GetUnitCostsDateBin | Unset = UNSET,
+    order: GetUnitCostsOrder | Unset = GetUnitCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -30,13 +30,13 @@ def _get_kwargs(
 
     params["end_date"] = end_date
 
-    json_date_bin: Union[Unset, str] = UNSET
+    json_date_bin: str | Unset = UNSET
     if not isinstance(date_bin, Unset):
         json_date_bin = date_bin.value
 
     params["date_bin"] = json_date_bin
 
-    json_order: Union[Unset, str] = UNSET
+    json_order: str | Unset = UNSET
     if not isinstance(order, Unset):
         json_order = order.value
 
@@ -57,34 +57,34 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, UnitCosts]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | UnitCosts | None:
     if response.status_code == 200:
         response_200 = UnitCosts.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 402:
         response_402 = Errors.from_dict(response.json())
 
         return response_402
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, UnitCosts]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors | UnitCosts]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -97,30 +97,32 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     cost_report_token: str,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    date_bin: Union[Unset, GetUnitCostsDateBin] = UNSET,
-    order: Union[Unset, GetUnitCostsOrder] = GetUnitCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-) -> Response[Union[Errors, UnitCosts]]:
-    """Return all UnitCosts for a CostReport.
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    date_bin: GetUnitCostsDateBin | Unset = UNSET,
+    order: GetUnitCostsOrder | Unset = GetUnitCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+) -> Response[Errors | UnitCosts]:
+    """Get all unit costs for a cost report
+
+     Return all UnitCosts for a CostReport.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        date_bin (Union[Unset, GetUnitCostsDateBin]):
-        order (Union[Unset, GetUnitCostsOrder]):  Default: GetUnitCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        date_bin (GetUnitCostsDateBin | Unset):
+        order (GetUnitCostsOrder | Unset):  Default: GetUnitCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, UnitCosts]]
+        Response[Errors | UnitCosts]
     """
 
     kwargs = _get_kwargs(
@@ -144,30 +146,32 @@ def sync(
     *,
     client: AuthenticatedClient,
     cost_report_token: str,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    date_bin: Union[Unset, GetUnitCostsDateBin] = UNSET,
-    order: Union[Unset, GetUnitCostsOrder] = GetUnitCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-) -> Optional[Union[Errors, UnitCosts]]:
-    """Return all UnitCosts for a CostReport.
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    date_bin: GetUnitCostsDateBin | Unset = UNSET,
+    order: GetUnitCostsOrder | Unset = GetUnitCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+) -> Errors | UnitCosts | None:
+    """Get all unit costs for a cost report
+
+     Return all UnitCosts for a CostReport.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        date_bin (Union[Unset, GetUnitCostsDateBin]):
-        order (Union[Unset, GetUnitCostsOrder]):  Default: GetUnitCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        date_bin (GetUnitCostsDateBin | Unset):
+        order (GetUnitCostsOrder | Unset):  Default: GetUnitCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, UnitCosts]
+        Errors | UnitCosts
     """
 
     return sync_detailed(
@@ -186,30 +190,32 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     cost_report_token: str,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    date_bin: Union[Unset, GetUnitCostsDateBin] = UNSET,
-    order: Union[Unset, GetUnitCostsOrder] = GetUnitCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-) -> Response[Union[Errors, UnitCosts]]:
-    """Return all UnitCosts for a CostReport.
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    date_bin: GetUnitCostsDateBin | Unset = UNSET,
+    order: GetUnitCostsOrder | Unset = GetUnitCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+) -> Response[Errors | UnitCosts]:
+    """Get all unit costs for a cost report
+
+     Return all UnitCosts for a CostReport.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        date_bin (Union[Unset, GetUnitCostsDateBin]):
-        order (Union[Unset, GetUnitCostsOrder]):  Default: GetUnitCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        date_bin (GetUnitCostsDateBin | Unset):
+        order (GetUnitCostsOrder | Unset):  Default: GetUnitCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, UnitCosts]]
+        Response[Errors | UnitCosts]
     """
 
     kwargs = _get_kwargs(
@@ -231,30 +237,32 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     cost_report_token: str,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    date_bin: Union[Unset, GetUnitCostsDateBin] = UNSET,
-    order: Union[Unset, GetUnitCostsOrder] = GetUnitCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-) -> Optional[Union[Errors, UnitCosts]]:
-    """Return all UnitCosts for a CostReport.
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    date_bin: GetUnitCostsDateBin | Unset = UNSET,
+    order: GetUnitCostsOrder | Unset = GetUnitCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+) -> Errors | UnitCosts | None:
+    """Get all unit costs for a cost report
+
+     Return all UnitCosts for a CostReport.
 
     Args:
         cost_report_token (str):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        date_bin (Union[Unset, GetUnitCostsDateBin]):
-        order (Union[Unset, GetUnitCostsOrder]):  Default: GetUnitCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        date_bin (GetUnitCostsDateBin | Unset):
+        order (GetUnitCostsOrder | Unset):  Default: GetUnitCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, UnitCosts]
+        Errors | UnitCosts
     """
 
     return (

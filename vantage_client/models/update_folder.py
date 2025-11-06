@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,15 +16,15 @@ class UpdateFolder:
     """Update a Folder for CostReports.
 
     Attributes:
-        title (Union[Unset, str]): The title of the Folder.
-        parent_folder_token (Union[Unset, str]): The token of the parent Folder.
-        saved_filter_tokens (Union[Unset, list[str]]): The tokens of the SavedFilters to apply to any Cost Report
-            contained within the Folder.
+        title (str | Unset): The title of the Folder.
+        parent_folder_token (str | Unset): The token of the parent Folder.
+        saved_filter_tokens (list[str] | Unset): The tokens of the SavedFilters to apply to any Cost Report contained
+            within the Folder.
     """
 
-    title: Union[Unset, str] = UNSET
-    parent_folder_token: Union[Unset, str] = UNSET
-    saved_filter_tokens: Union[Unset, list[str]] = UNSET
+    title: str | Unset = UNSET
+    parent_folder_token: str | Unset = UNSET
+    saved_filter_tokens: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -30,7 +32,7 @@ class UpdateFolder:
 
         parent_folder_token = self.parent_folder_token
 
-        saved_filter_tokens: Union[Unset, list[str]] = UNSET
+        saved_filter_tokens: list[str] | Unset = UNSET
         if not isinstance(self.saved_filter_tokens, Unset):
             saved_filter_tokens = self.saved_filter_tokens
 

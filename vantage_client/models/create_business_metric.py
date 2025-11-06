@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -24,44 +26,43 @@ class CreateBusinessMetric:
 
     Attributes:
         title (str): The title of the BusinessMetrics.
-        cost_report_tokens_with_metadata (Union[Unset, list['CreateBusinessMetricCostReportTokensWithMetadataItem']]):
-            The tokens for any CostReports that use the BusinessMetric, the unit scale, and label filter.
-        values (Union[Unset, list['CreateBusinessMetricValuesItem']]): The dates, amounts, and (optional) labels for the
+        cost_report_tokens_with_metadata (list[CreateBusinessMetricCostReportTokensWithMetadataItem] | Unset): The
+            tokens for any CostReports that use the BusinessMetric, the unit scale, and label filter.
+        values (list[CreateBusinessMetricValuesItem] | Unset): The dates, amounts, and (optional) labels for the
             BusinessMetric.
-        datadog_metric_fields (Union[Unset, CreateBusinessMetricDatadogMetricFields]): Datadog metric configuration
-            fields
-        cloudwatch_fields (Union[Unset, CreateBusinessMetricCloudwatchFields]): Cloudwatch configuration fields.
+        datadog_metric_fields (CreateBusinessMetricDatadogMetricFields | Unset): Datadog metric configuration fields
+        cloudwatch_fields (CreateBusinessMetricCloudwatchFields | Unset): Cloudwatch configuration fields.
     """
 
     title: str
-    cost_report_tokens_with_metadata: Union[Unset, list["CreateBusinessMetricCostReportTokensWithMetadataItem"]] = UNSET
-    values: Union[Unset, list["CreateBusinessMetricValuesItem"]] = UNSET
-    datadog_metric_fields: Union[Unset, "CreateBusinessMetricDatadogMetricFields"] = UNSET
-    cloudwatch_fields: Union[Unset, "CreateBusinessMetricCloudwatchFields"] = UNSET
+    cost_report_tokens_with_metadata: list[CreateBusinessMetricCostReportTokensWithMetadataItem] | Unset = UNSET
+    values: list[CreateBusinessMetricValuesItem] | Unset = UNSET
+    datadog_metric_fields: CreateBusinessMetricDatadogMetricFields | Unset = UNSET
+    cloudwatch_fields: CreateBusinessMetricCloudwatchFields | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         title = self.title
 
-        cost_report_tokens_with_metadata: Union[Unset, list[dict[str, Any]]] = UNSET
+        cost_report_tokens_with_metadata: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.cost_report_tokens_with_metadata, Unset):
             cost_report_tokens_with_metadata = []
             for cost_report_tokens_with_metadata_item_data in self.cost_report_tokens_with_metadata:
                 cost_report_tokens_with_metadata_item = cost_report_tokens_with_metadata_item_data.to_dict()
                 cost_report_tokens_with_metadata.append(cost_report_tokens_with_metadata_item)
 
-        values: Union[Unset, list[dict[str, Any]]] = UNSET
+        values: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.values, Unset):
             values = []
             for values_item_data in self.values:
                 values_item = values_item_data.to_dict()
                 values.append(values_item)
 
-        datadog_metric_fields: Union[Unset, dict[str, Any]] = UNSET
+        datadog_metric_fields: dict[str, Any] | Unset = UNSET
         if not isinstance(self.datadog_metric_fields, Unset):
             datadog_metric_fields = self.datadog_metric_fields.to_dict()
 
-        cloudwatch_fields: Union[Unset, dict[str, Any]] = UNSET
+        cloudwatch_fields: dict[str, Any] | Unset = UNSET
         if not isinstance(self.cloudwatch_fields, Unset):
             cloudwatch_fields = self.cloudwatch_fields.to_dict()
 
@@ -95,31 +96,35 @@ class CreateBusinessMetric:
         d = dict(src_dict)
         title = d.pop("title")
 
-        cost_report_tokens_with_metadata = []
         _cost_report_tokens_with_metadata = d.pop("cost_report_tokens_with_metadata", UNSET)
-        for cost_report_tokens_with_metadata_item_data in _cost_report_tokens_with_metadata or []:
-            cost_report_tokens_with_metadata_item = CreateBusinessMetricCostReportTokensWithMetadataItem.from_dict(
-                cost_report_tokens_with_metadata_item_data
-            )
+        cost_report_tokens_with_metadata: list[CreateBusinessMetricCostReportTokensWithMetadataItem] | Unset = UNSET
+        if _cost_report_tokens_with_metadata is not UNSET:
+            cost_report_tokens_with_metadata = []
+            for cost_report_tokens_with_metadata_item_data in _cost_report_tokens_with_metadata:
+                cost_report_tokens_with_metadata_item = CreateBusinessMetricCostReportTokensWithMetadataItem.from_dict(
+                    cost_report_tokens_with_metadata_item_data
+                )
 
-            cost_report_tokens_with_metadata.append(cost_report_tokens_with_metadata_item)
+                cost_report_tokens_with_metadata.append(cost_report_tokens_with_metadata_item)
 
-        values = []
         _values = d.pop("values", UNSET)
-        for values_item_data in _values or []:
-            values_item = CreateBusinessMetricValuesItem.from_dict(values_item_data)
+        values: list[CreateBusinessMetricValuesItem] | Unset = UNSET
+        if _values is not UNSET:
+            values = []
+            for values_item_data in _values:
+                values_item = CreateBusinessMetricValuesItem.from_dict(values_item_data)
 
-            values.append(values_item)
+                values.append(values_item)
 
         _datadog_metric_fields = d.pop("datadog_metric_fields", UNSET)
-        datadog_metric_fields: Union[Unset, CreateBusinessMetricDatadogMetricFields]
+        datadog_metric_fields: CreateBusinessMetricDatadogMetricFields | Unset
         if isinstance(_datadog_metric_fields, Unset):
             datadog_metric_fields = UNSET
         else:
             datadog_metric_fields = CreateBusinessMetricDatadogMetricFields.from_dict(_datadog_metric_fields)
 
         _cloudwatch_fields = d.pop("cloudwatch_fields", UNSET)
-        cloudwatch_fields: Union[Unset, CreateBusinessMetricCloudwatchFields]
+        cloudwatch_fields: CreateBusinessMetricCloudwatchFields | Unset
         if isinstance(_cloudwatch_fields, Unset):
             cloudwatch_fields = UNSET
         else:

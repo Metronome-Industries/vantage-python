@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Folders:
     """Folders model
 
     Attributes:
-        links (Union[Unset, FoldersLinks]):
-        folders (Union[Unset, list['Folder']]):
+        links (FoldersLinks | Unset):
+        folders (list[Folder] | Unset):
     """
 
-    links: Union[Unset, "FoldersLinks"] = UNSET
-    folders: Union[Unset, list["Folder"]] = UNSET
+    links: FoldersLinks | Unset = UNSET
+    folders: list[Folder] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        folders: Union[Unset, list[dict[str, Any]]] = UNSET
+        folders: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.folders, Unset):
             folders = []
             for folders_item_data in self.folders:
@@ -56,18 +58,20 @@ class Folders:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, FoldersLinks]
+        links: FoldersLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = FoldersLinks.from_dict(_links)
 
-        folders = []
         _folders = d.pop("folders", UNSET)
-        for folders_item_data in _folders or []:
-            folders_item = Folder.from_dict(folders_item_data)
+        folders: list[Folder] | Unset = UNSET
+        if _folders is not UNSET:
+            folders = []
+            for folders_item_data in _folders:
+                folders_item = Folder.from_dict(folders_item_data)
 
-            folders.append(folders_item)
+                folders.append(folders_item)
 
         folders = cls(
             links=links,

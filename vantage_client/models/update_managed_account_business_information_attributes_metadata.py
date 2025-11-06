@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,17 +22,15 @@ class UpdateManagedAccountBusinessInformationAttributesMetadata:
     """Business metadata including custom fields
 
     Attributes:
-        custom_fields (Union[Unset, list['UpdateManagedAccountBusinessInformationAttributesMetadataCustomFieldsItem']]):
-            Array of custom field objects
+        custom_fields (list[UpdateManagedAccountBusinessInformationAttributesMetadataCustomFieldsItem] | Unset): Array
+            of custom field objects
     """
 
-    custom_fields: Union[Unset, list["UpdateManagedAccountBusinessInformationAttributesMetadataCustomFieldsItem"]] = (
-        UNSET
-    )
+    custom_fields: list[UpdateManagedAccountBusinessInformationAttributesMetadataCustomFieldsItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        custom_fields: Union[Unset, list[dict[str, Any]]] = UNSET
+        custom_fields: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.custom_fields, Unset):
             custom_fields = []
             for custom_fields_item_data in self.custom_fields:
@@ -52,14 +52,18 @@ class UpdateManagedAccountBusinessInformationAttributesMetadata:
         )
 
         d = dict(src_dict)
-        custom_fields = []
         _custom_fields = d.pop("custom_fields", UNSET)
-        for custom_fields_item_data in _custom_fields or []:
-            custom_fields_item = UpdateManagedAccountBusinessInformationAttributesMetadataCustomFieldsItem.from_dict(
-                custom_fields_item_data
-            )
+        custom_fields: list[UpdateManagedAccountBusinessInformationAttributesMetadataCustomFieldsItem] | Unset = UNSET
+        if _custom_fields is not UNSET:
+            custom_fields = []
+            for custom_fields_item_data in _custom_fields:
+                custom_fields_item = (
+                    UpdateManagedAccountBusinessInformationAttributesMetadataCustomFieldsItem.from_dict(
+                        custom_fields_item_data
+                    )
+                )
 
-            custom_fields.append(custom_fields_item)
+                custom_fields.append(custom_fields_item)
 
         update_managed_account_business_information_attributes_metadata = cls(
             custom_fields=custom_fields,

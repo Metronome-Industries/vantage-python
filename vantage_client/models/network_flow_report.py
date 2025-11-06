@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,42 +16,42 @@ class NetworkFlowReport:
     """NetworkFlowReport model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the NetworkFlowReport. Example: Public Traffic Destinations.
-        default (Union[Unset, bool]): Indicates whether the NetworkFlowReport is the default report.
-        created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
+        token (str | Unset):
+        title (str | Unset): The title of the NetworkFlowReport. Example: Public Traffic Destinations.
+        default (bool | Unset): Indicates whether the NetworkFlowReport is the default report.
+        created_at (str | Unset): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
             2024-03-19T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the NetworkFlowReport is a part of.
-        created_by_token (Union[Unset, str]): The token for the User or Team that created this NetworkFlowReport.
-        start_date (Union[Unset, str]): The start date for the NetworkFlowReport. Only set for custom date ranges. ISO
-            8601 Formatted. Example: 2024-03-01.
-        end_date (Union[Unset, str]): The end date for the NetworkFlowReport. Only set for custom date ranges. ISO 8601
+        workspace_token (str | Unset): The token for the Workspace the NetworkFlowReport is a part of.
+        created_by_token (str | Unset): The token for the User or Team that created this NetworkFlowReport.
+        start_date (str | Unset): The start date for the NetworkFlowReport. Only set for custom date ranges. ISO 8601
+            Formatted. Example: 2024-03-01.
+        end_date (str | Unset): The end date for the NetworkFlowReport. Only set for custom date ranges. ISO 8601
             Formatted. Example: 2024-03-20.
-        date_interval (Union[Unset, str]): The date range for the NetworkFlowReport. Only present if a custom date range
-            is not specified. Example: last_month.
-        groupings (Union[Unset, str]): The grouping aggregations applied to the filtered data. Example: cost_type,
+        date_interval (str | Unset): The date range for the NetworkFlowReport. Only present if a custom date range is
+            not specified. Example: last_month.
+        groupings (str | Unset): The grouping aggregations applied to the filtered data. Example: cost_type,
             tag:account.
-        flow_direction (Union[Unset, str]): The flow weight of the NetworkFlowReport. Possible values: costs, bytes.
-            Example: ingress.
-        flow_weight (Union[Unset, str]): The flow weight of the NetworkFlowReport. Possible values: costs, bytes.
-            Example: costs.
-        filter_ (Union[Unset, str]): The filter applied to the NetworkFlowReport. Additional documentation available at
+        flow_direction (str | Unset): The flow weight of the NetworkFlowReport. Possible values: costs, bytes. Example:
+            ingress.
+        flow_weight (str | Unset): The flow weight of the NetworkFlowReport. Possible values: costs, bytes. Example:
+            costs.
+        filter_ (str | Unset): The filter applied to the NetworkFlowReport. Additional documentation available at
             https://docs.vantage.sh/vql.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    default: Union[Unset, bool] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    created_by_token: Union[Unset, str] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    date_interval: Union[Unset, str] = UNSET
-    groupings: Union[Unset, str] = UNSET
-    flow_direction: Union[Unset, str] = UNSET
-    flow_weight: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    default: bool | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    created_by_token: str | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    date_interval: str | Unset = UNSET
+    groupings: str | Unset = UNSET
+    flow_direction: str | Unset = UNSET
+    flow_weight: str | Unset = UNSET
+    filter_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

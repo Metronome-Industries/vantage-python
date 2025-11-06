@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,22 +21,22 @@ class ForecastedCosts:
     """ForecastedCosts model
 
     Attributes:
-        links (Union[Unset, ForecastedCostsLinks]):
-        forecasted_costs (Union[Unset, list['ForecastedCost']]):
-        currency (Union[Unset, str]): The currency of the forecasted costs. Example: USD.
+        links (ForecastedCostsLinks | Unset):
+        forecasted_costs (list[ForecastedCost] | Unset):
+        currency (str | Unset): The currency of the forecasted costs. Example: USD.
     """
 
-    links: Union[Unset, "ForecastedCostsLinks"] = UNSET
-    forecasted_costs: Union[Unset, list["ForecastedCost"]] = UNSET
-    currency: Union[Unset, str] = UNSET
+    links: ForecastedCostsLinks | Unset = UNSET
+    forecasted_costs: list[ForecastedCost] | Unset = UNSET
+    currency: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        forecasted_costs: Union[Unset, list[dict[str, Any]]] = UNSET
+        forecasted_costs: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.forecasted_costs, Unset):
             forecasted_costs = []
             for forecasted_costs_item_data in self.forecasted_costs:
@@ -62,18 +64,20 @@ class ForecastedCosts:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ForecastedCostsLinks]
+        links: ForecastedCostsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = ForecastedCostsLinks.from_dict(_links)
 
-        forecasted_costs = []
         _forecasted_costs = d.pop("forecasted_costs", UNSET)
-        for forecasted_costs_item_data in _forecasted_costs or []:
-            forecasted_costs_item = ForecastedCost.from_dict(forecasted_costs_item_data)
+        forecasted_costs: list[ForecastedCost] | Unset = UNSET
+        if _forecasted_costs is not UNSET:
+            forecasted_costs = []
+            for forecasted_costs_item_data in _forecasted_costs:
+                forecasted_costs_item = ForecastedCost.from_dict(forecasted_costs_item_data)
 
-            forecasted_costs.append(forecasted_costs_item)
+                forecasted_costs.append(forecasted_costs_item)
 
         currency = d.pop("currency", UNSET)
 

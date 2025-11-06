@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class DownloadInvoiceBodyFileType(str, Enum):
+class DownloadInvoiceFileType(str, Enum):
     CSV = "csv"
     PDF = "pdf"
 

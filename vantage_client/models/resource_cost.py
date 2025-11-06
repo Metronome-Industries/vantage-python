@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,12 +15,12 @@ T = TypeVar("T", bound="ResourceCost")
 class ResourceCost:
     """
     Attributes:
-        category (Union[Unset, str]): The category of the cost.
-        amount (Union[Unset, str]):
+        category (str | Unset): The category of the cost.
+        amount (str | Unset):
     """
 
-    category: Union[Unset, str] = UNSET
-    amount: Union[Unset, str] = UNSET
+    category: str | Unset = UNSET
+    amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

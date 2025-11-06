@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -16,26 +18,24 @@ class ReportNotification:
     """ReportNotification model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the ReportNotification. Example: Acme Report Notification.
-        cost_report_token (Union[Unset, str]): The token for a CostReport the ReportNotification is applied to. Example:
+        token (str | Unset):
+        title (str | Unset): The title of the ReportNotification. Example: Acme Report Notification.
+        cost_report_token (str | Unset): The token for a CostReport the ReportNotification is applied to. Example:
             rprt_abcd1234.
-        user_tokens (Union[Unset, list[str]]): The Users that receive the notification.
-        recipient_channels (Union[Unset, list[str]]): The Slack or Microsoft Teams channels that receive the
-            notification.
-        frequency (Union[Unset, ReportNotificationFrequency]): The frequency the ReportNotification is sent. Example:
-            weekly.
-        change (Union[Unset, ReportNotificationChange]): The type of change the ReportNotification is tracking. Example:
+        user_tokens (list[str] | Unset): The Users that receive the notification.
+        recipient_channels (list[str] | Unset): The Slack or Microsoft Teams channels that receive the notification.
+        frequency (ReportNotificationFrequency | Unset): The frequency the ReportNotification is sent. Example: weekly.
+        change (ReportNotificationChange | Unset): The type of change the ReportNotification is tracking. Example:
             percentage.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    cost_report_token: Union[Unset, str] = UNSET
-    user_tokens: Union[Unset, list[str]] = UNSET
-    recipient_channels: Union[Unset, list[str]] = UNSET
-    frequency: Union[Unset, ReportNotificationFrequency] = UNSET
-    change: Union[Unset, ReportNotificationChange] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    cost_report_token: str | Unset = UNSET
+    user_tokens: list[str] | Unset = UNSET
+    recipient_channels: list[str] | Unset = UNSET
+    frequency: ReportNotificationFrequency | Unset = UNSET
+    change: ReportNotificationChange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -45,19 +45,19 @@ class ReportNotification:
 
         cost_report_token = self.cost_report_token
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 
-        recipient_channels: Union[Unset, list[str]] = UNSET
+        recipient_channels: list[str] | Unset = UNSET
         if not isinstance(self.recipient_channels, Unset):
             recipient_channels = self.recipient_channels
 
-        frequency: Union[Unset, str] = UNSET
+        frequency: str | Unset = UNSET
         if not isinstance(self.frequency, Unset):
             frequency = self.frequency.value
 
-        change: Union[Unset, str] = UNSET
+        change: str | Unset = UNSET
         if not isinstance(self.change, Unset):
             change = self.change.value
 
@@ -95,14 +95,14 @@ class ReportNotification:
         recipient_channels = cast(list[str], d.pop("recipient_channels", UNSET))
 
         _frequency = d.pop("frequency", UNSET)
-        frequency: Union[Unset, ReportNotificationFrequency]
+        frequency: ReportNotificationFrequency | Unset
         if isinstance(_frequency, Unset):
             frequency = UNSET
         else:
             frequency = ReportNotificationFrequency(_frequency)
 
         _change = d.pop("change", UNSET)
-        change: Union[Unset, ReportNotificationChange]
+        change: ReportNotificationChange | Unset
         if isinstance(_change, Unset):
             change = UNSET
         else:

@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -21,18 +21,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Errors]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | None:
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Errors]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -47,7 +48,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Errors]:
-    """Delete a UserCostsUpload.
+    """Delete user costs upload
+
+     Delete a UserCostsUpload.
 
     Args:
         integration_token (str):
@@ -78,8 +81,10 @@ def sync(
     user_costs_upload_token: int,
     *,
     client: AuthenticatedClient,
-) -> Optional[Errors]:
-    """Delete a UserCostsUpload.
+) -> Errors | None:
+    """Delete user costs upload
+
+     Delete a UserCostsUpload.
 
     Args:
         integration_token (str):
@@ -106,7 +111,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Errors]:
-    """Delete a UserCostsUpload.
+    """Delete user costs upload
+
+     Delete a UserCostsUpload.
 
     Args:
         integration_token (str):
@@ -135,8 +142,10 @@ async def asyncio(
     user_costs_upload_token: int,
     *,
     client: AuthenticatedClient,
-) -> Optional[Errors]:
-    """Delete a UserCostsUpload.
+) -> Errors | None:
+    """Delete user costs upload
+
+     Delete a UserCostsUpload.
 
     Args:
         integration_token (str):

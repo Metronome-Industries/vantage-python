@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -15,10 +15,7 @@ from ...types import Response
 def _get_kwargs(
     business_metric_token: str,
     *,
-    body: Union[
-        UpdateBusinessMetricValuesCSVDataBody,
-        UpdateBusinessMetricValuesCSVFilesBody,
-    ],
+    body: UpdateBusinessMetricValuesCSVDataBody | UpdateBusinessMetricValuesCSVFilesBody,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -41,28 +38,33 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[BusinessMetric, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> BusinessMetric | Errors | None:
     if response.status_code == 201:
         response_201 = BusinessMetric.from_dict(response.json())
 
         return response_201
-    if response.status_code == 404:
-        response_404 = Errors.from_dict(response.json())
 
-        return response_404
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
-    if response.status_code == 422:
-        response_422 = Errors.from_dict(response.json())
 
-        return response_422
     if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
+
+    if response.status_code == 404:
+        response_404 = Errors.from_dict(response.json())
+
+        return response_404
+
+    if response.status_code == 422:
+        response_422 = Errors.from_dict(response.json())
+
+        return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -70,8 +72,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[BusinessMetric, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[BusinessMetric | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,12 +86,11 @@ def sync_detailed(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBusinessMetricValuesCSVDataBody,
-        UpdateBusinessMetricValuesCSVFilesBody,
-    ],
-) -> Response[Union[BusinessMetric, Errors]]:
-    """Updates the values for an existing BusinessMetric from a CSV file.
+    body: UpdateBusinessMetricValuesCSVDataBody | UpdateBusinessMetricValuesCSVFilesBody,
+) -> Response[BusinessMetric | Errors]:
+    """Update business metric values from CSV
+
+     Updates the values for an existing BusinessMetric from a CSV file.
 
     Args:
         business_metric_token (str):
@@ -101,7 +102,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BusinessMetric, Errors]]
+        Response[BusinessMetric | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -120,12 +121,11 @@ def sync(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBusinessMetricValuesCSVDataBody,
-        UpdateBusinessMetricValuesCSVFilesBody,
-    ],
-) -> Optional[Union[BusinessMetric, Errors]]:
-    """Updates the values for an existing BusinessMetric from a CSV file.
+    body: UpdateBusinessMetricValuesCSVDataBody | UpdateBusinessMetricValuesCSVFilesBody,
+) -> BusinessMetric | Errors | None:
+    """Update business metric values from CSV
+
+     Updates the values for an existing BusinessMetric from a CSV file.
 
     Args:
         business_metric_token (str):
@@ -137,7 +137,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BusinessMetric, Errors]
+        BusinessMetric | Errors
     """
 
     return sync_detailed(
@@ -151,12 +151,11 @@ async def asyncio_detailed(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBusinessMetricValuesCSVDataBody,
-        UpdateBusinessMetricValuesCSVFilesBody,
-    ],
-) -> Response[Union[BusinessMetric, Errors]]:
-    """Updates the values for an existing BusinessMetric from a CSV file.
+    body: UpdateBusinessMetricValuesCSVDataBody | UpdateBusinessMetricValuesCSVFilesBody,
+) -> Response[BusinessMetric | Errors]:
+    """Update business metric values from CSV
+
+     Updates the values for an existing BusinessMetric from a CSV file.
 
     Args:
         business_metric_token (str):
@@ -168,7 +167,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BusinessMetric, Errors]]
+        Response[BusinessMetric | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -185,12 +184,11 @@ async def asyncio(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    body: Union[
-        UpdateBusinessMetricValuesCSVDataBody,
-        UpdateBusinessMetricValuesCSVFilesBody,
-    ],
-) -> Optional[Union[BusinessMetric, Errors]]:
-    """Updates the values for an existing BusinessMetric from a CSV file.
+    body: UpdateBusinessMetricValuesCSVDataBody | UpdateBusinessMetricValuesCSVFilesBody,
+) -> BusinessMetric | Errors | None:
+    """Update business metric values from CSV
+
+     Updates the values for an existing BusinessMetric from a CSV file.
 
     Args:
         business_metric_token (str):
@@ -202,7 +200,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BusinessMetric, Errors]
+        BusinessMetric | Errors
     """
 
     return (

@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -12,10 +12,10 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    resource_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    include_cost: Union[Unset, bool] = UNSET,
+    resource_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    include_cost: bool | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -38,34 +38,34 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, Resources]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | Resources | None:
     if response.status_code == 200:
         response_200 = Resources.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 402:
         response_402 = Errors.from_dict(response.json())
 
         return response_402
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, Resources]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors | Resources]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -77,25 +77,27 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    resource_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    include_cost: Union[Unset, bool] = UNSET,
-) -> Response[Union[Errors, Resources]]:
-    """Return Resources contained in a ResourceReport
+    resource_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    include_cost: bool | Unset = UNSET,
+) -> Response[Errors | Resources]:
+    """Get resources
+
+     Return Resources contained in a ResourceReport
 
     Args:
-        resource_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        include_cost (Union[Unset, bool]):
+        resource_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        include_cost (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Resources]]
+        Response[Errors | Resources]
     """
 
     kwargs = _get_kwargs(
@@ -115,25 +117,27 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    resource_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    include_cost: Union[Unset, bool] = UNSET,
-) -> Optional[Union[Errors, Resources]]:
-    """Return Resources contained in a ResourceReport
+    resource_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    include_cost: bool | Unset = UNSET,
+) -> Errors | Resources | None:
+    """Get resources
+
+     Return Resources contained in a ResourceReport
 
     Args:
-        resource_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        include_cost (Union[Unset, bool]):
+        resource_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        include_cost (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Resources]
+        Errors | Resources
     """
 
     return sync_detailed(
@@ -148,25 +152,27 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    resource_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    include_cost: Union[Unset, bool] = UNSET,
-) -> Response[Union[Errors, Resources]]:
-    """Return Resources contained in a ResourceReport
+    resource_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    include_cost: bool | Unset = UNSET,
+) -> Response[Errors | Resources]:
+    """Get resources
+
+     Return Resources contained in a ResourceReport
 
     Args:
-        resource_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        include_cost (Union[Unset, bool]):
+        resource_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        include_cost (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Resources]]
+        Response[Errors | Resources]
     """
 
     kwargs = _get_kwargs(
@@ -184,25 +190,27 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    resource_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    include_cost: Union[Unset, bool] = UNSET,
-) -> Optional[Union[Errors, Resources]]:
-    """Return Resources contained in a ResourceReport
+    resource_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    include_cost: bool | Unset = UNSET,
+) -> Errors | Resources | None:
+    """Get resources
+
+     Return Resources contained in a ResourceReport
 
     Args:
-        resource_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        include_cost (Union[Unset, bool]):
+        resource_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        include_cost (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Resources]
+        Errors | Resources
     """
 
     return (

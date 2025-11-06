@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,26 +20,26 @@ class CostAlertEvent:
     """CostAlertEvent model
 
     Attributes:
-        token (Union[Unset, str]):
-        created_at (Union[Unset, str]): The date and time, in UTC, the CostAlertEvent was created. ISO 8601 Formatted.
+        token (str | Unset):
+        created_at (str | Unset): The date and time, in UTC, the CostAlertEvent was created. ISO 8601 Formatted.
             Example: 2021-07-09T00:00:00Z.
-        triggered_at (Union[Unset, str]): The date and time, in UTC, the CostAlertEvent is sent. ISO 8601 Formatted.
-            Example: 2021-07-09T00:00:00Z.
-        description (Union[Unset, str]): The description of the CostAlertEvent.
-        alert_type (Union[Unset, str]): The type of the CostAlertEvent.
-        metadata (Union[Unset, CostAlertEventMetadata]): The metadata of the CostAlertEvent.
-        report_token (Union[Unset, str]): The token of the report associated with the CostAlertEvent.
-        alert_token (Union[Unset, str]): The token of the alert associated with the CostAlertEvent.
+        triggered_at (str | Unset): The date and time, in UTC, the CostAlertEvent is sent. ISO 8601 Formatted. Example:
+            2021-07-09T00:00:00Z.
+        description (str | Unset): The description of the CostAlertEvent.
+        alert_type (str | Unset): The type of the CostAlertEvent.
+        metadata (CostAlertEventMetadata | Unset): The metadata of the CostAlertEvent.
+        report_token (str | Unset): The token of the report associated with the CostAlertEvent.
+        alert_token (str | Unset): The token of the alert associated with the CostAlertEvent.
     """
 
-    token: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    triggered_at: Union[Unset, str] = UNSET
-    description: Union[Unset, str] = UNSET
-    alert_type: Union[Unset, str] = UNSET
-    metadata: Union[Unset, "CostAlertEventMetadata"] = UNSET
-    report_token: Union[Unset, str] = UNSET
-    alert_token: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    triggered_at: str | Unset = UNSET
+    description: str | Unset = UNSET
+    alert_type: str | Unset = UNSET
+    metadata: CostAlertEventMetadata | Unset = UNSET
+    report_token: str | Unset = UNSET
+    alert_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -51,7 +53,7 @@ class CostAlertEvent:
 
         alert_type = self.alert_type
 
-        metadata: Union[Unset, dict[str, Any]] = UNSET
+        metadata: dict[str, Any] | Unset = UNSET
         if not isinstance(self.metadata, Unset):
             metadata = self.metadata.to_dict()
 
@@ -97,7 +99,7 @@ class CostAlertEvent:
         alert_type = d.pop("alert_type", UNSET)
 
         _metadata = d.pop("metadata", UNSET)
-        metadata: Union[Unset, CostAlertEventMetadata]
+        metadata: CostAlertEventMetadata | Unset
         if isinstance(_metadata, Unset):
             metadata = UNSET
         else:

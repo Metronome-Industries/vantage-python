@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Resources:
     """Resources model
 
     Attributes:
-        links (Union[Unset, ResourcesLinks]):
-        resources (Union[Unset, list['Resource']]):
+        links (ResourcesLinks | Unset):
+        resources (list[Resource] | Unset):
     """
 
-    links: Union[Unset, "ResourcesLinks"] = UNSET
-    resources: Union[Unset, list["Resource"]] = UNSET
+    links: ResourcesLinks | Unset = UNSET
+    resources: list[Resource] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        resources: Union[Unset, list[dict[str, Any]]] = UNSET
+        resources: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.resources, Unset):
             resources = []
             for resources_item_data in self.resources:
@@ -56,18 +58,20 @@ class Resources:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ResourcesLinks]
+        links: ResourcesLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = ResourcesLinks.from_dict(_links)
 
-        resources = []
         _resources = d.pop("resources", UNSET)
-        for resources_item_data in _resources or []:
-            resources_item = Resource.from_dict(resources_item_data)
+        resources: list[Resource] | Unset = UNSET
+        if _resources is not UNSET:
+            resources = []
+            for resources_item_data in _resources:
+                resources_item = Resource.from_dict(resources_item_data)
 
-            resources.append(resources_item)
+                resources.append(resources_item)
 
         resources = cls(
             links=links,

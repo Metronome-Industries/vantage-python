@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,18 +19,18 @@ T = TypeVar("T", bound="VirtualTagConfigValueCostMetric")
 class VirtualTagConfigValueCostMetric:
     """
     Attributes:
-        filter_ (Union[Unset, str]): The filter VQL for the cost metric.
-        aggregation (Union[Unset, VirtualTagConfigValueCostMetricAggregation]):
+        filter_ (str | Unset): The filter VQL for the cost metric.
+        aggregation (VirtualTagConfigValueCostMetricAggregation | Unset):
     """
 
-    filter_: Union[Unset, str] = UNSET
-    aggregation: Union[Unset, "VirtualTagConfigValueCostMetricAggregation"] = UNSET
+    filter_: str | Unset = UNSET
+    aggregation: VirtualTagConfigValueCostMetricAggregation | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         filter_ = self.filter_
 
-        aggregation: Union[Unset, dict[str, Any]] = UNSET
+        aggregation: dict[str, Any] | Unset = UNSET
         if not isinstance(self.aggregation, Unset):
             aggregation = self.aggregation.to_dict()
 
@@ -50,7 +52,7 @@ class VirtualTagConfigValueCostMetric:
         filter_ = d.pop("filter", UNSET)
 
         _aggregation = d.pop("aggregation", UNSET)
-        aggregation: Union[Unset, VirtualTagConfigValueCostMetricAggregation]
+        aggregation: VirtualTagConfigValueCostMetricAggregation | Unset
         if isinstance(_aggregation, Unset):
             aggregation = UNSET
         else:
