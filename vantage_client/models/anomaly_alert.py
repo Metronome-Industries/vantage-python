@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,36 +16,36 @@ class AnomalyAlert:
     """AnomalyAlert model
 
     Attributes:
-        token (Union[Unset, str]):
-        created_at (Union[Unset, str]): The date and time, in UTC, the AnomalyAlert was created. ISO 8601 Formatted.
-            Example: 2021-07-09T00:00:00Z.
-        alerted_at (Union[Unset, str]): The date and time, in UTC, the AnomalyAlert is sent. ISO 8601 Formatted.
-            Example: 2021-07-09T00:00:00Z.
-        category (Union[Unset, str]): The category of the AnomalyAlert.
-        service (Union[Unset, str]): The provider service causing the AnomalyAlert.
-        provider (Union[Unset, str]): The provider of the service causing the AnomalyAlert.
-        amount (Union[Unset, str]): The amount observed.
-        previous_amount (Union[Unset, str]): The previous amount observed.
-        seven_day_average (Union[Unset, str]): The seven day average of the amount observed.
-        status (Union[Unset, str]): The status of the AnomalyAlert.
-        feedback (Union[Unset, str]): The user-provided feedback of why alert was ignored/archived.
-        resources (Union[Unset, list[str]]): The names of the resources the AnomalyAlert was attributed to.
-        cost_report_token (Union[Unset, str]): The token of the Report associated with the AnomalyAlert.
+        token (str | Unset):
+        created_at (str | Unset): The date and time, in UTC, the AnomalyAlert was created. ISO 8601 Formatted. Example:
+            2021-07-09T00:00:00Z.
+        alerted_at (str | Unset): The date and time, in UTC, the AnomalyAlert is sent. ISO 8601 Formatted. Example:
+            2021-07-09T00:00:00Z.
+        category (str | Unset): The category of the AnomalyAlert.
+        service (str | Unset): The provider service causing the AnomalyAlert.
+        provider (str | Unset): The provider of the service causing the AnomalyAlert.
+        amount (str | Unset): The amount observed.
+        previous_amount (str | Unset): The previous amount observed.
+        seven_day_average (str | Unset): The seven day average of the amount observed.
+        status (str | Unset): The status of the AnomalyAlert.
+        feedback (str | Unset): The user-provided feedback of why alert was ignored/archived.
+        resources (list[str] | Unset): The names of the resources the AnomalyAlert was attributed to.
+        cost_report_token (str | Unset): The token of the Report associated with the AnomalyAlert.
     """
 
-    token: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    alerted_at: Union[Unset, str] = UNSET
-    category: Union[Unset, str] = UNSET
-    service: Union[Unset, str] = UNSET
-    provider: Union[Unset, str] = UNSET
-    amount: Union[Unset, str] = UNSET
-    previous_amount: Union[Unset, str] = UNSET
-    seven_day_average: Union[Unset, str] = UNSET
-    status: Union[Unset, str] = UNSET
-    feedback: Union[Unset, str] = UNSET
-    resources: Union[Unset, list[str]] = UNSET
-    cost_report_token: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    alerted_at: str | Unset = UNSET
+    category: str | Unset = UNSET
+    service: str | Unset = UNSET
+    provider: str | Unset = UNSET
+    amount: str | Unset = UNSET
+    previous_amount: str | Unset = UNSET
+    seven_day_average: str | Unset = UNSET
+    status: str | Unset = UNSET
+    feedback: str | Unset = UNSET
+    resources: list[str] | Unset = UNSET
+    cost_report_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -69,7 +71,7 @@ class AnomalyAlert:
 
         feedback = self.feedback
 
-        resources: Union[Unset, list[str]] = UNSET
+        resources: list[str] | Unset = UNSET
         if not isinstance(self.resources, Unset):
             resources = self.resources
 

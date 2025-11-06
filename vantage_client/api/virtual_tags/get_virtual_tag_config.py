@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -22,16 +22,18 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, VirtualTagConfig]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | VirtualTagConfig | None:
     if response.status_code == 200:
         response_200 = VirtualTagConfig.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -39,8 +41,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, VirtualTagConfig]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | VirtualTagConfig]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -53,8 +55,10 @@ def sync_detailed(
     token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Errors, VirtualTagConfig]]:
-    """Return a specific VirtualTagConfig.
+) -> Response[Errors | VirtualTagConfig]:
+    """Get virtual tag config by token
+
+     Return a specific VirtualTagConfig.
 
     Args:
         token (str):
@@ -64,7 +68,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, VirtualTagConfig]]
+        Response[Errors | VirtualTagConfig]
     """
 
     kwargs = _get_kwargs(
@@ -82,8 +86,10 @@ def sync(
     token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Errors, VirtualTagConfig]]:
-    """Return a specific VirtualTagConfig.
+) -> Errors | VirtualTagConfig | None:
+    """Get virtual tag config by token
+
+     Return a specific VirtualTagConfig.
 
     Args:
         token (str):
@@ -93,7 +99,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, VirtualTagConfig]
+        Errors | VirtualTagConfig
     """
 
     return sync_detailed(
@@ -106,8 +112,10 @@ async def asyncio_detailed(
     token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Errors, VirtualTagConfig]]:
-    """Return a specific VirtualTagConfig.
+) -> Response[Errors | VirtualTagConfig]:
+    """Get virtual tag config by token
+
+     Return a specific VirtualTagConfig.
 
     Args:
         token (str):
@@ -117,7 +125,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, VirtualTagConfig]]
+        Response[Errors | VirtualTagConfig]
     """
 
     kwargs = _get_kwargs(
@@ -133,8 +141,10 @@ async def asyncio(
     token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Errors, VirtualTagConfig]]:
-    """Return a specific VirtualTagConfig.
+) -> Errors | VirtualTagConfig | None:
+    """Get virtual tag config by token
+
+     Return a specific VirtualTagConfig.
 
     Args:
         token (str):
@@ -144,7 +154,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, VirtualTagConfig]
+        Errors | VirtualTagConfig
     """
 
     return (

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,14 +20,14 @@ class TagValues:
     """TagValues model
 
     Attributes:
-        tag_values (Union[Unset, list['TagValue']]):
+        tag_values (list[TagValue] | Unset):
     """
 
-    tag_values: Union[Unset, list["TagValue"]] = UNSET
+    tag_values: list[TagValue] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        tag_values: Union[Unset, list[dict[str, Any]]] = UNSET
+        tag_values: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.tag_values, Unset):
             tag_values = []
             for tag_values_item_data in self.tag_values:
@@ -45,12 +47,14 @@ class TagValues:
         from ..models.tag_value import TagValue
 
         d = dict(src_dict)
-        tag_values = []
         _tag_values = d.pop("tag_values", UNSET)
-        for tag_values_item_data in _tag_values or []:
-            tag_values_item = TagValue.from_dict(tag_values_item_data)
+        tag_values: list[TagValue] | Unset = UNSET
+        if _tag_values is not UNSET:
+            tag_values = []
+            for tag_values_item_data in _tag_values:
+                tag_values_item = TagValue.from_dict(tag_values_item_data)
 
-            tag_values.append(tag_values_item)
+                tag_values.append(tag_values_item)
 
         tag_values = cls(
             tag_values=tag_values,

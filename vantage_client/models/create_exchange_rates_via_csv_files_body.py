@@ -1,62 +1,63 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
+from io import BytesIO
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="CreateInvoiceBody")
+from .. import types
+from ..types import File
+
+T = TypeVar("T", bound="CreateExchangeRatesViaCsvFilesBody")
 
 
 @_attrs_define
-class CreateInvoiceBody:
+class CreateExchangeRatesViaCsvFilesBody:
     """
     Attributes:
-        billing_period_start (str): Start date of billing period (YYYY-MM-DD)
-        billing_period_end (str): End date of billing period (YYYY-MM-DD)
-        account_token (str): Token of the managed account to invoice
+        csv (File): CSV file containing exchange rates. Format: base_currency_code, currency_code, rate, date (YYYY-MM-
+            DD)
     """
 
-    billing_period_start: str
-    billing_period_end: str
-    account_token: str
+    csv: File
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        billing_period_start = self.billing_period_start
-
-        billing_period_end = self.billing_period_end
-
-        account_token = self.account_token
+        csv = self.csv.to_tuple()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "billing_period_start": billing_period_start,
-                "billing_period_end": billing_period_end,
-                "account_token": account_token,
+                "csv": csv,
             }
         )
 
         return field_dict
 
+    def to_multipart(self) -> types.RequestFiles:
+        files: types.RequestFiles = []
+
+        files.append(("csv", self.csv.to_tuple()))
+
+        for prop_name, prop in self.additional_properties.items():
+            files.append((prop_name, (None, str(prop).encode(), "text/plain")))
+
+        return files
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        billing_period_start = d.pop("billing_period_start")
+        csv = File(payload=BytesIO(d.pop("csv")))
 
-        billing_period_end = d.pop("billing_period_end")
-
-        account_token = d.pop("account_token")
-
-        create_invoice_body = cls(
-            billing_period_start=billing_period_start,
-            billing_period_end=billing_period_end,
-            account_token=account_token,
+        create_exchange_rates_via_csv_files_body = cls(
+            csv=csv,
         )
 
-        create_invoice_body.additional_properties = d
-        return create_invoice_body
+        create_exchange_rates_via_csv_files_body.additional_properties = d
+        return create_exchange_rates_via_csv_files_body
 
     @property
     def additional_keys(self) -> list[str]:

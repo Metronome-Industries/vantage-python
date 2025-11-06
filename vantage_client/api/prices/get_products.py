@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -11,11 +11,11 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    provider_id: Union[Unset, str] = UNSET,
-    service_id: Union[Unset, str] = UNSET,
-    name: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    provider_id: str | Unset = UNSET,
+    service_id: str | Unset = UNSET,
+    name: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -40,18 +40,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Products]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Products | None:
     if response.status_code == 200:
         response_200 = Products.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Products]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Products]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,22 +64,24 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, str] = UNSET,
-    service_id: Union[Unset, str] = UNSET,
-    name: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    provider_id: str | Unset = UNSET,
+    service_id: str | Unset = UNSET,
+    name: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[Products]:
-    """Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
+    """Get all products
+
+     Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
     Products will be a list of all EC2 Instances. By default, this endpoint returns all Products across
     all Services and Providers but has optional query parameters for filtering listed below.
 
     Args:
-        provider_id (Union[Unset, str]):
-        service_id (Union[Unset, str]):
-        name (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider_id (str | Unset):
+        service_id (str | Unset):
+        name (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -106,22 +109,24 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, str] = UNSET,
-    service_id: Union[Unset, str] = UNSET,
-    name: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Products]:
-    """Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
+    provider_id: str | Unset = UNSET,
+    service_id: str | Unset = UNSET,
+    name: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Products | None:
+    """Get all products
+
+     Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
     Products will be a list of all EC2 Instances. By default, this endpoint returns all Products across
     all Services and Providers but has optional query parameters for filtering listed below.
 
     Args:
-        provider_id (Union[Unset, str]):
-        service_id (Union[Unset, str]):
-        name (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider_id (str | Unset):
+        service_id (str | Unset):
+        name (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -144,22 +149,24 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, str] = UNSET,
-    service_id: Union[Unset, str] = UNSET,
-    name: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    provider_id: str | Unset = UNSET,
+    service_id: str | Unset = UNSET,
+    name: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[Products]:
-    """Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
+    """Get all products
+
+     Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
     Products will be a list of all EC2 Instances. By default, this endpoint returns all Products across
     all Services and Providers but has optional query parameters for filtering listed below.
 
     Args:
-        provider_id (Union[Unset, str]):
-        service_id (Union[Unset, str]):
-        name (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider_id (str | Unset):
+        service_id (str | Unset):
+        name (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -185,22 +192,24 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    provider_id: Union[Unset, str] = UNSET,
-    service_id: Union[Unset, str] = UNSET,
-    name: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Products]:
-    """Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
+    provider_id: str | Unset = UNSET,
+    service_id: str | Unset = UNSET,
+    name: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Products | None:
+    """Get all products
+
+     Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2,
     Products will be a list of all EC2 Instances. By default, this endpoint returns all Products across
     all Services and Providers but has optional query parameters for filtering listed below.
 
     Args:
-        provider_id (Union[Unset, str]):
-        service_id (Union[Unset, str]):
-        name (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider_id (str | Unset):
+        service_id (str | Unset):
+        name (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,24 +16,24 @@ class SavedFilter:
     """SavedFilter model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the SavedFilter. Example: Platform Team Reports.
-        cost_report_tokens (Union[Unset, list[str]]): The tokens for any CostReports the SavedFilter is applied to.
-        filter_ (Union[Unset, str]): The SavedFilter's filter, applied to any relevant CostReports. Additional
-            documentation available at https://docs.vantage.sh/vql. Example: costs.provider = 'azure'.
-        created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
+        token (str | Unset):
+        title (str | Unset): The title of the SavedFilter. Example: Platform Team Reports.
+        cost_report_tokens (list[str] | Unset): The tokens for any CostReports the SavedFilter is applied to.
+        filter_ (str | Unset): The SavedFilter's filter, applied to any relevant CostReports. Additional documentation
+            available at https://docs.vantage.sh/vql. Example: costs.provider = 'azure'.
+        created_at (str | Unset): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
             2023-08-04T00:00:00Z.
-        created_by (Union[Unset, str]): The token for the Creator of this SavedFilter.
-        workspace_token (Union[Unset, str]): The token for the Workspace the SavedFilter is a part of.
+        created_by (str | Unset): The token for the Creator of this SavedFilter.
+        workspace_token (str | Unset): The token for the Workspace the SavedFilter is a part of.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    cost_report_tokens: Union[Unset, list[str]] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    created_by: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    cost_report_tokens: list[str] | Unset = UNSET
+    filter_: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    created_by: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -39,7 +41,7 @@ class SavedFilter:
 
         title = self.title
 
-        cost_report_tokens: Union[Unset, list[str]] = UNSET
+        cost_report_tokens: list[str] | Unset = UNSET
         if not isinstance(self.cost_report_tokens, Unset):
             cost_report_tokens = self.cost_report_tokens
 

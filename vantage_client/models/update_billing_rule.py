@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,33 +16,32 @@ class UpdateBillingRule:
     """Update a BillingRule.
 
     Attributes:
-        title (Union[Unset, str]): The title of the BillingRule.
-        charge_type (Union[Unset, str]): The charge type of the BillingRule.
-        percentage (Union[Unset, float]): The percentage of the cost shown. Example value: 75.0
-        service (Union[Unset, str]): The service of the BillingRule.
-        category (Union[Unset, str]): The category of the BillingRule.
-        sub_category (Union[Unset, str]): The subcategory of the BillingRule.
-        start_period (Union[Unset, str]): The start period of the BillingRule.
-        amount (Union[Unset, float]): The credit amount for the BillingRule. Example value: 300
-        start_date (Union[Unset, str]): The start date of the BillingRule. ISO 8601 formatted.
-        end_date (Union[Unset, str]): The end date of the BillingRule. ISO 8601 formatted.
-        apply_to_all (Union[Unset, bool]): Determines if the BillingRule applies to all current and future managed
-            accounts.
-        sql_query (Union[Unset, str]): The SQL query of the BillingRule.
+        title (str | Unset): The title of the BillingRule.
+        charge_type (str | Unset): The charge type of the BillingRule.
+        percentage (float | Unset): The percentage of the cost shown. Example value: 75.0
+        service (str | Unset): The service of the BillingRule.
+        category (str | Unset): The category of the BillingRule.
+        sub_category (str | Unset): The subcategory of the BillingRule.
+        start_period (str | Unset): The start period of the BillingRule.
+        amount (float | Unset): The credit amount for the BillingRule. Example value: 300
+        start_date (str | Unset): The start date of the BillingRule. ISO 8601 formatted.
+        end_date (str | Unset): The end date of the BillingRule. ISO 8601 formatted.
+        apply_to_all (bool | Unset): Determines if the BillingRule applies to all current and future managed accounts.
+        sql_query (str | Unset): The SQL query of the BillingRule.
     """
 
-    title: Union[Unset, str] = UNSET
-    charge_type: Union[Unset, str] = UNSET
-    percentage: Union[Unset, float] = UNSET
-    service: Union[Unset, str] = UNSET
-    category: Union[Unset, str] = UNSET
-    sub_category: Union[Unset, str] = UNSET
-    start_period: Union[Unset, str] = UNSET
-    amount: Union[Unset, float] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    apply_to_all: Union[Unset, bool] = UNSET
-    sql_query: Union[Unset, str] = UNSET
+    title: str | Unset = UNSET
+    charge_type: str | Unset = UNSET
+    percentage: float | Unset = UNSET
+    service: str | Unset = UNSET
+    category: str | Unset = UNSET
+    sub_category: str | Unset = UNSET
+    start_period: str | Unset = UNSET
+    amount: float | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    apply_to_all: bool | Unset = UNSET
+    sql_query: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

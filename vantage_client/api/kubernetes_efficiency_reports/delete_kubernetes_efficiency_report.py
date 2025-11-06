@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -22,16 +22,18 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, KubernetesEfficiencyReport]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | KubernetesEfficiencyReport | None:
     if response.status_code == 204:
         response_204 = KubernetesEfficiencyReport.from_dict(response.json())
 
         return response_204
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -39,8 +41,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, KubernetesEfficiencyReport]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | KubernetesEfficiencyReport]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -53,8 +55,10 @@ def sync_detailed(
     kubernetes_efficiency_report_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Errors, KubernetesEfficiencyReport]]:
-    """Delete a KubernetesEfficiencyReport.
+) -> Response[Errors | KubernetesEfficiencyReport]:
+    """Delete Kubernetes efficiency report
+
+     Delete a KubernetesEfficiencyReport.
 
     Args:
         kubernetes_efficiency_report_token (str):
@@ -64,7 +68,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, KubernetesEfficiencyReport]]
+        Response[Errors | KubernetesEfficiencyReport]
     """
 
     kwargs = _get_kwargs(
@@ -82,8 +86,10 @@ def sync(
     kubernetes_efficiency_report_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Errors, KubernetesEfficiencyReport]]:
-    """Delete a KubernetesEfficiencyReport.
+) -> Errors | KubernetesEfficiencyReport | None:
+    """Delete Kubernetes efficiency report
+
+     Delete a KubernetesEfficiencyReport.
 
     Args:
         kubernetes_efficiency_report_token (str):
@@ -93,7 +99,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, KubernetesEfficiencyReport]
+        Errors | KubernetesEfficiencyReport
     """
 
     return sync_detailed(
@@ -106,8 +112,10 @@ async def asyncio_detailed(
     kubernetes_efficiency_report_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Errors, KubernetesEfficiencyReport]]:
-    """Delete a KubernetesEfficiencyReport.
+) -> Response[Errors | KubernetesEfficiencyReport]:
+    """Delete Kubernetes efficiency report
+
+     Delete a KubernetesEfficiencyReport.
 
     Args:
         kubernetes_efficiency_report_token (str):
@@ -117,7 +125,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, KubernetesEfficiencyReport]]
+        Response[Errors | KubernetesEfficiencyReport]
     """
 
     kwargs = _get_kwargs(
@@ -133,8 +141,10 @@ async def asyncio(
     kubernetes_efficiency_report_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Errors, KubernetesEfficiencyReport]]:
-    """Delete a KubernetesEfficiencyReport.
+) -> Errors | KubernetesEfficiencyReport | None:
+    """Delete Kubernetes efficiency report
+
+     Delete a KubernetesEfficiencyReport.
 
     Args:
         kubernetes_efficiency_report_token (str):
@@ -144,7 +154,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, KubernetesEfficiencyReport]
+        Errors | KubernetesEfficiencyReport
     """
 
     return (

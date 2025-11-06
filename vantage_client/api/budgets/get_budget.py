@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -13,7 +13,7 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     budget_token: str,
     *,
-    include_performance: Union[Unset, bool] = UNSET,
+    include_performance: bool | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -30,26 +30,24 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Budget, Errors]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Budget | Errors | None:
     if response.status_code == 200:
         response_200 = Budget.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Budget, Errors]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Budget | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -62,20 +60,22 @@ def sync_detailed(
     budget_token: str,
     *,
     client: AuthenticatedClient,
-    include_performance: Union[Unset, bool] = UNSET,
-) -> Response[Union[Budget, Errors]]:
-    """Return a Budget.
+    include_performance: bool | Unset = UNSET,
+) -> Response[Budget | Errors]:
+    """Get budget by token
+
+     Return a Budget.
 
     Args:
         budget_token (str):
-        include_performance (Union[Unset, bool]):
+        include_performance (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Budget, Errors]]
+        Response[Budget | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -94,20 +94,22 @@ def sync(
     budget_token: str,
     *,
     client: AuthenticatedClient,
-    include_performance: Union[Unset, bool] = UNSET,
-) -> Optional[Union[Budget, Errors]]:
-    """Return a Budget.
+    include_performance: bool | Unset = UNSET,
+) -> Budget | Errors | None:
+    """Get budget by token
+
+     Return a Budget.
 
     Args:
         budget_token (str):
-        include_performance (Union[Unset, bool]):
+        include_performance (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Budget, Errors]
+        Budget | Errors
     """
 
     return sync_detailed(
@@ -121,20 +123,22 @@ async def asyncio_detailed(
     budget_token: str,
     *,
     client: AuthenticatedClient,
-    include_performance: Union[Unset, bool] = UNSET,
-) -> Response[Union[Budget, Errors]]:
-    """Return a Budget.
+    include_performance: bool | Unset = UNSET,
+) -> Response[Budget | Errors]:
+    """Get budget by token
+
+     Return a Budget.
 
     Args:
         budget_token (str):
-        include_performance (Union[Unset, bool]):
+        include_performance (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Budget, Errors]]
+        Response[Budget | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -151,20 +155,22 @@ async def asyncio(
     budget_token: str,
     *,
     client: AuthenticatedClient,
-    include_performance: Union[Unset, bool] = UNSET,
-) -> Optional[Union[Budget, Errors]]:
-    """Return a Budget.
+    include_performance: bool | Unset = UNSET,
+) -> Budget | Errors | None:
+    """Get budget by token
+
+     Return a Budget.
 
     Args:
         budget_token (str):
-        include_performance (Union[Unset, bool]):
+        include_performance (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Budget, Errors]
+        Budget | Errors
     """
 
     return (

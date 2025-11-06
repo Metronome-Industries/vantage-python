@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -21,26 +21,24 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, Invoice]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | Invoice | None:
     if response.status_code == 200:
         response_200 = Invoice.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, Invoice]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors | Invoice]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -53,10 +51,10 @@ def sync_detailed(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Errors, Invoice]]:
-    """Regenerate an existing invoice.
+) -> Response[Errors | Invoice]:
+    """Regenerate invoice
 
-     Regenerates invoice data and files. Only MSP accounts can regenerate.
+     Regenerate an existing invoice (MSP accounts only).
 
     Args:
         invoice_token (str):
@@ -66,7 +64,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Invoice]]
+        Response[Errors | Invoice]
     """
 
     kwargs = _get_kwargs(
@@ -84,10 +82,10 @@ def sync(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Errors, Invoice]]:
-    """Regenerate an existing invoice.
+) -> Errors | Invoice | None:
+    """Regenerate invoice
 
-     Regenerates invoice data and files. Only MSP accounts can regenerate.
+     Regenerate an existing invoice (MSP accounts only).
 
     Args:
         invoice_token (str):
@@ -97,7 +95,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Invoice]
+        Errors | Invoice
     """
 
     return sync_detailed(
@@ -110,10 +108,10 @@ async def asyncio_detailed(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-) -> Response[Union[Errors, Invoice]]:
-    """Regenerate an existing invoice.
+) -> Response[Errors | Invoice]:
+    """Regenerate invoice
 
-     Regenerates invoice data and files. Only MSP accounts can regenerate.
+     Regenerate an existing invoice (MSP accounts only).
 
     Args:
         invoice_token (str):
@@ -123,7 +121,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Invoice]]
+        Response[Errors | Invoice]
     """
 
     kwargs = _get_kwargs(
@@ -139,10 +137,10 @@ async def asyncio(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Union[Errors, Invoice]]:
-    """Regenerate an existing invoice.
+) -> Errors | Invoice | None:
+    """Regenerate invoice
 
-     Regenerates invoice data and files. Only MSP accounts can regenerate.
+     Regenerate an existing invoice (MSP accounts only).
 
     Args:
         invoice_token (str):
@@ -152,7 +150,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Invoice]
+        Errors | Invoice
     """
 
     return (

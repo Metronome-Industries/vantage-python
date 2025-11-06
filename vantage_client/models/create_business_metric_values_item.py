@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,12 +19,12 @@ class CreateBusinessMetricValuesItem:
     Attributes:
         date (datetime.datetime):
         amount (float):
-        label (Union[None, Unset, str]):
+        label (None | str | Unset):
     """
 
     date: datetime.datetime
     amount: float
-    label: Union[None, Unset, str] = UNSET
+    label: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -30,7 +32,7 @@ class CreateBusinessMetricValuesItem:
 
         amount = self.amount
 
-        label: Union[None, Unset, str]
+        label: None | str | Unset
         if isinstance(self.label, Unset):
             label = UNSET
         else:
@@ -56,12 +58,12 @@ class CreateBusinessMetricValuesItem:
 
         amount = d.pop("amount")
 
-        def _parse_label(data: object) -> Union[None, Unset, str]:
+        def _parse_label(data: object) -> None | str | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(Union[None, Unset, str], data)
+            return cast(None | str | Unset, data)
 
         label = _parse_label(d.pop("label", UNSET))
 

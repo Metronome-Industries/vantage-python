@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,24 +16,24 @@ class Folder:
     """Folder model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the Folder. Example: Platform Team Reports.
-        parent_folder_token (Union[Unset, str]): The token for the parent Folder, if any.
-        saved_filter_tokens (Union[Unset, list[str]]): The tokens for the SavedFilters assigned to the Folder.
-        created_at (Union[Unset, str]): The date and time, in UTC, the Folder was created. ISO 8601 Formatted. Example:
+        token (str | Unset):
+        title (str | Unset): The title of the Folder. Example: Platform Team Reports.
+        parent_folder_token (str | Unset): The token for the parent Folder, if any.
+        saved_filter_tokens (list[str] | Unset): The tokens for the SavedFilters assigned to the Folder.
+        created_at (str | Unset): The date and time, in UTC, the Folder was created. ISO 8601 Formatted. Example:
             2023-08-04T00:00:00Z.
-        updated_at (Union[Unset, str]): The date and time, in UTC, the Folder was last updated at. ISO 8601 Formatted.
+        updated_at (str | Unset): The date and time, in UTC, the Folder was last updated at. ISO 8601 Formatted.
             Example: 2023-08-04T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the Folder is a part of.
+        workspace_token (str | Unset): The token for the Workspace the Folder is a part of.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    parent_folder_token: Union[Unset, str] = UNSET
-    saved_filter_tokens: Union[Unset, list[str]] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    updated_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    parent_folder_token: str | Unset = UNSET
+    saved_filter_tokens: list[str] | Unset = UNSET
+    created_at: str | Unset = UNSET
+    updated_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -41,7 +43,7 @@ class Folder:
 
         parent_folder_token = self.parent_folder_token
 
-        saved_filter_tokens: Union[Unset, list[str]] = UNSET
+        saved_filter_tokens: list[str] | Unset = UNSET
         if not isinstance(self.saved_filter_tokens, Unset):
             saved_filter_tokens = self.saved_filter_tokens
 

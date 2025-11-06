@@ -1,10 +1,16 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.banking_information_secure_data import BankingInformationSecureData
+
 
 T = TypeVar("T", bound="BankingInformation")
 
@@ -13,25 +19,21 @@ T = TypeVar("T", bound="BankingInformation")
 class BankingInformation:
     """
     Attributes:
-        id (Union[Unset, str]):
-        token (Union[Unset, str]):
-        bank_name (Union[Unset, str]): Name of the bank
-        beneficiary_name (Union[Unset, str]): Name of the account beneficiary
-        tax_id (Union[Unset, str]): Tax identification number
-        secure_data (Union[Unset, str]): Encrypted banking details (account numbers, routing info)
+        token (str | Unset):
+        bank_name (str | Unset): Name of the bank
+        beneficiary_name (str | Unset): Name of the account beneficiary
+        tax_id (str | Unset): Tax identification number
+        secure_data (BankingInformationSecureData | Unset):
     """
 
-    id: Union[Unset, str] = UNSET
-    token: Union[Unset, str] = UNSET
-    bank_name: Union[Unset, str] = UNSET
-    beneficiary_name: Union[Unset, str] = UNSET
-    tax_id: Union[Unset, str] = UNSET
-    secure_data: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    bank_name: str | Unset = UNSET
+    beneficiary_name: str | Unset = UNSET
+    tax_id: str | Unset = UNSET
+    secure_data: BankingInformationSecureData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        id = self.id
-
         token = self.token
 
         bank_name = self.bank_name
@@ -40,13 +42,13 @@ class BankingInformation:
 
         tax_id = self.tax_id
 
-        secure_data = self.secure_data
+        secure_data: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.secure_data, Unset):
+            secure_data = self.secure_data.to_dict()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if id is not UNSET:
-            field_dict["id"] = id
         if token is not UNSET:
             field_dict["token"] = token
         if bank_name is not UNSET:
@@ -62,9 +64,9 @@ class BankingInformation:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        d = dict(src_dict)
-        id = d.pop("id", UNSET)
+        from ..models.banking_information_secure_data import BankingInformationSecureData
 
+        d = dict(src_dict)
         token = d.pop("token", UNSET)
 
         bank_name = d.pop("bank_name", UNSET)
@@ -73,10 +75,14 @@ class BankingInformation:
 
         tax_id = d.pop("tax_id", UNSET)
 
-        secure_data = d.pop("secure_data", UNSET)
+        _secure_data = d.pop("secure_data", UNSET)
+        secure_data: BankingInformationSecureData | Unset
+        if isinstance(_secure_data, Unset):
+            secure_data = UNSET
+        else:
+            secure_data = BankingInformationSecureData.from_dict(_secure_data)
 
         banking_information = cls(
-            id=id,
             token=token,
             bank_name=bank_name,
             beneficiary_name=beneficiary_name,

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,18 +16,18 @@ class SegmentReportSettings:
     """Report settings configurable on top-level Segments.
 
     Attributes:
-        include_credits (Union[Unset, bool]):
-        include_refunds (Union[Unset, bool]):
-        include_discounts (Union[Unset, bool]):
-        include_tax (Union[Unset, bool]):
-        amortize (Union[Unset, bool]):
+        include_credits (bool | Unset):
+        include_refunds (bool | Unset):
+        include_discounts (bool | Unset):
+        include_tax (bool | Unset):
+        amortize (bool | Unset):
     """
 
-    include_credits: Union[Unset, bool] = UNSET
-    include_refunds: Union[Unset, bool] = UNSET
-    include_discounts: Union[Unset, bool] = UNSET
-    include_tax: Union[Unset, bool] = UNSET
-    amortize: Union[Unset, bool] = UNSET
+    include_credits: bool | Unset = UNSET
+    include_refunds: bool | Unset = UNSET
+    include_discounts: bool | Unset = UNSET
+    include_tax: bool | Unset = UNSET
+    amortize: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,22 +16,21 @@ class AccessGrant:
     """AccessGrant model
 
     Attributes:
-        token (Union[Unset, str]):
-        resource_token (Union[Unset, str]): The token for any resource the AccessGrant is applied to. Example:
-            rprt_abcd1234.
-        access (Union[Unset, str]): The access status of the AccessGrant.
-        team_token (Union[Unset, str]): The Team token for which an AccessGrant is applied to.
-        created_at (Union[Unset, str]): The date and time, in UTC, the AccessGrant was created. ISO 8601 Formatted.
-            Example: 2023-08-04T00:00:00Z.
-        created_by (Union[Unset, str]): The token for the User who created the AccessGrant.
+        token (str | Unset):
+        resource_token (str | Unset): The token for any resource the AccessGrant is applied to. Example: rprt_abcd1234.
+        access (str | Unset): The access status of the AccessGrant.
+        team_token (str | Unset): The Team token for which an AccessGrant is applied to.
+        created_at (str | Unset): The date and time, in UTC, the AccessGrant was created. ISO 8601 Formatted. Example:
+            2023-08-04T00:00:00Z.
+        created_by (str | Unset): The token for the User who created the AccessGrant.
     """
 
-    token: Union[Unset, str] = UNSET
-    resource_token: Union[Unset, str] = UNSET
-    access: Union[Unset, str] = UNSET
-    team_token: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    created_by: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    resource_token: str | Unset = UNSET
+    access: str | Unset = UNSET
+    team_token: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    created_by: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

@@ -2,6 +2,8 @@ from enum import Enum
 
 
 class GetTagValuesProvidersItem(str, Enum):
+    ANTHROPIC = "anthropic"
+    ANYSCALE = "anyscale"
     AWS = "aws"
     AZURE = "azure"
     AZURE_CSP = "azure_csp"

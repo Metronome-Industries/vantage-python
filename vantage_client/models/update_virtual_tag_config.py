@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,31 +22,30 @@ class UpdateVirtualTagConfig:
     """Updates an existing VirtualTagConfig.
 
     Attributes:
-        key (Union[Unset, str]): The key of the VirtualTagConfig.
-        overridable (Union[None, Unset, bool]): Whether the VirtualTagConfig can override a provider-supplied tag on a
+        key (str | Unset): The key of the VirtualTagConfig.
+        overridable (bool | None | Unset): Whether the VirtualTagConfig can override a provider-supplied tag on a
             matching Cost.
-        backfill_until (Union[None, Unset, datetime.date]): The earliest month the VirtualTagConfig should be backfilled
-            to.
-        values (Union[Unset, list['UpdateVirtualTagConfigValuesItem']]): Values for the VirtualTagConfig, with match
-            precedence determined by order in the list.
+        backfill_until (datetime.date | None | Unset): The earliest month the VirtualTagConfig should be backfilled to.
+        values (list[UpdateVirtualTagConfigValuesItem] | Unset): Values for the VirtualTagConfig, with match precedence
+            determined by order in the list.
     """
 
-    key: Union[Unset, str] = UNSET
-    overridable: Union[None, Unset, bool] = UNSET
-    backfill_until: Union[None, Unset, datetime.date] = UNSET
-    values: Union[Unset, list["UpdateVirtualTagConfigValuesItem"]] = UNSET
+    key: str | Unset = UNSET
+    overridable: bool | None | Unset = UNSET
+    backfill_until: datetime.date | None | Unset = UNSET
+    values: list[UpdateVirtualTagConfigValuesItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         key = self.key
 
-        overridable: Union[None, Unset, bool]
+        overridable: bool | None | Unset
         if isinstance(self.overridable, Unset):
             overridable = UNSET
         else:
             overridable = self.overridable
 
-        backfill_until: Union[None, Unset, str]
+        backfill_until: None | str | Unset
         if isinstance(self.backfill_until, Unset):
             backfill_until = UNSET
         elif isinstance(self.backfill_until, datetime.date):
@@ -52,7 +53,7 @@ class UpdateVirtualTagConfig:
         else:
             backfill_until = self.backfill_until
 
-        values: Union[Unset, list[dict[str, Any]]] = UNSET
+        values: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.values, Unset):
             values = []
             for values_item_data in self.values:
@@ -80,16 +81,16 @@ class UpdateVirtualTagConfig:
         d = dict(src_dict)
         key = d.pop("key", UNSET)
 
-        def _parse_overridable(data: object) -> Union[None, Unset, bool]:
+        def _parse_overridable(data: object) -> bool | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
                 return data
-            return cast(Union[None, Unset, bool], data)
+            return cast(bool | None | Unset, data)
 
         overridable = _parse_overridable(d.pop("overridable", UNSET))
 
-        def _parse_backfill_until(data: object) -> Union[None, Unset, datetime.date]:
+        def _parse_backfill_until(data: object) -> datetime.date | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -100,18 +101,20 @@ class UpdateVirtualTagConfig:
                 backfill_until_type_0 = isoparse(data).date()
 
                 return backfill_until_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
-            return cast(Union[None, Unset, datetime.date], data)
+            return cast(datetime.date | None | Unset, data)
 
         backfill_until = _parse_backfill_until(d.pop("backfill_until", UNSET))
 
-        values = []
         _values = d.pop("values", UNSET)
-        for values_item_data in _values or []:
-            values_item = UpdateVirtualTagConfigValuesItem.from_dict(values_item_data)
+        values: list[UpdateVirtualTagConfigValuesItem] | Unset = UNSET
+        if _values is not UNSET:
+            values = []
+            for values_item_data in _values:
+                values_item = UpdateVirtualTagConfigValuesItem.from_dict(values_item_data)
 
-            values.append(values_item)
+                values.append(values_item)
 
         update_virtual_tag_config = cls(
             key=key,

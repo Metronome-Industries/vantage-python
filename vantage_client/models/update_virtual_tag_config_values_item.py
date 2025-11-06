@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,15 +21,15 @@ class UpdateVirtualTagConfigValuesItem:
     Attributes:
         filter_ (str): The filter query language to apply to the value. Additional documentation available at
             https://docs.vantage.sh/vql.
-        name (Union[Unset, str]): The name of the value.
-        business_metric_token (Union[Unset, str]): The token of an associated business metric.
-        cost_metric (Union[Unset, UpdateVirtualTagConfigValuesItemCostMetric]):
+        name (str | Unset): The name of the value.
+        business_metric_token (str | Unset): The token of an associated business metric.
+        cost_metric (UpdateVirtualTagConfigValuesItemCostMetric | Unset):
     """
 
     filter_: str
-    name: Union[Unset, str] = UNSET
-    business_metric_token: Union[Unset, str] = UNSET
-    cost_metric: Union[Unset, "UpdateVirtualTagConfigValuesItemCostMetric"] = UNSET
+    name: str | Unset = UNSET
+    business_metric_token: str | Unset = UNSET
+    cost_metric: UpdateVirtualTagConfigValuesItemCostMetric | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,7 +39,7 @@ class UpdateVirtualTagConfigValuesItem:
 
         business_metric_token = self.business_metric_token
 
-        cost_metric: Union[Unset, dict[str, Any]] = UNSET
+        cost_metric: dict[str, Any] | Unset = UNSET
         if not isinstance(self.cost_metric, Unset):
             cost_metric = self.cost_metric.to_dict()
 
@@ -71,7 +73,7 @@ class UpdateVirtualTagConfigValuesItem:
         business_metric_token = d.pop("business_metric_token", UNSET)
 
         _cost_metric = d.pop("cost_metric", UNSET)
-        cost_metric: Union[Unset, UpdateVirtualTagConfigValuesItemCostMetric]
+        cost_metric: UpdateVirtualTagConfigValuesItemCostMetric | Unset
         if isinstance(_cost_metric, Unset):
             cost_metric = UNSET
         else:

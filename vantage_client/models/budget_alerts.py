@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class BudgetAlerts:
     """BudgetAlerts model
 
     Attributes:
-        links (Union[Unset, BudgetAlertsLinks]):
-        budget_alerts (Union[Unset, list['BudgetAlert']]):
+        links (BudgetAlertsLinks | Unset):
+        budget_alerts (list[BudgetAlert] | Unset):
     """
 
-    links: Union[Unset, "BudgetAlertsLinks"] = UNSET
-    budget_alerts: Union[Unset, list["BudgetAlert"]] = UNSET
+    links: BudgetAlertsLinks | Unset = UNSET
+    budget_alerts: list[BudgetAlert] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        budget_alerts: Union[Unset, list[dict[str, Any]]] = UNSET
+        budget_alerts: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.budget_alerts, Unset):
             budget_alerts = []
             for budget_alerts_item_data in self.budget_alerts:
@@ -56,18 +58,20 @@ class BudgetAlerts:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, BudgetAlertsLinks]
+        links: BudgetAlertsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = BudgetAlertsLinks.from_dict(_links)
 
-        budget_alerts = []
         _budget_alerts = d.pop("budget_alerts", UNSET)
-        for budget_alerts_item_data in _budget_alerts or []:
-            budget_alerts_item = BudgetAlert.from_dict(budget_alerts_item_data)
+        budget_alerts: list[BudgetAlert] | Unset = UNSET
+        if _budget_alerts is not UNSET:
+            budget_alerts = []
+            for budget_alerts_item_data in _budget_alerts:
+                budget_alerts_item = BudgetAlert.from_dict(budget_alerts_item_data)
 
-            budget_alerts.append(budget_alerts_item)
+                budget_alerts.append(budget_alerts_item)
 
         budget_alerts = cls(
             links=links,

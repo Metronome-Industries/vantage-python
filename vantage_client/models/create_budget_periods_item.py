@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,12 +19,12 @@ class CreateBudgetPeriodsItem:
     Attributes:
         start_at (datetime.date): The start date of the period.
         amount (float): The amount of the period.
-        end_at (Union[None, Unset, datetime.date]): The end date of the period.
+        end_at (datetime.date | None | Unset): The end date of the period.
     """
 
     start_at: datetime.date
     amount: float
-    end_at: Union[None, Unset, datetime.date] = UNSET
+    end_at: datetime.date | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -30,7 +32,7 @@ class CreateBudgetPeriodsItem:
 
         amount = self.amount
 
-        end_at: Union[None, Unset, str]
+        end_at: None | str | Unset
         if isinstance(self.end_at, Unset):
             end_at = UNSET
         elif isinstance(self.end_at, datetime.date):
@@ -58,7 +60,7 @@ class CreateBudgetPeriodsItem:
 
         amount = d.pop("amount")
 
-        def _parse_end_at(data: object) -> Union[None, Unset, datetime.date]:
+        def _parse_end_at(data: object) -> datetime.date | None | Unset:
             if data is None:
                 return data
             if isinstance(data, Unset):
@@ -69,9 +71,9 @@ class CreateBudgetPeriodsItem:
                 end_at_type_0 = isoparse(data).date()
 
                 return end_at_type_0
-            except:  # noqa: E722
+            except (TypeError, ValueError, AttributeError, KeyError):
                 pass
-            return cast(Union[None, Unset, datetime.date], data)
+            return cast(datetime.date | None | Unset, data)
 
         end_at = _parse_end_at(d.pop("end_at", UNSET))
 

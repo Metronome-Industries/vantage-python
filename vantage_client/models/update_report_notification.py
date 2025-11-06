@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,23 +16,21 @@ class UpdateReportNotification:
     """Update a ReportNotification.
 
     Attributes:
-        title (Union[Unset, str]): The title of the ReportNotification.
-        cost_report_token (Union[Unset, str]): The CostReport token.
-        user_tokens (Union[Unset, list[str]]): The Users that receive the notification.
-        recipient_channels (Union[Unset, list[str]]): The Slack or Microsoft Teams channels that receive the
-            notification.
-        frequency (Union[Unset, str]): The frequency the ReportNotification is sent. Possible values: daily, weekly,
-            monthly.
-        change (Union[Unset, str]): The type of change the ReportNotification is tracking. Possible values: percentage,
+        title (str | Unset): The title of the ReportNotification.
+        cost_report_token (str | Unset): The CostReport token.
+        user_tokens (list[str] | Unset): The Users that receive the notification.
+        recipient_channels (list[str] | Unset): The Slack or Microsoft Teams channels that receive the notification.
+        frequency (str | Unset): The frequency the ReportNotification is sent. Possible values: daily, weekly, monthly.
+        change (str | Unset): The type of change the ReportNotification is tracking. Possible values: percentage,
             dollars.
     """
 
-    title: Union[Unset, str] = UNSET
-    cost_report_token: Union[Unset, str] = UNSET
-    user_tokens: Union[Unset, list[str]] = UNSET
-    recipient_channels: Union[Unset, list[str]] = UNSET
-    frequency: Union[Unset, str] = UNSET
-    change: Union[Unset, str] = UNSET
+    title: str | Unset = UNSET
+    cost_report_token: str | Unset = UNSET
+    user_tokens: list[str] | Unset = UNSET
+    recipient_channels: list[str] | Unset = UNSET
+    frequency: str | Unset = UNSET
+    change: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -38,11 +38,11 @@ class UpdateReportNotification:
 
         cost_report_token = self.cost_report_token
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 
-        recipient_channels: Union[Unset, list[str]] = UNSET
+        recipient_channels: list[str] | Unset = UNSET
         if not isinstance(self.recipient_channels, Unset):
             recipient_channels = self.recipient_channels
 

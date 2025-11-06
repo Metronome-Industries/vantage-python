@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -30,21 +30,22 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, Integration]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | Integration | None:
     if response.status_code == 201:
         response_201 = Integration.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -52,8 +53,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, Integration]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | Integration]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -66,8 +67,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateCustomProviderIntegration,
-) -> Response[Union[Errors, Integration]]:
-    """Create a Custom Provider Integration
+) -> Response[Errors | Integration]:
+    """Create custom provider integration
+
+     Create a Custom Provider Integration
 
     Args:
         body (CreateCustomProviderIntegration): Create a Custom Provider Integration
@@ -77,7 +80,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Integration]]
+        Response[Errors | Integration]
     """
 
     kwargs = _get_kwargs(
@@ -95,8 +98,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: CreateCustomProviderIntegration,
-) -> Optional[Union[Errors, Integration]]:
-    """Create a Custom Provider Integration
+) -> Errors | Integration | None:
+    """Create custom provider integration
+
+     Create a Custom Provider Integration
 
     Args:
         body (CreateCustomProviderIntegration): Create a Custom Provider Integration
@@ -106,7 +111,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Integration]
+        Errors | Integration
     """
 
     return sync_detailed(
@@ -119,8 +124,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateCustomProviderIntegration,
-) -> Response[Union[Errors, Integration]]:
-    """Create a Custom Provider Integration
+) -> Response[Errors | Integration]:
+    """Create custom provider integration
+
+     Create a Custom Provider Integration
 
     Args:
         body (CreateCustomProviderIntegration): Create a Custom Provider Integration
@@ -130,7 +137,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Integration]]
+        Response[Errors | Integration]
     """
 
     kwargs = _get_kwargs(
@@ -146,8 +153,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateCustomProviderIntegration,
-) -> Optional[Union[Errors, Integration]]:
-    """Create a Custom Provider Integration
+) -> Errors | Integration | None:
+    """Create custom provider integration
+
+     Create a Custom Provider Integration
 
     Args:
         body (CreateCustomProviderIntegration): Create a Custom Provider Integration
@@ -157,7 +166,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Integration]
+        Errors | Integration
     """
 
     return (

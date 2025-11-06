@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class FinancialCommitmentReports:
     """FinancialCommitmentReports model
 
     Attributes:
-        links (Union[Unset, FinancialCommitmentReportsLinks]):
-        financial_commitment_reports (Union[Unset, list['FinancialCommitmentReport']]):
+        links (FinancialCommitmentReportsLinks | Unset):
+        financial_commitment_reports (list[FinancialCommitmentReport] | Unset):
     """
 
-    links: Union[Unset, "FinancialCommitmentReportsLinks"] = UNSET
-    financial_commitment_reports: Union[Unset, list["FinancialCommitmentReport"]] = UNSET
+    links: FinancialCommitmentReportsLinks | Unset = UNSET
+    financial_commitment_reports: list[FinancialCommitmentReport] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        financial_commitment_reports: Union[Unset, list[dict[str, Any]]] = UNSET
+        financial_commitment_reports: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.financial_commitment_reports, Unset):
             financial_commitment_reports = []
             for financial_commitment_reports_item_data in self.financial_commitment_reports:
@@ -56,20 +58,22 @@ class FinancialCommitmentReports:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, FinancialCommitmentReportsLinks]
+        links: FinancialCommitmentReportsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = FinancialCommitmentReportsLinks.from_dict(_links)
 
-        financial_commitment_reports = []
         _financial_commitment_reports = d.pop("financial_commitment_reports", UNSET)
-        for financial_commitment_reports_item_data in _financial_commitment_reports or []:
-            financial_commitment_reports_item = FinancialCommitmentReport.from_dict(
-                financial_commitment_reports_item_data
-            )
+        financial_commitment_reports: list[FinancialCommitmentReport] | Unset = UNSET
+        if _financial_commitment_reports is not UNSET:
+            financial_commitment_reports = []
+            for financial_commitment_reports_item_data in _financial_commitment_reports:
+                financial_commitment_reports_item = FinancialCommitmentReport.from_dict(
+                    financial_commitment_reports_item_data
+                )
 
-            financial_commitment_reports.append(financial_commitment_reports_item)
+                financial_commitment_reports.append(financial_commitment_reports_item)
 
         financial_commitment_reports = cls(
             links=links,

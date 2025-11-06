@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class CreateWorkspaceBodyExchangeRateDate(str, Enum):
+class CreateWorkspaceExchangeRateDate(str, Enum):
     DAILY_RATE = "daily_rate"
     END_OF_BILLING_PERIOD_RATE = "end_of_billing_period_rate"
 

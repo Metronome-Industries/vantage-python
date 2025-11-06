@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,22 +20,22 @@ class Product:
     """Product model
 
     Attributes:
-        id (Union[Unset, str]):
-        category (Union[Unset, str]): The category of the cloud product Example: compute.
-        name (Union[Unset, str]): The common name of the product. Example: EC2.
-        service_id (Union[Unset, str]): A unique slug for the service the product belongs to. Example: aws-ec2.
-        provider_id (Union[Unset, str]): A unique slug for the provider the product belongs to. Example: aws.
-        details (Union[Unset, ProductDetails]): An object of metadata about the product. Example: {'gpu': 0, 'name': 'M5
+        id (str | Unset):
+        category (str | Unset): The category of the cloud product Example: compute.
+        name (str | Unset): The common name of the product. Example: EC2.
+        service_id (str | Unset): A unique slug for the service the product belongs to. Example: aws-ec2.
+        provider_id (str | Unset): A unique slug for the provider the product belongs to. Example: aws.
+        details (ProductDetails | Unset): An object of metadata about the product. Example: {'gpu': 0, 'name': 'M5
             General Purpose 16xlarge', 'vcpu': 64, 'memory': 256, 'clock_speed_ghz': 3.1, 'physical_processor_description':
             'Intel Xeon Platinum 8175 (Skylake)', 'network_performance_description': '20 Gigabit'}.
     """
 
-    id: Union[Unset, str] = UNSET
-    category: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    service_id: Union[Unset, str] = UNSET
-    provider_id: Union[Unset, str] = UNSET
-    details: Union[Unset, "ProductDetails"] = UNSET
+    id: str | Unset = UNSET
+    category: str | Unset = UNSET
+    name: str | Unset = UNSET
+    service_id: str | Unset = UNSET
+    provider_id: str | Unset = UNSET
+    details: ProductDetails | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -47,7 +49,7 @@ class Product:
 
         provider_id = self.provider_id
 
-        details: Union[Unset, dict[str, Any]] = UNSET
+        details: dict[str, Any] | Unset = UNSET
         if not isinstance(self.details, Unset):
             details = self.details.to_dict()
 
@@ -85,7 +87,7 @@ class Product:
         provider_id = d.pop("provider_id", UNSET)
 
         _details = d.pop("details", UNSET)
-        details: Union[Unset, ProductDetails]
+        details: ProductDetails | Unset
         if isinstance(_details, Unset):
             details = UNSET
         else:

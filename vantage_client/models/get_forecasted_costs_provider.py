@@ -3,6 +3,8 @@ from enum import Enum
 
 class GetForecastedCostsProvider(str, Enum):
     ALL = "all"
+    ANTHROPIC = "anthropic"
+    ANYSCALE = "anyscale"
     AWS = "aws"
     AZURE = "azure"
     AZURE_CSP = "azure_csp"

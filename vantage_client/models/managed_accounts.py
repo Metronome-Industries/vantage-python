@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class ManagedAccounts:
     """ManagedAccounts model
 
     Attributes:
-        links (Union[Unset, ManagedAccountsLinks]):
-        managed_accounts (Union[Unset, list['ManagedAccount']]):
+        links (ManagedAccountsLinks | Unset):
+        managed_accounts (list[ManagedAccount] | Unset):
     """
 
-    links: Union[Unset, "ManagedAccountsLinks"] = UNSET
-    managed_accounts: Union[Unset, list["ManagedAccount"]] = UNSET
+    links: ManagedAccountsLinks | Unset = UNSET
+    managed_accounts: list[ManagedAccount] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        managed_accounts: Union[Unset, list[dict[str, Any]]] = UNSET
+        managed_accounts: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.managed_accounts, Unset):
             managed_accounts = []
             for managed_accounts_item_data in self.managed_accounts:
@@ -56,18 +58,20 @@ class ManagedAccounts:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ManagedAccountsLinks]
+        links: ManagedAccountsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = ManagedAccountsLinks.from_dict(_links)
 
-        managed_accounts = []
         _managed_accounts = d.pop("managed_accounts", UNSET)
-        for managed_accounts_item_data in _managed_accounts or []:
-            managed_accounts_item = ManagedAccount.from_dict(managed_accounts_item_data)
+        managed_accounts: list[ManagedAccount] | Unset = UNSET
+        if _managed_accounts is not UNSET:
+            managed_accounts = []
+            for managed_accounts_item_data in _managed_accounts:
+                managed_accounts_item = ManagedAccount.from_dict(managed_accounts_item_data)
 
-            managed_accounts.append(managed_accounts_item)
+                managed_accounts.append(managed_accounts_item)
 
         managed_accounts = cls(
             links=links,

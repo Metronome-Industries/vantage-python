@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,19 +17,17 @@ T = TypeVar("T", bound="UpdateWorkspaceBody")
 class UpdateWorkspaceBody:
     """
     Attributes:
-        name (Union[Unset, str]): Name of the workspace.
-        enable_currency_conversion (Union[Unset, bool]): Enable currency conversion for the workspace. Default: True.
-        currency (Union[Unset, UpdateWorkspaceBodyCurrency]): Currency code for the workspace.
-        exchange_rate_date (Union[Unset, UpdateWorkspaceBodyExchangeRateDate]): The date to use for currency conversion.
+        name (str | Unset): Name of the workspace.
+        enable_currency_conversion (bool | Unset): Enable currency conversion for the workspace. Default: True.
+        currency (UpdateWorkspaceBodyCurrency | Unset): Currency code for the workspace.
+        exchange_rate_date (UpdateWorkspaceBodyExchangeRateDate | Unset): The date to use for currency conversion.
             Default: UpdateWorkspaceBodyExchangeRateDate.DAILY_RATE.
     """
 
-    name: Union[Unset, str] = UNSET
-    enable_currency_conversion: Union[Unset, bool] = True
-    currency: Union[Unset, UpdateWorkspaceBodyCurrency] = UNSET
-    exchange_rate_date: Union[Unset, UpdateWorkspaceBodyExchangeRateDate] = (
-        UpdateWorkspaceBodyExchangeRateDate.DAILY_RATE
-    )
+    name: str | Unset = UNSET
+    enable_currency_conversion: bool | Unset = True
+    currency: UpdateWorkspaceBodyCurrency | Unset = UNSET
+    exchange_rate_date: UpdateWorkspaceBodyExchangeRateDate | Unset = UpdateWorkspaceBodyExchangeRateDate.DAILY_RATE
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -35,11 +35,11 @@ class UpdateWorkspaceBody:
 
         enable_currency_conversion = self.enable_currency_conversion
 
-        currency: Union[Unset, str] = UNSET
+        currency: str | Unset = UNSET
         if not isinstance(self.currency, Unset):
             currency = self.currency.value
 
-        exchange_rate_date: Union[Unset, str] = UNSET
+        exchange_rate_date: str | Unset = UNSET
         if not isinstance(self.exchange_rate_date, Unset):
             exchange_rate_date = self.exchange_rate_date.value
 
@@ -65,14 +65,14 @@ class UpdateWorkspaceBody:
         enable_currency_conversion = d.pop("enable_currency_conversion", UNSET)
 
         _currency = d.pop("currency", UNSET)
-        currency: Union[Unset, UpdateWorkspaceBodyCurrency]
+        currency: UpdateWorkspaceBodyCurrency | Unset
         if isinstance(_currency, Unset):
             currency = UNSET
         else:
             currency = UpdateWorkspaceBodyCurrency(_currency)
 
         _exchange_rate_date = d.pop("exchange_rate_date", UNSET)
-        exchange_rate_date: Union[Unset, UpdateWorkspaceBodyExchangeRateDate]
+        exchange_rate_date: UpdateWorkspaceBodyExchangeRateDate | Unset
         if isinstance(_exchange_rate_date, Unset):
             exchange_rate_date = UNSET
         else:

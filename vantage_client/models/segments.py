@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Segments:
     """Segments model
 
     Attributes:
-        links (Union[Unset, SegmentsLinks]):
-        segments (Union[Unset, list['Segment']]):
+        links (SegmentsLinks | Unset):
+        segments (list[Segment] | Unset):
     """
 
-    links: Union[Unset, "SegmentsLinks"] = UNSET
-    segments: Union[Unset, list["Segment"]] = UNSET
+    links: SegmentsLinks | Unset = UNSET
+    segments: list[Segment] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        segments: Union[Unset, list[dict[str, Any]]] = UNSET
+        segments: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.segments, Unset):
             segments = []
             for segments_item_data in self.segments:
@@ -56,18 +58,20 @@ class Segments:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, SegmentsLinks]
+        links: SegmentsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = SegmentsLinks.from_dict(_links)
 
-        segments = []
         _segments = d.pop("segments", UNSET)
-        for segments_item_data in _segments or []:
-            segments_item = Segment.from_dict(segments_item_data)
+        segments: list[Segment] | Unset = UNSET
+        if _segments is not UNSET:
+            segments = []
+            for segments_item_data in _segments:
+                segments_item = Segment.from_dict(segments_item_data)
 
-            segments.append(segments_item)
+                segments.append(segments_item)
 
         segments = cls(
             links=links,

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,14 +16,13 @@ class CreateBusinessMetricDatadogMetricFields:
     """Datadog metric configuration fields
 
     Attributes:
-        integration_token (Union[Unset, str]): Integration token for the account from which you would like to fetch
-            metrics.
-        query (Union[Unset, str]): Datadog metrics query string. e.g. sum:aws.applicationelb.request_count{region:us-
+        integration_token (str | Unset): Integration token for the account from which you would like to fetch metrics.
+        query (str | Unset): Datadog metrics query string. e.g. sum:aws.applicationelb.request_count{region:us-
             east-1}.rollup(avg,daily)
     """
 
-    integration_token: Union[Unset, str] = UNSET
-    query: Union[Unset, str] = UNSET
+    integration_token: str | Unset = UNSET
+    query: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

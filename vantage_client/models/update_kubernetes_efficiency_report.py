@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,32 +21,32 @@ class UpdateKubernetesEfficiencyReport:
     """Update a KubernetesEfficiencyReport.
 
     Attributes:
-        title (Union[Unset, str]): The title of the KubernetesEfficiencyReport.
-        filter_ (Union[Unset, str]): The filter query language to apply to the KubernetesEfficiencyReport. Additional
+        title (str | Unset): The title of the KubernetesEfficiencyReport.
+        filter_ (str | Unset): The filter query language to apply to the KubernetesEfficiencyReport. Additional
             documentation available at https://docs.vantage.sh/vql.
-        start_date (Union[Unset, datetime.date]): The start date of the KubernetesEfficiencyReport. ISO 8601 Formatted.
+        start_date (datetime.date | Unset): The start date of the KubernetesEfficiencyReport. ISO 8601 Formatted.
             Incompatible with 'date_interval' parameter.
-        end_date (Union[Unset, datetime.date]): The end date of the KubernetesEfficiencyReport. ISO 8601 Formatted.
+        end_date (datetime.date | Unset): The end date of the KubernetesEfficiencyReport. ISO 8601 Formatted.
             Incompatible with 'date_interval' parameter.
-        date_interval (Union[Unset, UpdateKubernetesEfficiencyReportDateInterval]): The date interval of the
+        date_interval (UpdateKubernetesEfficiencyReportDateInterval | Unset): The date interval of the
             KubernetesEfficiencyReport. Incompatible with 'start_date' and 'end_date' parameters. Defaults to 'this_month'
             if start_date and end_date are not provided.
-        aggregated_by (Union[Unset, UpdateKubernetesEfficiencyReportAggregatedBy]): The column by which the costs are
+        aggregated_by (UpdateKubernetesEfficiencyReportAggregatedBy | Unset): The column by which the costs are
             aggregated.
-        date_bucket (Union[Unset, UpdateKubernetesEfficiencyReportDateBucket]): The date bucket of the
+        date_bucket (UpdateKubernetesEfficiencyReportDateBucket | Unset): The date bucket of the
             KubernetesEfficiencyReport.
-        groupings (Union[Unset, list[str]]): Grouping values for aggregating costs on the KubernetesEfficiencyReport.
-            Valid groupings: cluster_id, namespace, labeled, category, pod, label, label:<label_name>.
+        groupings (list[str] | Unset): Grouping values for aggregating costs on the KubernetesEfficiencyReport. Valid
+            groupings: cluster_id, namespace, labeled, category, pod, label, label:<label_name>.
     """
 
-    title: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    start_date: Union[Unset, datetime.date] = UNSET
-    end_date: Union[Unset, datetime.date] = UNSET
-    date_interval: Union[Unset, UpdateKubernetesEfficiencyReportDateInterval] = UNSET
-    aggregated_by: Union[Unset, UpdateKubernetesEfficiencyReportAggregatedBy] = UNSET
-    date_bucket: Union[Unset, UpdateKubernetesEfficiencyReportDateBucket] = UNSET
-    groupings: Union[Unset, list[str]] = UNSET
+    title: str | Unset = UNSET
+    filter_: str | Unset = UNSET
+    start_date: datetime.date | Unset = UNSET
+    end_date: datetime.date | Unset = UNSET
+    date_interval: UpdateKubernetesEfficiencyReportDateInterval | Unset = UNSET
+    aggregated_by: UpdateKubernetesEfficiencyReportAggregatedBy | Unset = UNSET
+    date_bucket: UpdateKubernetesEfficiencyReportDateBucket | Unset = UNSET
+    groupings: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,27 +54,27 @@ class UpdateKubernetesEfficiencyReport:
 
         filter_ = self.filter_
 
-        start_date: Union[Unset, str] = UNSET
+        start_date: str | Unset = UNSET
         if not isinstance(self.start_date, Unset):
             start_date = self.start_date.isoformat()
 
-        end_date: Union[Unset, str] = UNSET
+        end_date: str | Unset = UNSET
         if not isinstance(self.end_date, Unset):
             end_date = self.end_date.isoformat()
 
-        date_interval: Union[Unset, str] = UNSET
+        date_interval: str | Unset = UNSET
         if not isinstance(self.date_interval, Unset):
             date_interval = self.date_interval.value
 
-        aggregated_by: Union[Unset, str] = UNSET
+        aggregated_by: str | Unset = UNSET
         if not isinstance(self.aggregated_by, Unset):
             aggregated_by = self.aggregated_by.value
 
-        date_bucket: Union[Unset, str] = UNSET
+        date_bucket: str | Unset = UNSET
         if not isinstance(self.date_bucket, Unset):
             date_bucket = self.date_bucket.value
 
-        groupings: Union[Unset, list[str]] = UNSET
+        groupings: list[str] | Unset = UNSET
         if not isinstance(self.groupings, Unset):
             groupings = self.groupings
 
@@ -106,35 +108,35 @@ class UpdateKubernetesEfficiencyReport:
         filter_ = d.pop("filter", UNSET)
 
         _start_date = d.pop("start_date", UNSET)
-        start_date: Union[Unset, datetime.date]
+        start_date: datetime.date | Unset
         if isinstance(_start_date, Unset):
             start_date = UNSET
         else:
             start_date = isoparse(_start_date).date()
 
         _end_date = d.pop("end_date", UNSET)
-        end_date: Union[Unset, datetime.date]
+        end_date: datetime.date | Unset
         if isinstance(_end_date, Unset):
             end_date = UNSET
         else:
             end_date = isoparse(_end_date).date()
 
         _date_interval = d.pop("date_interval", UNSET)
-        date_interval: Union[Unset, UpdateKubernetesEfficiencyReportDateInterval]
+        date_interval: UpdateKubernetesEfficiencyReportDateInterval | Unset
         if isinstance(_date_interval, Unset):
             date_interval = UNSET
         else:
             date_interval = UpdateKubernetesEfficiencyReportDateInterval(_date_interval)
 
         _aggregated_by = d.pop("aggregated_by", UNSET)
-        aggregated_by: Union[Unset, UpdateKubernetesEfficiencyReportAggregatedBy]
+        aggregated_by: UpdateKubernetesEfficiencyReportAggregatedBy | Unset
         if isinstance(_aggregated_by, Unset):
             aggregated_by = UNSET
         else:
             aggregated_by = UpdateKubernetesEfficiencyReportAggregatedBy(_aggregated_by)
 
         _date_bucket = d.pop("date_bucket", UNSET)
-        date_bucket: Union[Unset, UpdateKubernetesEfficiencyReportDateBucket]
+        date_bucket: UpdateKubernetesEfficiencyReportDateBucket | Unset
         if isinstance(_date_bucket, Unset):
             date_bucket = UNSET
         else:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -20,50 +22,50 @@ class UpdateDashboard:
     """Update a Dashboard.
 
     Attributes:
-        title (Union[Unset, str]): The title of the Dashboard.
-        widgets (Union[Unset, list['UpdateDashboardWidgetsItem']]): The widgets to add to the Dashboard. Currently
-            supports CostReport, ResourceReport, KubernetesEfficiencyReport, and FinancialCommitmentReport.
-        saved_filter_tokens (Union[Unset, list[str]]): The tokens of the Saved Filters used in the Dashboard.
-        date_bin (Union[Unset, UpdateDashboardDateBin]): Determines how to group costs in the Dashboard.
-        date_interval (Union[Unset, UpdateDashboardDateInterval]): Determines the date range in the Dashboard.
-            Incompatible with 'start_date' and 'end_date' parameters.
-        start_date (Union[Unset, str]): The start date for the date range for costs in the Dashboard. ISO 8601
-            Formatted. Incompatible with 'date_interval' parameter.
-        end_date (Union[Unset, str]): The end date for the date range for costs in the Dashboard. ISO 8601 Formatted.
+        title (str | Unset): The title of the Dashboard.
+        widgets (list[UpdateDashboardWidgetsItem] | Unset): The widgets to add to the Dashboard. Currently supports
+            CostReport, ResourceReport, KubernetesEfficiencyReport, and FinancialCommitmentReport.
+        saved_filter_tokens (list[str] | Unset): The tokens of the Saved Filters used in the Dashboard.
+        date_bin (UpdateDashboardDateBin | Unset): Determines how to group costs in the Dashboard.
+        date_interval (UpdateDashboardDateInterval | Unset): Determines the date range in the Dashboard. Incompatible
+            with 'start_date' and 'end_date' parameters.
+        start_date (str | Unset): The start date for the date range for costs in the Dashboard. ISO 8601 Formatted.
             Incompatible with 'date_interval' parameter.
-        workspace_token (Union[Unset, str]): The token of the Workspace the Dashboard belongs to. Required if the API
-            token is associated with multiple Workspaces.
+        end_date (str | Unset): The end date for the date range for costs in the Dashboard. ISO 8601 Formatted.
+            Incompatible with 'date_interval' parameter.
+        workspace_token (str | Unset): The token of the Workspace the Dashboard belongs to. Required if the API token is
+            associated with multiple Workspaces.
     """
 
-    title: Union[Unset, str] = UNSET
-    widgets: Union[Unset, list["UpdateDashboardWidgetsItem"]] = UNSET
-    saved_filter_tokens: Union[Unset, list[str]] = UNSET
-    date_bin: Union[Unset, UpdateDashboardDateBin] = UNSET
-    date_interval: Union[Unset, UpdateDashboardDateInterval] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
+    title: str | Unset = UNSET
+    widgets: list[UpdateDashboardWidgetsItem] | Unset = UNSET
+    saved_filter_tokens: list[str] | Unset = UNSET
+    date_bin: UpdateDashboardDateBin | Unset = UNSET
+    date_interval: UpdateDashboardDateInterval | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         title = self.title
 
-        widgets: Union[Unset, list[dict[str, Any]]] = UNSET
+        widgets: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.widgets, Unset):
             widgets = []
             for widgets_item_data in self.widgets:
                 widgets_item = widgets_item_data.to_dict()
                 widgets.append(widgets_item)
 
-        saved_filter_tokens: Union[Unset, list[str]] = UNSET
+        saved_filter_tokens: list[str] | Unset = UNSET
         if not isinstance(self.saved_filter_tokens, Unset):
             saved_filter_tokens = self.saved_filter_tokens
 
-        date_bin: Union[Unset, str] = UNSET
+        date_bin: str | Unset = UNSET
         if not isinstance(self.date_bin, Unset):
             date_bin = self.date_bin.value
 
-        date_interval: Union[Unset, str] = UNSET
+        date_interval: str | Unset = UNSET
         if not isinstance(self.date_interval, Unset):
             date_interval = self.date_interval.value
 
@@ -102,24 +104,26 @@ class UpdateDashboard:
         d = dict(src_dict)
         title = d.pop("title", UNSET)
 
-        widgets = []
         _widgets = d.pop("widgets", UNSET)
-        for widgets_item_data in _widgets or []:
-            widgets_item = UpdateDashboardWidgetsItem.from_dict(widgets_item_data)
+        widgets: list[UpdateDashboardWidgetsItem] | Unset = UNSET
+        if _widgets is not UNSET:
+            widgets = []
+            for widgets_item_data in _widgets:
+                widgets_item = UpdateDashboardWidgetsItem.from_dict(widgets_item_data)
 
-            widgets.append(widgets_item)
+                widgets.append(widgets_item)
 
         saved_filter_tokens = cast(list[str], d.pop("saved_filter_tokens", UNSET))
 
         _date_bin = d.pop("date_bin", UNSET)
-        date_bin: Union[Unset, UpdateDashboardDateBin]
+        date_bin: UpdateDashboardDateBin | Unset
         if isinstance(_date_bin, Unset):
             date_bin = UNSET
         else:
             date_bin = UpdateDashboardDateBin(_date_bin)
 
         _date_interval = d.pop("date_interval", UNSET)
-        date_interval: Union[Unset, UpdateDashboardDateInterval]
+        date_interval: UpdateDashboardDateInterval | Unset
         if isinstance(_date_interval, Unset):
             date_interval = UNSET
         else:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,24 +16,24 @@ class UpdateAnomalyNotification:
     """Update an Anomaly Notification.
 
     Attributes:
-        threshold (Union[Unset, int]): The threshold amount that must be met for the notification to fire.
-        user_tokens (Union[Unset, list[str]]): The tokens of the users that receive the notification.
-        recipient_channels (Union[Unset, list[str]]): The Slack/MS Teams channels that receive the notification.
+        threshold (int | Unset): The threshold amount that must be met for the notification to fire.
+        user_tokens (list[str] | Unset): The tokens of the users that receive the notification.
+        recipient_channels (list[str] | Unset): The Slack/MS Teams channels that receive the notification.
     """
 
-    threshold: Union[Unset, int] = UNSET
-    user_tokens: Union[Unset, list[str]] = UNSET
-    recipient_channels: Union[Unset, list[str]] = UNSET
+    threshold: int | Unset = UNSET
+    user_tokens: list[str] | Unset = UNSET
+    recipient_channels: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         threshold = self.threshold
 
-        user_tokens: Union[Unset, list[str]] = UNSET
+        user_tokens: list[str] | Unset = UNSET
         if not isinstance(self.user_tokens, Unset):
             user_tokens = self.user_tokens
 
-        recipient_channels: Union[Unset, list[str]] = UNSET
+        recipient_channels: list[str] | Unset = UNSET
         if not isinstance(self.recipient_channels, Unset):
             recipient_channels = self.recipient_channels
 

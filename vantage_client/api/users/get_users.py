@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -12,8 +12,8 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -32,26 +32,24 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, Users]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | Users | None:
     if response.status_code == 200:
         response_200 = Users.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 403:
         response_403 = Errors.from_dict(response.json())
 
         return response_403
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, Users]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors | Users]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,21 +61,23 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Response[Union[Errors, Users]]:
-    """Return all Users that the current API token has access to.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Response[Errors | Users]:
+    """Get all users
+
+     Return all Users that the current API token has access to.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Users]]
+        Response[Errors | Users]
     """
 
     kwargs = _get_kwargs(
@@ -95,21 +95,23 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Union[Errors, Users]]:
-    """Return all Users that the current API token has access to.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Errors | Users | None:
+    """Get all users
+
+     Return all Users that the current API token has access to.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Users]
+        Errors | Users
     """
 
     return sync_detailed(
@@ -122,21 +124,23 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Response[Union[Errors, Users]]:
-    """Return all Users that the current API token has access to.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Response[Errors | Users]:
+    """Get all users
+
+     Return all Users that the current API token has access to.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Users]]
+        Response[Errors | Users]
     """
 
     kwargs = _get_kwargs(
@@ -152,21 +156,23 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Union[Errors, Users]]:
-    """Return all Users that the current API token has access to.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Errors | Users | None:
+    """Get all users
+
+     Return all Users that the current API token has access to.
 
     Args:
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Users]
+        Errors | Users
     """
 
     return (

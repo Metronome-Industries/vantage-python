@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -20,22 +20,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[UserCostsUploads]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> UserCostsUploads | None:
     if response.status_code == 200:
         response_200 = UserCostsUploads.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[UserCostsUploads]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[UserCostsUploads]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -49,7 +46,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[UserCostsUploads]:
-    """List UserCostUploads.
+    """Get all user costs uploads
+
+     List UserCostUploads.
 
     Args:
         integration_token (str):
@@ -77,8 +76,10 @@ def sync(
     integration_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[UserCostsUploads]:
-    """List UserCostUploads.
+) -> UserCostsUploads | None:
+    """Get all user costs uploads
+
+     List UserCostUploads.
 
     Args:
         integration_token (str):
@@ -102,7 +103,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[UserCostsUploads]:
-    """List UserCostUploads.
+    """Get all user costs uploads
+
+     List UserCostUploads.
 
     Args:
         integration_token (str):
@@ -128,8 +131,10 @@ async def asyncio(
     integration_token: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[UserCostsUploads]:
-    """List UserCostUploads.
+) -> UserCostsUploads | None:
+    """Get all user costs uploads
+
+     List UserCostUploads.
 
     Args:
         integration_token (str):

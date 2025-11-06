@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,40 +15,40 @@ T = TypeVar("T", bound="FinancialCommitment")
 class FinancialCommitment:
     """
     Attributes:
-        commitment_type (Union[Unset, str]): The commitment type (eg Savings Plan or Reserved Instance). Example:
-            Savings Plan.
-        service (Union[Unset, str]): The service this commitment applies towards. Example: Compute.
-        account (Union[Unset, str]): The account for this financial commitment. Example: 113074892135.
-        type_ (Union[Unset, str]): The type of financial commitment. Example: m5.large.
-        amount (Union[Unset, str]): The number of instances for the financial commitment. Example: 4.
-        term (Union[Unset, str]): The duration in years of the financial commitment. Example: 3 Year.
-        payment_type (Union[Unset, str]): The type of payment for the financial commitment. Example: No upfront.
-        region (Union[Unset, str]): The region for the financial commitment. Example: us-east-1.
-        purchase_date (Union[Unset, str]): The purchase date of the financial commitment. ISO 8601 Formatted. Example:
+        commitment_type (str | Unset): The commitment type (eg Savings Plan or Reserved Instance). Example: Savings
+            Plan.
+        service (str | Unset): The service this commitment applies towards. Example: Compute.
+        account (str | Unset): The account for this financial commitment. Example: 113074892135.
+        type_ (str | Unset): The type of financial commitment. Example: m5.large.
+        amount (str | Unset): The number of instances for the financial commitment. Example: 4.
+        term (str | Unset): The duration in years of the financial commitment. Example: 3 Year.
+        payment_type (str | Unset): The type of payment for the financial commitment. Example: No upfront.
+        region (str | Unset): The region for the financial commitment. Example: us-east-1.
+        purchase_date (str | Unset): The purchase date of the financial commitment. ISO 8601 Formatted. Example:
             2023-08-30.
-        expiration_date (Union[Unset, str]): The expiration date of the financial commitment. ISO 8601 Formatted.
-            Example: 2026-08-30.
-        commitment (Union[Unset, str]): The amount of the financial commitment. Example: $2.18.
-        status (Union[Unset, str]): The status of the financial commitment (e.g. active vs expired). Example: active.
-        created_at (Union[Unset, str]): The date and time, in UTC, the Financial Commitment was created. ISO 8601
-            Formatted. Example: 2024-03-19T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the FinancialCommitment is a part of.
+        expiration_date (str | Unset): The expiration date of the financial commitment. ISO 8601 Formatted. Example:
+            2026-08-30.
+        commitment (str | Unset): The amount of the financial commitment. Example: $2.18.
+        status (str | Unset): The status of the financial commitment (e.g. active vs expired). Example: active.
+        created_at (str | Unset): The date and time, in UTC, the Financial Commitment was created. ISO 8601 Formatted.
+            Example: 2024-03-19T00:00:00Z.
+        workspace_token (str | Unset): The token for the Workspace the FinancialCommitment is a part of.
     """
 
-    commitment_type: Union[Unset, str] = UNSET
-    service: Union[Unset, str] = UNSET
-    account: Union[Unset, str] = UNSET
-    type_: Union[Unset, str] = UNSET
-    amount: Union[Unset, str] = UNSET
-    term: Union[Unset, str] = UNSET
-    payment_type: Union[Unset, str] = UNSET
-    region: Union[Unset, str] = UNSET
-    purchase_date: Union[Unset, str] = UNSET
-    expiration_date: Union[Unset, str] = UNSET
-    commitment: Union[Unset, str] = UNSET
-    status: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
+    commitment_type: str | Unset = UNSET
+    service: str | Unset = UNSET
+    account: str | Unset = UNSET
+    type_: str | Unset = UNSET
+    amount: str | Unset = UNSET
+    term: str | Unset = UNSET
+    payment_type: str | Unset = UNSET
+    region: str | Unset = UNSET
+    purchase_date: str | Unset = UNSET
+    expiration_date: str | Unset = UNSET
+    commitment: str | Unset = UNSET
+    status: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

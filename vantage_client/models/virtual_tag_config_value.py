@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,18 +19,17 @@ T = TypeVar("T", bound="VirtualTagConfigValue")
 class VirtualTagConfigValue:
     """
     Attributes:
-        filter_ (Union[Unset, str]): The filter VQL for the Value. Example: costs.provider = 'aws' AND costs.service =
-            'Amazon Simple Storage Service'.
-        name (Union[Unset, str]): The name of the Value. Example: Informatics.
-        business_metric_token (Union[Unset, str]): The token of the associated BusinessMetric. Example:
-            bsnss_mtrc_abc123.
-        cost_metric (Union[Unset, VirtualTagConfigValueCostMetric]):
+        filter_ (str | Unset): The filter VQL for the Value. Example: costs.provider = 'aws' AND costs.service = 'Amazon
+            Simple Storage Service'.
+        name (str | Unset): The name of the Value. Example: Informatics.
+        business_metric_token (str | Unset): The token of the associated BusinessMetric. Example: bsnss_mtrc_abc123.
+        cost_metric (VirtualTagConfigValueCostMetric | Unset):
     """
 
-    filter_: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    business_metric_token: Union[Unset, str] = UNSET
-    cost_metric: Union[Unset, "VirtualTagConfigValueCostMetric"] = UNSET
+    filter_: str | Unset = UNSET
+    name: str | Unset = UNSET
+    business_metric_token: str | Unset = UNSET
+    cost_metric: VirtualTagConfigValueCostMetric | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -38,7 +39,7 @@ class VirtualTagConfigValue:
 
         business_metric_token = self.business_metric_token
 
-        cost_metric: Union[Unset, dict[str, Any]] = UNSET
+        cost_metric: dict[str, Any] | Unset = UNSET
         if not isinstance(self.cost_metric, Unset):
             cost_metric = self.cost_metric.to_dict()
 
@@ -68,7 +69,7 @@ class VirtualTagConfigValue:
         business_metric_token = d.pop("business_metric_token", UNSET)
 
         _cost_metric = d.pop("cost_metric", UNSET)
-        cost_metric: Union[Unset, VirtualTagConfigValueCostMetric]
+        cost_metric: VirtualTagConfigValueCostMetric | Unset
         if isinstance(_cost_metric, Unset):
             cost_metric = UNSET
         else:

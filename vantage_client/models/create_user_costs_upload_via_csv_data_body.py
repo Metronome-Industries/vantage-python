@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
 from io import BytesIO
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,12 +17,12 @@ class CreateUserCostsUploadViaCsvDataBody:
     """
     Attributes:
         csv (File): CSV file containing custom costs
-        auto_transform (Union[Unset, bool]): Attempt to automatically transform the CSV file to match the FOCUS format.
+        auto_transform (bool | Unset): Attempt to automatically transform the CSV file to match the FOCUS format.
             Default: False.
     """
 
     csv: File
-    auto_transform: Union[Unset, bool] = False
+    auto_transform: bool | Unset = False
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

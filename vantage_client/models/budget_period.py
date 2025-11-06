@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,16 +15,16 @@ T = TypeVar("T", bound="BudgetPeriod")
 class BudgetPeriod:
     """
     Attributes:
-        start_at (Union[Unset, str]): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
+        start_at (str | Unset): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
             2024-03-19T00:00:00Z.
-        end_at (Union[Unset, str]): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
+        end_at (str | Unset): The date and time, in UTC, the Budget was created. ISO 8601 Formatted. Example:
             2024-03-19T00:00:00Z.
-        amount (Union[Unset, str]): The amount of the Budget Period as a string to ensure precision. Example: 100.00.
+        amount (str | Unset): The amount of the Budget Period as a string to ensure precision. Example: 100.00.
     """
 
-    start_at: Union[Unset, str] = UNSET
-    end_at: Union[Unset, str] = UNSET
-    amount: Union[Unset, str] = UNSET
+    start_at: str | Unset = UNSET
+    end_at: str | Unset = UNSET
+    amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

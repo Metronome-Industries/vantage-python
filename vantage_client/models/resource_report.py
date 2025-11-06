@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,26 +16,26 @@ class ResourceReport:
     """ResourceReport model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the ResourceReport. Example: Acme123 Active Resources.
-        filter_ (Union[Unset, str]): The filter applied to the ResourceReport. Additional documentation available at
+        token (str | Unset):
+        title (str | Unset): The title of the ResourceReport. Example: Acme123 Active Resources.
+        filter_ (str | Unset): The filter applied to the ResourceReport. Additional documentation available at
             https://docs.vantage.sh/vql.
-        created_at (Union[Unset, str]): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
+        created_at (str | Unset): The date and time, in UTC, the report was created. ISO 8601 Formatted. Example:
             2024-03-19T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the ResourceReport is a part of.
-        user_token (Union[Unset, str]): The token for the User who created this ResourceReport.
-        created_by_token (Union[Unset, str]): The token for the User or Team who created this ResourceReport.
-        columns (Union[Unset, list[str]]): Array of column names configured for the ResourceReport table display.
+        workspace_token (str | Unset): The token for the Workspace the ResourceReport is a part of.
+        user_token (str | Unset): The token for the User who created this ResourceReport.
+        created_by_token (str | Unset): The token for the User or Team who created this ResourceReport.
+        columns (list[str] | Unset): Array of column names configured for the ResourceReport table display.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    user_token: Union[Unset, str] = UNSET
-    created_by_token: Union[Unset, str] = UNSET
-    columns: Union[Unset, list[str]] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    filter_: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    user_token: str | Unset = UNSET
+    created_by_token: str | Unset = UNSET
+    columns: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -51,7 +53,7 @@ class ResourceReport:
 
         created_by_token = self.created_by_token
 
-        columns: Union[Unset, list[str]] = UNSET
+        columns: list[str] | Unset = UNSET
         if not isinstance(self.columns, Unset):
             columns = self.columns
 

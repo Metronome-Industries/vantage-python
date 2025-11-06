@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,14 +20,14 @@ class BusinessMetricValues:
     """BusinessMetricValues model
 
     Attributes:
-        values (Union[Unset, list['BusinessMetricValue']]):
+        values (list[BusinessMetricValue] | Unset):
     """
 
-    values: Union[Unset, list["BusinessMetricValue"]] = UNSET
+    values: list[BusinessMetricValue] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        values: Union[Unset, list[dict[str, Any]]] = UNSET
+        values: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.values, Unset):
             values = []
             for values_item_data in self.values:
@@ -45,12 +47,14 @@ class BusinessMetricValues:
         from ..models.business_metric_value import BusinessMetricValue
 
         d = dict(src_dict)
-        values = []
         _values = d.pop("values", UNSET)
-        for values_item_data in _values or []:
-            values_item = BusinessMetricValue.from_dict(values_item_data)
+        values: list[BusinessMetricValue] | Unset = UNSET
+        if _values is not UNSET:
+            values = []
+            for values_item_data in _values:
+                values_item = BusinessMetricValue.from_dict(values_item_data)
 
-            values.append(values_item)
+                values.append(values_item)
 
         business_metric_values = cls(
             values=values,

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,12 +19,12 @@ class CreateAccessGrant:
     Attributes:
         resource_token (str): The token of the resource for which you are granting access.
         team_token (str): The token of the Team you want to grant access to.
-        access (Union[Unset, CreateAccessGrantAccess]): The access level you want to grant. Defaults to 'allowed'.
+        access (CreateAccessGrantAccess | Unset): The access level you want to grant. Defaults to 'allowed'.
     """
 
     resource_token: str
     team_token: str
-    access: Union[Unset, CreateAccessGrantAccess] = UNSET
+    access: CreateAccessGrantAccess | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -30,7 +32,7 @@ class CreateAccessGrant:
 
         team_token = self.team_token
 
-        access: Union[Unset, str] = UNSET
+        access: str | Unset = UNSET
         if not isinstance(self.access, Unset):
             access = self.access.value
 
@@ -55,7 +57,7 @@ class CreateAccessGrant:
         team_token = d.pop("team_token")
 
         _access = d.pop("access", UNSET)
-        access: Union[Unset, CreateAccessGrantAccess]
+        access: CreateAccessGrantAccess | Unset
         if isinstance(_access, Unset):
             access = UNSET
         else:

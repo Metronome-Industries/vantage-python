@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class AnomalyNotifications:
     """AnomalyNotifications model
 
     Attributes:
-        links (Union[Unset, AnomalyNotificationsLinks]):
-        anomaly_notifications (Union[Unset, list['AnomalyNotification']]):
+        links (AnomalyNotificationsLinks | Unset):
+        anomaly_notifications (list[AnomalyNotification] | Unset):
     """
 
-    links: Union[Unset, "AnomalyNotificationsLinks"] = UNSET
-    anomaly_notifications: Union[Unset, list["AnomalyNotification"]] = UNSET
+    links: AnomalyNotificationsLinks | Unset = UNSET
+    anomaly_notifications: list[AnomalyNotification] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        anomaly_notifications: Union[Unset, list[dict[str, Any]]] = UNSET
+        anomaly_notifications: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.anomaly_notifications, Unset):
             anomaly_notifications = []
             for anomaly_notifications_item_data in self.anomaly_notifications:
@@ -56,18 +58,20 @@ class AnomalyNotifications:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, AnomalyNotificationsLinks]
+        links: AnomalyNotificationsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = AnomalyNotificationsLinks.from_dict(_links)
 
-        anomaly_notifications = []
         _anomaly_notifications = d.pop("anomaly_notifications", UNSET)
-        for anomaly_notifications_item_data in _anomaly_notifications or []:
-            anomaly_notifications_item = AnomalyNotification.from_dict(anomaly_notifications_item_data)
+        anomaly_notifications: list[AnomalyNotification] | Unset = UNSET
+        if _anomaly_notifications is not UNSET:
+            anomaly_notifications = []
+            for anomaly_notifications_item_data in _anomaly_notifications:
+                anomaly_notifications_item = AnomalyNotification.from_dict(anomaly_notifications_item_data)
 
-            anomaly_notifications.append(anomaly_notifications_item)
+                anomaly_notifications.append(anomaly_notifications_item)
 
         anomaly_notifications = cls(
             links=links,

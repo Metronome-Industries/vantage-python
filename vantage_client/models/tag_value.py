@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,18 +15,18 @@ T = TypeVar("T", bound="TagValue")
 class TagValue:
     """
     Attributes:
-        tag_value (Union[Unset, str]): The TagValue. Example: vantage.
-        providers (Union[Unset, list[str]]): The unique providers that are covered by the TagValue.
+        tag_value (str | Unset): The TagValue. Example: vantage.
+        providers (list[str] | Unset): The unique providers that are covered by the TagValue.
     """
 
-    tag_value: Union[Unset, str] = UNSET
-    providers: Union[Unset, list[str]] = UNSET
+    tag_value: str | Unset = UNSET
+    providers: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         tag_value = self.tag_value
 
-        providers: Union[Unset, list[str]] = UNSET
+        providers: list[str] | Unset = UNSET
         if not isinstance(self.providers, Unset):
             providers = self.providers
 

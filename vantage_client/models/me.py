@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,27 +21,27 @@ class Me:
     """Me model
 
     Attributes:
-        default_workspace_token (Union[Unset, str]):
-        workspaces (Union[Unset, list['Workspace']]):
-        bearer_token (Union[Unset, BearerToken]):
+        default_workspace_token (str | Unset):
+        workspaces (list[Workspace] | Unset):
+        bearer_token (BearerToken | Unset):
     """
 
-    default_workspace_token: Union[Unset, str] = UNSET
-    workspaces: Union[Unset, list["Workspace"]] = UNSET
-    bearer_token: Union[Unset, "BearerToken"] = UNSET
+    default_workspace_token: str | Unset = UNSET
+    workspaces: list[Workspace] | Unset = UNSET
+    bearer_token: BearerToken | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         default_workspace_token = self.default_workspace_token
 
-        workspaces: Union[Unset, list[dict[str, Any]]] = UNSET
+        workspaces: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.workspaces, Unset):
             workspaces = []
             for workspaces_item_data in self.workspaces:
                 workspaces_item = workspaces_item_data.to_dict()
                 workspaces.append(workspaces_item)
 
-        bearer_token: Union[Unset, dict[str, Any]] = UNSET
+        bearer_token: dict[str, Any] | Unset = UNSET
         if not isinstance(self.bearer_token, Unset):
             bearer_token = self.bearer_token.to_dict()
 
@@ -63,15 +65,17 @@ class Me:
         d = dict(src_dict)
         default_workspace_token = d.pop("default_workspace_token", UNSET)
 
-        workspaces = []
         _workspaces = d.pop("workspaces", UNSET)
-        for workspaces_item_data in _workspaces or []:
-            workspaces_item = Workspace.from_dict(workspaces_item_data)
+        workspaces: list[Workspace] | Unset = UNSET
+        if _workspaces is not UNSET:
+            workspaces = []
+            for workspaces_item_data in _workspaces:
+                workspaces_item = Workspace.from_dict(workspaces_item_data)
 
-            workspaces.append(workspaces_item)
+                workspaces.append(workspaces_item)
 
         _bearer_token = d.pop("bearer_token", UNSET)
-        bearer_token: Union[Unset, BearerToken]
+        bearer_token: BearerToken | Unset
         if isinstance(_bearer_token, Unset):
             bearer_token = UNSET
         else:

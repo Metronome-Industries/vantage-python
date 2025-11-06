@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,14 +16,14 @@ T = TypeVar("T", bound="DashboardWidgetSettings")
 class DashboardWidgetSettings:
     """
     Attributes:
-        display_type (Union[Unset, DashboardWidgetSettingsDisplayType]):
+        display_type (DashboardWidgetSettingsDisplayType | Unset):
     """
 
-    display_type: Union[Unset, DashboardWidgetSettingsDisplayType] = UNSET
+    display_type: DashboardWidgetSettingsDisplayType | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        display_type: Union[Unset, str] = UNSET
+        display_type: str | Unset = UNSET
         if not isinstance(self.display_type, Unset):
             display_type = self.display_type.value
 
@@ -37,7 +39,7 @@ class DashboardWidgetSettings:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         _display_type = d.pop("display_type", UNSET)
-        display_type: Union[Unset, DashboardWidgetSettingsDisplayType]
+        display_type: DashboardWidgetSettingsDisplayType | Unset
         if isinstance(_display_type, Unset):
             display_type = UNSET
         else:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class UnitCosts:
     """UnitCosts model
 
     Attributes:
-        links (Union[Unset, UnitCostsLinks]):
-        unit_costs (Union[Unset, list['UnitCost']]):
+        links (UnitCostsLinks | Unset):
+        unit_costs (list[UnitCost] | Unset):
     """
 
-    links: Union[Unset, "UnitCostsLinks"] = UNSET
-    unit_costs: Union[Unset, list["UnitCost"]] = UNSET
+    links: UnitCostsLinks | Unset = UNSET
+    unit_costs: list[UnitCost] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        unit_costs: Union[Unset, list[dict[str, Any]]] = UNSET
+        unit_costs: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.unit_costs, Unset):
             unit_costs = []
             for unit_costs_item_data in self.unit_costs:
@@ -56,18 +58,20 @@ class UnitCosts:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, UnitCostsLinks]
+        links: UnitCostsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = UnitCostsLinks.from_dict(_links)
 
-        unit_costs = []
         _unit_costs = d.pop("unit_costs", UNSET)
-        for unit_costs_item_data in _unit_costs or []:
-            unit_costs_item = UnitCost.from_dict(unit_costs_item_data)
+        unit_costs: list[UnitCost] | Unset = UNSET
+        if _unit_costs is not UNSET:
+            unit_costs = []
+            for unit_costs_item_data in _unit_costs:
+                unit_costs_item = UnitCost.from_dict(unit_costs_item_data)
 
-            unit_costs.append(unit_costs_item)
+                unit_costs.append(unit_costs_item)
 
         unit_costs = cls(
             links=links,

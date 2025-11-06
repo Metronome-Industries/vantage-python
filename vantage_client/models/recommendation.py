@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,29 +16,29 @@ class Recommendation:
     """Recommendation model
 
     Attributes:
-        token (Union[Unset, str]):
-        category (Union[Unset, str]): The category of the Recommendation. Example: ec2_rightsizing_recommender.
-        workspace_token (Union[Unset, str]): The token for the Workspace the Recommendation is a part of.
-        provider (Union[Unset, str]): The provider the Recommendation is for.
-        provider_account_id (Union[Unset, str]): The account ID of the provider. For Azure, this is the subscription ID.
-        description (Union[Unset, str]):
-        potential_savings (Union[Unset, str]): The monthly potential savings of the Recommendation. Example: 100.00.
-        service (Union[Unset, str]): The service the Recommendation is for. Example: Amazon EC2.
-        created_at (Union[Unset, str]): The date and time, in UTC, the Recommendation was created. ISO 8601 Formatted.
-        resources_affected_count (Union[Unset, str]): The number of ProviderResources related to the Recommendation. Use
-            the `recommendations/:token/resources` endpoint to get the full list of resources.
+        token (str | Unset):
+        category (str | Unset): The category of the Recommendation. Example: ec2_compute_optimizer_recommender.
+        workspace_token (str | Unset): The token for the Workspace the Recommendation is a part of.
+        provider (str | Unset): The provider the Recommendation is for.
+        provider_account_id (str | Unset): The account ID of the provider. For Azure, this is the subscription ID.
+        description (str | Unset):
+        potential_savings (str | Unset): The monthly potential savings of the Recommendation. Example: 100.00.
+        service (str | Unset): The service the Recommendation is for. Example: Amazon EC2.
+        created_at (str | Unset): The date and time, in UTC, the Recommendation was created. ISO 8601 Formatted.
+        resources_affected_count (str | Unset): The number of ProviderResources related to the Recommendation. Use the
+            `recommendations/:token/resources` endpoint to get the full list of resources.
     """
 
-    token: Union[Unset, str] = UNSET
-    category: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    provider: Union[Unset, str] = UNSET
-    provider_account_id: Union[Unset, str] = UNSET
-    description: Union[Unset, str] = UNSET
-    potential_savings: Union[Unset, str] = UNSET
-    service: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    resources_affected_count: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    category: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    provider: str | Unset = UNSET
+    provider_account_id: str | Unset = UNSET
+    description: str | Unset = UNSET
+    potential_savings: str | Unset = UNSET
+    service: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    resources_affected_count: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

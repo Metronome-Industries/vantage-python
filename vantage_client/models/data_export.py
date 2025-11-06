@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,20 +20,20 @@ class DataExport:
     """DataExport model
 
     Attributes:
-        token (Union[Unset, str]):  Example: dta_xprt_abcd1234567890.
-        status (Union[Unset, str]):  Example: pending.
-        created_at (Union[Unset, str]):  Example: 2025-03-20T12:00:00Z.
-        export_type (Union[Unset, str]):  Example: cost_report.
-        manifest (Union[Unset, DataExportManifest]):
-        attributes (Union[Unset, str]):
+        token (str | Unset):  Example: dta_xprt_abcd1234567890.
+        status (str | Unset):  Example: pending.
+        created_at (str | Unset):  Example: 2025-03-20T12:00:00Z.
+        export_type (str | Unset):  Example: cost_report.
+        manifest (DataExportManifest | Unset):
+        attributes (str | Unset):
     """
 
-    token: Union[Unset, str] = UNSET
-    status: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    export_type: Union[Unset, str] = UNSET
-    manifest: Union[Unset, "DataExportManifest"] = UNSET
-    attributes: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    status: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    export_type: str | Unset = UNSET
+    manifest: DataExportManifest | Unset = UNSET
+    attributes: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -43,7 +45,7 @@ class DataExport:
 
         export_type = self.export_type
 
-        manifest: Union[Unset, dict[str, Any]] = UNSET
+        manifest: dict[str, Any] | Unset = UNSET
         if not isinstance(self.manifest, Unset):
             manifest = self.manifest.to_dict()
 
@@ -81,7 +83,7 @@ class DataExport:
         export_type = d.pop("export_type", UNSET)
 
         _manifest = d.pop("manifest", UNSET)
-        manifest: Union[Unset, DataExportManifest]
+        manifest: DataExportManifest | Unset
         if isinstance(_manifest, Unset):
             manifest = UNSET
         else:

@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -30,21 +30,22 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, UserFeedback]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | UserFeedback | None:
     if response.status_code == 201:
         response_201 = UserFeedback.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 422:
         response_422 = Errors.from_dict(response.json())
 
         return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -52,8 +53,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, UserFeedback]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | UserFeedback]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -66,8 +67,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateUserFeedback,
-) -> Response[Union[Errors, UserFeedback]]:
-    """Provide UserFeedback for our product and features.
+) -> Response[Errors | UserFeedback]:
+    """Submit user feedback
+
+     Provide UserFeedback for our product and features.
 
     Args:
         body (CreateUserFeedback): Provide UserFeedback for our product and features.
@@ -77,7 +80,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, UserFeedback]]
+        Response[Errors | UserFeedback]
     """
 
     kwargs = _get_kwargs(
@@ -95,8 +98,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: CreateUserFeedback,
-) -> Optional[Union[Errors, UserFeedback]]:
-    """Provide UserFeedback for our product and features.
+) -> Errors | UserFeedback | None:
+    """Submit user feedback
+
+     Provide UserFeedback for our product and features.
 
     Args:
         body (CreateUserFeedback): Provide UserFeedback for our product and features.
@@ -106,7 +111,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, UserFeedback]
+        Errors | UserFeedback
     """
 
     return sync_detailed(
@@ -119,8 +124,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateUserFeedback,
-) -> Response[Union[Errors, UserFeedback]]:
-    """Provide UserFeedback for our product and features.
+) -> Response[Errors | UserFeedback]:
+    """Submit user feedback
+
+     Provide UserFeedback for our product and features.
 
     Args:
         body (CreateUserFeedback): Provide UserFeedback for our product and features.
@@ -130,7 +137,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, UserFeedback]]
+        Response[Errors | UserFeedback]
     """
 
     kwargs = _get_kwargs(
@@ -146,8 +153,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateUserFeedback,
-) -> Optional[Union[Errors, UserFeedback]]:
-    """Provide UserFeedback for our product and features.
+) -> Errors | UserFeedback | None:
+    """Submit user feedback
+
+     Provide UserFeedback for our product and features.
 
     Args:
         body (CreateUserFeedback): Provide UserFeedback for our product and features.
@@ -157,7 +166,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, UserFeedback]
+        Errors | UserFeedback
     """
 
     return (

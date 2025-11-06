@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,27 +21,27 @@ class CreateSegment:
 
     Attributes:
         title (str): The title of the Segment.
-        description (Union[Unset, str]): The description of the Segment.
-        priority (Union[Unset, int]): The priority of the Segment.
-        track_unallocated (Union[Unset, bool]): Track Unallocated Costs which are not assigned to any of the created
-            Segments. Default: False.
-        report_settings (Union[Unset, CreateSegmentReportSettings]): Report settings configurable on top-level Segments.
-        workspace_token (Union[Unset, str]): The token of the Workspace to add the Segment to. Ignored if
-            'segment_token' is set. Required if the API token is associated with multiple Workspaces.
-        filter_ (Union[Unset, str]): The filter query language to apply to the Segment. Additional documentation
-            available at https://docs.vantage.sh/vql.
-        parent_segment_token (Union[Unset, str]): The token of the parent Segment this new Segment belongs to.
-            Determines the Workspace the segment is assigned to.
+        description (str | Unset): The description of the Segment.
+        priority (int | Unset): The priority of the Segment.
+        track_unallocated (bool | Unset): Track Unallocated Costs which are not assigned to any of the created Segments.
+            Default: False.
+        report_settings (CreateSegmentReportSettings | Unset): Report settings configurable on top-level Segments.
+        workspace_token (str | Unset): The token of the Workspace to add the Segment to. Ignored if 'segment_token' is
+            set. Required if the API token is associated with multiple Workspaces.
+        filter_ (str | Unset): The filter query language to apply to the Segment. Additional documentation available at
+            https://docs.vantage.sh/vql.
+        parent_segment_token (str | Unset): The token of the parent Segment this new Segment belongs to. Determines the
+            Workspace the segment is assigned to.
     """
 
     title: str
-    description: Union[Unset, str] = UNSET
-    priority: Union[Unset, int] = UNSET
-    track_unallocated: Union[Unset, bool] = False
-    report_settings: Union[Unset, "CreateSegmentReportSettings"] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    parent_segment_token: Union[Unset, str] = UNSET
+    description: str | Unset = UNSET
+    priority: int | Unset = UNSET
+    track_unallocated: bool | Unset = False
+    report_settings: CreateSegmentReportSettings | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    filter_: str | Unset = UNSET
+    parent_segment_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -51,7 +53,7 @@ class CreateSegment:
 
         track_unallocated = self.track_unallocated
 
-        report_settings: Union[Unset, dict[str, Any]] = UNSET
+        report_settings: dict[str, Any] | Unset = UNSET
         if not isinstance(self.report_settings, Unset):
             report_settings = self.report_settings.to_dict()
 
@@ -99,7 +101,7 @@ class CreateSegment:
         track_unallocated = d.pop("track_unallocated", UNSET)
 
         _report_settings = d.pop("report_settings", UNSET)
-        report_settings: Union[Unset, CreateSegmentReportSettings]
+        report_settings: CreateSegmentReportSettings | Unset
         if isinstance(_report_settings, Unset):
             report_settings = UNSET
         else:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union, cast
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,33 +15,29 @@ T = TypeVar("T", bound="BillingInformation")
 class BillingInformation:
     """
     Attributes:
-        id (Union[Unset, str]):
-        token (Union[Unset, str]):
-        company_name (Union[Unset, str]): Company name for billing
-        country_code (Union[Unset, str]): ISO country code
-        address_line_1 (Union[Unset, str]): First line of billing address
-        address_line_2 (Union[Unset, str]): Second line of billing address
-        city (Union[Unset, str]): City for billing address
-        state (Union[Unset, str]): State or province for billing address
-        postal_code (Union[Unset, str]): Postal or ZIP code
-        billing_email (Union[Unset, list[str]]): Array of billing email addresses
+        token (str | Unset):
+        company_name (str | Unset): Company name for billing
+        country_code (str | Unset): ISO country code
+        address_line_1 (str | Unset): First line of billing address
+        address_line_2 (str | Unset): Second line of billing address
+        city (str | Unset): City for billing address
+        state (str | Unset): State or province for billing address
+        postal_code (str | Unset): Postal or ZIP code
+        billing_email (list[str] | Unset): Array of billing email addresses
     """
 
-    id: Union[Unset, str] = UNSET
-    token: Union[Unset, str] = UNSET
-    company_name: Union[Unset, str] = UNSET
-    country_code: Union[Unset, str] = UNSET
-    address_line_1: Union[Unset, str] = UNSET
-    address_line_2: Union[Unset, str] = UNSET
-    city: Union[Unset, str] = UNSET
-    state: Union[Unset, str] = UNSET
-    postal_code: Union[Unset, str] = UNSET
-    billing_email: Union[Unset, list[str]] = UNSET
+    token: str | Unset = UNSET
+    company_name: str | Unset = UNSET
+    country_code: str | Unset = UNSET
+    address_line_1: str | Unset = UNSET
+    address_line_2: str | Unset = UNSET
+    city: str | Unset = UNSET
+    state: str | Unset = UNSET
+    postal_code: str | Unset = UNSET
+    billing_email: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        id = self.id
-
         token = self.token
 
         company_name = self.company_name
@@ -56,15 +54,13 @@ class BillingInformation:
 
         postal_code = self.postal_code
 
-        billing_email: Union[Unset, list[str]] = UNSET
+        billing_email: list[str] | Unset = UNSET
         if not isinstance(self.billing_email, Unset):
             billing_email = self.billing_email
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if id is not UNSET:
-            field_dict["id"] = id
         if token is not UNSET:
             field_dict["token"] = token
         if company_name is not UNSET:
@@ -89,8 +85,6 @@ class BillingInformation:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        id = d.pop("id", UNSET)
-
         token = d.pop("token", UNSET)
 
         company_name = d.pop("company_name", UNSET)
@@ -110,7 +104,6 @@ class BillingInformation:
         billing_email = cast(list[str], d.pop("billing_email", UNSET))
 
         billing_information = cls(
-            id=id,
             token=token,
             company_name=company_name,
             country_code=country_code,

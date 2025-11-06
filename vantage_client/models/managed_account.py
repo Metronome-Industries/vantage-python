@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,28 +21,28 @@ class ManagedAccount:
     """ManagedAccount model
 
     Attributes:
-        token (Union[Unset, str]):
-        name (Union[Unset, str]):
-        contact_email (Union[Unset, str]):
-        parent_account_token (Union[Unset, str]): The token for the parent Account.
-        access_credential_tokens (Union[Unset, list[str]]): The tokens for the Access Credentials assigned to the
-            Managed Account.
-        billing_rule_tokens (Union[Unset, list[str]]): The tokens for the Billing Rules assigned to the Managed Account.
-        msp_billing_profile_token (Union[Unset, str]): Token of the MSP billing profile used for this managed account
-            (MSP invoicing accounts only)
-        billing_information_attributes (Union[Unset, BillingInformation]):
-        business_information_attributes (Union[Unset, BusinessInformation]):
+        token (str | Unset):
+        name (str | Unset):
+        contact_email (str | Unset):
+        parent_account_token (str | Unset): The token for the parent Account.
+        access_credential_tokens (list[str] | Unset): The tokens for the Access Credentials assigned to the Managed
+            Account.
+        billing_rule_tokens (list[str] | Unset): The tokens for the Billing Rules assigned to the Managed Account.
+        msp_billing_profile_token (str | Unset): Token of the MSP billing profile used for this managed account (MSP
+            invoicing accounts only)
+        billing_information_attributes (BillingInformation | Unset):
+        business_information_attributes (BusinessInformation | Unset):
     """
 
-    token: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    contact_email: Union[Unset, str] = UNSET
-    parent_account_token: Union[Unset, str] = UNSET
-    access_credential_tokens: Union[Unset, list[str]] = UNSET
-    billing_rule_tokens: Union[Unset, list[str]] = UNSET
-    msp_billing_profile_token: Union[Unset, str] = UNSET
-    billing_information_attributes: Union[Unset, "BillingInformation"] = UNSET
-    business_information_attributes: Union[Unset, "BusinessInformation"] = UNSET
+    token: str | Unset = UNSET
+    name: str | Unset = UNSET
+    contact_email: str | Unset = UNSET
+    parent_account_token: str | Unset = UNSET
+    access_credential_tokens: list[str] | Unset = UNSET
+    billing_rule_tokens: list[str] | Unset = UNSET
+    msp_billing_profile_token: str | Unset = UNSET
+    billing_information_attributes: BillingInformation | Unset = UNSET
+    business_information_attributes: BusinessInformation | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,21 +54,21 @@ class ManagedAccount:
 
         parent_account_token = self.parent_account_token
 
-        access_credential_tokens: Union[Unset, list[str]] = UNSET
+        access_credential_tokens: list[str] | Unset = UNSET
         if not isinstance(self.access_credential_tokens, Unset):
             access_credential_tokens = self.access_credential_tokens
 
-        billing_rule_tokens: Union[Unset, list[str]] = UNSET
+        billing_rule_tokens: list[str] | Unset = UNSET
         if not isinstance(self.billing_rule_tokens, Unset):
             billing_rule_tokens = self.billing_rule_tokens
 
         msp_billing_profile_token = self.msp_billing_profile_token
 
-        billing_information_attributes: Union[Unset, dict[str, Any]] = UNSET
+        billing_information_attributes: dict[str, Any] | Unset = UNSET
         if not isinstance(self.billing_information_attributes, Unset):
             billing_information_attributes = self.billing_information_attributes.to_dict()
 
-        business_information_attributes: Union[Unset, dict[str, Any]] = UNSET
+        business_information_attributes: dict[str, Any] | Unset = UNSET
         if not isinstance(self.business_information_attributes, Unset):
             business_information_attributes = self.business_information_attributes.to_dict()
 
@@ -115,14 +117,14 @@ class ManagedAccount:
         msp_billing_profile_token = d.pop("msp_billing_profile_token", UNSET)
 
         _billing_information_attributes = d.pop("billing_information_attributes", UNSET)
-        billing_information_attributes: Union[Unset, BillingInformation]
+        billing_information_attributes: BillingInformation | Unset
         if isinstance(_billing_information_attributes, Unset):
             billing_information_attributes = UNSET
         else:
             billing_information_attributes = BillingInformation.from_dict(_billing_information_attributes)
 
         _business_information_attributes = d.pop("business_information_attributes", UNSET)
-        business_information_attributes: Union[Unset, BusinessInformation]
+        business_information_attributes: BusinessInformation | Unset
         if isinstance(_business_information_attributes, Unset):
             business_information_attributes = UNSET
         else:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class CostReports:
     """CostReports model
 
     Attributes:
-        links (Union[Unset, CostReportsLinks]):
-        cost_reports (Union[Unset, list['CostReport']]):
+        links (CostReportsLinks | Unset):
+        cost_reports (list[CostReport] | Unset):
     """
 
-    links: Union[Unset, "CostReportsLinks"] = UNSET
-    cost_reports: Union[Unset, list["CostReport"]] = UNSET
+    links: CostReportsLinks | Unset = UNSET
+    cost_reports: list[CostReport] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        cost_reports: Union[Unset, list[dict[str, Any]]] = UNSET
+        cost_reports: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.cost_reports, Unset):
             cost_reports = []
             for cost_reports_item_data in self.cost_reports:
@@ -56,18 +58,20 @@ class CostReports:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, CostReportsLinks]
+        links: CostReportsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = CostReportsLinks.from_dict(_links)
 
-        cost_reports = []
         _cost_reports = d.pop("cost_reports", UNSET)
-        for cost_reports_item_data in _cost_reports or []:
-            cost_reports_item = CostReport.from_dict(cost_reports_item_data)
+        cost_reports: list[CostReport] | Unset = UNSET
+        if _cost_reports is not UNSET:
+            cost_reports = []
+            for cost_reports_item_data in _cost_reports:
+                cost_reports_item = CostReport.from_dict(cost_reports_item_data)
 
-            cost_reports.append(cost_reports_item)
+                cost_reports.append(cost_reports_item)
 
         cost_reports = cls(
             links=links,

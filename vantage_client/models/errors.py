@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,20 +20,20 @@ class Errors:
     """Errors model
 
     Attributes:
-        links (Union[Unset, ErrorsLinks]):
-        errors (Union[Unset, list[str]]):
+        links (ErrorsLinks | Unset):
+        errors (list[str] | Unset):
     """
 
-    links: Union[Unset, "ErrorsLinks"] = UNSET
-    errors: Union[Unset, list[str]] = UNSET
+    links: ErrorsLinks | Unset = UNSET
+    errors: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        errors: Union[Unset, list[str]] = UNSET
+        errors: list[str] | Unset = UNSET
         if not isinstance(self.errors, Unset):
             errors = self.errors
 
@@ -51,7 +53,7 @@ class Errors:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, ErrorsLinks]
+        links: ErrorsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:

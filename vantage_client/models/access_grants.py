@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class AccessGrants:
     """AccessGrants model
 
     Attributes:
-        links (Union[Unset, AccessGrantsLinks]):
-        access_grants (Union[Unset, list['AccessGrant']]):
+        links (AccessGrantsLinks | Unset):
+        access_grants (list[AccessGrant] | Unset):
     """
 
-    links: Union[Unset, "AccessGrantsLinks"] = UNSET
-    access_grants: Union[Unset, list["AccessGrant"]] = UNSET
+    links: AccessGrantsLinks | Unset = UNSET
+    access_grants: list[AccessGrant] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        access_grants: Union[Unset, list[dict[str, Any]]] = UNSET
+        access_grants: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.access_grants, Unset):
             access_grants = []
             for access_grants_item_data in self.access_grants:
@@ -56,18 +58,20 @@ class AccessGrants:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, AccessGrantsLinks]
+        links: AccessGrantsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = AccessGrantsLinks.from_dict(_links)
 
-        access_grants = []
         _access_grants = d.pop("access_grants", UNSET)
-        for access_grants_item_data in _access_grants or []:
-            access_grants_item = AccessGrant.from_dict(access_grants_item_data)
+        access_grants: list[AccessGrant] | Unset = UNSET
+        if _access_grants is not UNSET:
+            access_grants = []
+            for access_grants_item_data in _access_grants:
+                access_grants_item = AccessGrant.from_dict(access_grants_item_data)
 
-            access_grants.append(access_grants_item)
+                access_grants.append(access_grants_item)
 
         access_grants = cls(
             links=links,

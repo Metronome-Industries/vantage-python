@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,30 +16,30 @@ class Invoice:
     """Invoice model
 
     Attributes:
-        token (Union[Unset, str]):
-        invoice_number (Union[Unset, str]): Sequential invoice number for the MSP account
-        total (Union[Unset, str]): Total amount for the invoice period
-        billing_period_start (Union[Unset, str]): Start date of the billing period. ISO 8601 formatted.
-        billing_period_end (Union[Unset, str]): End date of the billing period. ISO 8601 formatted.
-        status (Union[Unset, str]): Current status of the invoice
-        created_at (Union[Unset, str]): The date and time, in UTC, the invoice was created. ISO 8601 formatted.
-        updated_at (Union[Unset, str]): The date and time, in UTC, the invoice was last updated. ISO 8601 formatted.
-        account_token (Union[Unset, str]): Token of the managed account this invoice belongs to
-        account_name (Union[Unset, str]): Name of the managed account this invoice belongs to
-        msp_account_token (Union[Unset, str]): Token of the MSP account that owns this invoice
+        token (str | Unset):
+        invoice_number (str | Unset): Sequential invoice number for the MSP account
+        total (str | Unset): Total amount for the invoice period
+        billing_period_start (str | Unset): Start date of the billing period. ISO 8601 formatted.
+        billing_period_end (str | Unset): End date of the billing period. ISO 8601 formatted.
+        status (str | Unset): Current status of the invoice
+        created_at (str | Unset): The date and time, in UTC, the invoice was created. ISO 8601 formatted.
+        updated_at (str | Unset): The date and time, in UTC, the invoice was last updated. ISO 8601 formatted.
+        account_token (str | Unset): Token of the managed account this invoice belongs to
+        account_name (str | Unset): Name of the managed account this invoice belongs to
+        msp_account_token (str | Unset): Token of the MSP account that owns this invoice
     """
 
-    token: Union[Unset, str] = UNSET
-    invoice_number: Union[Unset, str] = UNSET
-    total: Union[Unset, str] = UNSET
-    billing_period_start: Union[Unset, str] = UNSET
-    billing_period_end: Union[Unset, str] = UNSET
-    status: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    updated_at: Union[Unset, str] = UNSET
-    account_token: Union[Unset, str] = UNSET
-    account_name: Union[Unset, str] = UNSET
-    msp_account_token: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    invoice_number: str | Unset = UNSET
+    total: str | Unset = UNSET
+    billing_period_start: str | Unset = UNSET
+    billing_period_end: str | Unset = UNSET
+    status: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    updated_at: str | Unset = UNSET
+    account_token: str | Unset = UNSET
+    account_name: str | Unset = UNSET
+    msp_account_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

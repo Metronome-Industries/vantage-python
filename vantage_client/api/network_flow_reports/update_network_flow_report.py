@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -32,20 +32,23 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, NetworkFlowReport]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Errors | NetworkFlowReport | None:
     if response.status_code == 200:
         response_200 = NetworkFlowReport.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 422:
         response_422 = Errors.from_dict(response.json())
 
         return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -53,8 +56,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, NetworkFlowReport]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Errors | NetworkFlowReport]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -68,8 +71,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateNetworkFlowReport,
-) -> Response[Union[Errors, NetworkFlowReport]]:
-    """Update a NetworkFlowReport.
+) -> Response[Errors | NetworkFlowReport]:
+    """Update network flow report
+
+     Update a NetworkFlowReport.
 
     Args:
         network_flow_report_token (str):
@@ -80,7 +85,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, NetworkFlowReport]]
+        Response[Errors | NetworkFlowReport]
     """
 
     kwargs = _get_kwargs(
@@ -100,8 +105,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: UpdateNetworkFlowReport,
-) -> Optional[Union[Errors, NetworkFlowReport]]:
-    """Update a NetworkFlowReport.
+) -> Errors | NetworkFlowReport | None:
+    """Update network flow report
+
+     Update a NetworkFlowReport.
 
     Args:
         network_flow_report_token (str):
@@ -112,7 +119,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, NetworkFlowReport]
+        Errors | NetworkFlowReport
     """
 
     return sync_detailed(
@@ -127,8 +134,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: UpdateNetworkFlowReport,
-) -> Response[Union[Errors, NetworkFlowReport]]:
-    """Update a NetworkFlowReport.
+) -> Response[Errors | NetworkFlowReport]:
+    """Update network flow report
+
+     Update a NetworkFlowReport.
 
     Args:
         network_flow_report_token (str):
@@ -139,7 +148,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, NetworkFlowReport]]
+        Response[Errors | NetworkFlowReport]
     """
 
     kwargs = _get_kwargs(
@@ -157,8 +166,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: UpdateNetworkFlowReport,
-) -> Optional[Union[Errors, NetworkFlowReport]]:
-    """Update a NetworkFlowReport.
+) -> Errors | NetworkFlowReport | None:
+    """Update network flow report
+
+     Update a NetworkFlowReport.
 
     Args:
         network_flow_report_token (str):
@@ -169,7 +180,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, NetworkFlowReport]
+        Errors | NetworkFlowReport
     """
 
     return (

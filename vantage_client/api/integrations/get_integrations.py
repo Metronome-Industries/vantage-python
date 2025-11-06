@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -12,14 +12,14 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    provider: Union[Unset, GetIntegrationsProvider] = UNSET,
-    account_identifier: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    provider: GetIntegrationsProvider | Unset = UNSET,
+    account_identifier: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
-    json_provider: Union[Unset, str] = UNSET
+    json_provider: str | Unset = UNSET
     if not isinstance(provider, Unset):
         json_provider = provider.value
 
@@ -42,18 +42,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Integrations]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Integrations | None:
     if response.status_code == 200:
         response_200 = Integrations.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Integrations]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Integrations]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -65,18 +66,20 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    provider: Union[Unset, GetIntegrationsProvider] = UNSET,
-    account_identifier: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    provider: GetIntegrationsProvider | Unset = UNSET,
+    account_identifier: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[Integrations]:
-    """Return all Integrations.
+    """Get all integrations
+
+     Return all Integrations.
 
     Args:
-        provider (Union[Unset, GetIntegrationsProvider]):
-        account_identifier (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider (GetIntegrationsProvider | Unset):
+        account_identifier (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -103,18 +106,20 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    provider: Union[Unset, GetIntegrationsProvider] = UNSET,
-    account_identifier: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Integrations]:
-    """Return all Integrations.
+    provider: GetIntegrationsProvider | Unset = UNSET,
+    account_identifier: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Integrations | None:
+    """Get all integrations
+
+     Return all Integrations.
 
     Args:
-        provider (Union[Unset, GetIntegrationsProvider]):
-        account_identifier (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider (GetIntegrationsProvider | Unset):
+        account_identifier (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -136,18 +141,20 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    provider: Union[Unset, GetIntegrationsProvider] = UNSET,
-    account_identifier: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    provider: GetIntegrationsProvider | Unset = UNSET,
+    account_identifier: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[Integrations]:
-    """Return all Integrations.
+    """Get all integrations
+
+     Return all Integrations.
 
     Args:
-        provider (Union[Unset, GetIntegrationsProvider]):
-        account_identifier (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider (GetIntegrationsProvider | Unset):
+        account_identifier (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -172,18 +179,20 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    provider: Union[Unset, GetIntegrationsProvider] = UNSET,
-    account_identifier: Union[Unset, str] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Integrations]:
-    """Return all Integrations.
+    provider: GetIntegrationsProvider | Unset = UNSET,
+    account_identifier: str | Unset = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Integrations | None:
+    """Get all integrations
+
+     Return all Integrations.
 
     Args:
-        provider (Union[Unset, GetIntegrationsProvider]):
-        account_identifier (Union[Unset, str]):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        provider (GetIntegrationsProvider | Unset):
+        account_identifier (str | Unset):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

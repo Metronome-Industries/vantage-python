@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,34 +20,33 @@ class Segment:
     """Segment model
 
     Attributes:
-        token (Union[Unset, str]):
-        title (Union[Unset, str]): The title of the Segment. Example: OPEX.
-        parent_segment_token (Union[Unset, str]): The token of the parent Segment of this Segment.
-        description (Union[Unset, str]): The description of the Segment. Example: Operating expenses.
-        track_unallocated (Union[Unset, bool]): Track Unallocated Costs which are not assigned to any of the created
-            Segments.
-        report_settings (Union[Unset, SegmentReportSettings]): Report settings configurable on top-level Segments.
-        priority (Union[Unset, int]): Costs are assigned in priority order across all Segments with assigned filters.
-            Example: 100.
-        filter_ (Union[Unset, str]): The filter applied to the Segment. Additional documentation available at
+        token (str | Unset):
+        title (str | Unset): The title of the Segment. Example: OPEX.
+        parent_segment_token (str | Unset): The token of the parent Segment of this Segment.
+        description (str | Unset): The description of the Segment. Example: Operating expenses.
+        track_unallocated (bool | Unset): Track Unallocated Costs which are not assigned to any of the created Segments.
+        report_settings (SegmentReportSettings | Unset): Report settings configurable on top-level Segments.
+        priority (int | Unset): Costs are assigned in priority order across all Segments with assigned filters. Example:
+            100.
+        filter_ (str | Unset): The filter applied to the Segment. Additional documentation available at
             https://docs.vantage.sh/vql.
-        created_at (Union[Unset, str]): The date and time, in UTC, the Segment was created. ISO 8601 Formatted. Example:
+        created_at (str | Unset): The date and time, in UTC, the Segment was created. ISO 8601 Formatted. Example:
             2021-07-09T00:00:00Z.
-        workspace_token (Union[Unset, str]): The token for the Workspace the Segment is a part of.
-        report_token (Union[Unset, str]): The token for the Report the Segment has generated.
+        workspace_token (str | Unset): The token for the Workspace the Segment is a part of.
+        report_token (str | Unset): The token for the Report the Segment has generated.
     """
 
-    token: Union[Unset, str] = UNSET
-    title: Union[Unset, str] = UNSET
-    parent_segment_token: Union[Unset, str] = UNSET
-    description: Union[Unset, str] = UNSET
-    track_unallocated: Union[Unset, bool] = UNSET
-    report_settings: Union[Unset, "SegmentReportSettings"] = UNSET
-    priority: Union[Unset, int] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    created_at: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    report_token: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    title: str | Unset = UNSET
+    parent_segment_token: str | Unset = UNSET
+    description: str | Unset = UNSET
+    track_unallocated: bool | Unset = UNSET
+    report_settings: SegmentReportSettings | Unset = UNSET
+    priority: int | Unset = UNSET
+    filter_: str | Unset = UNSET
+    created_at: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    report_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -59,7 +60,7 @@ class Segment:
 
         track_unallocated = self.track_unallocated
 
-        report_settings: Union[Unset, dict[str, Any]] = UNSET
+        report_settings: dict[str, Any] | Unset = UNSET
         if not isinstance(self.report_settings, Unset):
             report_settings = self.report_settings.to_dict()
 
@@ -117,7 +118,7 @@ class Segment:
         track_unallocated = d.pop("track_unallocated", UNSET)
 
         _report_settings = d.pop("report_settings", UNSET)
-        report_settings: Union[Unset, SegmentReportSettings]
+        report_settings: SegmentReportSettings | Unset
         if isinstance(_report_settings, Unset):
             report_settings = UNSET
         else:

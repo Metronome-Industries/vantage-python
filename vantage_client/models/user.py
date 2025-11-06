@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,18 +16,18 @@ class User:
     """User model
 
     Attributes:
-        token (Union[Unset, str]):
-        name (Union[Unset, str]): The name of the User. Example: John Doe.
-        email (Union[Unset, str]): The email of the User. Example: john_doe@acme.com.
-        role (Union[Unset, str]): The role of the User. Example: Admin.
-        last_seen_at (Union[Unset, str]): The last time the User logged in. Example: 2024-01-01T00:00:00Z.
+        token (str | Unset):
+        name (str | Unset): The name of the User. Example: John Doe.
+        email (str | Unset): The email of the User. Example: john_doe@acme.com.
+        role (str | Unset): The role of the User. Example: Admin.
+        last_seen_at (str | Unset): The last time the User logged in. Example: 2024-01-01T00:00:00Z.
     """
 
-    token: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    email: Union[Unset, str] = UNSET
-    role: Union[Unset, str] = UNSET
-    last_seen_at: Union[Unset, str] = UNSET
+    token: str | Unset = UNSET
+    name: str | Unset = UNSET
+    email: str | Unset = UNSET
+    role: str | Unset = UNSET
+    last_seen_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

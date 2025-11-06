@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -13,24 +13,24 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    cost_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    groupings: Union[Unset, list[str]] = UNSET,
-    order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    date_bin: Union[Unset, GetCostsDateBin] = UNSET,
-    settingsinclude_credits: Union[Unset, bool] = False,
-    settingsinclude_refunds: Union[Unset, bool] = False,
-    settingsinclude_discounts: Union[Unset, bool] = True,
-    settingsinclude_tax: Union[Unset, bool] = True,
-    settingsamortize: Union[Unset, bool] = True,
-    settingsunallocated: Union[Unset, bool] = False,
-    settingsaggregate_by: Union[Unset, str] = "cost",
-    settingsshow_previous_period: Union[Unset, bool] = True,
+    cost_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    groupings: list[str] | Unset = UNSET,
+    order: GetCostsOrder | Unset = GetCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+    date_bin: GetCostsDateBin | Unset = UNSET,
+    settingsinclude_credits: bool | Unset = False,
+    settingsinclude_refunds: bool | Unset = False,
+    settingsinclude_discounts: bool | Unset = True,
+    settingsinclude_tax: bool | Unset = True,
+    settingsamortize: bool | Unset = True,
+    settingsunallocated: bool | Unset = False,
+    settingsaggregate_by: str | Unset = "cost",
+    settingsshow_previous_period: bool | Unset = True,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -44,13 +44,13 @@ def _get_kwargs(
 
     params["end_date"] = end_date
 
-    json_groupings: Union[Unset, list[str]] = UNSET
+    json_groupings: list[str] | Unset = UNSET
     if not isinstance(groupings, Unset):
         json_groupings = groupings
 
     params["groupings"] = json_groupings
 
-    json_order: Union[Unset, str] = UNSET
+    json_order: str | Unset = UNSET
     if not isinstance(order, Unset):
         json_order = order.value
 
@@ -60,7 +60,7 @@ def _get_kwargs(
 
     params["page"] = page
 
-    json_date_bin: Union[Unset, str] = UNSET
+    json_date_bin: str | Unset = UNSET
     if not isinstance(date_bin, Unset):
         json_date_bin = date_bin.value
 
@@ -93,26 +93,29 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Errors]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | None:
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 402:
         response_402 = Errors.from_dict(response.json())
 
         return response_402
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Errors]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -124,46 +127,48 @@ def _build_response(*, client: Union[AuthenticatedClient, Client], response: htt
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    cost_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    groupings: Union[Unset, list[str]] = UNSET,
-    order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    date_bin: Union[Unset, GetCostsDateBin] = UNSET,
-    settingsinclude_credits: Union[Unset, bool] = False,
-    settingsinclude_refunds: Union[Unset, bool] = False,
-    settingsinclude_discounts: Union[Unset, bool] = True,
-    settingsinclude_tax: Union[Unset, bool] = True,
-    settingsamortize: Union[Unset, bool] = True,
-    settingsunallocated: Union[Unset, bool] = False,
-    settingsaggregate_by: Union[Unset, str] = "cost",
-    settingsshow_previous_period: Union[Unset, bool] = True,
+    cost_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    groupings: list[str] | Unset = UNSET,
+    order: GetCostsOrder | Unset = GetCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+    date_bin: GetCostsDateBin | Unset = UNSET,
+    settingsinclude_credits: bool | Unset = False,
+    settingsinclude_refunds: bool | Unset = False,
+    settingsinclude_discounts: bool | Unset = True,
+    settingsinclude_tax: bool | Unset = True,
+    settingsamortize: bool | Unset = True,
+    settingsunallocated: bool | Unset = False,
+    settingsaggregate_by: str | Unset = "cost",
+    settingsshow_previous_period: bool | Unset = True,
 ) -> Response[Errors]:
-    """Return all Costs for a CostReport or VQL filter.
+    """Get costs for cost report or VQL filter
+
+     Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        groupings (Union[Unset, list[str]]):
-        order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
-        date_bin (Union[Unset, GetCostsDateBin]):
-        settingsinclude_credits (Union[Unset, bool]):  Default: False.
-        settingsinclude_refunds (Union[Unset, bool]):  Default: False.
-        settingsinclude_discounts (Union[Unset, bool]):  Default: True.
-        settingsinclude_tax (Union[Unset, bool]):  Default: True.
-        settingsamortize (Union[Unset, bool]):  Default: True.
-        settingsunallocated (Union[Unset, bool]):  Default: False.
-        settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
-        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
+        cost_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        groupings (list[str] | Unset):
+        order (GetCostsOrder | Unset):  Default: GetCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
+        date_bin (GetCostsDateBin | Unset):
+        settingsinclude_credits (bool | Unset):  Default: False.
+        settingsinclude_refunds (bool | Unset):  Default: False.
+        settingsinclude_discounts (bool | Unset):  Default: True.
+        settingsinclude_tax (bool | Unset):  Default: True.
+        settingsamortize (bool | Unset):  Default: True.
+        settingsunallocated (bool | Unset):  Default: False.
+        settingsaggregate_by (str | Unset):  Default: 'cost'.
+        settingsshow_previous_period (bool | Unset):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -204,46 +209,48 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    cost_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    groupings: Union[Unset, list[str]] = UNSET,
-    order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    date_bin: Union[Unset, GetCostsDateBin] = UNSET,
-    settingsinclude_credits: Union[Unset, bool] = False,
-    settingsinclude_refunds: Union[Unset, bool] = False,
-    settingsinclude_discounts: Union[Unset, bool] = True,
-    settingsinclude_tax: Union[Unset, bool] = True,
-    settingsamortize: Union[Unset, bool] = True,
-    settingsunallocated: Union[Unset, bool] = False,
-    settingsaggregate_by: Union[Unset, str] = "cost",
-    settingsshow_previous_period: Union[Unset, bool] = True,
-) -> Optional[Errors]:
-    """Return all Costs for a CostReport or VQL filter.
+    cost_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    groupings: list[str] | Unset = UNSET,
+    order: GetCostsOrder | Unset = GetCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+    date_bin: GetCostsDateBin | Unset = UNSET,
+    settingsinclude_credits: bool | Unset = False,
+    settingsinclude_refunds: bool | Unset = False,
+    settingsinclude_discounts: bool | Unset = True,
+    settingsinclude_tax: bool | Unset = True,
+    settingsamortize: bool | Unset = True,
+    settingsunallocated: bool | Unset = False,
+    settingsaggregate_by: str | Unset = "cost",
+    settingsshow_previous_period: bool | Unset = True,
+) -> Errors | None:
+    """Get costs for cost report or VQL filter
+
+     Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        groupings (Union[Unset, list[str]]):
-        order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
-        date_bin (Union[Unset, GetCostsDateBin]):
-        settingsinclude_credits (Union[Unset, bool]):  Default: False.
-        settingsinclude_refunds (Union[Unset, bool]):  Default: False.
-        settingsinclude_discounts (Union[Unset, bool]):  Default: True.
-        settingsinclude_tax (Union[Unset, bool]):  Default: True.
-        settingsamortize (Union[Unset, bool]):  Default: True.
-        settingsunallocated (Union[Unset, bool]):  Default: False.
-        settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
-        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
+        cost_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        groupings (list[str] | Unset):
+        order (GetCostsOrder | Unset):  Default: GetCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
+        date_bin (GetCostsDateBin | Unset):
+        settingsinclude_credits (bool | Unset):  Default: False.
+        settingsinclude_refunds (bool | Unset):  Default: False.
+        settingsinclude_discounts (bool | Unset):  Default: True.
+        settingsinclude_tax (bool | Unset):  Default: True.
+        settingsamortize (bool | Unset):  Default: True.
+        settingsunallocated (bool | Unset):  Default: False.
+        settingsaggregate_by (str | Unset):  Default: 'cost'.
+        settingsshow_previous_period (bool | Unset):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -279,46 +286,48 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    cost_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    groupings: Union[Unset, list[str]] = UNSET,
-    order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    date_bin: Union[Unset, GetCostsDateBin] = UNSET,
-    settingsinclude_credits: Union[Unset, bool] = False,
-    settingsinclude_refunds: Union[Unset, bool] = False,
-    settingsinclude_discounts: Union[Unset, bool] = True,
-    settingsinclude_tax: Union[Unset, bool] = True,
-    settingsamortize: Union[Unset, bool] = True,
-    settingsunallocated: Union[Unset, bool] = False,
-    settingsaggregate_by: Union[Unset, str] = "cost",
-    settingsshow_previous_period: Union[Unset, bool] = True,
+    cost_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    groupings: list[str] | Unset = UNSET,
+    order: GetCostsOrder | Unset = GetCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+    date_bin: GetCostsDateBin | Unset = UNSET,
+    settingsinclude_credits: bool | Unset = False,
+    settingsinclude_refunds: bool | Unset = False,
+    settingsinclude_discounts: bool | Unset = True,
+    settingsinclude_tax: bool | Unset = True,
+    settingsamortize: bool | Unset = True,
+    settingsunallocated: bool | Unset = False,
+    settingsaggregate_by: str | Unset = "cost",
+    settingsshow_previous_period: bool | Unset = True,
 ) -> Response[Errors]:
-    """Return all Costs for a CostReport or VQL filter.
+    """Get costs for cost report or VQL filter
+
+     Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        groupings (Union[Unset, list[str]]):
-        order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
-        date_bin (Union[Unset, GetCostsDateBin]):
-        settingsinclude_credits (Union[Unset, bool]):  Default: False.
-        settingsinclude_refunds (Union[Unset, bool]):  Default: False.
-        settingsinclude_discounts (Union[Unset, bool]):  Default: True.
-        settingsinclude_tax (Union[Unset, bool]):  Default: True.
-        settingsamortize (Union[Unset, bool]):  Default: True.
-        settingsunallocated (Union[Unset, bool]):  Default: False.
-        settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
-        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
+        cost_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        groupings (list[str] | Unset):
+        order (GetCostsOrder | Unset):  Default: GetCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
+        date_bin (GetCostsDateBin | Unset):
+        settingsinclude_credits (bool | Unset):  Default: False.
+        settingsinclude_refunds (bool | Unset):  Default: False.
+        settingsinclude_discounts (bool | Unset):  Default: True.
+        settingsinclude_tax (bool | Unset):  Default: True.
+        settingsamortize (bool | Unset):  Default: True.
+        settingsunallocated (bool | Unset):  Default: False.
+        settingsaggregate_by (str | Unset):  Default: 'cost'.
+        settingsshow_previous_period (bool | Unset):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -357,46 +366,48 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    cost_report_token: Union[Unset, str] = UNSET,
-    filter_: Union[Unset, str] = UNSET,
-    workspace_token: Union[Unset, str] = UNSET,
-    start_date: Union[Unset, str] = UNSET,
-    end_date: Union[Unset, str] = UNSET,
-    groupings: Union[Unset, list[str]] = UNSET,
-    order: Union[Unset, GetCostsOrder] = GetCostsOrder.DESC,
-    limit: Union[Unset, int] = UNSET,
-    page: Union[Unset, int] = UNSET,
-    date_bin: Union[Unset, GetCostsDateBin] = UNSET,
-    settingsinclude_credits: Union[Unset, bool] = False,
-    settingsinclude_refunds: Union[Unset, bool] = False,
-    settingsinclude_discounts: Union[Unset, bool] = True,
-    settingsinclude_tax: Union[Unset, bool] = True,
-    settingsamortize: Union[Unset, bool] = True,
-    settingsunallocated: Union[Unset, bool] = False,
-    settingsaggregate_by: Union[Unset, str] = "cost",
-    settingsshow_previous_period: Union[Unset, bool] = True,
-) -> Optional[Errors]:
-    """Return all Costs for a CostReport or VQL filter.
+    cost_report_token: str | Unset = UNSET,
+    filter_: str | Unset = UNSET,
+    workspace_token: str | Unset = UNSET,
+    start_date: str | Unset = UNSET,
+    end_date: str | Unset = UNSET,
+    groupings: list[str] | Unset = UNSET,
+    order: GetCostsOrder | Unset = GetCostsOrder.DESC,
+    limit: int | Unset = UNSET,
+    page: int | Unset = UNSET,
+    date_bin: GetCostsDateBin | Unset = UNSET,
+    settingsinclude_credits: bool | Unset = False,
+    settingsinclude_refunds: bool | Unset = False,
+    settingsinclude_discounts: bool | Unset = True,
+    settingsinclude_tax: bool | Unset = True,
+    settingsamortize: bool | Unset = True,
+    settingsunallocated: bool | Unset = False,
+    settingsaggregate_by: str | Unset = "cost",
+    settingsshow_previous_period: bool | Unset = True,
+) -> Errors | None:
+    """Get costs for cost report or VQL filter
+
+     Return all Costs for a CostReport or VQL filter.
 
     Args:
-        cost_report_token (Union[Unset, str]):
-        filter_ (Union[Unset, str]):
-        workspace_token (Union[Unset, str]):
-        start_date (Union[Unset, str]):
-        end_date (Union[Unset, str]):
-        groupings (Union[Unset, list[str]]):
-        order (Union[Unset, GetCostsOrder]):  Default: GetCostsOrder.DESC.
-        limit (Union[Unset, int]):
-        page (Union[Unset, int]):
-        date_bin (Union[Unset, GetCostsDateBin]):
-        settingsinclude_credits (Union[Unset, bool]):  Default: False.
-        settingsinclude_refunds (Union[Unset, bool]):  Default: False.
-        settingsinclude_discounts (Union[Unset, bool]):  Default: True.
-        settingsinclude_tax (Union[Unset, bool]):  Default: True.
-        settingsamortize (Union[Unset, bool]):  Default: True.
-        settingsunallocated (Union[Unset, bool]):  Default: False.
-        settingsaggregate_by (Union[Unset, str]):  Default: 'cost'.
-        settingsshow_previous_period (Union[Unset, bool]):  Default: True.
+        cost_report_token (str | Unset):
+        filter_ (str | Unset):
+        workspace_token (str | Unset):
+        start_date (str | Unset):
+        end_date (str | Unset):
+        groupings (list[str] | Unset):
+        order (GetCostsOrder | Unset):  Default: GetCostsOrder.DESC.
+        limit (int | Unset):
+        page (int | Unset):
+        date_bin (GetCostsDateBin | Unset):
+        settingsinclude_credits (bool | Unset):  Default: False.
+        settingsinclude_refunds (bool | Unset):  Default: False.
+        settingsinclude_discounts (bool | Unset):  Default: True.
+        settingsinclude_tax (bool | Unset):  Default: True.
+        settingsamortize (bool | Unset):  Default: True.
+        settingsunallocated (bool | Unset):  Default: False.
+        settingsaggregate_by (str | Unset):  Default: 'cost'.
+        settingsshow_previous_period (bool | Unset):  Default: True.
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -12,8 +12,8 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     product_id: str,
     *,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -32,18 +32,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Prices]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Prices | None:
     if response.status_code == 200:
         response_200 = Prices.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Prices]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Prices]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -56,15 +57,17 @@ def sync_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[Prices]:
-    """Return available Prices across all Regions for a Product.
+    """Get prices for a product
+
+     Return available Prices across all Regions for a Product.
 
     Args:
         product_id (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -91,15 +94,17 @@ def sync(
     product_id: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Prices]:
-    """Return available Prices across all Regions for a Product.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Prices | None:
+    """Get prices for a product
+
+     Return available Prices across all Regions for a Product.
 
     Args:
         product_id (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -121,15 +126,17 @@ async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
 ) -> Response[Prices]:
-    """Return available Prices across all Regions for a Product.
+    """Get prices for a product
+
+     Return available Prices across all Regions for a Product.
 
     Args:
         product_id (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -154,15 +161,17 @@ async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-) -> Optional[Prices]:
-    """Return available Prices across all Regions for a Product.
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+) -> Prices | None:
+    """Get prices for a product
+
+     Return available Prices across all Regions for a Product.
 
     Args:
         product_id (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
+        page (int | Unset):
+        limit (int | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

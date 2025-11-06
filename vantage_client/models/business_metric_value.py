@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,15 +15,14 @@ T = TypeVar("T", bound="BusinessMetricValue")
 class BusinessMetricValue:
     """
     Attributes:
-        date (Union[Unset, str]): The date of the Business Metric Value. ISO 8601 formatted. Example: 2024-03-01+00:00.
-        amount (Union[Unset, str]): The amount of the Business Metric Value as a string to ensure precision. Example:
-            100.00.
-        label (Union[Unset, str]): The label of the Business Metric Value. Example: Cost Center A.
+        date (str | Unset): The date of the Business Metric Value. ISO 8601 formatted. Example: 2024-03-01+00:00.
+        amount (str | Unset): The amount of the Business Metric Value as a string to ensure precision. Example: 100.00.
+        label (str | Unset): The label of the Business Metric Value. Example: Cost Center A.
     """
 
-    date: Union[Unset, str] = UNSET
-    amount: Union[Unset, str] = UNSET
-    label: Union[Unset, str] = UNSET
+    date: str | Unset = UNSET
+    amount: str | Unset = UNSET
+    label: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

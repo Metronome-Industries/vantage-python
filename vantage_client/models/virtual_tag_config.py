@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,23 +20,22 @@ class VirtualTagConfig:
     """VirtualTagConfig model
 
     Attributes:
-        token (Union[Unset, str]): The token of the VirtualTagConfig. Example: vtag_1234.
-        created_by_token (Union[Unset, str]): The token of the Creator of the VirtualTagConfig. Example: usr_1234.
-        key (Union[Unset, str]): The key of the VirtualTagConfig. Example: Cost Center.
-        overridable (Union[Unset, bool]): Whether the VirtualTagConfig can override a provider-supplied tag on a
-            matching Cost.
-        backfill_until (Union[Unset, str]): The earliest month VirtualTagConfig should be backfilled to. Example:
-            2025-02-01.
-        values (Union[Unset, list['VirtualTagConfigValue']]): Values for the VirtualTagConfig, with match precedence
-            determined by their relative order in the list.
+        token (str | Unset): The token of the VirtualTagConfig. Example: vtag_1234.
+        created_by_token (str | Unset): The token of the Creator of the VirtualTagConfig. Example: usr_1234.
+        key (str | Unset): The key of the VirtualTagConfig. Example: Cost Center.
+        overridable (bool | Unset): Whether the VirtualTagConfig can override a provider-supplied tag on a matching
+            Cost.
+        backfill_until (str | Unset): The earliest month VirtualTagConfig should be backfilled to. Example: 2025-05-01.
+        values (list[VirtualTagConfigValue] | Unset): Values for the VirtualTagConfig, with match precedence determined
+            by their relative order in the list.
     """
 
-    token: Union[Unset, str] = UNSET
-    created_by_token: Union[Unset, str] = UNSET
-    key: Union[Unset, str] = UNSET
-    overridable: Union[Unset, bool] = UNSET
-    backfill_until: Union[Unset, str] = UNSET
-    values: Union[Unset, list["VirtualTagConfigValue"]] = UNSET
+    token: str | Unset = UNSET
+    created_by_token: str | Unset = UNSET
+    key: str | Unset = UNSET
+    overridable: bool | Unset = UNSET
+    backfill_until: str | Unset = UNSET
+    values: list[VirtualTagConfigValue] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -48,7 +49,7 @@ class VirtualTagConfig:
 
         backfill_until = self.backfill_until
 
-        values: Union[Unset, list[dict[str, Any]]] = UNSET
+        values: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.values, Unset):
             values = []
             for values_item_data in self.values:
@@ -88,12 +89,14 @@ class VirtualTagConfig:
 
         backfill_until = d.pop("backfill_until", UNSET)
 
-        values = []
         _values = d.pop("values", UNSET)
-        for values_item_data in _values or []:
-            values_item = VirtualTagConfigValue.from_dict(values_item_data)
+        values: list[VirtualTagConfigValue] | Unset = UNSET
+        if _values is not UNSET:
+            values = []
+            for values_item_data in _values:
+                values_item = VirtualTagConfigValue.from_dict(values_item_data)
 
-            values.append(values_item)
+                values.append(values_item)
 
         virtual_tag_config = cls(
             token=token,

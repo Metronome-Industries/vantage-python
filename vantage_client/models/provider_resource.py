@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,15 +20,15 @@ class ProviderResource:
     """ProviderResource model
 
     Attributes:
-        token (Union[Unset, str]):
-        resource_id (Union[Unset, str]): The unique identifier of the Active Resource. Example: i-0a1b2c3d4e5f6g7h8.
-        recommendation_actions (Union[Unset, list['RecommendationAction']]): The actions to take to implement the
+        token (str | Unset):
+        resource_id (str | Unset): The unique identifier of the Active Resource. Example: i-0a1b2c3d4e5f6g7h8.
+        recommendation_actions (list[RecommendationAction] | Unset): The actions to take to implement the
             Recommendation.
     """
 
-    token: Union[Unset, str] = UNSET
-    resource_id: Union[Unset, str] = UNSET
-    recommendation_actions: Union[Unset, list["RecommendationAction"]] = UNSET
+    token: str | Unset = UNSET
+    resource_id: str | Unset = UNSET
+    recommendation_actions: list[RecommendationAction] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -34,7 +36,7 @@ class ProviderResource:
 
         resource_id = self.resource_id
 
-        recommendation_actions: Union[Unset, list[dict[str, Any]]] = UNSET
+        recommendation_actions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.recommendation_actions, Unset):
             recommendation_actions = []
             for recommendation_actions_item_data in self.recommendation_actions:
@@ -62,12 +64,14 @@ class ProviderResource:
 
         resource_id = d.pop("resource_id", UNSET)
 
-        recommendation_actions = []
         _recommendation_actions = d.pop("recommendation_actions", UNSET)
-        for recommendation_actions_item_data in _recommendation_actions or []:
-            recommendation_actions_item = RecommendationAction.from_dict(recommendation_actions_item_data)
+        recommendation_actions: list[RecommendationAction] | Unset = UNSET
+        if _recommendation_actions is not UNSET:
+            recommendation_actions = []
+            for recommendation_actions_item_data in _recommendation_actions:
+                recommendation_actions_item = RecommendationAction.from_dict(recommendation_actions_item_data)
 
-            recommendation_actions.append(recommendation_actions_item)
+                recommendation_actions.append(recommendation_actions_item)
 
         provider_resource = cls(
             token=token,

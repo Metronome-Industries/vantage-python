@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -20,18 +20,19 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Product]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Product | None:
     if response.status_code == 200:
         response_200 = Product.from_dict(response.json())
 
         return response_200
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Product]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Product]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -45,7 +46,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Product]:
-    """Return a product
+    """Get product by ID
+
+     Return a product
 
     Args:
         id (str):
@@ -73,8 +76,10 @@ def sync(
     id: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Product]:
-    """Return a product
+) -> Product | None:
+    """Get product by ID
+
+     Return a product
 
     Args:
         id (str):
@@ -98,7 +103,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
 ) -> Response[Product]:
-    """Return a product
+    """Get product by ID
+
+     Return a product
 
     Args:
         id (str):
@@ -124,8 +131,10 @@ async def asyncio(
     id: str,
     *,
     client: AuthenticatedClient,
-) -> Optional[Product]:
-    """Return a product
+) -> Product | None:
+    """Get product by ID
+
+     Return a product
 
     Args:
         id (str):

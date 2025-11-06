@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class Workspaces:
     """Workspaces model
 
     Attributes:
-        links (Union[Unset, WorkspacesLinks]):
-        workspaces (Union[Unset, list['Workspace']]):
+        links (WorkspacesLinks | Unset):
+        workspaces (list[Workspace] | Unset):
     """
 
-    links: Union[Unset, "WorkspacesLinks"] = UNSET
-    workspaces: Union[Unset, list["Workspace"]] = UNSET
+    links: WorkspacesLinks | Unset = UNSET
+    workspaces: list[Workspace] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        workspaces: Union[Unset, list[dict[str, Any]]] = UNSET
+        workspaces: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.workspaces, Unset):
             workspaces = []
             for workspaces_item_data in self.workspaces:
@@ -56,18 +58,20 @@ class Workspaces:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, WorkspacesLinks]
+        links: WorkspacesLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = WorkspacesLinks.from_dict(_links)
 
-        workspaces = []
         _workspaces = d.pop("workspaces", UNSET)
-        for workspaces_item_data in _workspaces or []:
-            workspaces_item = Workspace.from_dict(workspaces_item_data)
+        workspaces: list[Workspace] | Unset = UNSET
+        if _workspaces is not UNSET:
+            workspaces = []
+            for workspaces_item_data in _workspaces:
+                workspaces_item = Workspace.from_dict(workspaces_item_data)
 
-            workspaces.append(workspaces_item)
+                workspaces.append(workspaces_item)
 
         workspaces = cls(
             links=links,

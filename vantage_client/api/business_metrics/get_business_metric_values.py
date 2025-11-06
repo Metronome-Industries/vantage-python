@@ -1,6 +1,6 @@
 import datetime
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -14,9 +14,9 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     business_metric_token: str,
     *,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    start_date: Union[Unset, datetime.date] = UNSET,
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    start_date: datetime.date | Unset = UNSET,
 ) -> dict[str, Any]:
     params: dict[str, Any] = {}
 
@@ -24,7 +24,7 @@ def _get_kwargs(
 
     params["limit"] = limit
 
-    json_start_date: Union[Unset, str] = UNSET
+    json_start_date: str | Unset = UNSET
     if not isinstance(start_date, Unset):
         json_start_date = start_date.isoformat()
     params["start_date"] = json_start_date
@@ -41,16 +41,18 @@ def _get_kwargs(
 
 
 def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[BusinessMetricValues, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> BusinessMetricValues | Errors | None:
     if response.status_code == 200:
         response_200 = BusinessMetricValues.from_dict(response.json())
 
         return response_200
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
@@ -58,8 +60,8 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[BusinessMetricValues, Errors]]:
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[BusinessMetricValues | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -72,24 +74,26 @@ def sync_detailed(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    start_date: Union[Unset, datetime.date] = UNSET,
-) -> Response[Union[BusinessMetricValues, Errors]]:
-    """Return values of a BusinessMetric
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    start_date: datetime.date | Unset = UNSET,
+) -> Response[BusinessMetricValues | Errors]:
+    """Get business metric values
+
+     Return values of a BusinessMetric
 
     Args:
         business_metric_token (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        start_date (Union[Unset, datetime.date]):
+        page (int | Unset):
+        limit (int | Unset):
+        start_date (datetime.date | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BusinessMetricValues, Errors]]
+        Response[BusinessMetricValues | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -110,24 +114,26 @@ def sync(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    start_date: Union[Unset, datetime.date] = UNSET,
-) -> Optional[Union[BusinessMetricValues, Errors]]:
-    """Return values of a BusinessMetric
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    start_date: datetime.date | Unset = UNSET,
+) -> BusinessMetricValues | Errors | None:
+    """Get business metric values
+
+     Return values of a BusinessMetric
 
     Args:
         business_metric_token (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        start_date (Union[Unset, datetime.date]):
+        page (int | Unset):
+        limit (int | Unset):
+        start_date (datetime.date | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BusinessMetricValues, Errors]
+        BusinessMetricValues | Errors
     """
 
     return sync_detailed(
@@ -143,24 +149,26 @@ async def asyncio_detailed(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    start_date: Union[Unset, datetime.date] = UNSET,
-) -> Response[Union[BusinessMetricValues, Errors]]:
-    """Return values of a BusinessMetric
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    start_date: datetime.date | Unset = UNSET,
+) -> Response[BusinessMetricValues | Errors]:
+    """Get business metric values
+
+     Return values of a BusinessMetric
 
     Args:
         business_metric_token (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        start_date (Union[Unset, datetime.date]):
+        page (int | Unset):
+        limit (int | Unset):
+        start_date (datetime.date | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[BusinessMetricValues, Errors]]
+        Response[BusinessMetricValues | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -179,24 +187,26 @@ async def asyncio(
     business_metric_token: str,
     *,
     client: AuthenticatedClient,
-    page: Union[Unset, int] = UNSET,
-    limit: Union[Unset, int] = UNSET,
-    start_date: Union[Unset, datetime.date] = UNSET,
-) -> Optional[Union[BusinessMetricValues, Errors]]:
-    """Return values of a BusinessMetric
+    page: int | Unset = UNSET,
+    limit: int | Unset = UNSET,
+    start_date: datetime.date | Unset = UNSET,
+) -> BusinessMetricValues | Errors | None:
+    """Get business metric values
+
+     Return values of a BusinessMetric
 
     Args:
         business_metric_token (str):
-        page (Union[Unset, int]):
-        limit (Union[Unset, int]):
-        start_date (Union[Unset, datetime.date]):
+        page (int | Unset):
+        limit (int | Unset):
+        start_date (datetime.date | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[BusinessMetricValues, Errors]
+        BusinessMetricValues | Errors
     """
 
     return (

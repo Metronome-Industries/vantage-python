@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,11 +15,11 @@ T = TypeVar("T", bound="DatadogMetricFields")
 class DatadogMetricFields:
     """
     Attributes:
-        query (Union[Unset, str]): The query used to import Datadog metrics. Example:
+        query (str | Unset): The query used to import Datadog metrics. Example:
             sum:aws.applicationelb.request_count{region:us-east-1}.rollup(avg,daily).
     """
 
-    query: Union[Unset, str] = UNSET
+    query: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -14,18 +16,18 @@ class UpdateSegmentReportSettings:
     """Report settings configurable on top-level Segments.
 
     Attributes:
-        include_credits (Union[Unset, bool]): Reports created under this Segment will include credits.
-        include_refunds (Union[Unset, bool]): Reports created under this Segment will include refunds.
-        include_discounts (Union[Unset, bool]): Reports created under this Segment will include discounts.
-        include_tax (Union[Unset, bool]): Reports created under this Segment will include tax.
-        amortize (Union[Unset, bool]): Reports created under this Segment will amortize.
+        include_credits (bool | Unset): Reports created under this Segment will include credits.
+        include_refunds (bool | Unset): Reports created under this Segment will include refunds.
+        include_discounts (bool | Unset): Reports created under this Segment will include discounts.
+        include_tax (bool | Unset): Reports created under this Segment will include tax.
+        amortize (bool | Unset): Reports created under this Segment will amortize.
     """
 
-    include_credits: Union[Unset, bool] = UNSET
-    include_refunds: Union[Unset, bool] = UNSET
-    include_discounts: Union[Unset, bool] = UNSET
-    include_tax: Union[Unset, bool] = UNSET
-    amortize: Union[Unset, bool] = UNSET
+    include_credits: bool | Unset = UNSET
+    include_refunds: bool | Unset = UNSET
+    include_discounts: bool | Unset = UNSET
+    include_tax: bool | Unset = UNSET
+    amortize: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

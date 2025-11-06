@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class NetworkFlowReports:
     """NetworkFlowReports model
 
     Attributes:
-        links (Union[Unset, NetworkFlowReportsLinks]):
-        network_flow_reports (Union[Unset, list['NetworkFlowReport']]):
+        links (NetworkFlowReportsLinks | Unset):
+        network_flow_reports (list[NetworkFlowReport] | Unset):
     """
 
-    links: Union[Unset, "NetworkFlowReportsLinks"] = UNSET
-    network_flow_reports: Union[Unset, list["NetworkFlowReport"]] = UNSET
+    links: NetworkFlowReportsLinks | Unset = UNSET
+    network_flow_reports: list[NetworkFlowReport] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        network_flow_reports: Union[Unset, list[dict[str, Any]]] = UNSET
+        network_flow_reports: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.network_flow_reports, Unset):
             network_flow_reports = []
             for network_flow_reports_item_data in self.network_flow_reports:
@@ -56,18 +58,20 @@ class NetworkFlowReports:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, NetworkFlowReportsLinks]
+        links: NetworkFlowReportsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = NetworkFlowReportsLinks.from_dict(_links)
 
-        network_flow_reports = []
         _network_flow_reports = d.pop("network_flow_reports", UNSET)
-        for network_flow_reports_item_data in _network_flow_reports or []:
-            network_flow_reports_item = NetworkFlowReport.from_dict(network_flow_reports_item_data)
+        network_flow_reports: list[NetworkFlowReport] | Unset = UNSET
+        if _network_flow_reports is not UNSET:
+            network_flow_reports = []
+            for network_flow_reports_item_data in _network_flow_reports:
+                network_flow_reports_item = NetworkFlowReport.from_dict(network_flow_reports_item_data)
 
-            network_flow_reports.append(network_flow_reports_item)
+                network_flow_reports.append(network_flow_reports_item)
 
         network_flow_reports = cls(
             links=links,

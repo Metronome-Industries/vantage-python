@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union
+from typing import Any
 
 import httpx
 
@@ -30,30 +30,29 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Errors, Segment]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Errors | Segment | None:
     if response.status_code == 201:
         response_201 = Segment.from_dict(response.json())
 
         return response_201
+
     if response.status_code == 400:
         response_400 = Errors.from_dict(response.json())
 
         return response_400
+
     if response.status_code == 422:
         response_422 = Errors.from_dict(response.json())
 
         return response_422
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Errors, Segment]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Errors | Segment]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -66,8 +65,10 @@ def sync_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateSegment,
-) -> Response[Union[Errors, Segment]]:
-    """Create a Segment.
+) -> Response[Errors | Segment]:
+    """Create segment
+
+     Create a Segment.
 
     Args:
         body (CreateSegment): Create a Segment.
@@ -77,7 +78,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Segment]]
+        Response[Errors | Segment]
     """
 
     kwargs = _get_kwargs(
@@ -95,8 +96,10 @@ def sync(
     *,
     client: AuthenticatedClient,
     body: CreateSegment,
-) -> Optional[Union[Errors, Segment]]:
-    """Create a Segment.
+) -> Errors | Segment | None:
+    """Create segment
+
+     Create a Segment.
 
     Args:
         body (CreateSegment): Create a Segment.
@@ -106,7 +109,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Segment]
+        Errors | Segment
     """
 
     return sync_detailed(
@@ -119,8 +122,10 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
     body: CreateSegment,
-) -> Response[Union[Errors, Segment]]:
-    """Create a Segment.
+) -> Response[Errors | Segment]:
+    """Create segment
+
+     Create a Segment.
 
     Args:
         body (CreateSegment): Create a Segment.
@@ -130,7 +135,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Errors, Segment]]
+        Response[Errors | Segment]
     """
 
     kwargs = _get_kwargs(
@@ -146,8 +151,10 @@ async def asyncio(
     *,
     client: AuthenticatedClient,
     body: CreateSegment,
-) -> Optional[Union[Errors, Segment]]:
-    """Create a Segment.
+) -> Errors | Segment | None:
+    """Create segment
+
+     Create a Segment.
 
     Args:
         body (CreateSegment): Create a Segment.
@@ -157,7 +164,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Errors, Segment]
+        Errors | Segment
     """
 
     return (

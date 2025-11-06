@@ -1,31 +1,52 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
+from io import BytesIO
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="AuditLogObjectChanges")
+from ..types import File
+
+T = TypeVar("T", bound="CreateExchangeRatesViaCsvDataBody")
 
 
 @_attrs_define
-class AuditLogObjectChanges:
-    """The changes made to the object."""
+class CreateExchangeRatesViaCsvDataBody:
+    """
+    Attributes:
+        csv (File): CSV file containing exchange rates. Format: base_currency_code, currency_code, rate, date (YYYY-MM-
+            DD)
+    """
 
+    csv: File
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        csv = self.csv.to_tuple()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "csv": csv,
+            }
+        )
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        audit_log_object_changes = cls()
+        csv = File(payload=BytesIO(d.pop("csv")))
 
-        audit_log_object_changes.additional_properties = d
-        return audit_log_object_changes
+        create_exchange_rates_via_csv_data_body = cls(
+            csv=csv,
+        )
+
+        create_exchange_rates_via_csv_data_body.additional_properties = d
+        return create_exchange_rates_via_csv_data_body
 
     @property
     def additional_keys(self) -> list[str]:

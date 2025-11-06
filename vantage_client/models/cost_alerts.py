@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,20 +21,20 @@ class CostAlerts:
     """CostAlerts model
 
     Attributes:
-        links (Union[Unset, CostAlertsLinks]):
-        cost_alerts (Union[Unset, list['CostAlert']]):
+        links (CostAlertsLinks | Unset):
+        cost_alerts (list[CostAlert] | Unset):
     """
 
-    links: Union[Unset, "CostAlertsLinks"] = UNSET
-    cost_alerts: Union[Unset, list["CostAlert"]] = UNSET
+    links: CostAlertsLinks | Unset = UNSET
+    cost_alerts: list[CostAlert] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        links: Union[Unset, dict[str, Any]] = UNSET
+        links: dict[str, Any] | Unset = UNSET
         if not isinstance(self.links, Unset):
             links = self.links.to_dict()
 
-        cost_alerts: Union[Unset, list[dict[str, Any]]] = UNSET
+        cost_alerts: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.cost_alerts, Unset):
             cost_alerts = []
             for cost_alerts_item_data in self.cost_alerts:
@@ -56,18 +58,20 @@ class CostAlerts:
 
         d = dict(src_dict)
         _links = d.pop("links", UNSET)
-        links: Union[Unset, CostAlertsLinks]
+        links: CostAlertsLinks | Unset
         if isinstance(_links, Unset):
             links = UNSET
         else:
             links = CostAlertsLinks.from_dict(_links)
 
-        cost_alerts = []
         _cost_alerts = d.pop("cost_alerts", UNSET)
-        for cost_alerts_item_data in _cost_alerts or []:
-            cost_alerts_item = CostAlert.from_dict(cost_alerts_item_data)
+        cost_alerts: list[CostAlert] | Unset = UNSET
+        if _cost_alerts is not UNSET:
+            cost_alerts = []
+            for cost_alerts_item_data in _cost_alerts:
+                cost_alerts_item = CostAlert.from_dict(cost_alerts_item_data)
 
-            cost_alerts.append(cost_alerts_item)
+                cost_alerts.append(cost_alerts_item)
 
         cost_alerts = cls(
             links=links,

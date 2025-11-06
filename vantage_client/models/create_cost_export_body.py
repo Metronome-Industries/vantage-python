@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,43 +17,43 @@ T = TypeVar("T", bound="CreateCostExportBody")
 class CreateCostExportBody:
     """
     Attributes:
-        cost_report_token (Union[Unset, str]): The CostReport token.
-        filter_ (Union[Unset, str]): The VQL filter to apply to the costs. If this is supplied you do not need
+        cost_report_token (str | Unset): The CostReport token.
+        filter_ (str | Unset): The VQL filter to apply to the costs. If this is supplied you do not need
             cost_report_token.
-        workspace_token (Union[Unset, str]): The token of the Workspace to query costs from. Ignored if
-            'cost_report_token' is set. Required if the API token is associated with multiple Workspaces.
-        start_date (Union[Unset, str]): First date you would like to filter costs from. ISO 8601 formatted.
-        end_date (Union[Unset, str]): Last date you would like to filter costs to. ISO 8601 formatted.
-        date_bin (Union[Unset, CreateCostExportBodyDateBin]): The date bin of the costs. Defaults to the report's
-            default or day.
-        schema (Union[Unset, CreateCostExportBodySchema]): The schema of the data export. Default:
+        workspace_token (str | Unset): The token of the Workspace to query costs from. Ignored if 'cost_report_token' is
+            set. Required if the API token is associated with multiple Workspaces.
+        start_date (str | Unset): First date you would like to filter costs from. ISO 8601 formatted.
+        end_date (str | Unset): Last date you would like to filter costs to. ISO 8601 formatted.
+        date_bin (CreateCostExportBodyDateBin | Unset): The date bin of the costs. Defaults to the report's default or
+            day.
+        schema (CreateCostExportBodySchema | Unset): The schema of the data export. Default:
             CreateCostExportBodySchema.VNTG.
-        settingsinclude_credits (Union[Unset, bool]): Results will include credits. Default: False.
-        settingsinclude_refunds (Union[Unset, bool]): Results will include refunds. Default: False.
-        settingsinclude_discounts (Union[Unset, bool]): Results will include discounts. Default: True.
-        settingsinclude_tax (Union[Unset, bool]): Results will include tax. Default: True.
-        settingsamortize (Union[Unset, bool]): Results will amortize. Default: True.
-        settingsunallocated (Union[Unset, bool]): Results will show unallocated costs. Default: False.
-        settingsaggregate_by (Union[Unset, str]): Results will aggregate by cost or usage. Default: 'cost'.
-        settingsshow_previous_period (Union[Unset, bool]): Results will show previous period costs or usage comparison.
+        settingsinclude_credits (bool | Unset): Results will include credits. Default: False.
+        settingsinclude_refunds (bool | Unset): Results will include refunds. Default: False.
+        settingsinclude_discounts (bool | Unset): Results will include discounts. Default: True.
+        settingsinclude_tax (bool | Unset): Results will include tax. Default: True.
+        settingsamortize (bool | Unset): Results will amortize. Default: True.
+        settingsunallocated (bool | Unset): Results will show unallocated costs. Default: False.
+        settingsaggregate_by (str | Unset): Results will aggregate by cost or usage. Default: 'cost'.
+        settingsshow_previous_period (bool | Unset): Results will show previous period costs or usage comparison.
             Default: True.
     """
 
-    cost_report_token: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
-    workspace_token: Union[Unset, str] = UNSET
-    start_date: Union[Unset, str] = UNSET
-    end_date: Union[Unset, str] = UNSET
-    date_bin: Union[Unset, CreateCostExportBodyDateBin] = UNSET
-    schema: Union[Unset, CreateCostExportBodySchema] = CreateCostExportBodySchema.VNTG
-    settingsinclude_credits: Union[Unset, bool] = False
-    settingsinclude_refunds: Union[Unset, bool] = False
-    settingsinclude_discounts: Union[Unset, bool] = True
-    settingsinclude_tax: Union[Unset, bool] = True
-    settingsamortize: Union[Unset, bool] = True
-    settingsunallocated: Union[Unset, bool] = False
-    settingsaggregate_by: Union[Unset, str] = "cost"
-    settingsshow_previous_period: Union[Unset, bool] = True
+    cost_report_token: str | Unset = UNSET
+    filter_: str | Unset = UNSET
+    workspace_token: str | Unset = UNSET
+    start_date: str | Unset = UNSET
+    end_date: str | Unset = UNSET
+    date_bin: CreateCostExportBodyDateBin | Unset = UNSET
+    schema: CreateCostExportBodySchema | Unset = CreateCostExportBodySchema.VNTG
+    settingsinclude_credits: bool | Unset = False
+    settingsinclude_refunds: bool | Unset = False
+    settingsinclude_discounts: bool | Unset = True
+    settingsinclude_tax: bool | Unset = True
+    settingsamortize: bool | Unset = True
+    settingsunallocated: bool | Unset = False
+    settingsaggregate_by: str | Unset = "cost"
+    settingsshow_previous_period: bool | Unset = True
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -65,11 +67,11 @@ class CreateCostExportBody:
 
         end_date = self.end_date
 
-        date_bin: Union[Unset, str] = UNSET
+        date_bin: str | Unset = UNSET
         if not isinstance(self.date_bin, Unset):
             date_bin = self.date_bin.value
 
-        schema: Union[Unset, str] = UNSET
+        schema: str | Unset = UNSET
         if not isinstance(self.schema, Unset):
             schema = self.schema.value
 
@@ -139,14 +141,14 @@ class CreateCostExportBody:
         end_date = d.pop("end_date", UNSET)
 
         _date_bin = d.pop("date_bin", UNSET)
-        date_bin: Union[Unset, CreateCostExportBodyDateBin]
+        date_bin: CreateCostExportBodyDateBin | Unset
         if isinstance(_date_bin, Unset):
             date_bin = UNSET
         else:
             date_bin = CreateCostExportBodyDateBin(_date_bin)
 
         _schema = d.pop("schema", UNSET)
-        schema: Union[Unset, CreateCostExportBodySchema]
+        schema: CreateCostExportBodySchema | Unset
         if isinstance(_schema, Unset):
             schema = UNSET
         else:

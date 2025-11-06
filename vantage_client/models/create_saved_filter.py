@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections.abc import Mapping
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,15 +17,15 @@ class CreateSavedFilter:
 
     Attributes:
         title (str): The title of the SavedFilter.
-        workspace_token (Union[Unset, str]): The Workspace to associate the SavedFilter with. Required if the API token
-            is associated with multiple Workspaces.
-        filter_ (Union[Unset, str]): The filter query language to apply to the SavedFilter, which subsequently gets
-            applied to a CostReport. Additional documentation available at https://docs.vantage.sh/vql.
+        workspace_token (str | Unset): The Workspace to associate the SavedFilter with. Required if the API token is
+            associated with multiple Workspaces.
+        filter_ (str | Unset): The filter query language to apply to the SavedFilter, which subsequently gets applied to
+            a CostReport. Additional documentation available at https://docs.vantage.sh/vql.
     """
 
     title: str
-    workspace_token: Union[Unset, str] = UNSET
-    filter_: Union[Unset, str] = UNSET
+    workspace_token: str | Unset = UNSET
+    filter_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:

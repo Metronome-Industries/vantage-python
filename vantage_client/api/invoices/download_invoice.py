@@ -1,11 +1,11 @@
 from http import HTTPStatus
-from typing import Any, Optional, Union, cast
+from typing import Any, cast
 
 import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.download_invoice_body import DownloadInvoiceBody
+from ...models.download_invoice import DownloadInvoice
 from ...models.errors import Errors
 from ...types import Response
 
@@ -13,7 +13,7 @@ from ...types import Response
 def _get_kwargs(
     invoice_token: str,
     *,
-    body: DownloadInvoiceBody,
+    body: DownloadInvoice,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
@@ -30,25 +30,23 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[Union[Any, Errors]]:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Errors | None:
     if response.status_code == 200:
         response_200 = cast(Any, None)
         return response_200
+
     if response.status_code == 404:
         response_404 = Errors.from_dict(response.json())
 
         return response_404
+
     if client.raise_on_unexpected_status:
         raise errors.UnexpectedStatus(response.status_code, response.content)
     else:
         return None
 
 
-def _build_response(
-    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[Union[Any, Errors]]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Errors]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -61,22 +59,22 @@ def sync_detailed(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-    body: DownloadInvoiceBody,
-) -> Response[Union[Any, Errors]]:
-    """Download invoice file.
+    body: DownloadInvoice,
+) -> Response[Any | Errors]:
+    """Get invoice file
 
-     MSP accounts can download PDF and CSV. Child accounts can only download PDF.
+     Download invoice file (PDF or CSV).
 
     Args:
         invoice_token (str):
-        body (DownloadInvoiceBody):
+        body (DownloadInvoice): Download invoice file (PDF or CSV).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, Errors]]
+        Response[Any | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -95,22 +93,22 @@ def sync(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-    body: DownloadInvoiceBody,
-) -> Optional[Union[Any, Errors]]:
-    """Download invoice file.
+    body: DownloadInvoice,
+) -> Any | Errors | None:
+    """Get invoice file
 
-     MSP accounts can download PDF and CSV. Child accounts can only download PDF.
+     Download invoice file (PDF or CSV).
 
     Args:
         invoice_token (str):
-        body (DownloadInvoiceBody):
+        body (DownloadInvoice): Download invoice file (PDF or CSV).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, Errors]
+        Any | Errors
     """
 
     return sync_detailed(
@@ -124,22 +122,22 @@ async def asyncio_detailed(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-    body: DownloadInvoiceBody,
-) -> Response[Union[Any, Errors]]:
-    """Download invoice file.
+    body: DownloadInvoice,
+) -> Response[Any | Errors]:
+    """Get invoice file
 
-     MSP accounts can download PDF and CSV. Child accounts can only download PDF.
+     Download invoice file (PDF or CSV).
 
     Args:
         invoice_token (str):
-        body (DownloadInvoiceBody):
+        body (DownloadInvoice): Download invoice file (PDF or CSV).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Union[Any, Errors]]
+        Response[Any | Errors]
     """
 
     kwargs = _get_kwargs(
@@ -156,22 +154,22 @@ async def asyncio(
     invoice_token: str,
     *,
     client: AuthenticatedClient,
-    body: DownloadInvoiceBody,
-) -> Optional[Union[Any, Errors]]:
-    """Download invoice file.
+    body: DownloadInvoice,
+) -> Any | Errors | None:
+    """Get invoice file
 
-     MSP accounts can download PDF and CSV. Child accounts can only download PDF.
+     Download invoice file (PDF or CSV).
 
     Args:
         invoice_token (str):
-        body (DownloadInvoiceBody):
+        body (DownloadInvoice): Download invoice file (PDF or CSV).
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Union[Any, Errors]
+        Any | Errors
     """
 
     return (
